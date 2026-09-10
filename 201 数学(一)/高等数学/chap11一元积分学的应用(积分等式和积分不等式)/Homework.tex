@@ -1,0 +1,862 @@
+\documentclass[11pt,a4paper,UTF8]{ctexart}
+\usepackage{geometry}
+\geometry{left=18mm,right=18mm,top=24mm,bottom=24mm,headheight=22pt,footskip=12mm}
+\usepackage{amsmath,amssymb,mathtools,bm,esint,extarrows}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{tabularx}
+
+% --- Color Palette (Purple & DeepPink Academic Theme) ---
+\definecolor{DeepPurple}{HTML}{4C1D95}
+\definecolor{TitlePurple}{HTML}{581C87}
+\definecolor{SubPurple}{HTML}{6B21A8}
+\definecolor{DeepPink}{HTML}{FF1493}
+\definecolor{LightPinkBg}{HTML}{FFF5F8}
+\definecolor{LightPurpleBg}{HTML}{F8F5FF}
+\definecolor{GoldAccent}{HTML}{D97706}
+\definecolor{DarkText}{HTML}{1F2937}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=TitlePurple,
+    citecolor=DeepPink,
+    urlcolor=SubPurple,
+    pdfborder={0 0 0}
+}
+
+% --- Typography & Spacing ---
+\linespread{1.3}
+\setlength{\parskip}{0.35em plus 0.1em minus 0.1em}
+\setlength{\parindent}{0pt}
+
+% --- Section Titles Styling ---
+\titleformat{\section}
+  {\Large\bfseries\color{TitlePurple}}{\thesection}{1em}{}
+  [\vspace{1mm}{\color{TitlePurple!30}\hrule height 1pt}]
+\titleformat{\subsection}
+  {\large\bfseries\color{SubPurple}}{\thesubsection}{0.8em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\color{DeepPurple}}{\thesubsubsection}{0.6em}{}
+
+% --- tcolorbox Environments ---
+% 1. Theorem / Formula / Method Box (Deep Purple)
+\newtcolorbox{thmbox}[1][]{
+    enhanced,
+    breakable,
+    colback=LightPurpleBg,
+    colframe=TitlePurple,
+    arc=3pt,
+    boxrule=0pt,
+    leftrule=3.5pt,
+    left=10pt,
+    right=10pt,
+    top=8pt,
+    bottom=8pt,
+    title=#1,
+    coltitle=white,
+    colbacktitle=TitlePurple,
+    fonttitle=\bfseries\small,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={boxrule=0pt, arc=2pt}
+}
+
+% 2. Solution / Formula / Derivation Box (DeepPink)
+\newtcolorbox{solbox}[1][]{
+    enhanced,
+    breakable,
+    colback=LightPinkBg,
+    colframe=DeepPink,
+    arc=3pt,
+    boxrule=0pt,
+    leftrule=3.5pt,
+    left=10pt,
+    right=10pt,
+    top=8pt,
+    bottom=8pt,
+    title=#1,
+    coltitle=white,
+    colbacktitle=DeepPink,
+    fonttitle=\bfseries\small,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={boxrule=0pt, arc=2pt}
+}
+
+% 3. Learning Goals / Summary Box
+\newtcolorbox{targetbox}[1][]{
+    enhanced,
+    breakable,
+    colback=LightPurpleBg,
+    colframe=DeepPurple,
+    arc=3pt,
+    boxrule=1pt,
+    left=10pt,
+    right=10pt,
+    top=8pt,
+    bottom=8pt,
+    title=#1,
+    coltitle=white,
+    colbacktitle=DeepPurple,
+    fonttitle=\bfseries\small,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={boxrule=0pt, arc=2pt}
+}
+
+\begin{document}
+
+% ------------------- 讲义封面 (Cover Page) -------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+    \fill[DeepPurple] (current page.north west) rectangle ([yshift=-7cm]current page.north east);
+    \draw[DeepPink, line width=3.5pt] ([yshift=-7cm]current page.north west) -- ([yshift=-7cm]current page.north east);
+    \draw[GoldAccent, line width=1pt] ([yshift=-7.12cm]current page.north west) -- ([yshift=-7.12cm]current page.north east);
+    
+    \node[anchor=north east, opacity=0.12, text=white] at ([xshift=-1.5cm, yshift=-0.5cm]current page.north east) {
+        \fontsize{70}{70}\selectfont\bfseries 2027
+    };
+\end{tikzpicture}
+
+\vspace*{0.8cm}
+\begin{center}
+    {\color{white}\fontsize{26}{32}\selectfont\bfseries 2027 考研数学(二) 核心讲义}\\[0.6cm]
+    {\color{white}\fontsize{13}{18}\selectfont\bfseries 全国硕士研究生招生考试 · 统考数学(二) 核心精讲全书}\\[1.5cm]
+\end{center}
+
+\vspace{3.5cm}
+\begin{center}
+    {\color{GoldAccent}\large\bfseries $\blacktriangleright$ 基础强化 · 核心题解 · 考点深水区 $\blacktriangleleft$}\\[0.8cm]
+    {\color{TitlePurple}\fontsize{24}{28}\selectfont\bfseries 一元积分学的应用（积分等式和积分不等式）· 课后作业深度精析}\\[0.6cm]
+    {\color{DeepPink}\large\bfseries —— 课后精选练习题与全过程推导 ——}\\[1.5cm]
+\end{center}
+
+\vfill
+
+\begin{center}
+\begin{tcolorbox}[
+    colback=white,
+    colframe=DeepPurple,
+    width=0.88\textwidth,
+    arc=4pt,
+    boxrule=1.2pt,
+    halign=center,
+    drop shadow=gray!30
+]
+    \vspace{3mm}
+    {\bfseries\large 编著团队：EscoffierZhou}\\[2.5mm]
+    {\bfseries\color{TitlePurple} 目标院校：中国科学院大学 (UCAS) 计算机专硕 (22408)}\\[2.5mm]
+    {\small\color{gray} 备考铁律：手算真题数字 · 错题白纸重做 · 408 客观题为王}\\[2.5mm]
+    {\small 编制版本：2027 届首发版 · \today}
+    \vspace{2mm}
+\end{tcolorbox}
+\end{center}
+\vspace{0.8cm}
+\end{titlepage}
+
+% ------------------- 目录与页面主体配置 -------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{gray}2027 考研数学(二) · 核心讲义系列}
+\fancyhead[R]{\small\color{TitlePurple}\nouppercase{\leftmark}}
+\fancyfoot[C]{\small\color{gray}— 第 \thepage\ 页 —}
+\fancyfoot[R]{\small\color{gray}UCAS 22408}
+\renewcommand{\headrulewidth}{0.5pt}
+
+\pagenumbering{Roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+
+---
+
+
+\section{习题 11.1：积分均值不等条件与二阶导数符号判定}
+
+
+\subsection{1. 题目描述}
+设函数 $\varphi(x)$ 在闭区间 $[1, 3]$ 上二阶可导，且满足条件：
+
+\begin{equation*}
+\varphi(2) > \varphi(1) \quad \text{且} \quad \varphi(2) > \int\_2^3 \varphi(x)\,\mathrm{d}x
+\end{equation*}
+
+证明：存在 $\xi \in (1, 3)$，使得
+
+\begin{equation*}
+\varphi''(\xi) < 0
+\end{equation*}
+
+
+
+\subsection{2. 解题思路与方法提炼}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{积分第一中值定理转化积分条件}：
+条件中包含定积分 $\int_2^3 \varphi(x)\,\mathrm{d}x$，区间长度为 $3 - 2 = 1$。通过积分第一中值定理，可将定积分严格转化为区间 $(2, 3)$ 内某点处的函数值 $\varphi(c)$。
+\textbf{[2]}  \textbf{两阶段拉格朗日中值定理穿透二阶导数}：
+点 $2$ 处的函数值同时严格高于左侧点 $1$ 和右侧点 $c$ 的函数值，形成局部的“山峰”态势。利用两次拉格朗日中值定理分别得到符号为正与符号为负的一阶导数点，再次应用中值定理即可锁定二阶导数的负号。
+\end{solbox}
+
+
+\subsection{3. 详细解答与规范步骤}
+
+
+\subsubsection{方法一：积分中值定理与两次拉格朗日中值定理（标准规范法）}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{应用积分中值定理抽取点值}：
+因为 $\varphi(x)$ 在 $[2, 3]$ 上连续，由积分第一中值定理，存在 $c \in (2, 3)$，使得：
+
+\begin{equation*}
+\int\_2^3 \varphi(x)\,\mathrm{d}x = \varphi(c)(3 - 2) = \varphi(c)
+\end{equation*}
+
+代入已知条件 $\varphi(2) > \int_2^3 \varphi(x)\,\mathrm{d}x$，可得：
+
+\begin{equation*}
+\varphi(2) > \varphi(c)
+\end{equation*}
+
+结合另一已知条件 $\varphi(2) > \varphi(1)$，已知各点横坐标满足 $1 < 2 < c < 3$。
+
+\textbf{[2]}  \textbf{构造一阶导数正负相异点}：
+在区间 $[1, 2]$ 上应用拉格朗日中值定理：存在 $\eta_1 \in (1, 2)$，使得：
+
+\begin{equation*}
+\varphi'(\eta\_1) = \frac{\varphi(2) - \varphi(1)}{2 - 1} = \varphi(2) - \varphi(1)
+\end{equation*}
+
+由于 $\varphi(2) > \varphi(1)$，故 $\varphi'(\eta_1) > 0$。\\ \\
+在区间 $[2, c]$ 上应用拉格朗日中值定理：存在 $\eta_2 \in (2, c)$，使得：
+
+\begin{equation*}
+\varphi'(\eta\_2) = \frac{\varphi(c) - \varphi(2)}{c - 2}
+\end{equation*}
+
+由于 $c > 2 \implies c - 2 > 0$，且 $\varphi(c) < \varphi(2) \implies \varphi(c) - \varphi(2) < 0$，故 $\varphi'(\eta_2) < 0$。
+
+\textbf{[3]}  \textbf{应用拉格朗日中值定理确定二阶导数符号}：
+显然有 $1 < \eta_1 < 2 < \eta_2 < c < 3$，故 $\eta_1 < \eta_2$。\\ \\
+函数 $\varphi'(x)$ 在区间 $[\eta_1, \eta_2]$ 上满足拉格朗日中值定理条件，存在 $\xi \in (\eta_1, \eta_2) \subset (1, 3)$，使得：
+
+\begin{equation*}
+\varphi''(\xi) = \frac{\varphi'(\eta\_2) - \varphi'(\eta\_1)}{\eta\_2 - \eta\_1}
+\end{equation*}
+
+因为分母 $\eta_2 - \eta_1 > 0$，而分子满足：
+
+\begin{equation*}
+\varphi'(\eta\_2) < 0,\quad \varphi'(\eta\_1) > 0 \implies \varphi'(\eta\_2) - \varphi'(\eta\_1) < 0
+\end{equation*}
+
+所以：
+
+\begin{equation*}
+\varphi''(\xi) < 0
+\end{equation*}
+
+命题得证。
+\end{solbox}
+
+
+\subsubsection{方法二：极值点与反证法（几何极值视角）}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{确定最大值落在区间内部}：
+由闭区间连续函数的性质，$\varphi(x)$ 在闭区间 $[1, c]$ 上必能取得最大值，设最大值点为 $x_0 \in [1, c]$。\\ \\
+因为 $\varphi(2) > \varphi(1)$ 且 $\varphi(2) > \varphi(c)$，故最大值点不可能在端点 $1$ 或 $c$ 处取得，必有 $x_0 \in (1, c) \subset (1, 3)$。\\ \\
+由费马引理，极值点处必有一阶导数为零：$\varphi'(x_0) = 0$。
+
+\textbf{[2]}  \textbf{泰勒展开导出矛盾}：
+若结论不成立，即假设对任意 $x \in (1, 3)$ 均有 $\varphi''(x) \ge 0$。\\ \\
+则由一阶泰勒公式（拉格朗日余项）：
+
+\begin{equation*}
+\varphi(x) = \varphi(x\_0) + \varphi'(x\_0)(x - x\_0) + \frac{\varphi''(\zeta)}{2}(x - x\_0)^2 \ge \varphi(x\_0)
+\end{equation*}
+
+此式表明对一切 $x \in [1, c]$ 均有 $\varphi(x) \ge \varphi(x_0)$。这与 $\varphi(x_0)$ 为区间严格最大值产生矛盾！\\ \\
+因此假设不成立，必存在 $\xi \in (1, 3)$ 使得 $\varphi''(\xi) < 0$。
+\end{solbox}
+
+
+\subsection{4. 考点延展与防坑警示}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{积分区间长度的感知}：注意本题积分区间是 $[2, 3]$，长度刚好为 $1$，故 $\int_2^3 \varphi(x)\,\mathrm{d}x = \varphi(c) \cdot 1 = \varphi(c)$。如果区间长度不是 $1$，需要包含因式 $(b-a)$。
+\end{solbox}
+
+---
+
+
+\section{习题 11.2：对称区间替换与单调核积分不等式}
+
+
+\subsection{1. 题目描述}
+证明积分不等式：
+
+\begin{equation*}
+\int\_0^{\pi/2} \frac{\cos x}{1+x^2}\,\mathrm{d}x \ge \int\_0^{\pi/2} \frac{\sin x}{1+x^2}\,\mathrm{d}x
+\end{equation*}
+
+
+
+\subsection{2. 解题思路与方法提炼}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{识别三角函数的对称性}：
+在区间 $[0, \pi/2]$ 上，正弦与余弦在关于 $x = \pi/4$ 的对称变换 $x \mapsto \pi/2 - x$ 下互换，即 $\cos(\pi/2 - x) = \sin x$。
+\textbf{[2]}  \textbf{区间拆分与权函数单调性结合}：
+将差值积分拆为 $[0, \pi/4]$ 与 $[\pi/4, \pi/2]$ 两段，在第二段上做对称换元，将全积分收敛回 $[0, \pi/4]$。利用核函数 $\frac{1}{1+x^2}$ 的严格单调减性质判定被积式正负。
+\end{solbox}
+
+
+\subsection{3. 详细解答与规范步骤}
+
+
+\subsubsection{方法一：区间再现变换与分半对称法（推荐规范解法）}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{构造积分差值并拆分区间}：
+考虑两积分的差：
+
+\begin{equation*}
+I = \int\_0^{\pi/2} \frac{\cos x - \sin x}{1+x^2}\,\mathrm{d}x = \int\_0^{\pi/4} \frac{\cos x - \sin x}{1+x^2}\,\mathrm{d}x + \int\_{\pi/4}^{\pi/2} \frac{\cos x - \sin x}{1+x^2}\,\mathrm{d}x
+\end{equation*}
+
+
+\textbf{[2]}  \textbf{对后半区间进行对称换元}：
+对于第二项积分 $I_2 = \int_{\pi/4}^{\pi/2} \frac{\cos x - \sin x}{1+x^2}\,\mathrm{d}x$，做换元：
+
+\begin{equation*}
+x = \frac{\pi}{2} - t,\quad \mathrm{d}x = -\mathrm{d}t
+\end{equation*}
+
+当 $x = \pi/4$ 时，$t = \pi/4$；当 $x = \pi/2$ 时，$t = 0$。代入得：
+
+\begin{align*}
+\begin{aligned}
+I\_2 \&= \int\_{\pi/4}^0 \frac{\cos(\pi/2 - t) - \sin(\pi/2 - t)}{1+(\pi/2 - t)^2}\,(-\mathrm{d}t) \\ \\
+\&= \int\_0^{\pi/4} \frac{\sin t - \cos t}{1+(\pi/2 - t)^2}\,\mathrm{d}t \\ \\
+\&= -\int\_0^{\pi/4} \frac{\cos t - \sin t}{1+(\pi/2 - t)^2}\,\mathrm{d}t
+\end{aligned}
+\end{align*}
+
+
+\textbf{[3]}  \textbf{合并积分并判断被积函数符号}：
+将变量统一记为 $x$，合并 $I_1$ 与 $I_2$：
+
+\begin{equation*}
+I = \int\_0^{\pi/4} (\cos x - \sin x) \left[ \frac{1}{1+x^2} - \frac{1}{1+(\pi/2 - x)^2} \right]\,\mathrm{d}x
+\end{equation*}
+
+考察区间 $(0, \pi/4)$ 内的两个因子：
+\textbf{(1)}  当 $x \in (0, \pi/4)$ 时，$\cos x > \sin x$，因此 $\cos x - \sin x > 0$；
+\textbf{(2)}  当 $x \in (0, \pi/4)$ 时，$0 < x < \pi/2 - x$，从而 $x^2 < (\pi/2 - x)^2$，所以：
+
+\begin{equation*}
+1 + x^2 < 1 + (\pi/2 - x)^2 \implies \frac{1}{1+x^2} - \frac{1}{1+(\pi/2 - x)^2} > 0
+\end{equation*}
+
+因此在开区间 $(0, \pi/4)$ 上，被积函数恒为正数：
+
+\begin{equation*}
+(\cos x - \sin x) \left[ \frac{1}{1+x^2} - \frac{1}{1+(\pi/2 - x)^2} \right] > 0
+\end{equation*}
+
+由定积分严格保号性，得：
+
+\begin{equation*}
+I > 0 \implies \int\_0^{\pi/2} \frac{\cos x}{1+x^2}\,\mathrm{d}x > \int\_0^{\pi/2} \frac{\sin x}{1+x^2}\,\mathrm{d}x
+\end{equation*}
+
+原不等式成立。
+\end{solbox}
+
+
+\subsubsection{方法二：推广积分第一中值定理法}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{分段应用推广积分中值定理}：
+在区间 $[0, \pi/4]$ 上，$\cos x - \sin x \ge 0$，且 $\frac{1}{1+x^2}$ 连续，故存在 $\xi_1 \in [0, \pi/4]$ 使得：
+
+\begin{equation*}
+\int\_0^{\pi/4} \frac{\cos x - \sin x}{1+x^2}\,\mathrm{d}x = \frac{1}{1+\xi\_1^2} \int\_0^{\pi/4} (\cos x - \sin x)\,\mathrm{d}x
+\end{equation*}
+
+在区间 $[\pi/4, \pi/2]$ 上，$\sin x - \cos x \ge 0$，故存在 $\xi_2 \in [\pi/4, \pi/2]$ 使得：
+
+\begin{equation*}
+\int\_{\pi/4}^{\pi/2} \frac{\sin x - \cos x}{1+x^2}\,\mathrm{d}x = \frac{1}{1+\xi\_2^2} \int\_{\pi/4}^{\pi/2} (\sin x - \cos x)\,\mathrm{d}x
+\end{equation*}
+
+
+\textbf{[2]}  \textbf{对比积分基本量与系数值}：
+易算得：
+
+\begin{equation*}
+\int\_0^{\pi/4} (\cos x - \sin x)\,\mathrm{d}x = [\sin x + \cos x]\_0^{\pi/4} = \sqrt{2} - 1
+\end{equation*}
+
+
+\begin{equation*}
+\int\_{\pi/4}^{\pi/2} (\sin x - \cos x)\,\mathrm{d}x = [-\cos x - \sin x]\_{\pi/4}^{\pi/2} = -1 - (-\sqrt{2}) = \sqrt{2} - 1
+\end{equation*}
+
+两段积分的底积分完全相等，设为 $A = \sqrt{2} - 1 > 0$。\\ \\
+因此原差值为：
+
+\begin{equation*}
+I = A \left( \frac{1}{1+\xi\_1^2} - \frac{1}{1+\xi\_2^2} \right)
+\end{equation*}
+
+因 $0 \le \xi_1 \le \pi/4 \le \xi_2 \le \pi/2$，且中值点不可能同时取在 $\pi/4$，故 $\xi_1 < \xi_2$。\\ \\
+由核函数单调性知 $\frac{1}{1+\xi_1^2} > \frac{1}{1+\xi_2^2}$，即证 $I > 0$。
+\end{solbox}
+
+
+\subsection{4. 考点延展与防坑警示}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  “\textbf{区间再现+对称拆分}”是解决考研中各类“正弦、余弦伴随非对称代数有理核”积分大小比较的最锐利武器。牢记变换 $x = a + b - t$。
+\end{solbox}
+
+---
+
+
+\section{习题 11.3：变上限积分交换次序与分部积分恒等变形}
+
+
+\subsection{1. 题目描述}
+设函数 $f(x)$ 在闭区间 $[0, 1]$ 上一阶连续可导，且对一切 $x \in [0, 1]$ 满足 $f'(x) > 0, f(0) = 0$。
+设单调增加函数 $\varphi(t)$ 连续，证明：
+
+\begin{equation*}
+\int\_0^1 \left[ \int\_0^{f(x)} \varphi(t)\,\mathrm{d}t \right]\,\mathrm{d}x = \int\_0^{f(1)} (1 - f^{-1}(t))\varphi(t)\,\mathrm{d}t
+\end{equation*}
+
+并由此讨论当 $\varphi(t) = t$ 且 $f(x) = x$ 时的几何意义。
+
+
+\subsection{2. 解题思路与方法提炼}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{分部积分法转化变上限积分}：
+令外层积分为 $\int_0^1 u\,\mathrm{d}v$ 的结构，将变上限积分记为 $u(x) = \int_0^{f(x)}\varphi(t)\,\mathrm{d}t$，而令 $\mathrm{d}v = \mathrm{d}x$（或凑为 $\mathrm{d}(x-1)$），通过分部积分消除外层不定项。
+\textbf{[2]}  \textbf{二重积分交换积分次序视角（几何投影法）}：
+原式可视为平面区域 $D = \{(x, t) \mid 0 \le x \le 1,\, 0 \le t \le f(x)\}$ 上的二重积分 $\iint_D \varphi(t)\,\mathrm{d}x\mathrm{d}t$，通过将 $X$ 型区域转化为 $Y$ 型区域直接获证。
+\end{solbox}
+
+
+\subsection{3. 详细解答与规范步骤}
+
+
+\subsubsection{方法一：二重积分交换积分次序法（最简证明）}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{刻画积分区域}：
+原左端累次积分对应的二维平面积分区域为：
+
+\begin{equation*}
+D = \{(x, t) \mid 0 \le x \le 1,\, 0 \le t \le f(x)\}
+\end{equation*}
+
+因为 $f'(x) > 0$ 且 $f(0) = 0$，$f(x)$ 严格单调增加。曲线 $t = f(x)$ 存在严格单调反函数 $x = f^{-1}(t)$，自变量取值范围为 $t \in [0, f(1)]$。
+
+\textbf{[2]}  \textit{}转换为先对 $x$ 积分的 $Y$ 型区域\textit{}：
+将区域 $D$ 改写为：
+
+\begin{equation*}
+D = \{(x, t) \mid 0 \le t \le f(1),\, f^{-1}(t) \le x \le 1\}
+\end{equation*}
+
+
+\textbf{[3]}  \textbf{交换次序并积分内层}：
+
+\begin{align*}
+\begin{aligned}
+\int\_0^1 \left[ \int\_0^{f(x)} \varphi(t)\,\mathrm{d}t \right]\,\mathrm{d}x \&= \iint\_D \varphi(t)\,\mathrm{d}x\mathrm{d}t \\ \\
+\&= \int\_0^{f(1)} \left[ \int\_{f^{-1}(t)}^1 \varphi(t)\,\mathrm{d}x \right]\,\mathrm{d}t \\ \\
+\&= \int\_0^{f(1)} \varphi(t) \left[ \int\_{f^{-1}(t)}^1 1\,\mathrm{d}x \right]\,\mathrm{d}t \\ \\
+\&= \int\_0^{f(1)} (1 - f^{-1}(t))\varphi(t)\,\mathrm{d}t
+\end{aligned}
+\end{align*}
+
+等式直接获证。
+\end{solbox}
+
+
+\subsubsection{方法二：一维分部积分与换元积分法}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{设定分部积分}：
+设 $u(x) = \int_0^{f(x)} \varphi(t)\,\mathrm{d}t$，则由复合变上限积分求导法则：
+
+\begin{equation*}
+u'(x) = \varphi(f(x))f'(x)
+\end{equation*}
+
+取 $v(x) = x - 1$，由分部积分公式：
+
+\begin{align*}
+\begin{aligned}
+\int\_0^1 u(x)\,\mathrm{d}x \&= \int\_0^1 u(x)\,\mathrm{d}(x-1) \\ \\
+\&= \left[ (x-1)u(x) \right]\_0^1 - \int\_0^1 (x-1)u'(x)\,\mathrm{d}x \\ \\
+\&= 0 - (-1)u(0) + \int\_0^1 (1-x)\varphi(f(x))f'(x)\,\mathrm{d}x
+\end{aligned}
+\end{align*}
+
+因为 $f(0) = 0$，所以 $u(0) = \int_0^0 \varphi(t)\,\mathrm{d}t = 0$。
+
+\textbf{[2]}  \textbf{进行变量替换}：
+令 $t = f(x)$，则 $\mathrm{d}t = f'(x)\,\mathrm{d}x$。当 $x = 0$ 时 $t = 0$；当 $x = 1$ 时 $t = f(1)$。\\ \\
+同时 $x = f^{-1}(t)$。代入上式得：
+
+\begin{equation*}
+\int\_0^1 u(x)\,\mathrm{d}x = \int\_0^{f(1)} (1 - f^{-1}(t))\varphi(t)\,\mathrm{d}t
+\end{equation*}
+
+两法殊途同归。
+\end{solbox}
+
+
+\subsection{4. 考点延展与防坑警示}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{特例检验与几何直观}：
+当 $\varphi(t) = t, f(x) = x$ 时：
+左端为 $\int_0^1 \left(\int_0^x t\,\mathrm{d}t\right)\mathrm{d}x = \int_0^1 \frac{x^2}{2}\,\mathrm{d}x = \frac{1}{6}$；
+右端为 $\int_0^1 (1-t)t\,\mathrm{d}t = \int_0^1 (t - t^2)\,\mathrm{d}t = \frac{1}{2} - \frac{1}{3} = \frac{1}{6}$。\\ \\
+这体现了三维空间中四面体体积积分沿不同截面切片计算的一致性。
+\end{solbox}
+
+---
+
+
+\section{习题 11.4：区间再现变换证明单调加权积分不等式}
+
+
+\subsection{1. 题目描述}
+设函数 $f(x)$ 在闭区间 $[a, b]$（其中 $a < b$）上单调递增且连续。
+证明不等式：
+
+\begin{equation*}
+(a+b)\int\_a^b f(x)\,\mathrm{d}x \le 2\int\_a^b x f(x)\,\mathrm{d}x
+\end{equation*}
+
+并指出等号成立的充要条件。
+
+
+\subsection{2. 解题思路与方法提炼}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{区间再现（倒角对称）变换}：
+区间为 $[a, b]$ 时，中心对称点为 $\frac{a+b}{2}$。做变量替换 $x = a + b - t$，将积分自身重新表达后相加。
+\textbf{[2]}  \textbf{单调函数的代数保号结构}：
+利用单调递增函数的本质性质：自变量越大函数值越大，即 $(x_1 - x_2)(f(x_1) - f(x_2)) \ge 0$。选取对称点即可直接证明被积式恒非负。
+\end{solbox}
+
+
+\subsection{3. 详细解答与规范步骤}
+
+
+\subsubsection{方法一：区间再现变换法（最为巧妙快捷）}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{对含权积分做区间再现换元}：
+设目标积分 $J = \int_a^b x f(x)\,\mathrm{d}x$。
+作变量代换：
+
+\begin{equation*}
+x = a + b - t,\quad \mathrm{d}x = -\mathrm{d}t
+\end{equation*}
+
+当 $x = a$ 时 $t = b$；当 $x = b$ 时 $t = a$。代入得：
+
+\begin{equation*}
+J = \int\_b^a (a + b - t) f(a + b - t)\,(-\mathrm{d}t) = \int\_a^b (a + b - t) f(a + b - t)\,\mathrm{d}t
+\end{equation*}
+
+将积分哑元重命名为 $x$，与原表达式相加：
+
+\begin{equation*}
+2J = \int\_a^b x f(x)\,\mathrm{d}x + \int\_a^b (a + b - x) f(a + b - x)\,\mathrm{d}x
+\end{equation*}
+
+
+\textbf{[2]}  \textbf{转化待证差值式}：
+待证不等式等价于：
+
+\begin{equation*}
+2J - (a+b)\int\_a^b f(x)\,\mathrm{d}x \ge 0
+\end{equation*}
+
+对 $(a+b)\int_a^b f(x)\,\mathrm{d}x$ 同样做区间再现分解：
+
+\begin{equation*}
+\int\_a^b f(x)\,\mathrm{d}x = \frac{1}{2}\int\_a^b [f(x) + f(a+b-x)]\,\mathrm{d}x
+\end{equation*}
+
+两式相减可得：
+
+\begin{align*}
+\begin{aligned}
+2J - (a+b)\int\_a^b f(x)\,\mathrm{d}x \&= \int\_a^b \left[ x f(x) + (a+b-x)f(a+b-x) - \frac{a+b}{2}(f(x) + f(a+b-x)) \right]\,\mathrm{d}x \\ \\
+\&= \int\_a^b \left[ \left(x - \frac{a+b}{2}\right)f(x) - \left(x - \frac{a+b}{2}\right)f(a+b-x) \right]\,\mathrm{d}x \\ \\
+\&= \int\_a^b \left(x - \frac{a+b}{2}\right) [f(x) - f(a+b-x)]\,\mathrm{d}x
+\end{aligned}
+\end{align*}
+
+
+\textbf{[3]}  \textbf{判定被积函数符号}：
+考察被积函数 $H(x) = \left(x - \frac{a+b}{2}\right) [f(x) - f(a+b-x)]$：
+\textbf{(1)}  当 $x > \frac{a+b}{2}$ 时，$x > a+b-x$。由于 $f$ 单调递增，故 $f(x) \ge f(a+b-x)$，两项均非负，乘积 $H(x) \ge 0$；
+\textbf{(2)}  当 $x < \frac{a+b}{2}$ 时，$x < a+b-x$。同理 $f(x) \le f(a+b-x)$，两项均为非正数，负负得正，乘积 $H(x) \ge 0$；
+\textbf{(3)}  当 $x = \frac{a+b}{2}$ 时，$H(x) = 0$。\\ \\
+综上，在整个闭区间 $[a, b]$ 上恒有 $H(x) \ge 0$。由定积分保号性：
+
+\begin{equation*}
+\int\_a^b H(x)\,\mathrm{d}x \ge 0 \implies 2\int\_a^b x f(x)\,\mathrm{d}x \ge (a+b)\int\_a^b f(x)\,\mathrm{d}x
+\end{equation*}
+
+
+\textbf{[4]}  \textbf{等号成立条件}：
+因 $f(x)$ 连续，等号成立当且仅当 $H(x) \equiv 0$，即对几乎所有 $x \in [a, b]$ 均有 $f(x) = f(a+b-x)$。结合 $f$ 单调递增，这意味着 $f(x)$ 恒为常数函数。
+\end{solbox}
+
+
+\subsubsection{方法二：变上限积分辅助函数求导法}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{设定变上限辅助函数}：
+固定左端点 $a$，设对于 $t \in [a, b]$：
+
+\begin{equation*}
+G(t) = 2\int\_a^t x f(x)\,\mathrm{d}x - (a+t)\int\_a^t f(x)\,\mathrm{d}x
+\end{equation*}
+
+显然 $G(a) = 0$。
+
+\textbf{[2]}  \textbf{求导分析单调性}：
+
+\begin{align*}
+\begin{aligned}
+G'(t) \&= 2t f(t) - \int\_a^t f(x)\,\mathrm{d}x - (a+t)f(t) \\ \\
+\&= (t-a)f(t) - \int\_a^t f(x)\,\mathrm{d}x \\ \\
+\&= \int\_a^t [f(t) - f(x)]\,\mathrm{d}x
+\end{aligned}
+\end{align*}
+
+因为 $f(x)$ 单调递增，当 $x \in [a, t]$ 时 $f(t) \ge f(x)$，故被积函数非负，定积分 $G'(t) \ge 0$。\\ \\
+因此 $G(t)$ 在 $[a, b]$ 上单调增加。故 $G(b) \ge G(a) = 0$，即证。
+\end{solbox}
+
+
+\subsection{4. 考点延展与防坑警示}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  方法一展现的代数结构 $\left(x - \frac{a+b}{2}\right)[f(x) - f(a+b-x)] \ge 0$ 是处理考研高阶积分对称不等式的杀手级技巧，必须熟练默写。
+\end{solbox}
+
+---
+
+
+\section{习题 11.5：单端点零值与导数有界条件下的积分模估计}
+
+
+\subsection{1. 题目描述}
+设函数 $f(x)$ 在闭区间 $[0, a]$（$a > 0$）上可导，满足端点条件 $f(0) = 0$，且导函数有界：
+
+\begin{equation*}
+|f'(x)| \le M \quad (\forall x \in [0, a])
+\end{equation*}
+
+证明：
+
+\begin{equation*}
+\left| \int\_0^a f(x)\,\mathrm{d}x \right| \le \frac{1}{2} M a^2
+\end{equation*}
+
+
+
+\subsection{2. 解题思路与方法提炼}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{拉格朗日中值定理点点放缩}：
+任取 $x \in [0, a]$，利用 $f(x) = f(x) - f(0) = f'(\xi)x$ 将函数值直接转化为关于自变量的线性上界 $Mx$。
+\textbf{[2]}  \textbf{补项分部积分法}：
+通过分部积分，将 $f(x)\,\mathrm{d}x$ 转化为 $(x-a)f'(x)\,\mathrm{d}x$，直接将导数约束嵌入积分核中。
+\end{solbox}
+
+
+\subsection{3. 详细解答与规范步骤}
+
+
+\subsubsection{方法一：微分中值定理逐点放缩法（最为直观）}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{获得逐点绝对值上界}：
+对任意给定的 $x \in (0, a]$，函数 $f(t)$ 在区间 $[0, x]$ 上满足拉格朗日中值定理条件：
+
+\begin{equation*}
+f(x) - f(0) = f'(\xi) (x - 0) = f'(\xi) x \quad (\xi \in (0, x))
+\end{equation*}
+
+由于 $f(0) = 0$ 且 $|f'(\xi)| \le M$：
+
+\begin{equation*}
+|f(x)| = |f'(\xi)| x \le M x
+\end{equation*}
+
+该不等式对 $x = 0$ 显然亦成立。
+
+\textbf{[2]}  \textbf{定积分绝对值放缩}：
+由定积分性质：
+
+\begin{equation*}
+\left| \int\_0^a f(x)\,\mathrm{d}x \right| \le \int\_0^a |f(x)|\,\mathrm{d}x \le \int\_0^a M x\,\mathrm{d}x = M \left[ \frac{x^2}{2} \right]\_0^a = \frac{1}{2} M a^2
+\end{equation*}
+
+命题即刻得证。
+\end{solbox}
+
+
+\subsubsection{方法二：补项分部积分法（规范解析核法）}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{构造消除右端项的微分式}：
+
+\begin{align*}
+\begin{aligned}
+\int\_0^a f(x)\,\mathrm{d}x \&= \int\_0^a f(x)\,\mathrm{d}(x - a) \\ \\
+\&= \left[ (x - a)f(x) \right]\_0^a - \int\_0^a (x - a)f'(x)\,\mathrm{d}x
+\end{aligned}
+\end{align*}
+
+
+\textbf{[2]}  \textbf{代入端点值消去边界项}：
+当 $x = a$ 时，$x - a = 0$；当 $x = 0$ 时，$f(0) = 0$。因此边界项为零：
+
+\begin{equation*}
+\left[ (x - a)f(x) \right]\_0^a = 0 - 0 = 0
+\end{equation*}
+
+从而得到恒等式：
+
+\begin{equation*}
+\int\_0^a f(x)\,\mathrm{d}x = \int\_0^a (a - x)f'(x)\,\mathrm{d}x
+\end{equation*}
+
+
+\textbf{[3]}  \textbf{应用绝对值放缩}：
+由于当 $x \in [0, a]$ 时 $a - x \ge 0$：
+
+\begin{equation*}
+\left| \int\_0^a f(x)\,\mathrm{d}x \right| \le \int\_0^a (a - x)|f'(x)|\,\mathrm{d}x \le M \int\_0^a (a - x)\,\mathrm{d}x = M \left[ -\frac{(a-x)^2}{2} \right]\_0^a = \frac{1}{2} M a^2
+\end{equation*}
+
+\end{solbox}
+
+
+\subsection{4. 考点延展与防坑警示}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{双端为零与单端为零的对比}：
+若条件增加 $f(a) = 0$，则上界收紧为 $\frac{1}{4}Ma^2$（例题 11.8）；若仅有单侧端点 $f(0) = 0$，则最优上界为 $\frac{1}{2}Ma^2$。考研选择填空中切勿记混系数。
+\end{solbox}
+
+---
+
+
+\section{习题 11.6：凸函数切线不等式与中点积分下界}
+
+
+\subsection{1. 题目描述}
+设函数 $f(x)$ 在闭区间 $[0, 1]$ 上二阶可导，且对一切 $x \in [0, 1]$ 均满足 $f''(x) \ge 0$。
+若已知中点函数值 $f\left(\frac{1}{2}\right) = 1$。证明：
+
+\begin{equation*}
+\int\_0^1 f(x)\,\mathrm{d}x \ge 1
+\end{equation*}
+
+
+
+\subsection{2. 解题思路与方法提炼}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{凸函数的核心几何性质：切线不等式}：
+由 $f''(x) \ge 0$ 知曲线呈现凹形（下凸函数）。下凸函数曲线始终位于其任意一切线的上方。
+\textbf{[2]}  \textbf{中点泰勒展开积分对称消除法}：
+在中点 $x_0 = 1/2$ 处展开至一阶，由于对称区间上一阶线性项 $(x - 1/2)$ 的积分为零，二阶余项非负，直接积分得到严格下界。
+\end{solbox}
+
+
+\subsection{3. 详细解答与规范步骤}
+
+
+\subsubsection{方法一：切线不等式与泰勒展开法（标准典范解法）}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{在中点处展开}：
+由泰勒公式（带拉格朗日余项），对任意 $x \in [0, 1]$，将 $f(x)$ 在 $x_0 = \frac{1}{2}$ 处展开：
+
+\begin{equation*}
+f(x) = f\left(\frac{1}{2}\right) + f'\left(\frac{1}{2}\right)\left(x - \frac{1}{2}\right) + \frac{f''(\xi)}{2}\left(x - \frac{1}{2}\right)^2
+\end{equation*}
+
+其中 $\xi$ 介于 $x$ 与 $\frac{1}{2}$ 之间。
+
+\textbf{[2]}  \textbf{利用凸性放缩为切线方程}：
+因为对任意 $\xi \in [0, 1]$ 均有 $f''(\xi) \ge 0$，且 $\left(x - \frac{1}{2}\right)^2 \ge 0$，所以：
+
+\begin{equation*}
+\frac{f''(\xi)}{2}\left(x - \frac{1}{2}\right)^2 \ge 0
+\end{equation*}
+
+从而建立下界（切线不等式）：
+
+\begin{equation*}
+f(x) \ge f\left(\frac{1}{2}\right) + f'\left(\frac{1}{2}\right)\left(x - \frac{1}{2}\right) = 1 + f'\left(\frac{1}{2}\right)\left(x - \frac{1}{2}\right)
+\end{equation*}
+
+
+\textbf{[3]}  \textbf{两边积分并利用对称奇性}：
+在区间 $[0, 1]$ 上两端取定积分：
+
+\begin{equation*}
+\int\_0^1 f(x)\,\mathrm{d}x \ge \int\_0^1 \left[ 1 + f'\left(\frac{1}{2}\right)\left(x - \frac{1}{2}\right) \right]\,\mathrm{d}x = \int\_0^1 1\,\mathrm{d}x + f'\left(\frac{1}{2}\right)\int\_0^1 \left(x - \frac{1}{2}\right)\,\mathrm{d}x
+\end{equation*}
+
+计算线性项积分：
+
+\begin{equation*}
+\int\_0^1 \left(x - \frac{1}{2}\right)\,\mathrm{d}x = \left[ \frac{1}{2}\left(x - \frac{1}{2}\right)^2 \right]\_0^1 = \frac{1}{2}\left( \frac{1}{4} - \frac{1}{4} \right) = 0
+\end{equation*}
+
+因此：
+
+\begin{equation*}
+\int\_0^1 f(x)\,\mathrm{d}x \ge 1 + 0 = 1
+\end{equation*}
+
+命题得证。
+\end{solbox}
+
+
+\subsubsection{方法二：琴生（Jensen）积分不等式法（高观点秒杀）}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{陈述连续型琴生不等式}：
+若 $f(u)$ 为下凸函数（即 $f''(u) \ge 0$），$g(x)$ 为区间 $[0, 1]$ 上的概率密度（此处取均匀权 $g(x) = 1$），则恒有：
+
+\begin{equation*}
+\int\_0^1 f(x)\,\mathrm{d}x \ge f\left( \int\_0^1 x\,\mathrm{d}x \right)
+\end{equation*}
+
+
+\textbf{[2]}  \textbf{计算重心并代入}：
+由于 $\int_0^1 x\,\mathrm{d}x = \frac{1}{2}$，代入直接得出：
+
+\begin{equation*}
+\int\_0^1 f(x)\,\mathrm{d}x \ge f\left(\frac{1}{2}\right) = 1
+\end{equation*}
+
+\end{solbox}
+
+
+\subsection{4. 考点延展与防坑警示}
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]}  \textbf{哈达玛（Hermite-Hadamard）不等式}：
+对于定义在 $[a, b]$ 上的凸函数 $f$，恒有双向对称不等式：
+
+\begin{equation*}
+f\left(\frac{a+b}{2}\right) \le \frac{1}{b-a}\int\_a^b f(x)\,\mathrm{d}x \le \frac{f(a)+f(b)}{2}
+\end{equation*}
+
+本题结论正是 Hermite-Hadamard 不等式的左半侧。考研大题应写出方法一的泰勒展开全过程以确保拿满每一步的分数。
+\end{solbox}
+
+\end{document}

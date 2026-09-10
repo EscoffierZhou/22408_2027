@@ -1,0 +1,1047 @@
+\documentclass[11pt,a4paper,UTF8]{ctexart}
+\usepackage{geometry}
+\geometry{left=18mm,right=18mm,top=24mm,bottom=24mm,headheight=22pt,footskip=12mm}
+\usepackage{amsmath,amssymb,mathtools,bm,esint,extarrows}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{tabularx}
+
+% --- Color Palette (Purple & DeepPink Academic Theme) ---
+\definecolor{DeepPurple}{HTML}{4C1D95}
+\definecolor{TitlePurple}{HTML}{581C87}
+\definecolor{SubPurple}{HTML}{6B21A8}
+\definecolor{DeepPink}{HTML}{FF1493}
+\definecolor{LightPinkBg}{HTML}{FFF5F8}
+\definecolor{LightPurpleBg}{HTML}{F8F5FF}
+\definecolor{GoldAccent}{HTML}{D97706}
+\definecolor{DarkText}{HTML}{1F2937}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=TitlePurple,
+    citecolor=DeepPink,
+    urlcolor=SubPurple,
+    pdfborder={0 0 0}
+}
+
+% --- Typography & Spacing ---
+\linespread{1.3}
+\setlength{\parskip}{0.35em plus 0.1em minus 0.1em}
+\setlength{\parindent}{0pt}
+
+% --- Section Titles Styling ---
+\titleformat{\section}
+  {\Large\bfseries\color{TitlePurple}}{\thesection}{1em}{}
+  [\vspace{1mm}{\color{TitlePurple!30}\hrule height 1pt}]
+\titleformat{\subsection}
+  {\large\bfseries\color{SubPurple}}{\thesubsection}{0.8em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\color{DeepPurple}}{\thesubsubsection}{0.6em}{}
+
+% --- tcolorbox Environments ---
+% 1. Theorem / Formula / Method / Analysis Box (Deep Purple)
+\newtcolorbox{thmbox}[1][]{
+    enhanced,
+    breakable,
+    colback=LightPurpleBg,
+    colframe=TitlePurple,
+    arc=3pt,
+    boxrule=0pt,
+    leftrule=3.5pt,
+    left=10pt,
+    right=10pt,
+    top=8pt,
+    bottom=8pt,
+    title=#1,
+    coltitle=white,
+    colbacktitle=TitlePurple,
+    fonttitle=\bfseries\small,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={boxrule=0pt, arc=2pt}
+}
+
+% 2. Solution / Formula / Derivation Box (DeepPink)
+\newtcolorbox{solbox}[1][]{
+    enhanced,
+    breakable,
+    colback=LightPinkBg,
+    colframe=DeepPink,
+    arc=3pt,
+    boxrule=0pt,
+    leftrule=3.5pt,
+    left=10pt,
+    right=10pt,
+    top=8pt,
+    bottom=8pt,
+    title=#1,
+    coltitle=white,
+    colbacktitle=DeepPink,
+    fonttitle=\bfseries\small,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={boxrule=0pt, arc=2pt}
+}
+
+% 3. Learning Goals / Summary Box
+\newtcolorbox{targetbox}[1][]{
+    enhanced,
+    breakable,
+    colback=LightPurpleBg,
+    colframe=DeepPurple,
+    arc=3pt,
+    boxrule=1pt,
+    left=10pt,
+    right=10pt,
+    top=8pt,
+    bottom=8pt,
+    title=#1,
+    coltitle=white,
+    colbacktitle=DeepPurple,
+    fonttitle=\bfseries\small,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={boxrule=0pt, arc=2pt}
+}
+
+\begin{document}
+
+% ------------------- 讲义封面 (Cover Page) -------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+    \fill[DeepPurple] (current page.north west) rectangle ([yshift=-7cm]current page.north east);
+    \draw[DeepPink, line width=3.5pt] ([yshift=-7cm]current page.north west) -- ([yshift=-7cm]current page.north east);
+    \draw[GoldAccent, line width=1pt] ([yshift=-7.12cm]current page.north west) -- ([yshift=-7.12cm]current page.north east);
+    
+    \node[anchor=north east, opacity=0.12, text=white] at ([xshift=-1.5cm, yshift=-0.5cm]current page.north east) {
+        \fontsize{70}{70}\selectfont\bfseries 2027
+    };
+\end{tikzpicture}
+
+\vspace*{0.8cm}
+\begin{center}
+    {\color{white}\fontsize{26}{32}\selectfont\bfseries 2027 考研数学(二) 核心讲义}\\[0.6cm]
+    {\color{white}\fontsize{13}{18}\selectfont\bfseries 全国硕士研究生招生考试 · 统考数学(二) 核心精讲全书}\\[1.5cm]
+\end{center}
+
+\vspace{3.5cm}
+\begin{center}
+    {\color{GoldAccent}\large\bfseries $\blacktriangleright$ 基础强化 · 核心题解 · 考点深水区 $\blacktriangleleft$}\\[0.8cm]
+    {\color{TitlePurple}\fontsize{24}{28}\selectfont\bfseries 第九章 一元函数积分学的计算}\\[0.6cm]
+    {\color{DeepPink}\large\bfseries —— 体系化理论精讲与公式全景 ——}\\[1.5cm]
+\end{center}
+
+\vfill
+
+\begin{center}
+\begin{tcolorbox}[
+    colback=white,
+    colframe=DeepPurple,
+    width=0.88\textwidth,
+    arc=4pt,
+    boxrule=1.2pt,
+    halign=center,
+    drop shadow=gray!30
+]
+    \vspace{3mm}
+    {\bfseries\large 编著团队：EscoffierZhou}\\[2.5mm]
+    {\bfseries\color{TitlePurple} 目标院校：中国科学院大学 (UCAS) 计算机专硕 (22408)}\\[2.5mm]
+    {\small\color{gray} 备考铁律：手算真题数字 · 错题白纸重做 · 408 客观题为王}\\[2.5mm]
+    {\small 编制版本：2027 届首发版 · \today}
+    \vspace{2mm}
+\end{tcolorbox}
+\end{center}
+\vspace{0.8cm}
+\end{titlepage}
+
+% ------------------- 目录与页面主体配置 -------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{gray}2027 考研数学(二) · 核心讲义系列}
+\fancyhead[R]{\small\color{TitlePurple}\nouppercase{\leftmark}}
+\fancyfoot[C]{\small\color{gray}— 第 \thepage\ 页 —}
+\fancyfoot[R]{\small\color{gray}UCAS 22408}
+\renewcommand{\headrulewidth}{0.5pt}
+
+\pagenumbering{Roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+
+\begin{targetbox}[本章复习目标与核心知识图谱]
+\begin{itemize}
+  \item 目的[1]:熟练掌握基本积分公式系统及13组高频凑微分模型，做到见形拆招、正反双向秒切
+\end{itemize}
+\end{targetbox}
+
+\begin{targetbox}[本章复习目标与核心知识图谱]
+\begin{itemize}
+  \item 目的[2]:深刻领会第二类换元法(三角代换、根式代换、倒代换)与分部积分法(“反对幂指三”、表格十字相乘法)
+\end{itemize}
+\end{targetbox}
+
+\begin{targetbox}[本章复习目标与核心知识图谱]
+\begin{itemize}
+  \item 目的[3]:掌握有理函数分式分解原则及三角有理式化简(万能代换与奇偶优先降幂策略)
+\end{itemize}
+\end{targetbox}
+
+\begin{targetbox}[本章复习目标与核心知识图谱]
+\begin{itemize}
+  \item 目的[4]:熟练掌握定积分三大神技(对称性与周期性、区间再现公式、华里士点火公式)，实现高难度定积分快速降维
+\end{itemize}
+\end{targetbox}
+
+\begin{targetbox}[本章复习目标与核心知识图谱]
+\begin{itemize}
+  \item 目的[5]:深刻掌握变上限积分求导莱布尼茨准则与含参分离法则，严格掌握变限积分奇偶性与周期性传导定理
+\end{itemize}
+\end{targetbox}
+
+\begin{targetbox}[本章复习目标与核心知识图谱]
+\begin{itemize}
+  \item 目的[6]:掌握反常积分计算技巧与内部瑕点强制拆分法则，全面掌握 $\Gamma$ 函数定义、收敛性证明、递推性质与高斯积分联立应用
+\end{itemize}
+\end{targetbox}
+
+
+\section{1.基本积分公式与不定积分的凑微分法}
+
+\begin{thmbox}[公式[1]: 10组基本积分公式全景汇总与记忆框架]
+
+在整个考研高等数学中，求不定积分与定积分的本质是求导数的逆运算。要想在考场上快速准确地完成积分计算，必须将基本积分公式熟练掌握到如同“九九乘法表”一样的本能反应。以下整理为10组核心公式体系：
+
+\textbf{[1]} 幂函数与常数类：
+\textbf{(1)}  $\int 0\,\mathrm{d}x = C$
+
+\textbf{(2)}  $\int k\,\mathrm{d}x = kx + C$ (特别地，$\int \mathrm{d}x = x + C$)
+
+\textbf{(3)}  $\int x^a\,\mathrm{d}x = \frac{1}{a+1}x^{a+1} + C \quad (a \neq -1)$
+
+\textbf{(4)}  $\int \frac{1}{x}\,\mathrm{d}x = \ln|x| + C$ (必须带绝对值符号，因定义域包含 $x < 0$)
+
+\textbf{[2]} 指数函数类：
+\textbf{(1)}  $\int e^x\,\mathrm{d}x = e^x + C$
+
+\textbf{(2)}  $\int a^x\,\mathrm{d}x = \frac{a^x}{\ln a} + C \quad (a > 0, a \neq 1)$
+
+\textbf{[3]} 基本三角函数一次项类：
+\textbf{(1)}  $\int \cos x\,\mathrm{d}x = \sin x + C$
+
+\textbf{(2)}  $\int \sin x\,\mathrm{d}x = -\cos x + C$ (注意负号)
+
+\textbf{(3)}  $\int \tan x\,\mathrm{d}x = -\ln|\cos x| + C = \ln|\sec x| + C$
+
+\textbf{(4)}  $\int \cot x\,\mathrm{d}x = \ln|\sin x| + C$
+
+\textbf{[4]} 正割与余割一次项类：
+\textbf{(1)}  $\int \sec x\,\mathrm{d}x = \ln|\sec x + \tan x| + C$
+
+\textbf{(2)}  $\int \csc x\,\mathrm{d}x = -\ln|\csc x + \cot x| + C = \ln|\csc x - \cot x| + C$
+
+\textbf{[5]} 三角函数平方项类：
+\textbf{(1)}  $\int \sec^2 x\,\mathrm{d}x = \int \frac{1}{\cos^2 x}\,\mathrm{d}x = \tan x + C$
+
+\textbf{(2)}  $\int \csc^2 x\,\mathrm{d}x = \int \frac{1}{\sin^2 x}\,\mathrm{d}x = -\cot x + C$
+
+\textbf{[6]} 三角函数交叉乘积类：
+\textbf{(1)}  $\int \sec x \tan x\,\mathrm{d}x = \sec x + C$
+
+\textbf{(2)}  $\int \csc x \cot x\,\mathrm{d}x = -\csc x + C$
+
+\textbf{[7]} 反三角函数与平方和平方差(常数 $a > 0$)：
+\textbf{(1)}  $\int \frac{1}{\sqrt{a^2-x^2}}\,\mathrm{d}x = \arcsin\frac{x}{a} + C$
+
+\textbf{(2)}  $\int \frac{1}{a^2+x^2}\,\mathrm{d}x = \frac{1}{a}\arctan\frac{x}{a} + C$ (注意系数前方有 $\frac{1}{a}$)
+
+\textbf{[8]} 有理平方差分式：
+\textbf{(1)}  $\int \frac{1}{a^2-x^2}\,\mathrm{d}x = \frac{1}{2a}\ln\left|\frac{a+x}{a-x}\right| + C$
+
+\textbf{(2)}  $\int \frac{1}{x^2-a^2}\,\mathrm{d}x = \frac{1}{2a}\ln\left|\frac{x-a}{x+a}\right| + C$
+
+\textbf{[9]} 根号下平方和差反双曲类：
+\textbf{(1)}  $\int \frac{1}{\sqrt{x^2+a^2}}\,\mathrm{d}x = \ln\left(x + \sqrt{x^2+a^2}\right) + C$
+
+\textbf{(2)}  $\int \frac{1}{\sqrt{x^2-a^2}}\,\mathrm{d}x = \ln\left|x + \sqrt{x^2-a^2}\right| + C$
+
+\textbf{[10]} 圆面积型根式积分：
+
+\begin{equation*}
+\int \sqrt{a^2-x^2}\,\mathrm{d}x = \frac{x}{2}\sqrt{a^2-x^2} + \frac{a^2}{2}\arcsin\frac{x}{a} + C
+\end{equation*}
+
+
+记忆技巧: 第一项为直角三角形面积部分 $\frac{1}{2}x y$，第二项为扇形面积部分 $\frac{1}{2}a^2 \theta$。
+
+\end{thmbox}
+\begin{thmbox}[公式[2]: 双曲函数积分拓展]
+
+双曲函数在考研高数和物理应用题中经常出现，其运算法则与三角函数有极强对偶性：
+
+\textbf{[1]} 双曲正弦与双曲余弦定义：
+
+\begin{equation*}
+\sinh x = \frac{e^x - e^{-x}}{2}, \qquad \cosh x = \frac{e^x + e^{-x}}{2}
+\end{equation*}
+
+
+基本恒等式: $\cosh^2 x - \sinh^2 x = 1$。
+
+\textbf{[2]} 基本积分公式：
+\textbf{(1)}  $\int \sinh x\,\mathrm{d}x = \cosh x + C$
+
+\textbf{(2)}  $\int \cosh x\,\mathrm{d}x = \sinh x + C$ (注意双曲函数互求积分无负号)
+
+\textbf{(3)}  $\int \frac{1}{\cosh^2 x}\,\mathrm{d}x = \tanh x + C$
+
+\end{thmbox}
+
+\begin{equation*}
+\int f[\varphi(x)]\varphi'(x)\,\mathrm{d}x = \int f[\varphi(x)]\,\mathrm{d}\varphi(x) = F[\varphi(x)] + C
+\end{equation*}
+\begin{thmbox}[方法[1]: 不定积分的凑微分法(第一类换元法)]
+
+凑微分法的数学原理基于复合函数的求导链式法则：
+
+设 $F'(u) = f(u)$，且 $u = \varphi(x)$ 可微，则：
+
+
+凑微分的本质是在被积表达式中识别出复合内层函数 $\varphi(x)$，并将剩余因式与 $\mathrm{d}x$ 结合，凑成内层函数的微分 $\mathrm{d}\varphi(x)$。以下为考研中最为核心的13组凑微分对照表：
+
+\textbf{[1]} 常数因子微调：
+
+\begin{equation*}
+\mathrm{d}x = \frac{1}{a}\,\mathrm{d}(ax + b) \quad (a \neq 0)
+\end{equation*}
+
+
+\textbf{[2]} 幂函数与根式类：
+\textbf{(1)}  $x^n\,\mathrm{d}x = \frac{1}{n+1}\,\mathrm{d}(x^{n+1}) \quad (n \neq -1)$
+
+\textbf{(2)}  $\frac{1}{\sqrt{x}}\,\mathrm{d}x = 2\,\mathrm{d}(\sqrt{x})$
+
+\textbf{(3)}  $\frac{1}{x^2}\,\mathrm{d}x = -\,\mathrm{d}\left(\frac{1}{x}\right)$
+
+\textbf{[3]} 对数函数类：
+
+\begin{equation*}
+\frac{1}{x}\,\mathrm{d}x = \mathrm{d}(\ln x)
+\end{equation*}
+
+
+\textbf{[4]} 指数函数类：
+\textbf{(1)}  $e^x\,\mathrm{d}x = \mathrm{d}(e^x)$
+
+\textbf{(2)}  $a^x\,\mathrm{d}x = \frac{1}{\ln a}\,\mathrm{d}(a^x)$
+
+\textbf{[5]} 正弦余弦一次因式类：
+\textbf{(1)}  $\cos x\,\mathrm{d}x = \mathrm{d}(\sin x)$
+
+\textbf{(2)}  $\sin x\,\mathrm{d}x = -\,\mathrm{d}(\cos x)$
+
+\textbf{[6]} 正割余割平方因式类：
+\textbf{(1)}  $\sec^2 x\,\mathrm{d}x = \frac{1}{\cos^2 x}\,\mathrm{d}x = \mathrm{d}(\tan x)$
+
+\textbf{(2)}  $\csc^2 x\,\mathrm{d}x = \frac{1}{\sin^2 x}\,\mathrm{d}x = -\,\mathrm{d}(\cot x)$
+
+\textbf{[7]} 正割余割积因式类：
+\textbf{(1)}  $\sec x\tan x\,\mathrm{d}x = \mathrm{d}(\sec x)$
+
+\textbf{(2)}  $\csc x\cot x\,\mathrm{d}x = -\,\mathrm{d}(\csc x)$
+
+\textbf{[8]} 反正切反余切微分项类：
+
+\begin{equation*}
+\frac{1}{1+x^2}\,\mathrm{d}x = \mathrm{d}(\arctan x) = -\,\mathrm{d}(\operatorname{arccot} x)
+\end{equation*}
+
+
+\textbf{[9]} 反正弦反余弦微分项类：
+
+\begin{equation*}
+\frac{1}{\sqrt{1-x^2}}\,\mathrm{d}x = \mathrm{d}(\arcsin x) = -\,\mathrm{d}(\arccos x)
+\end{equation*}
+
+
+\textbf{[10]} 正切余切分母对数类：
+\textbf{(1)}  $\tan x\,\mathrm{d}x = -\frac{\mathrm{d}(\cos x)}{\cos x} = -\,\mathrm{d}(\ln|\cos x|)$
+
+\textbf{(2)}  $\cot x\,\mathrm{d}x = \frac{\mathrm{d}(\sin x)}{\sin x} = \mathrm{d}(\ln|\sin x|)$
+
+\textbf{[11]} 根号下二次齐次型：
+
+\begin{equation*}
+\frac{x}{\sqrt{x^2 \pm a^2}}\,\mathrm{d}x = \mathrm{d}\left(\sqrt{x^2 \pm a^2}\right)
+\end{equation*}
+
+
+\textbf{[12]} 二次平方和差分母型：
+
+\begin{equation*}
+\frac{x}{x^2 \pm a^2}\,\mathrm{d}x = \frac{1}{2}\,\mathrm{d}(x^2 \pm a^2) = \frac{1}{2}\,\mathrm{d}\ln|x^2 \pm a^2|
+\end{equation*}
+
+
+\textbf{[13]} 高次幂与倒数提取型：
+当分母为高次多项式时，往往分子凑不出微分，此时应主动提取 $x$ 的最高次幂到分母外部，化为 $\frac{1}{x^k}$ 结构后凑微分。
+
+\end{thmbox}
+\begin{thmbox}[原理[1]: 凑微分三大核心思维心法]
+
+凑微分不是盲目尝试，而是目标极其明确的逆向还原：
+
+\textbf{[1]} 抓内层导数: 先看被积表达式中最复杂、最不规整的复合结构(如 $\sqrt{\dots}$, $e^{\dots}$, $\ln(\dots)$, $\arctan(\dots)$)，观察其余部分是否正好为内层函数的导数。
+
+\textbf{[2]} 平衡系数: 导数中产生的常数倍数，必须在外侧同步乘以倒数予以抵消，确保等式严格恒等。
+
+\textbf{[3]} 化整为零: 遇到分式结构，若分子有多项，应首先考虑拆项，将一个看似庞杂的积分拆成若干个标准的凑微分积木。
+
+\end{thmbox}
+
+\section{2.不定积分的换元积分法与分部积分法}
+
+\begin{thmbox}[方法[1]: 第二类换元积分法]
+
+当无法直接凑微分时，通过引入中间变量 $t$，令 $x = \psi(t)$，将复杂的被积函数化简，求出关于 $t$ 的原函数后再将 $t = \psi^{-1}(x)$ 回代。
+
+\textbf{[1]} 三角代换(无理根式代数化)：
+三角代换的核心在于利用同角三角函数的勾股平方关系，彻底开掉被积函数中的二次方根。
+
+\textbf{(1)}  含有 $\sqrt{a^2-x^2}$ 型：
+令 $x = a\sin t \quad \left(-\frac{\pi}{2} \leqslant t \leqslant \frac{\pi}{2}\right)$。
+
+此时 $\sqrt{a^2-x^2} = a\cos t$，$\mathrm{d}x = a\cos t\,\mathrm{d}t$。
+
+\textbf{(2)}  含有 $\sqrt{a^2+x^2}$ 型：
+令 $x = a\tan t \quad \left(-\frac{\pi}{2} < t < \frac{\pi}{2}\right)$。
+
+此时 $\sqrt{a^2+x^2} = a\sec t$，$\mathrm{d}x = a\sec^2 t\,\mathrm{d}t$。
+
+\textbf{(3)}  含有 $\sqrt{x^2-a^2}$ 型：
+令 $x = a\sec t \quad \left(0 \leqslant t < \frac{\pi}{2} \text{ 或 } \pi \leqslant t < \frac{3\pi}{2}\right)$。
+
+此时 $\sqrt{x^2-a^2} = a\tan t$，$\mathrm{d}x = a\sec t\tan t\,\mathrm{d}t$。
+
+\textbf{(4)}  辅助直角三角形几何回代法：
+求得关于 $t$ 的三角函数表达式后，必须回代原变量 $x$。此时切勿硬背反三角公式，而应随手画出一个以 $t$ 为锐角的直角三角形：
+
+- 针对 $x = a\sin t$: 对边为 $x$，斜边为 $a$，邻边为 $\sqrt{a^2-x^2}$；
+- 针对 $x = a\tan t$: 对边为 $x$，邻边为 $a$，斜边为 $\sqrt{a^2+x^2}$；
+- 针对 $x = a\sec t$: 斜边为 $x$，邻边为 $a$，对边为 $\sqrt{x^2-a^2}$。
+
+直接根据三角形各边的几何比值写出 $\sin t, \cos t, \tan t, \sec t$ 的代数表达式，快捷准确，绝无差错。
+
+\textbf{[2]} 根式代换(直接消根)：
+\textbf{(1)}  单个一次根式: 若式中含有 $\sqrt[n]{ax+b}$，直接令 $t = \sqrt[n]{ax+b}$，则 $x = \frac{t^n-b}{a}$，$\mathrm{d}x = \frac{n}{a}t^{n-1}\mathrm{d}t$。
+
+\textbf{(2)}  分式型一次根式: 若含有 $\sqrt[n]{\frac{ax+b}{cx+d}}$，令 $t = \sqrt[n]{\frac{ax+b}{cx+d}}$，反解出 $x$ 后求微分化为有理分式。
+
+\textbf{(3)}  多个不同方根: 若式中同时含有 $\sqrt{x}$ 与 $\sqrt[3]{x}$，取根指数的最小公倍数，令 $x = t^6$。
+
+\textbf{[3]} 倒代换(高次分母降次神技)：
+\textbf{(1)}  适用特征: 被积函数为分式，且分母的次数明显高于分子的次数(通常高出2次及以上)，尤其是分母外侧含有 $x$ 或 $x^n$，内侧含有二次根式 $\sqrt{ax^2+bx+c}$。
+
+\textbf{(2)}  代换法则: 令 $x = \frac{1}{t}$，则 $\mathrm{d}x = -\frac{1}{t^2}\,\mathrm{d}t$。
+
+\textbf{(3)}  妙用机制: 分母中的 $x^k$ 会化为 $\frac{1}{t^k}$，微分中的 $\frac{1}{t^2}$ 可以直接将分子分母同乘以 $t$ 的高次方，原本处于根号内部的高次项瞬间被提炼至分子，从而转化为极容易求解的标准凑微分或反常积分形式。
+
+\textbf{[4]} 复杂指数与对数代换：
+当被积函数中含有指数复合项(如 $e^x, a^x$)或复杂对数项，且凑微分受阻时，令 $t = e^x$ ($x = \ln t$) 或 $t = \ln x$ ($x = e^t$)，往往能化繁为简。
+
+\end{thmbox}
+
+\begin{equation*}
+\int u\,\mathrm{d}v = uv - \int v\,\mathrm{d}u
+\end{equation*}
+\begin{thmbox}[方法[2]: 分部积分法与选 $u$ 原则]
+
+分部积分法的理论基石是乘积求导法则 $(uv)' = u'v + uv'$，两边积分得：
+
+
+分部积分法的精髓在于通过求导使得 $u$ 的结构变得更简单，通过积分使得 $\mathrm{d}v$ 还原为 $v$ 时不至于过分复杂，从而使新积分 $\int v\,\mathrm{d}u$ 比原积分更容易计算。
+
+\textbf{[1]} 选 $u$ 口诀：“反、对、幂、指、三”
+按此顺序排在前面的函数优先选为 $u$，排在后面的函数优先选为 $v'$ 与 $\mathrm{d}x$ 凑成 $\mathrm{d}v$：
+
+- “反”: 反三角函数($\arcsin x, \arccos x, \arctan x$)
+- “对”: 对数函数($\ln x, \log_a x$)
+- “幂”: 幂函数与多项式($x^n, P_n(x)$)
+- “指”: 指数函数($e^x, a^x$)
+- “三”: 三角函数($\sin x, \cos x$)
+
+\textbf{[2]} 三大典型乘积类型的分部解题策略：
+\textbf{(1)}  $P_n(x)e^{\lambda x}$, $P_n(x)\sin(\lambda x)$, $P_n(x)\cos(\lambda x)$ 型：
+选 $u = P_n(x)$，将多项式选作 $u$。
+
+解题机制: 每分部积分一次，$P_n(x)$ 的导数次数降低一次，连续分部 $n$ 次后多项式彻底变为常数，最终转化为简单指数或三角函数积分。
+
+\textbf{(2)}  $P_n(x)\ln x$, $P_n(x)\arcsin x$, $P_n(x)\arctan x$ 型：
+选 $u = \ln x, \arcsin x, \arctan x$，将反三角或对数选作 $u$。
+
+解题机制: 反三角函数和对数函数求导之后会变为代数分式或代数根式，从而脱掉反三角和对数的外壳，将超越函数积分转化为容易处理的有理函数或根式代换积分。
+
+\textbf{(3)}  $e^{\alpha x}\sin(\beta x)$, $e^{\alpha x}\cos(\beta x)$ 型：
+选指数函数或三角函数为 $u$ 均可(但连续两次分部时角色必须前后一致)。
+
+解题机制: 连续两次分部积分后，右端会再次出现原积分项 $I$ 带有负系数，通过移项合并同类项，解代数方程即可直接求出积分值(循环回路法)。
+
+\end{thmbox}
+\begin{thmbox}[方法[3]: 表格分部积分法(十字相乘法则)]
+
+表格分部积分法(Tabular Integration)是分部积分的高阶速算工具，极大地简化了连续多次分部积分中冗长繁复的书写与正负号容易混淆的痛点。
+
+\textbf{[1]} 适用对象：
+\textbf{(1)}  “降幂型”: 多项式与指数函数、正弦函数、余弦函数的乘积，多项式经过若干次求导后导数变为0。
+
+\textbf{(2)}  “循环型”: 指数函数与正余弦函数的乘积。
+
+\textbf{[2]} 表格构造与十字相乘三步走：
+第一步: 建立三列或两列。左列记为求导列 $D(u)$，右列记为积分列 $I(v')$，并标注交替符号 $+ , - , + , - , \dots$。
+
+第二步:
+- 将 $u(x)$ 写入左列第一行，逐行向下求导，直到导数为 0；
+- 将 $v'(x)$ 写入右列第一行，逐行向下积分，求得对应的各阶原函数。
+
+第三步:
+- 对角线相乘: 从左列第 $k$ 行向右下方第 $k+1$ 行画斜线相乘，并附带该斜线对应的正负号；
+- 水平线结算: 任意一行的水平相乘，必须加在积分号内部，即 $\pm \int D^{(k)}(u) I^{(k)}(v)\,\mathrm{d}x$。当左列求导到 0 时，最后一行水平乘积为 0，表格自动封闭完成！
+
+\textbf{[3]} 数学证明(由连续分部积分归纳得出)：
+
+\begin{equation*}
+\int u v^{(n+1)}\,\mathrm{d}x = u v^{(n)} - u' v^{(n-1)} + u'' v^{(n-2)} - \dots + (-1)^n u^{(n)} v + (-1)^{n+1}\int u^{(n+1)} v\,\mathrm{d}x
+\end{equation*}
+
+
+表格法正是这一高阶泰勒展开式结构的直观矩阵表达。
+
+\end{thmbox}
+
+\section{3.有理函数积分与三角有理式代换}
+
+\begin{thmbox}[方法[1]: 有理函数积分标准拆分原理]
+
+形如 $\int \frac{P(x)}{Q(x)}\,\mathrm{d}x$ 的积分，其中 $P(x), Q(x)$ 为实系数多项式。
+
+\textbf{[1]} 真假分式化简：
+若分子次数 $\geqslant$ 分母次数(假分式)，先用多项式带余长除法化为：
+
+
+\begin{equation*}
+\frac{P(x)}{Q(x)} = S(x) + \frac{R(x)}{Q(x)}
+\end{equation*}
+
+
+其中 $S(x)$ 为整式多项式(积分极易)，$\frac{R(x)}{Q(x)}$ 为真分式(分子次数严格小于分母次数)。
+
+\textbf{[2]} 真分式的拆分定理(分母实数域因式分解)：
+根据代数基本定理，分母 $Q(x)$ 在实数域内必能唯一分解为一次因式与不可约二次因式的乘积。拆分规则如下：
+
+\textbf{(1)}  单实根因式 $(x-a)$:
+产生拆项 $\frac{A}{x-a}$。
+
+\textbf{(2)}  重实根因式 $(x-a)^k$:
+产生 $k$ 项拆项：
+
+
+\begin{equation*}
+\frac{A_1}{x-a} + \frac{A_2}{(x-a)^2} + \dots + \frac{A_k}{(x-a)^k}
+\end{equation*}
+
+
+\textbf{(3)}  单二次因式 $(x^2+px+q)$ (判别式 $\Delta = p^2 - 4q < 0$):
+产生拆项 $\frac{Bx+C}{x^2+px+q}$。
+
+\textbf{(4)}  重二次因式 $(x^2+px+q)^m$:
+产生 $m$ 项拆项：
+
+
+\begin{equation*}
+\frac{B_1 x + C_1}{x^2+px+q} + \dots + \frac{B_m x + C_m}{(x^2+px+q)^m}
+\end{equation*}
+
+
+\textbf{[3]} 系数确定的三大速算技巧：
+\textbf{(1)}  赋值法(极点覆盖法/留数思想): 对不重实根因式，两边同乘该分母后令其根代入，瞬间秒杀待定系数。
+
+\textbf{(2)}  特殊值带入法: 给 $x$ 赋予特殊数值(如 $x=0, 1, -1$)，联立简单一元一次方程求解。
+
+\textbf{(3)}  比较最高次项系数法: 观察两端 $x$ 最高次项与常数项，快速锁定未知数。
+
+\textbf{[4]} 4种最简有理分式的标准积分公式：
+\textbf{(1)}  $\int \frac{A}{x-a}\,\mathrm{d}x = A\ln|x-a| + C$
+
+\textbf{(2)}  $\int \frac{A}{(x-a)^k}\,\mathrm{d}x = -\frac{A}{k-1}\frac{1}{(x-a)^{k-1}} + C \quad (k > 1)$
+
+\textbf{(3)}  $\int \frac{Bx+C}{x^2+px+q}\,\mathrm{d}x$:
+配方与拆项: 将分子改写为分母导数的常数倍加上剩余常数：
+
+
+\begin{equation*}
+Bx + C = \frac{B}{2}(2x + p) + \left(C - \frac{Bp}{2}\right)
+\end{equation*}
+
+
+前半部分凑微分得对数项 $\frac{B}{2}\ln(x^2+px+q)$；后半部分分母配方 $(x + p/2)^2 + (q - p^2/4)$，积出反正切项 $\arctan$。
+
+\textbf{(4)}  $\int \frac{1}{(x^2+a^2)^m}\,\mathrm{d}x$:
+通过分部积分建立递推公式 $I_m$ 与 $I_{m-1}$ 的关系求解。
+
+\end{thmbox}
+\begin{thmbox}[方法[2]: 三角有理式积分策略]
+
+被积函数为由 $\sin x$ 与 $\cos x$ 的代数有理运算构成的函数，记为 $R(\sin x, \cos x)$。
+
+\textbf{[1]} 万能代换公式(万能但往往计算量庞大)：
+令 $t = \tan\frac{x}{2} \quad (-\pi < x < \pi)$，则：
+
+
+\begin{equation*}
+\sin x = \frac{2t}{1+t^2}, \qquad \cos x = \frac{1-t^2}{1+t^2}, \qquad \mathrm{d}x = \frac{2}{1+t^2}\,\mathrm{d}t
+\end{equation*}
+
+
+万能代换能将一切三角有理式积分化为普通的代数有理函数积分，但往往导致分母次数翻倍，带来巨大的代数化简工作量，通常作为保底备用手段。
+
+\textbf{[2]} 三角有理式奇偶性降维三大优先原则：
+\textbf{(1)}  对 $\sin x$ 为奇函数: 即 $R(-\sin x, \cos x) = -R(\sin x, \cos x)$。
+处理策略: 从分子中分出一个 $\sin x$ 与 $\mathrm{d}x$ 凑成 $-\mathrm{d}(\cos x)$，其余各项全部用 $\sin^2 x = 1 - \cos^2 x$ 化为关于 $\cos x$ 的表达式，令 $u = \cos x$。
+
+\textbf{(2)}  对 $\cos x$ 为奇函数: 即 $R(\sin x, -\cos x) = -R(\sin x, \cos x)$。
+处理策略: 从分子中分出一个 $\cos x$ 与 $\mathrm{d}x$ 凑成 $\mathrm{d}(\sin x)$，其余各项用 $\cos^2 x = 1 - \sin^2 x$ 化为关于 $\sin x$ 的表达式，令 $u = \sin x$。
+
+\textbf{(3)}  对 $\sin x, \cos x$ 同为偶函数: 即 $R(-\sin x, -\cos x) = R(\sin x, \cos x)$。
+处理策略: 分子分母同时除以 $\cos^2 x$ 化为关于 $\tan x$ 的函数，将 $\frac{1}{\cos^2 x}\,\mathrm{d}x$ 凑成 $\mathrm{d}(\tan x)$，令 $u = \tan x$；此时 $\sin^2 x = \frac{u^2}{1+u^2}$，$\cos^2 x = \frac{1}{1+u^2}$，$\mathrm{d}x = \frac{\mathrm{d}u}{1+u^2}$。
+
+\end{thmbox}
+
+\section{4.定积分的计算理论与三大神技}
+
+
+\begin{equation*}
+\int_a^b f(x)\,\mathrm{d}x = \left. F(x) \right|_a^b = F(b) - F(a)
+\end{equation*}
+\begin{thmbox}[定理[1]: 牛顿-莱布尼茨公式与微积分基本定理]
+
+设函数 $f(x)$ 在区间 $[a, b]$ 上连续，且 $F(x)$ 是 $f(x)$ 在 $[a, b]$ 上的一个原函数，则：
+
+
+\textbf{[1]} 公式成立的严密性条件：
+\textbf{(1)}  被积函数 $f(x)$ 必须在整个闭区间 $[a, b]$ 上连续(至多包含有限个第一类间断点，此时需分段积分)。
+
+\textbf{(2)}  原函数 $F(x)$ 必须在整段闭区间 $[a, b]$ 上处处连续可导且满足 $F'(x) = f(x)$。
+
+严重警示: 对于分段函数求定积分，若采用先求不定积分再代入端点差的方法，其分段原函数在分界点处必须通过常数拼接保证连续性，否则直接套用差值将导致荒谬的错误结果！
+
+\textbf{[2]} 历史背景与文化小叙：
+微积分学由英国科学家牛顿(Isaac Newton)与德国哲学家莱布尼茨(Gottfried Wilhelm Leibniz)在17世纪下半叶各自独立建立。牛顿从经典力学运动的“瞬时速度”与“位移积累”出发创立了“流数术”；而莱布尼茨则从精妙的几何切线与特征三角形出发，创造了流传至今的微分符号 $\mathrm{d}x$ 与积分符号 $\int$。
+
+在我国清朝康熙年间，法国传教士白晋(Joachim Bouvet)与张诚(Jean-François Gerbillon)进入清廷，向酷爱自然科学的康熙皇帝系统讲解西方代数学与几何求积算法。康熙曾命内阁编纂《数理精蕴》，书中首次收录了西方初等微积分的思想萌芽，体现了东西方数学文化的交汇与碰撞。
+
+\end{thmbox}
+\begin{thmbox}[方法[1]: 定积分的换元法与分部积分法]
+
+\textbf{[1]} 换元法“三换”铁律：
+若令 $x = \varphi(t)$，必须同步完成三项替换：
+
+\textbf{(1)}  换被积函数: $f(x) \to f[\varphi(t)]$；
+
+\textbf{(2)}  换微分: $\mathrm{d}x \to \varphi'(t)\,\mathrm{d}t$；
+
+\textbf{(3)}  换积分上下限: $x=a \implies t = \alpha$，$x=b \implies t = \beta$ (满足 $\varphi(\alpha)=a, \varphi(\beta)=b$)。
+
+定积分换元的核心优势在于\textbf{换限不回代}，只要新变量上下限正确，直接代入新限结算即可，彻底免去了不定积分中复杂的几何三角形回代步骤。
+
+换元前提条件: $\varphi'(t)$ 在闭区间上连续，且当 $t$ 在 $[\alpha, \beta]$ 变化时，$\varphi(t)$ 的值域必须完全落在原函数定义区间内，且保持单调对应，防止由于多值映射导致积分区域畸变。
+
+\textbf{[2]} 定积分的分部积分法：
+
+\begin{equation*}
+\int_a^b u\,\mathrm{d}v = \left. uv \right|_a^b - \int_a^b v\,\mathrm{d}u
+\end{equation*}
+
+
+\end{thmbox}
+\begin{thmbox}[定理[2]: 对称性与周期性积分定理]
+
+\textbf{[1]} 对称区间上的奇偶性积分法则：
+设积分区间为关于原点对称的 $[-a, a]$ ($a > 0$)：
+
+\textbf{(1)}  若 $f(x)$ 为奇函数($f(-x) = -f(x)$)，则：
+
+
+\begin{equation*}
+\int_{-a}^a f(x)\,\mathrm{d}x = 0
+\end{equation*}
+
+
+\textbf{(2)}  若 $f(x)$ 为偶函数($f(-x) = f(x)$)，则：
+
+
+\begin{equation*}
+\int_{-a}^a f(x)\,\mathrm{d}x = 2\int_0^a f(x)\,\mathrm{d}x
+\end{equation*}
+
+
+\textbf{[2]} 周期函数的定积分性质(积分起点无关性)：
+设 $f(x)$ 是以 $T$ 为周期的连续函数，则对于任意实数 $a$：
+
+
+\begin{equation*}
+\int_a^{a+T} f(x)\,\mathrm{d}x = \int_0^T f(x)\,\mathrm{d}x
+\end{equation*}
+
+
+证明全过程：
+
+
+\begin{equation*}
+\int_a^{a+T} f(x)\,\mathrm{d}x = \int_a^0 f(x)\,\mathrm{d}x + \int_0^T f(x)\,\mathrm{d}x + \int_T^{a+T} f(x)\,\mathrm{d}x
+\end{equation*}
+
+
+对第三项作换元，令 $x = t + T$，则当 $x=T$ 时 $t=0$；当 $x=a+T$ 时 $t=a$：
+
+
+\begin{equation*}
+\int_T^{a+T} f(x)\,\mathrm{d}x = \int_0^a f(t+T)\,\mathrm{d}t = \int_0^a f(t)\,\mathrm{d}t
+\end{equation*}
+
+
+因此：
+
+
+\begin{equation*}
+\int_a^0 f(x)\,\mathrm{d}x + \int_T^{a+T} f(x)\,\mathrm{d}x = -\int_0^a f(x)\,\mathrm{d}x + \int_0^a f(t)\,\mathrm{d}t = 0
+\end{equation*}
+
+
+两项完美对消，定理得证。
+
+推论: $\int_0^{nT} f(x)\,\mathrm{d}x = n\int_0^T f(x)\,\mathrm{d}x \quad (n \in \mathbb{Z})$。
+
+\end{thmbox}
+\begin{thmbox}[定理[3]: 区间再现公式(考研定积分第一神技)]
+
+\textbf{[1]} 核心公式与严密推导：
+
+\begin{equation*}
+\int_a^b f(x)\,\mathrm{d}x = \int_a^b f(a+b-x)\,\mathrm{d}x
+\end{equation*}
+
+
+证明: 对右边作变量代换，令 $x = a+b-t$，则 $\mathrm{d}x = -\mathrm{d}t$。
+
+上下限变换: 当 $x=a$ 时 $t=b$；当 $x=b$ 时 $t=a$。
+
+
+\begin{equation*}
+\int_a^b f(a+b-x)\,\mathrm{d}x = \int_b^a f(t)(-\mathrm{d}t) = \int_a^b f(t)\,\mathrm{d}t = \int_a^b f(x)\,\mathrm{d}x
+\end{equation*}
+
+
+命题得证。几何本质: 将曲线关于区间中点 $x = \frac{a+b}{2}$ 作镜像翻折，图形总面积保持恒等。
+
+\textbf{[2]} 两大经典衍生变式：
+\textbf{(1)}  对称和常数型(秒杀利器)：
+若被积函数满足 $f(x) + f(a+b-x) = C$ (常数)，则：
+
+
+\begin{equation*}
+\int_a^b f(x)\,\mathrm{d}x = \frac{C}{2}(b - a)
+\end{equation*}
+
+
+典型考题: $\int_0^{\frac{\pi}{2}} \frac{\sin^n x}{\sin^n x + \cos^n x}\,\mathrm{d}x = \frac{1}{2}\left(\frac{\pi}{2} - 0\right) = \frac{\pi}{4}$。
+
+\textbf{(2)}  三角消元型：
+
+\begin{equation*}
+\int_0^\pi x f(\sin x)\,\mathrm{d}x = \frac{\pi}{2}\int_0^\pi f(\sin x)\,\mathrm{d}x
+\end{equation*}
+
+
+机制: 利用 $\sin(\pi - x) = \sin x$，区间再现之后两式相加，分子中的孤立因子 $x$ 瞬间被彻底消灭，化为纯三角定积分。
+
+\end{thmbox}
+\begin{thmbox}[公式[3]: 华里士公式(点火公式 / Wallis公式)]
+
+\textbf{[1]} 标准公式：
+记 $I_n = \int_0^{\frac{\pi}{2}} \sin^n x\,\mathrm{d}x = \int_0^{\frac{\pi}{2}} \cos^n x\,\mathrm{d}x$ ($n$ 为正整数)：
+
+
+\begin{align*}
+I_n = \begin{cases} \frac{n-1}{n} \cdot \frac{n-3}{n-2} \cdots \frac{1}{2} \cdot \frac{\pi}{2}, & n \text{ 为正偶数} \\ \\ \frac{n-1}{n} \cdot \frac{n-3}{n-2} \cdots \frac{2}{3} \cdot 1, & n \text{ 为大于1的奇数} \end{cases}
+\end{align*}
+
+
+点火口诀: “分子奇、分母偶，逢偶乘二分之派；分子偶、分母奇，乘一不用带派”。
+
+\textbf{[2]} 区间对称拓展法则(解决区间为 $[0, \pi]$ 与 $[0, 2\pi]$)：
+\textbf{(1)}  积分区间为 $[0, \pi]$ 时：
+利用关于 $x = \frac{\pi}{2}$ 的对称性：
+
+
+\begin{equation*}
+\int_0^\pi \sin^n x\,\mathrm{d}x = 2\int_0^{\frac{\pi}{2}} \sin^n x\,\mathrm{d}x = 2 I_n
+\end{equation*}
+
+
+
+\begin{align*}
+\int_0^\pi \cos^n x\,\mathrm{d}x = \begin{cases} 2 I_n, & n \text{ 为正偶数} \\ \\ 0, & n \text{ 为正奇数} \end{cases}
+\end{align*}
+
+
+\textbf{(2)}  积分区间为 $[0, 2\pi]$ 时：
+
+\begin{align*}
+\int_0^{2\pi} \sin^n x\,\mathrm{d}x = \int_0^{2\pi} \cos^n x\,\mathrm{d}x = \begin{cases} 4 I_n, & n \text{ 为正偶数} \\ \\ 0, & n \text{ 为正奇数} \end{cases}
+\end{align*}
+
+
+\end{thmbox}
+
+\section{5.变上限积分函数的计算与性质}
+
+\begin{thmbox}[公式[1]: 变限积分求导的莱布尼茨准则]
+
+\textbf{[1]} 复合上下限求导通用公式：
+设函数 $f(x)$ 连续，上下限函数 $\varphi_1(x), \varphi_2(x)$ 均可导，则：
+
+
+\begin{equation*}
+\frac{\mathrm{d}}{\mathrm{d}x}\int_{\varphi_1(x)}^{\varphi_2(x)} f(t)\,\mathrm{d}t = f[\varphi_2(x)]\cdot \varphi_2'(x) - f[\varphi_1(x)]\cdot \varphi_1'(x)
+\end{equation*}
+
+
+\textbf{[2]} 被积函数含自变量 $x$ 的求导处理原则：
+对于 $F(x) = \int_a^{u(x)} f(x, t)\,\mathrm{d}t$，因积分变量是 $t$，自变量 $x$ 同时出现在上下限与被积函数内部。
+
+\textbf{(1)}  线性分离法: 若 $f(x, t)$ 中 $x$ 与 $t$ 呈线性加减分离(如 $(x-t)g(t)$ 或 $x g(t)$)，必须先利用定积分性质把 $x$ 提至积分号外侧：
+
+
+\begin{equation*}
+\int_0^x (x-t)g(t)\,\mathrm{d}t = x\int_0^x g(t)\,\mathrm{d}t - \int_0^x t g(t)\,\mathrm{d}t
+\end{equation*}
+
+
+然后再利用乘积求导法则展开求导。
+
+\textbf{(2)}  换元消除法: 若 $x$ 与 $t$ 复合在一起无法直接分离(如 $f(x-t)$ 或 $f(xt)$)，必须先通过换元代换(令 $u = x-t$ 或 $u = xt$)将外层变量 $x$ 转移到积分限上，彻底净化被积表达式内部，方可动用求导准则。
+
+\end{thmbox}
+\begin{thmbox}[定理[1]: 变限积分的奇偶性与周期性传导定理]
+
+\textbf{[1]} 奇偶性传导定理(极高频考点)：
+设 $f(x)$ 在定义区间上连续：
+
+\textbf{(1)}  若 $f(x)$ 为\textbf{奇函数}：
+变上限积分 $F(x) = \int_0^x f(t)\,\mathrm{d}t$ 必为\textbf{偶函数}；
+
+更为重要的结论: \textbf{奇函数的全体原函数均为偶函数}！
+
+证明: 设 $G(x) = \int_0^x f(t)\,\mathrm{d}t + C$。
+
+
+\begin{equation*}
+G(-x) = \int_0^{-x} f(t)\,\mathrm{d}t + C
+\end{equation*}
+
+
+令 $t = -u$，则 $\mathrm{d}t = -\mathrm{d}u$，当 $t=0$ 时 $u=0$；当 $t=-x$ 时 $u=x$：
+
+
+\begin{equation*}
+G(-x) = \int_0^x f(-u)(-\mathrm{d}u) + C = \int_0^x [-f(u)](-\mathrm{d}u) + C = \int_0^x f(u)\,\mathrm{d}u + C = G(x)
+\end{equation*}
+
+
+常数 $C$ 完全不破坏轴对称性，因此奇函数的每一个原函数都是偶函数。
+
+\textbf{(2)}  若 $f(x)$ 为\textbf{偶函数}：
+变上限积分 $F(x) = \int_0^x f(t)\,\mathrm{d}t$ 必为\textbf{奇函数}；
+
+更为重要的结论: \textbf{偶函数的原函数中，有且仅有一个是奇函数}(即当下限为 0 且常数 $C = 0$ 时的那个原函数)！
+
+证明: 若 $G(x) = \int_0^x f(t)\,\mathrm{d}t + C$ 要成为奇函数，必须满足 $G(0) = 0$。而 $G(0) = 0 + C = 0 \implies C = 0$。一旦 $C \neq 0$，中心对称点被竖向平移，中心对称性瞬间瓦解。
+
+\textbf{[2]} 周期性传导定理：
+设连续函数 $f(x)$ 以 $T$ 为周期，记变上限积分 $F(x) = \int_0^x f(t)\,\mathrm{d}t$。
+
+定理: $F(x)$ 是以 $T$ 为周期的周期函数 $\iff \int_0^T f(t)\,\mathrm{d}t = 0$。
+
+证明过程：
+
+
+\begin{equation*}
+F(x+T) - F(x) = \int_0^{x+T} f(t)\,\mathrm{d}t - \int_0^x f(t)\,\mathrm{d}t = \int_x^{x+T} f(t)\,\mathrm{d}t
+\end{equation*}
+
+
+由周期函数积分起点无关性：
+
+
+\begin{equation*}
+\int_x^{x+T} f(t)\,\mathrm{d}t = \int_0^T f(t)\,\mathrm{d}t
+\end{equation*}
+
+
+因此 $F(x+T) = F(x) \iff \int_0^T f(t)\,\mathrm{d}t = 0$。
+
+深入内涵: 若 $\int_0^T f(t)\,\mathrm{d}t = A \neq 0$，则变上限积分可表示为：
+
+
+\begin{equation*}
+F(x) = \frac{A}{T}x + P(x)
+\end{equation*}
+
+
+其中 $P(x)$ 为以 $T$ 为周期的周期函数。此时 $F(x)$ 是一个沿斜率为 $\frac{A}{T}$ 的直线不断震荡上升(或下降)的非周期函数。
+
+\end{thmbox}
+
+\section{6.反常积分的计算与 $\Gamma$ 函数}
+
+\begin{thmbox}[概念[1]: 反常积分的分类与计算原则]
+
+反常积分包含无穷限反常积分与无界函数反常积分(瑕积分)。两者的本质均为变上限积分取单侧极限。
+
+\textbf{[1]} 无穷限反常积分：
+
+\begin{equation*}
+\int_a^{+\infty} f(x)\,\mathrm{d}x = \lim_{b \to +\infty} \int_a^b f(x)\,\mathrm{d}x
+\end{equation*}
+
+
+若两端皆为无穷限，必须在实轴上任选一点 $c$(通常选 $c=0$)拆分为两段：
+
+
+\begin{equation*}
+\int_{-\infty}^{+\infty} f(x)\,\mathrm{d}x = \int_{-\infty}^c f(x)\,\mathrm{d}x + \int_c^{+\infty} f(x)\,\mathrm{d}x
+\end{equation*}
+
+
+只有当两段极限分别、独立存在并收敛时，全区间的反常积分才称作收敛！
+
+\textbf{[2]} 瑕积分(无界函数反常积分)：
+若函数 $f(x)$ 在点 $a$ 处无界($\lim_{x \to a^+} f(x) = \infty$)，称 $a$ 为瑕点(奇点)：
+
+
+\begin{equation*}
+\int_a^b f(x)\,\mathrm{d}x = \lim_{\varepsilon \to 0^+} \int_{a+\varepsilon}^b f(x)\,\mathrm{d}x
+\end{equation*}
+
+
+核心避坑铁律: \textbf{内部瑕点必须强制拆分！}
+
+若瑕点 $c$ 处于积分开区间 $(a, b)$ 内部，绝不能直接盲目套用牛顿-莱布尼茨公式跨越奇点，必须严格拆分成两段：
+
+
+\begin{equation*}
+\int_a^b f(x)\,\mathrm{d}x = \int_a^c f(x)\,\mathrm{d}x + \int_c^b f(x)\,\mathrm{d}x
+\end{equation*}
+
+
+两段各自独立收敛，原反常积分方可收敛；只要其中任意一段发散，原积分即为发散。
+
+\end{thmbox}
+\begin{thmbox}[函数[1]: $\Gamma$ 函数(欧拉第二类积分)的理论体系]
+
+$\Gamma$ 函数(Gamma函数)在考研高数、概率论与数理统计(卡方分布、t分布、F分布、正态分布)中占据举足轻重的地位。
+
+\textbf{[1]} $\Gamma$ 函数定义：
+
+\begin{equation*}
+\Gamma(\alpha) = \int_0^{+\infty} x^{\alpha-1}e^{-x}\,\mathrm{d}x \quad (\alpha > 0)
+\end{equation*}
+
+
+\textbf{[2]} 收敛域 $\alpha > 0$ 的严密拆分证明：
+因为在积分区间 $(0, +\infty)$ 上，点 $x=0$ 可能为无界奇点(当 $\alpha < 1$ 时)，而 $+\infty$ 为无穷限，故必须在 $x=1$ 处拆分为两段研究：
+
+
+\begin{equation*}
+\Gamma(\alpha) = \int_0^1 x^{\alpha-1}e^{-x}\,\mathrm{d}x + \int_1^{+\infty} x^{\alpha-1}e^{-x}\,\mathrm{d}x
+\end{equation*}
+
+
+\textbf{(1)}  对无穷积分段 $\int_1^{+\infty} x^{\alpha-1}e^{-x}\,\mathrm{d}x$：
+由高阶无穷小极限性质：对于任意实数 $\alpha$，指数函数的衰减速度远超任意多项式：
+
+
+\begin{equation*}
+\lim_{x \to +\infty} \frac{x^{\alpha-1}e^{-x}}{\frac{1}{x^2}} = \lim_{x \to +\infty} x^{\alpha+1}e^{-x} = 0
+\end{equation*}
+
+
+由 $p$-积分比较审敛法，由于 $\int_1^{+\infty} \frac{1}{x^2}\,\mathrm{d}x$ 收敛，故对任意实数 $\alpha$，无穷积分段永远绝对收敛！
+
+\textbf{(2)}  对瑕积分段 $\int_0^1 x^{\alpha-1}e^{-x}\,\mathrm{d}x$：
+在 $x \in (0, 1]$ 上，$e^{-1} \leqslant e^{-x} < 1$，故被积函数的主部由 $x^{\alpha-1} = \frac{1}{x^{1-\alpha}}$ 唯一决定。
+
+由瑕积分 $p$-审敛准则：$\int_0^1 \frac{1}{x^p}\,\mathrm{d}x$ 当且仅当 $p < 1$ 时收敛。
+
+令 $1 - \alpha < 1$，即得 $\alpha > 0$！
+
+综上所述，$\Gamma(\alpha)$ 在且仅在 $\alpha > 0$ 时收敛。
+
+\textbf{[3]} $\Gamma$ 函数的四大核心运算性质：
+\textbf{(1)}  递推公式(利用分部积分即证)：
+
+\begin{equation*}
+\Gamma(\alpha+1) = \alpha\Gamma(\alpha) \quad (\alpha > 0)
+\end{equation*}
+
+
+\textbf{(2)}  正整数阶乘推广：
+当 $n$ 为正整数时，$\Gamma(1) = \int_0^{+\infty} e^{-x}\,\mathrm{d}x = 1$，由递推关系可得：
+
+
+\begin{equation*}
+\Gamma(n+1) = n!
+\end{equation*}
+
+
+这是实数阶乘在连续实数域上的完美推广。
+
+\textbf{(3)}  半整数核心基准值：
+
+\begin{equation*}
+\Gamma\left(\frac{1}{2}\right) = \sqrt{\pi}
+\end{equation*}
+
+
+由此可根据递推式秒杀所有半整数阶 $\Gamma$ 值：
+
+- $\Gamma\left(\frac{3}{2}\right) = \frac{1}{2}\Gamma\left(\frac{1}{2}\right) = \frac{\sqrt{\pi}}{2}$
+- $\Gamma\left(\frac{5}{2}\right) = \frac{3}{2}\Gamma\left(\frac{3}{2}\right) = \frac{3\sqrt{\pi}}{4}$
+- $\Gamma\left(\frac{7}{2}\right) = \frac{5}{2}\Gamma\left(\frac{5}{2}\right) = \frac{15\sqrt{\pi}}{8}$
+
+\textbf{(4)}  平方变量代换形式(高斯分布模型)：
+在 $\Gamma(\alpha)$ 中令 $x = t^2$，则 $\mathrm{d}x = 2t\,\mathrm{d}t$：
+
+
+\begin{equation*}
+\Gamma(\alpha) = 2\int_0^{+\infty} t^{2\alpha-1}e^{-t^2}\,\mathrm{d}t
+\end{equation*}
+
+
+取 $\alpha = \frac{1}{2}$，立即导出经典高斯积分(泊松积分)：
+
+
+\begin{equation*}
+\int_0^{+\infty} e^{-t^2}\,\mathrm{d}t = \frac{1}{2}\Gamma\left(\frac{1}{2}\right) = \frac{\sqrt{\pi}}{2} \implies \int_{-\infty}^{+\infty} e^{-t^2}\,\mathrm{d}t = \sqrt{\pi}
+\end{equation*}
+
+
+\textbf{[4]} 文化小叙与旁注：费曼的秘密武器——积分号下求导法：
+诺贝尔物理学奖得主理查德·费曼(Richard Feynman)曾在自传中提及，他在普林斯顿求学期间掌握了一套独特的数学技巧，即莱布尼茨积分号下求导法则(Leibniz Integral Rule)。每当同伴们陷入繁琐的分部积分或复变函数留数计算泥潭时，费曼往往通过在被积函数中巧妙引入一个微扰参数 $\lambda$，对参数 $\lambda$ 进行微分并交换积分次序，瞬间击穿难关。对于形如 $\int_0^{+\infty} x^n e^{-x}\,\mathrm{d}x$ 的积分，正是对基础积分 $\int_0^{+\infty} e^{-\lambda x}\,\mathrm{d}x = \frac{1}{\lambda}$ 连续求 $n$ 次关于 $\lambda$ 的导数后令 $\lambda=1$ 所获得的完美成果。
+\end{thmbox}
+
+\end{document}
