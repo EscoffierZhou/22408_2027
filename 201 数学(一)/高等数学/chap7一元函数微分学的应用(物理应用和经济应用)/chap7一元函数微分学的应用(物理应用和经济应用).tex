@@ -1,0 +1,539 @@
+\documentclass[11pt,a4paper,UTF8]{ctexart}
+\usepackage{geometry}
+\geometry{left=18mm,right=18mm,top=24mm,bottom=24mm,headheight=22pt,footskip=12mm}
+\usepackage{amsmath,amssymb,mathtools,bm,esint,extarrows,centernot}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{tabularx}
+
+% --- Color Palette (Purple & DeepPink Academic Theme) ---
+\definecolor{DeepPurple}{HTML}{4C1D95}
+\definecolor{TitlePurple}{HTML}{581C87}
+\definecolor{SubPurple}{HTML}{6B21A8}
+\definecolor{DeepPink}{HTML}{FF1493}
+\definecolor{LightPinkBg}{HTML}{FFF5F8}
+\definecolor{LightPurpleBg}{HTML}{F8F5FF}
+\definecolor{GoldAccent}{HTML}{D97706}
+\definecolor{DarkText}{HTML}{1F2937}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=TitlePurple,
+    citecolor=DeepPink,
+    urlcolor=SubPurple,
+    pdfborder={0 0 0}
+}
+
+% --- Typography & Spacing ---
+\linespread{1.3}
+\setlength{\parskip}{0.35em plus 0.1em minus 0.1em}
+\setlength{\parindent}{0pt}
+
+% --- Section Titles Styling ---
+\titleformat{\section}
+  {\Large\bfseries\color{TitlePurple}}{\thesection}{1em}{}
+  [\vspace{1mm}{\color{TitlePurple!30}\hrule height 1pt}]
+\titleformat{\subsection}
+  {\large\bfseries\color{SubPurple}}{\thesubsection}{0.8em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\color{DeepPurple}}{\thesubsubsection}{0.6em}{}
+
+% --- tcolorbox Environments ---
+% 1. Theorem / Formula / Method / Analysis Box (Deep Purple)
+\newtcolorbox{thmbox}[1][]{
+    enhanced,
+    breakable,
+    colback=LightPurpleBg,
+    colframe=TitlePurple,
+    arc=3pt,
+    boxrule=0pt,
+    leftrule=3.5pt,
+    left=10pt,
+    right=10pt,
+    top=8pt,
+    bottom=8pt,
+    title=#1,
+    coltitle=white,
+    colbacktitle=TitlePurple,
+    fonttitle=\bfseries\small,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={boxrule=0pt, arc=2pt}
+}
+
+% 2. Solution / Formula / Derivation Box (DeepPink)
+\newtcolorbox{solbox}[1][]{
+    enhanced,
+    breakable,
+    colback=LightPinkBg,
+    colframe=DeepPink,
+    arc=3pt,
+    boxrule=0pt,
+    leftrule=3.5pt,
+    left=10pt,
+    right=10pt,
+    top=8pt,
+    bottom=8pt,
+    title=#1,
+    coltitle=white,
+    colbacktitle=DeepPink,
+    fonttitle=\bfseries\small,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={boxrule=0pt, arc=2pt}
+}
+
+% 3. Learning Goals / Summary Box
+\newtcolorbox{targetbox}[1][]{
+    enhanced,
+    breakable,
+    colback=LightPurpleBg,
+    colframe=DeepPurple,
+    arc=3pt,
+    boxrule=1pt,
+    left=10pt,
+    right=10pt,
+    top=8pt,
+    bottom=8pt,
+    title=#1,
+    coltitle=white,
+    colbacktitle=DeepPurple,
+    fonttitle=\bfseries\small,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={boxrule=0pt, arc=2pt}
+}
+
+\begin{document}
+
+% ------------------- 讲义封面 (Cover Page) -------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+    \fill[DeepPurple] (current page.north west) rectangle ([yshift=-7cm]current page.north east);
+    \draw[DeepPink, line width=3.5pt] ([yshift=-7cm]current page.north west) -- ([yshift=-7cm]current page.north east);
+    \draw[GoldAccent, line width=1pt] ([yshift=-7.12cm]current page.north west) -- ([yshift=-7.12cm]current page.north east);
+    
+    \node[anchor=north east, opacity=0.12, text=white] at ([xshift=-1.5cm, yshift=-0.5cm]current page.north east) {
+        \fontsize{70}{70}\selectfont\bfseries 2027
+    };
+\end{tikzpicture}
+
+\vspace*{0.8cm}
+\begin{center}
+    {\color{white}\fontsize{26}{32}\selectfont\bfseries 2027 考研数学(二) 核心讲义}\\[0.6cm]
+    {\color{white}\fontsize{13}{18}\selectfont\bfseries 全国硕士研究生招生考试 · 统考数学(二) 核心精讲全书}\\[1.5cm]
+\end{center}
+
+\vspace{3.5cm}
+\begin{center}
+    {\color{GoldAccent}\large\bfseries $\blacktriangleright$ 基础强化 · 核心题解 · 考点深水区 $\blacktriangleleft$}\\[0.8cm]
+    {\color{TitlePurple}\fontsize{24}{28}\selectfont\bfseries 第七章 一元函数微分学的应用(物理应用和经济应用)}\\[0.6cm]
+    {\color{DeepPink}\large\bfseries —— 体系化理论精讲与公式全景 ——}\\[1.5cm]
+\end{center}
+
+\vfill
+
+\begin{center}
+\begin{tcolorbox}[
+    colback=white,
+    colframe=DeepPurple,
+    width=0.88\textwidth,
+    arc=4pt,
+    boxrule=1.2pt,
+    halign=center,
+    drop shadow=gray!30
+]
+    \vspace{3mm}
+    {\bfseries\large 编著团队：EscoffierZhou}\\[2.5mm]
+    {\bfseries\color{TitlePurple} 目标院校：中国科学院大学 (UCAS) 计算机专硕 (22408)}\\[2.5mm]
+    {\small\color{gray} 备考铁律：手算真题数字 · 错题白纸重做 · 408 客观题为王}\\[2.5mm]
+    {\small 编制版本：2027 届首发版 · \today}
+    \vspace{2mm}
+\end{tcolorbox}
+\end{center}
+\vspace{0.8cm}
+\end{titlepage}
+
+% ------------------- 目录与页面主体配置 -------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{gray}2027 考研数学(二) · 核心讲义系列}
+\fancyhead[R]{\small\color{TitlePurple}\nouppercase{\leftmark}}
+\fancyfoot[C]{\small\color{gray}— 第 \thepage\ 页 —}
+\fancyfoot[R]{\small\color{gray}UCAS 22408}
+\renewcommand{\headrulewidth}{0.5pt}
+
+\pagenumbering{Roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+
+\begin{targetbox}[本章复习目标与核心知识图谱]
+\begin{itemize}
+  \item 目的[1]:掌握导数的物理本质——变化率模型与相关变化率(数一/数二高频考点)
+\end{itemize}
+\end{targetbox}
+
+\begin{targetbox}[本章复习目标与核心知识图谱]
+\begin{itemize}
+  \item 目的[2]:掌握质点直线运动中的位移、速度、加速度与高阶导数链式微分关系
+\end{itemize}
+\end{targetbox}
+
+\begin{targetbox}[本章复习目标与核心知识图谱]
+\begin{itemize}
+  \item 目的[3]:掌握平面曲线运动中的速度分解、法向/切向加速度与曲率动力学模型
+\end{itemize}
+\end{targetbox}
+
+\begin{targetbox}[本章复习目标与核心知识图谱]
+\begin{itemize}
+  \item 目的[4]:熟练建立物理量之间的几何/代数约束方程，并结合隐函数求导法与链式法则求解变化率
+\end{itemize}
+\end{targetbox}
+
+\begin{targetbox}[本章复习目标与核心知识图谱]
+\begin{itemize}
+  \item 目的[5]:掌握导数在经济学中的边际分析(边际成本、边际收益、边际利润及利润最大化准则)
+\end{itemize}
+\end{targetbox}
+
+\begin{targetbox}[本章复习目标与核心知识图谱]
+\begin{itemize}
+  \item 目的[6]:掌握需求价格弹性公式、弹性与收益的关系，熟练运用导数分析经济决策
+\end{itemize}
+\end{targetbox}
+
+
+\section{1.导数的物理本质:变化率与相关变化率}
+
+
+\begin{equation*}
+\frac{\mathrm{d}y}{\mathrm{d}t} = \lim_{\Delta t \to 0} \frac{\Delta y}{\Delta t}
+\end{equation*}
+\begin{thmbox}[原理[1]: 变化率的物理定义]
+
+若物理量$y$依赖于时间参数$t$，则$y$对$t$的导数即为$y$随时间$t$变化的\textbf{瞬时变化率}：
+
+
+- 若$\frac{\mathrm{d}y}{\mathrm{d}t} > 0$，表示物理量随时间增加(如膨胀、上升、升温、加速)；
+- 若$\frac{\mathrm{d}y}{\mathrm{d}t} < 0$，表示物理量随时间减少(如收缩、下降、降温、减速)。
+
+\end{thmbox}
+
+\begin{equation*}
+F(x, y, \dots) = 0
+\end{equation*}
+\begin{thmbox}[原理[2]: 相关变化率模型与标准SOP流程]
+
+设两个或多个物理量$x, y, \theta$都是时间$t$的可导函数，它们之间通过某种几何约束关系或物理规律满足关联方程：
+
+
+若已知其中某些量的变化率(如$\frac{\mathrm{d}x}{\mathrm{d}t}$)，求另一物理量对时间的变化率$\frac{\mathrm{d}y}{\mathrm{d}t}$。
+
+[相关变化率标准解题SOP(步控流程)]
+
+操作[1]:选元定标：设出所有随时间变化的变量(记为$x(t), y(t), \theta(t)$等)。
+
+注意:变化过程中的动量严禁在求导前代入固定数值！
+
+操作[2]:几何/物理建模：利用勾股定理、相似三角形、三角函数定义或体积公式建立几何约束方程$F(x, y) = 0$。
+
+操作[3]:对时间$t$全求导：方程两边关于时间$t$求导(视各变量为$t$的复合函数，严格应用链式法则)。
+
+操作[4]:代入特定瞬时值：仅在求导完成后，将题设中“特定瞬间”的几何位置参数和已知变化率代入，解出目标变化率。
+
+\end{thmbox}
+
+\section{2.质点直线运动与微分关系}
+
+\begin{thmbox}[原理[1]: 质点直线运动中的高阶导数链]
+
+设质点沿直线运动的位置坐标随时间的变化规律为位移函数$s = s(t)$：
+
+- \textbf{瞬时速度(一阶导数):} $v(t) = \frac{\mathrm{d}s}{\mathrm{d}t} = s'(t)$
+- \textbf{瞬时加速度(二阶导数):} $a(t) = \frac{\mathrm{d}v}{\mathrm{d}t} = \frac{\mathrm{d}^2s}{\mathrm{d}t^2} = s''(t)$
+- \textbf{加加速度/变加速度(三阶导数Jerk):} $j(t) = \frac{\mathrm{d}a}{\mathrm{d}t} = \frac{\mathrm{d}^3s}{\mathrm{d}t^3} = s'''(t)$
+
+\end{thmbox}
+
+\begin{equation*}
+a = \frac{\mathrm{d}v}{\mathrm{d}t} = \frac{\mathrm{d}v}{\mathrm{d}s} \cdot \frac{\mathrm{d}s}{\mathrm{d}t} = v \frac{\mathrm{d}v}{\mathrm{d}s} = \frac{\mathrm{d}}{\mathrm{d}s}\left(\frac{1}{2}v^2\right)
+\end{equation*}
+\begin{thmbox}[原理[2]: 以位移为自变量的链式法则变换]
+
+在动力学问题中，加速度或外力常由位置决定(如弹簧弹力、万有引力$a = a(s)$)。此时时间参数$t$被消去，利用复合求导链式法则进行转化：
+
+
+本质作用:此关系是建立牛顿第二定律微分方程的桥梁：$F = ma \implies F(s) = mv \frac{\mathrm{d}v}{\mathrm{d}s}$，分离变量即可直接积分求解速度与位移的关系。
+
+\end{thmbox}
+
+\section{3.平面曲线运动与切向/法向加速度(结合曲率)}
+
+
+\begin{equation*}
+\vec{a} = a_\tau \vec{\tau} + a_n \vec{n}
+\end{equation*}
+
+\begin{equation*}
+a_\tau = \frac{\mathrm{d}v}{\mathrm{d}t} = \frac{\mathrm{d}^2s}{\mathrm{d}t^2}
+\end{equation*}
+
+\begin{equation*}
+a_n = \frac{v^2}{R} = K v^2
+\end{equation*}
+
+\begin{equation*}
+a = \vert{}\vec{a}\vert{} = \sqrt{a_\tau^2 + a_n^2} = \sqrt{\left(\frac{\mathrm{d}v}{\mathrm{d}t}\right)^2 + (K v^2)^2}
+\end{equation*}
+\begin{thmbox}[原理[1]: 切向加速度与法向加速度的正交分解]
+
+当质点沿平面曲线$y = f(x)$运动，弧长参数为$s$，瞬时速率为$v = \frac{\mathrm{d}s}{\mathrm{d}t}$时，其加速度向量$\vec{a}$可正交分解为切向分量$\vec{a}_\tau$与法向分量$\vec{a}_n$：
+
+
+- \textit{}切向加速度$a_\tau$:\textbf{ 反映}速率大小改变的快慢\textit{}：
+
+
+- \textit{}法向加速度$a_n$:\textbf{ 反映}运动速度方向改变的快慢\textit{}，与轨迹在当前点的曲率$K$及曲率半径$R$直接绑定：
+
+
+- \textbf{全加速度大小:} 
+
+
+\end{thmbox}
+
+\begin{equation*}
+K = \frac{\vert{}y''\vert{}}{[1 + (y')^2]^{\frac{3}{2}}}
+\end{equation*}
+\begin{thmbox}[原理[2]: 平面直角坐标下的曲率计算]
+
+若曲线方程为$y = f(x)$，在点$(x, y)$处的曲率$K$为：
+
+
+曲率半径为$R = \frac{1}{K}$。
+
+\end{thmbox}
+
+\section{5.经典强化例题精解}
+
+
+\subsection{例题 1: 相关变化率(仰角与高度模型)}
+
+观测站位于离火箭发射台水平距离为$3\text{ km}$的平地上。若火箭垂直向上发射，当火箭高度达到$4\text{ km}$时，其瞬时上升速度为$800\text{ km/h}$。求此时观测站仪器对火箭观测仰角的变化率。
+
+\textbf{\color{DeepPurple}【思路点拨】} 利用直角三角形建立正切函数几何约束方程$y = 3\tan\theta$，两端对时间$t$求导应用链式法则，代入特定瞬间的几何量解出仰角变化率
+
+
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]} 选元与几何建模：
+
+设在时刻$t$，火箭垂直高度为$y(t)$，观测站仪器的仰角为$\theta(t)$。
+
+由直角三角形三角函数关系：
+
+
+\begin{equation*}
+\tan\theta = \frac{y}{3} \implies y = 3\tan\theta
+\end{equation*}
+
+
+\textbf{[2]} 两端关于时间$t$求导：
+
+方程两端关于时间$t$求导(视$y$与$\theta$为$t$的复合函数)：
+
+
+\begin{equation*}
+\frac{\mathrm{d}y}{\mathrm{d}t} = 3\sec^2\theta \cdot \frac{\mathrm{d}\theta}{\mathrm{d}t}
+\end{equation*}
+
+
+\textbf{[3]} 确定特定瞬间的几何量：
+
+当火箭高度$y = 4\text{ km}$时：
+
+- 水平距离为$3\text{ km}$，斜边视线距离为$\sqrt{3^2 + 4^2} = 5\text{ km}$；
+- 此时$\cos\theta = \frac{3}{5} \implies \sec\theta = \frac{5}{3}$；
+- 瞬时上升速度已知：$\frac{\mathrm{d}y}{\mathrm{d}t} = 800\text{ km/h}$。
+
+\textbf{[4]} 代入计算仰角变化率：
+
+
+\begin{equation*}
+800 = 3 \cdot \left(\frac{5}{3}\right)^2 \cdot \frac{\mathrm{d}\theta}{\mathrm{d}t} = \frac{25}{3} \cdot \frac{\mathrm{d}\theta}{\mathrm{d}t}
+\end{equation*}
+
+
+解得：
+
+
+\begin{equation*}
+\frac{\mathrm{d}\theta}{\mathrm{d}t} = \frac{800 \times 3}{25} = 96\text{ rad/h}
+\end{equation*}
+
+\end{solbox}
+
+
+\subsection{例题 2: 相关变化率(倒圆锥漏水模型)}
+
+一倒置圆锥形水漏斗，其底面圆半径为$R = 6\text{ cm}$，高为$H = 12\text{ cm}$。水以$2\text{ cm}^3\text{/s}$的恒定速率从底部小孔漏出。当水深为$4\text{ cm}$时，求漏斗中水面下降的速率。
+
+\textbf{\color{DeepPurple}【思路点拨】} 利用相似三角形将半径$r$用高$h$表示以消元，建立单一变量体积公式$V(h)$，两边对$t$求导后代入瞬时水深求解
+
+
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]} 选元与几何相似消元：
+
+设在时刻$t$，水深为$h(t)$，对应水面半径为$r(t)$，水的体积为$V(t)$。
+
+由圆锥截面的相似三角形性质：
+
+
+\begin{equation*}
+\frac{r}{h} = \frac{R}{H} = \frac{6}{12} = \frac{1}{2} \implies r = \frac{1}{2}h
+\end{equation*}
+
+
+\textbf{[2]} 建立单变量体积函数：
+
+
+\begin{equation*}
+V = \frac{1}{3}\pi r^2 h = \frac{1}{3}\pi \left(\frac{1}{2}h\right)^2 h = \frac{1}{12}\pi h^3
+\end{equation*}
+
+
+\textbf{[3]} 两端对时间$t$求导：
+
+
+\begin{equation*}
+\frac{\mathrm{d}V}{\mathrm{d}t} = \frac{1}{12}\pi \cdot 3h^2 \frac{\mathrm{d}h}{\mathrm{d}t} = \frac{1}{4}\pi h^2 \frac{\mathrm{d}h}{\mathrm{d}t}
+\end{equation*}
+
+
+\textbf{[4]} 代入已知瞬时值计算：
+
+漏水说明体积随时间减少，$\frac{\mathrm{d}V}{\mathrm{d}t} = -2\text{ cm}^3\text{/s}$，水深$h = 4\text{ cm}$：
+
+
+\begin{equation*}
+-2 = \frac{1}{4}\pi (4)^2 \frac{\mathrm{d}h}{\mathrm{d}t} = 4\pi \frac{\mathrm{d}h}{\mathrm{d}t} \implies \frac{\mathrm{d}h}{\mathrm{d}t} = -\frac{1}{2\pi}\text{ cm/s}
+\end{equation*}
+
+
+故水面下降的速率为$\frac{1}{2\pi}\text{ cm/s}$。
+\end{solbox}
+
+
+\subsection{例题 3: 相关变化率(滑梯靠墙下滑模型)}
+
+长为$5\text{ m}$的梯子靠在垂直的墙上。底端以$2\text{ m/s}$的匀速沿水平地面向远离墙面方向滑动。当底端离墙面$3\text{ m}$时，求顶端沿墙面下滑的速度，以及梯子与地面夹角$\theta$的变化率。
+
+\textbf{\color{DeepPurple}【思路点拨】} 建立勾股定理约束方程$x^2 + y^2 = 25$对时间求导求解顶端下滑速度；通过余弦定义$\cos\theta = \frac{x}{5}$对时间求导求解角速度
+
+
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]} 勾股定理建模与求导：
+
+设底端离墙距离为$x(t)$，顶端离地高度为$y(t)$。满足几何约束：
+
+
+\begin{equation*}
+x^2 + y^2 = 5^2 = 25
+\end{equation*}
+
+
+两端对时间$t$求导：
+
+
+\begin{equation*}
+2x\frac{\mathrm{d}x}{\mathrm{d}t} + 2y\frac{\mathrm{d}y}{\mathrm{d}t} = 0 \implies x\frac{\mathrm{d}x}{\mathrm{d}t} + y\frac{\mathrm{d}y}{\mathrm{d}t} = 0
+\end{equation*}
+
+
+\textbf{[2]} 计算特定瞬时的顶端速度：
+
+当$x = 3\text{ m}$时，代入勾股方程得$y = \sqrt{25 - 3^2} = 4\text{ m}$。
+
+已知$\frac{\mathrm{d}x}{\mathrm{d}t} = 2\text{ m/s}$，代入得：
+
+
+\begin{equation*}
+3(2) + 4\frac{\mathrm{d}y}{\mathrm{d}t} = 0 \implies \frac{\mathrm{d}y}{\mathrm{d}t} = -\frac{3}{2}\text{ m/s}
+\end{equation*}
+
+
+说明顶端沿墙面下滑的速度大小为$1.5\text{ m/s}$。
+
+\textbf{[3]} 求夹角$\theta$的变化率：
+
+由几何关系$\cos\theta = \frac{x}{5}$，两端对$t$求导：
+
+
+\begin{equation*}
+-\sin\theta \frac{\mathrm{d}\theta}{\mathrm{d}t} = \frac{1}{5}\frac{\mathrm{d}x}{\mathrm{d}t}
+\end{equation*}
+
+
+此时$\sin\theta = \frac{y}{5} = \frac{4}{5}$，代入得：
+
+
+\begin{equation*}
+-\frac{4}{5} \frac{\mathrm{d}\theta}{\mathrm{d}t} = \frac{1}{5} \times 2 \implies \frac{\mathrm{d}\theta}{\mathrm{d}t} = -\frac{1}{2}\text{ rad/s}
+\end{equation*}
+
+\end{solbox}
+
+
+\subsection{例题 4: 曲线运动(法向加速度与曲率结合)}
+
+质点沿抛物线轨道$y = \frac{1}{2}x^2$运动。当质点到达点$(1, \frac{1}{2})$时，已知质点在该点的瞬时速率为$v = 2\sqrt{5}\text{ m/s}$，且速率随时间的增加率为$\frac{\mathrm{d}v}{\mathrm{d}t} = 3\text{ m/s}^2$。求质点在该瞬时的全加速度大小。
+
+\textbf{\color{DeepPurple}【思路点拨】} 切向加速度直接由速率导数给出；法向加速度通过轨迹曲率公式$K$及$a_n = Kv^2$计算；最后合成全加速度
+
+
+\begin{solbox}[分步推导与答题规范]
+\textbf{[1]} 切向加速度计算：
+
+切向加速度反映速率大小改变的快慢，直接由已知条件给出：
+
+
+\begin{equation*}
+a_\tau = \frac{\mathrm{d}v}{\mathrm{d}t} = 3\text{ m/s}^2
+\end{equation*}
+
+
+\textbf{[2]} 计算轨迹在点$x = 1$处的曲率$K$：
+
+- $y' = x \implies y'(1) = 1$；
+- $y'' = 1 \implies y''(1) = 1$；
+- 代入平面曲线曲率公式：
+
+ 
+\begin{equation*}
+K = \frac{\vert{}y''\vert{}}{[1 + (y')^2]^{\frac{3}{2}}} = \frac{1}{[1 + 1^2]^{\frac{3}{2}}} = \frac{1}{2^{\frac{3}{2}}} = \frac{1}{2\sqrt{2}}
+\end{equation*}
+
+
+\textbf{[3]} 计算法向加速度$a_n$：
+
+
+\begin{equation*}
+a_n = K v^2 = \frac{1}{2\sqrt{2}} \times (2\sqrt{5})^2 = \frac{20}{2\sqrt{2}} = 5\sqrt{2}\text{ m/s}^2
+\end{equation*}
+
+
+\textbf{[4]} 合成全加速度大小：
+
+
+\begin{equation*}
+a = \sqrt{a_\tau^2 + a_n^2} = \sqrt{3^2 + (5\sqrt{2})^2} = \sqrt{9 + 50} = \sqrt{59}\text{ m/s}^2
+\end{equation*}
+
+\end{solbox}
+
+\end{document}

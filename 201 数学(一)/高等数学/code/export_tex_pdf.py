@@ -7,6 +7,7 @@ Converts structured Markdown notes to native LaTeX documents (.tex) and compiles
 Key Design Architecture:
 - Real XeLaTeX math typesetting: Crisp black vector formulas with Donald Knuth's exact mathematical typography.
 - Native fraction rules in superscripts: Solves KaTeX's thick bar / bold semicolon artifact in exponents (e^{1/x}, x^{2/3}).
+- Auto-sanitizes inline & display math: Wraps Chinese words in \text{...} and ensures control sequences have trailing spaces.
 - Prestigious Academic Lecture Note Cover (全彩/矢量精装讲义封面): DeepPurple banner, DeepPink & GoldAccent dividing rules, 2027 watermark, UCAS 22408 metadata box.
 - Table of Contents (TOC) with purple hyperref links and Roman page numbering.
 - Beautiful tcolorbox environments:
@@ -14,6 +15,10 @@ Key Design Architecture:
   * solbox (DeepPink frame & title): Solutions, Step-by-Step Derivations, and Worked Examples
   * targetbox (Amethyst Purple): Chapter Learning Objectives
 - Two-way workspace synchronization between 22408_2027 and 11408_2027 - 副本.
+- CLI supports:
+  * python export_tex_pdf.py --all
+  * python export_tex_pdf.py --chap 1 2 3 4
+  * python export_tex_pdf.py <path>
 """
 
 import os
@@ -26,7 +31,7 @@ import argparse
 LATEX_PREAMBLE = r'''\documentclass[11pt,a4paper,UTF8]{ctexart}
 \usepackage{geometry}
 \geometry{left=18mm,right=18mm,top=24mm,bottom=24mm,headheight=22pt,footskip=12mm}
-\usepackage{amsmath,amssymb,mathtools,bm,esint,extarrows}
+\usepackage{amsmath,amssymb,mathtools,bm,esint,extarrows,centernot}
 \usepackage{xcolor}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
@@ -83,7 +88,7 @@ LATEX_PREAMBLE = r'''\documentclass[11pt,a4paper,UTF8]{ctexart}
     right=10pt,
     top=8pt,
     bottom=8pt,
-    title=#1,
+    title={#1},
     coltitle=white,
     colbacktitle=TitlePurple,
     fonttitle=\bfseries\small,
@@ -104,7 +109,7 @@ LATEX_PREAMBLE = r'''\documentclass[11pt,a4paper,UTF8]{ctexart}
     right=10pt,
     top=8pt,
     bottom=8pt,
-    title=#1,
+    title={#1},
     coltitle=white,
     colbacktitle=DeepPink,
     fonttitle=\bfseries\small,
@@ -148,10 +153,13 @@ def format_chinese_chap_title(raw):
             '29': '二十九', '30': '三十'
         }
         cn_str = chinese_nums.get(c_num, c_num)
-        return f"第{cn_str}章 {c_rest.strip()}"
+        clean_rest = c_rest.strip()
+        return f"第{cn_str}章 {clean_rest}"
     return raw
 
 def generate_cover_page(doc_title, sub_title):
+    doc_title = doc_title.replace('&', r'\&').replace('_', r'\_').replace('%', r'\%').replace('#', r'\#')
+    sub_title = sub_title.replace('&', r'\&').replace('_', r'\_').replace('%', r'\%').replace('#', r'\#')
     return r'''
 % ------------------- 讲义封面 (Cover Page) -------------------
 \begin{titlepage}
@@ -217,22 +225,59 @@ def generate_cover_page(doc_title, sub_title):
 \pagenumbering{arabic}
 '''
 
+def clean_math(math_content):
+    """Sanitizes math strings: ensures spaces after macros, wraps Chinese in \text{...}."""
+    # 1. Insert space after control sequence if followed by Chinese
+    s = re.sub(r'(\\[a-zA-Z]+)([\u4e00-\u9fa5])', r'\1 \2', math_content)
+    
+    # 2. Wrap Chinese character sequences that are not already inside \text{...}
+    parts = re.split(r'(\\text\{.*?\})', s)
+    out = []
+    for p in parts:
+        if p.startswith(r'\text{'):
+            out.append(p)
+        else:
+            out.append(re.sub(r'[\u4e00-\u9fa5]+', lambda m: f"\\text{{{m.group(0)}}}", p))
+    return ''.join(out)
+
 def escape_text(text):
-    """Escapes LaTeX special characters in normal prose while avoiding math."""
+    """Escapes LaTeX special characters in normal prose while sanitizing math."""
     parts = []
-    # Match both $...$ and $$...$$
     pattern = re.compile(r'(\$\$.*?\$\$|\$.*?\$)', re.DOTALL)
     tokens = pattern.split(text)
     
     for token in tokens:
-        if token.startswith('$'):
-            parts.append(token)
+        if token.startswith('$$'):
+            inner = clean_math(token[2:-2])
+            parts.append(f"$${inner}$$")
+        elif token.startswith('$'):
+            inner = clean_math(token[1:-1])
+            parts.append(f"${inner}$")
         else:
             t = token
+            t = t.replace(r'\[', '[')
+            t = t.replace(r'\]', ']')
+            t = t.replace(r'\(', '(')
+            t = t.replace(r'\)', ')')
             t = t.replace('&', r'\&')
             t = t.replace('%', r'\%')
             t = t.replace('_', r'\_')
             t = t.replace('#', r'\#')
+            t = t.replace('{', r'\{')
+            t = t.replace('}', r'\}')
+            t = t.replace('^', r'\textasciicircum{}')
+            
+            # HTML font colors: <font color=red>...</font>
+            def font_repl(m):
+                c = m.group(1).strip().lower()
+                body = m.group(2)
+                if c == 'deeppink':
+                    c = 'DeepPink'
+                elif c == 'purple':
+                    c = 'TitlePurple'
+                return f"\\textcolor{{{c}}}{{{body}}}"
+            t = re.sub(r'<font\s+color=["\']?([a-zA-Z]+)["\']?>(.*?)</font>', font_repl, t, flags=re.DOTALL)
+            
             # Chinese emphasis
             t = re.sub(r'【(.*?)】', r'\\textbf{【\1】}', t)
             # Markdown bold: **text**
@@ -248,7 +293,8 @@ def escape_text(text):
 def convert_display_math(tex_chunk):
     """Converts $$...$$ inside text to native LaTeX equation* or align* environments."""
     def repl(m):
-        content = m.group(1).strip()
+        content = m.group(1).strip().replace('$', '')
+        content = clean_math(content)
         if r'\\' in content or '&' in content:
             return f"\n\\begin{{align*}}\n{content}\n\\end{{align*}}\n"
         else:
@@ -256,8 +302,76 @@ def convert_display_math(tex_chunk):
     
     return re.sub(r'\$\$(.*?)\$\$', repl, tex_chunk, flags=re.DOTALL)
 
+def fix_adjacent_inline_dollars(line):
+    res = []
+    i = 0
+    n = len(line)
+    in_inline = False
+    
+    while i < n:
+        if i + 1 < n and line[i] == '$' and line[i+1] == '$':
+            if in_inline:
+                if i + 2 < n and line[i+2] not in (' ', '\t', '\n', '$'):
+                    res.append('$ $')
+                    in_inline = True
+                    i += 2
+                    continue
+                else:
+                    res.append('$')
+                    in_inline = False
+                    i += 1
+                    continue
+            else:
+                res.append('$$')
+                i += 2
+                continue
+        elif line[i] == '$':
+            res.append('$')
+            in_inline = not in_inline
+            i += 1
+        else:
+            res.append(line[i])
+            i += 1
+            
+    return "".join(res)
+
+def is_bare_math_line(line):
+    stripped = line.strip()
+    if not stripped:
+        return False
+    prose = re.sub(r'^[>\s]+', '', stripped).strip()
+    if not prose:
+        return False
+    if '$' in prose:
+        return False
+    if prose.startswith('#') or prose.startswith('![') or prose.startswith('---') or prose.startswith('<'):
+        return False
+    if re.search(r'[\u4e00-\u9fa5]', prose):
+        return False
+    if 'msedge.exe' in prose or prose.startswith('msedge') or re.match(r'^\([A-D]\)\s+\d+', prose):
+        return False
+        
+    has_math_macro = bool(re.search(r'\\(Delta|alpha|beta|gamma|lambda|mu|nu|xi|pi|rho|sigma|tau|phi|chi|psi|omega|frac|int|iint|iiint|oint|sum|prod|lim|sqrt|mathrm|mathbf|left|right|begin\{aligned\}|end\{aligned\}|le|ge|leqslant|geqslant|to|times|cdot|approx|equiv|neq|infty|partial|quad|qquad|ln|sin|cos|tan|cot|sec|csc|arcsin|arccos|arctan)\b', prose))
+    has_math_eq = bool(re.search(r'^[a-zA-Z0-9\(\)\'\"\_]+(\([a-zA-Z0-9\,\s\+\-\*\/\'\"]+\))?\s*(=|<|>|\\le|\\ge|\\leqslant|\\geqslant)', prose))
+    return has_math_macro or has_math_eq
+
+def wrap_bare_math(line):
+    if is_bare_math_line(line):
+        stripped = line.strip()
+        if stripped.startswith('>'):
+            m = re.match(r'^(>+\s*)', line)
+            if m:
+                q_prefix = m.group(1)
+                math_part = line[len(q_prefix):].strip()
+                return f"{q_prefix}$${math_part}$$"
+        return f"$${stripped}$$"
+    return line
+
 def parse_markdown_to_tex(md_content, file_path):
-    lines = md_content.splitlines()
+    # Strip invisible zero-width unicode characters
+    md_content = md_content.replace('\u200b', '').replace('\ufeff', '').replace('\u200e', '').replace('\u200f', '')
+    raw_lines = md_content.splitlines()
+    lines = [wrap_bare_math(fix_adjacent_inline_dollars(l)) for l in raw_lines]
     file_basename = os.path.basename(file_path)
     parent_dirname = os.path.basename(os.path.dirname(os.path.abspath(file_path)))
     
@@ -268,7 +382,7 @@ def parse_markdown_to_tex(md_content, file_path):
             raw_title = l[2:].strip()
             break
             
-    if not raw_title or raw_title.startswith('10.') or raw_title.startswith('11.'):
+    if not raw_title or re.match(r'^\d+\.', raw_title):
         raw_title = format_chinese_chap_title(parent_dirname)
     else:
         raw_title = format_chinese_chap_title(raw_title)
@@ -295,7 +409,7 @@ def parse_markdown_to_tex(md_content, file_path):
         if in_block and block_lines:
             content = '\n'.join(block_lines)
             content = convert_display_math(content)
-            title_opt = f"[{block_title}]" if block_title else ""
+            title_opt = f"[{{{block_title}}}]" if block_title else ""
             body_tex.append(f"\\begin{{{block_env}}}{title_opt}\n{content}\n\\end{{{block_env}}}\n")
             in_block = False
             block_env = ""
@@ -312,6 +426,41 @@ def parse_markdown_to_tex(md_content, file_path):
             i += 1
             continue
             
+        # Handle Fenced Code Blocks (```math or ```)
+        if stripped.startswith('```'):
+            flush_block()
+            lang = stripped[3:].strip().lower()
+            code_lines = []
+            i += 1
+            while i < len(lines) and not lines[i].strip().startswith('```'):
+                code_lines.append(lines[i])
+                i += 1
+            if i < len(lines):
+                i += 1  # consume closing ```
+                
+            if lang in ('math', 'latex'):
+                math_content = '\n'.join(code_lines).strip()
+                while math_content.startswith('$$') and math_content.endswith('$$') and len(math_content) >= 4:
+                    math_content = math_content[2:-2].strip()
+                while math_content.startswith('$') and math_content.endswith('$') and len(math_content) >= 2:
+                    math_content = math_content[1:-1].strip()
+                math_content = clean_math(math_content)
+                if r'\\' in math_content or '&' in math_content:
+                    body_tex.append(f"\n\\begin{{align*}}\n{math_content}\n\\end{{align*}}\n")
+                else:
+                    body_tex.append(f"\n\\begin{{equation*}}\n{math_content}\n\\end{{equation*}}\n")
+            else:
+                box_content = []
+                for cl in code_lines:
+                    cl_s = cl.strip()
+                    if cl_s:
+                        cl_esc = escape_text(cl_s)
+                        box_content.append(cl_esc + r"\\[1mm]")
+                    else:
+                        box_content.append(r"\vspace{1mm}")
+                body_tex.append("\n\\begin{tcolorbox}[colback=LightPurpleBg,colframe=TitlePurple!60,arc=2pt,boxrule=0.8pt]\n" + "\n".join(box_content) + "\n\\end{tcolorbox}\n")
+            continue
+
         # Chapter purpose / goals at beginning
         if re.match(r'^目的\[\d+\]:', stripped):
             flush_block()
@@ -351,9 +500,8 @@ def parse_markdown_to_tex(md_content, file_path):
         if stripped.startswith('######'):
             flush_block()
             h_clean = re.sub(r'^######\s*', '', stripped)
-            h_clean = re.sub(r'^\*\*(.*?)\*\*$', r'\1', h_clean) # strip outer bold
+            h_clean = re.sub(r'^\*\*(.*?)\*\*$', r'\1', h_clean)
             
-            # Check for pattern like 辨析[1]:标题 or 定理[1]:标题
             m_thm = re.match(r'^([^\[\]:：]+)\[(.*?)\][:：](.*)', h_clean)
             if m_thm:
                 cat, num, name = m_thm.group(1), m_thm.group(2), m_thm.group(3)
@@ -384,10 +532,7 @@ def parse_markdown_to_tex(md_content, file_path):
                 block_env = "solbox"
                 block_title = "分步推导与答题规范"
             
-            # Clean leading '>'
             q_line = re.sub(r'^>+\s?', '', line)
-            
-            # Sub-item tags like [1], [2], (1), (2)
             m_tag = re.match(r'^(\[\d+\]|\(\d+\))(.*)', q_line.strip())
             if m_tag:
                 tag, rest = m_tag.group(1), m_tag.group(2)
@@ -399,7 +544,6 @@ def parse_markdown_to_tex(md_content, file_path):
             i += 1
             continue
         else:
-            # Non-blockquote line: if we were in a solbox from blockquotes, flush
             if in_block and block_env == 'solbox':
                 flush_block()
 
@@ -414,7 +558,8 @@ def parse_markdown_to_tex(md_content, file_path):
             
         # Standalone display math outside blockquotes
         if stripped.startswith('$$') and stripped.endswith('$$') and len(stripped) > 4:
-            math_content = stripped[2:-2].strip()
+            math_content = stripped[2:-2].strip().replace('$', '')
+            math_content = clean_math(math_content)
             if r'\\' in math_content or '&' in math_content:
                 body_tex.append(f"\n\\begin{{align*}}\n{math_content}\n\\end{{align*}}\n")
             else:
@@ -467,14 +612,15 @@ def compile_tex_to_pdf(tex_path):
         log_file = os.path.splitext(tex_path)[0] + '.log'
         if os.path.exists(log_file):
             with open(log_file, 'r', encoding='utf-8', errors='replace') as lf:
+                enc = sys.stdout.encoding or 'utf-8'
                 for line in lf.readlines()[-35:]:
-                    print(line, end='')
+                    sys.stdout.buffer.write(line.encode(enc, errors='replace'))
+                    sys.stdout.flush()
         return False
         
     print(f"[*] Compiling XeLaTeX (Pass 2 for TOC): {tex_file}...")
     res2 = subprocess.run(cmd, cwd=work_dir, capture_output=True)
     
-    # Clean up temporary auxiliary files
     base_no_ext = os.path.splitext(tex_path)[0]
     for ext in ['.aux', '.log', '.out', '.toc']:
         aux = base_no_ext + ext
@@ -522,7 +668,6 @@ def process_file(md_path):
         md_content = f.read()
         
     tex_path = os.path.splitext(md_path)[0] + '.tex'
-    
     tex_str = parse_markdown_to_tex(md_content, md_path)
     
     with open(tex_path, 'w', encoding='utf-8') as f:
@@ -541,16 +686,54 @@ def process_directory(dir_path):
             md_path = os.path.join(dir_path, f)
             process_file(md_path)
 
+def get_math_base():
+    return r'F:\desktop\22408_2027\201 数学(一)\高等数学'
+
+def run_by_chapter_numbers(chap_nums):
+    base = get_math_base()
+    all_dirs = [d for d in os.listdir(base) if os.path.isdir(os.path.join(base, d)) and d != 'code']
+    
+    matched_dirs = []
+    for num in chap_nums:
+        for d in all_dirs:
+            if re.match(rf'^(?:\[.*?\])?chap0*{num}(?!\d)', d, re.IGNORECASE):
+                if d not in matched_dirs:
+                    matched_dirs.append(d)
+
+    print(f"[*] Processing chapters: {matched_dirs}")
+    for d in matched_dirs:
+        p = os.path.join(base, d)
+        process_directory(p)
+
+def run_all():
+    base = get_math_base()
+    all_dirs = sorted([d for d in os.listdir(base) if os.path.isdir(os.path.join(base, d)) and d != 'code'])
+    for d in all_dirs:
+        p = os.path.join(base, d)
+        mds = [f for f in os.listdir(p) if f.endswith('.md') and not f.lower().startswith('readme') and not f.lower().startswith('skill')]
+        if mds:
+            print(f"\n>>>>>>> Processing Chapter Folder: {d} ({len(mds)} files) <<<<<<<")
+            process_directory(p)
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Export Markdown to Publication-Grade LaTeX PDF")
     parser.add_argument('target', nargs='?', default=None, help="Target markdown file or directory")
+    parser.add_argument('--chap', nargs='+', type=str, help="List of chapter numbers to process (e.g. --chap 1 2 3 4)")
+    parser.add_argument('--all', action='store_true', help="Process all chapters that contain markdown notes")
     args = parser.parse_args()
     
-    if args.target:
+    if args.all:
+        run_all()
+    elif args.chap:
+        run_by_chapter_numbers(args.chap)
+    elif args.target:
         p = os.path.abspath(args.target)
         if os.path.isdir(p):
             process_directory(p)
         elif os.path.isfile(p):
             process_file(p)
     else:
-        print("Usage: python export_tex_pdf.py <path-to-markdown-or-folder>")
+        print("Usage:")
+        print("  python export_tex_pdf.py --all")
+        print("  python export_tex_pdf.py --chap 1 2 3 4")
+        print("  python export_tex_pdf.py <path-to-markdown-or-folder>")
