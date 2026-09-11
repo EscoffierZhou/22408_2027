@@ -1,479 +1,258 @@
-# 一元积分学的应用（积分等式和积分不等式）· 课后作业深度精析
+## 11.Homework
 
----
+**习题[11.1]:积分均值不等条件与二阶导数符号判定**
 
-## 习题 11.1：积分均值不等条件与二阶导数符号判定
-
-### 1. 题目描述
 设函数 $\varphi(x)$ 在闭区间 $[1, 3]$ 上二阶可导，且满足条件：
-$$
-\varphi(2) > \varphi(1) \quad \text{且} \quad \varphi(2) > \int_2^3 \varphi(x)\,\mathrm{d}x
-$$
-证明：存在 $\xi \in (1, 3)$，使得
-$$
-\varphi''(\xi) < 0
-$$
+$$\varphi(2) > \varphi(1) \quad \text{且} \quad \varphi(2) > \int_2^3 \varphi(x)\,\mathrm{d}x$$
+证明：存在 $\xi \in (1, 3)$，使得 $\varphi''(\xi) < 0$。
 
-### 2. 解题思路与方法提炼
->[1] **积分第一中值定理转化积分条件**：
->条件中包含定积分 $\int_2^3 \varphi(x)\,\mathrm{d}x$，区间长度为 $3 - 2 = 1$。通过积分第一中值定理，可将定积分严格转化为区间 $(2, 3)$ 内某点处的函数值 $\varphi(c)$。
->[2] **两阶段拉格朗日中值定理穿透二阶导数**：
->点 $2$ 处的函数值同时严格高于左侧点 $1$ 和右侧点 $c$ 的函数值，形成局部的“山峰”态势。利用两次拉格朗日中值定理分别得到符号为正与符号为负的一阶导数点，再次应用中值定理即可锁定二阶导数的负号。
+主要思路:利用积分第一中值定理将积分条件转化为区间内部点值 $\varphi(c)$，结合 $\varphi(2) > \varphi(1)$ 在两侧分别应用拉格朗日中值定理构造正负异号的一阶导数点，再应用拉格朗日中值定理确定二阶导数的负号
 
-### 3. 详细解答与规范步骤
-
-#### 方法一：积分中值定理与两次拉格朗日中值定理（标准规范法）
->[1] **应用积分中值定理抽取点值**：
+>[1]应用积分第一中值定理转化积分条件：
+>
 >因为 $\varphi(x)$ 在 $[2, 3]$ 上连续，由积分第一中值定理，存在 $c \in (2, 3)$，使得：
->$$
->\int_2^3 \varphi(x)\,\mathrm{d}x = \varphi(c)(3 - 2) = \varphi(c)
->$$
+>
+>$$\int_2^3 \varphi(x)\,\mathrm{d}x = \varphi(c)(3 - 2) = \varphi(c)$$
+>
 >代入已知条件 $\varphi(2) > \int_2^3 \varphi(x)\,\mathrm{d}x$，可得：
->$$
->\varphi(2) > \varphi(c)
->$$
+>
+>$$\varphi(2) > \varphi(c)$$
+>
 >结合另一已知条件 $\varphi(2) > \varphi(1)$，已知各点横坐标满足 $1 < 2 < c < 3$。
 >
->[2] **构造一阶导数正负相异点**：
+>[2]两次应用拉格朗日中值定理构造一阶导数正负相异点：
+>
 >在区间 $[1, 2]$ 上应用拉格朗日中值定理：存在 $\eta_1 \in (1, 2)$，使得：
->$$
->\varphi'(\eta_1) = \frac{\varphi(2) - \varphi(1)}{2 - 1} = \varphi(2) - \varphi(1)
->$$
->由于 $\varphi(2) > \varphi(1)$，故 $\varphi'(\eta_1) > 0$。\\ \\
+>
+>$$\varphi'(\eta_1) = \frac{\varphi(2) - \varphi(1)}{2 - 1} = \varphi(2) - \varphi(1) > 0$$
+>
 >在区间 $[2, c]$ 上应用拉格朗日中值定理：存在 $\eta_2 \in (2, c)$，使得：
->$$
->\varphi'(\eta_2) = \frac{\varphi(c) - \varphi(2)}{c - 2}
->$$
->由于 $c > 2 \implies c - 2 > 0$，且 $\varphi(c) < \varphi(2) \implies \varphi(c) - \varphi(2) < 0$，故 $\varphi'(\eta_2) < 0$。
 >
->[3] **应用拉格朗日中值定理确定二阶导数符号**：
->显然有 $1 < \eta_1 < 2 < \eta_2 < c < 3$，故 $\eta_1 < \eta_2$。\\ \\
+>$$\varphi'(\eta_2) = \frac{\varphi(c) - \varphi(2)}{c - 2} < 0$$
+>
+>显然有 $1 < \eta_1 < 2 < \eta_2 < c < 3$，故 $\eta_1 < \eta_2$。
+>
+>[3]应用拉格朗日中值定理确定二阶导数符号：
+>
 >函数 $\varphi'(x)$ 在区间 $[\eta_1, \eta_2]$ 上满足拉格朗日中值定理条件，存在 $\xi \in (\eta_1, \eta_2) \subset (1, 3)$，使得：
->$$
->\varphi''(\xi) = \frac{\varphi'(\eta_2) - \varphi'(\eta_1)}{\eta_2 - \eta_1}
->$$
+>
+>$$\varphi''(\xi) = \frac{\varphi'(\eta_2) - \varphi'(\eta_1)}{\eta_2 - \eta_1}$$
+>
 >因为分母 $\eta_2 - \eta_1 > 0$，而分子满足：
->$$
->\varphi'(\eta_2) < 0,\quad \varphi'(\eta_1) > 0 \implies \varphi'(\eta_2) - \varphi'(\eta_1) < 0
->$$
+>
+>$$\varphi'(\eta_2) < 0, \quad \varphi'(\eta_1) > 0 \implies \varphi'(\eta_2) - \varphi'(\eta_1) < 0$$
+>
 >所以：
->$$
->\varphi''(\xi) < 0
->$$
+>
+>$$\varphi''(\xi) < 0$$
+>
 >命题得证。
 
-#### 方法二：极值点与反证法（几何极值视角）
->[1] **确定最大值落在区间内部**：
->由闭区间连续函数的性质，$\varphi(x)$ 在闭区间 $[1, c]$ 上必能取得最大值，设最大值点为 $x_0 \in [1, c]$。\\ \\
->因为 $\varphi(2) > \varphi(1)$ 且 $\varphi(2) > \varphi(c)$，故最大值点不可能在端点 $1$ 或 $c$ 处取得，必有 $x_0 \in (1, c) \subset (1, 3)$。\\ \\
->由费马引理，极值点处必有一阶导数为零：$\varphi'(x_0) = 0$。
->
->[2] **泰勒展开导出矛盾**：
->若结论不成立，即假设对任意 $x \in (1, 3)$ 均有 $\varphi''(x) \ge 0$。\\ \\
->则由一阶泰勒公式（拉格朗日余项）：
->$$
->\varphi(x) = \varphi(x_0) + \varphi'(x_0)(x - x_0) + \frac{\varphi''(\zeta)}{2}(x - x_0)^2 \ge \varphi(x_0)
->$$
->此式表明对一切 $x \in [1, c]$ 均有 $\varphi(x) \ge \varphi(x_0)$。这与 $\varphi(x_0)$ 为区间严格最大值产生矛盾！\\ \\
->因此假设不成立，必存在 $\xi \in (1, 3)$ 使得 $\varphi''(\xi) < 0$。
+**习题[11.2]:对称区间替换与单调核积分不等式**
 
-### 4. 考点延展与防坑警示
->[1] **积分区间长度的感知**：注意本题积分区间是 $[2, 3]$，长度刚好为 $1$，故 $\int_2^3 \varphi(x)\,\mathrm{d}x = \varphi(c) \cdot 1 = \varphi(c)$。如果区间长度不是 $1$，需要包含因式 $(b-a)$。
-
----
-
-## 习题 11.2：对称区间替换与单调核积分不等式
-
-### 1. 题目描述
 证明积分不等式：
-$$
-\int_0^{\pi/2} \frac{\cos x}{1+x^2}\,\mathrm{d}x \ge \int_0^{\pi/2} \frac{\sin x}{1+x^2}\,\mathrm{d}x
-$$
+$$\int_0^{\pi/2} \frac{\cos x}{1+x^2}\,\mathrm{d}x \ge \int_0^{\pi/2} \frac{\sin x}{1+x^2}\,\mathrm{d}x$$
 
-### 2. 解题思路与方法提炼
->[1] **识别三角函数的对称性**：
->在区间 $[0, \pi/2]$ 上，正弦与余弦在关于 $x = \pi/4$ 的对称变换 $x \mapsto \pi/2 - x$ 下互换，即 $\cos(\pi/2 - x) = \sin x$。
->[2] **区间拆分与权函数单调性结合**：
->将差值积分拆为 $[0, \pi/4]$ 与 $[\pi/4, \pi/2]$ 两段，在第二段上做对称换元，将全积分收敛回 $[0, \pi/4]$。利用核函数 $\frac{1}{1+x^2}$ 的严格单调减性质判定被积式正负。
+主要思路:考查正弦与余弦在关于 $x = \pi/4$ 的对称变换下的对偶关系，将差值积分拆为 $[0, \pi/4]$ 与 $[\pi/4, \pi/2]$ 两段并在后半段作对称代换，结合核函数 $\frac{1}{1+x^2}$ 的单调递减性判定符号
 
-### 3. 详细解答与规范步骤
-
-#### 方法一：区间再现变换与分半对称法（推荐规范解法）
->[1] **构造积分差值并拆分区间**：
+>[1]构造积分差值并拆分区间：
+>
 >考虑两积分的差：
->$$
->I = \int_0^{\pi/2} \frac{\cos x - \sin x}{1+x^2}\,\mathrm{d}x = \int_0^{\pi/4} \frac{\cos x - \sin x}{1+x^2}\,\mathrm{d}x + \int_{\pi/4}^{\pi/2} \frac{\cos x - \sin x}{1+x^2}\,\mathrm{d}x
->$$
 >
->[2] **对后半区间进行对称换元**：
->对于第二项积分 $I_2 = \int_{\pi/4}^{\pi/2} \frac{\cos x - \sin x}{1+x^2}\,\mathrm{d}x$，做换元：
->$$
->x = \frac{\pi}{2} - t,\quad \mathrm{d}x = -\mathrm{d}t
->$$
->当 $x = \pi/4$ 时，$t = \pi/4$；当 $x = \pi/2$ 时，$t = 0$。代入得：
->$$
->\begin{aligned}
->I_2 &= \int_{\pi/4}^0 \frac{\cos(\pi/2 - t) - \sin(\pi/2 - t)}{1+(\pi/2 - t)^2}\,(-\mathrm{d}t) \\ \\
->&= \int_0^{\pi/4} \frac{\sin t - \cos t}{1+(\pi/2 - t)^2}\,\mathrm{d}t \\ \\
->&= -\int_0^{\pi/4} \frac{\cos t - \sin t}{1+(\pi/2 - t)^2}\,\mathrm{d}t
->\end{aligned}
->$$
+>$$I = \int_0^{\pi/2} \frac{\cos x - \sin x}{1+x^2}\,\mathrm{d}x = \int_0^{\pi/4} \frac{\cos x - \sin x}{1+x^2}\,\mathrm{d}x + \int_{\pi/4}^{\pi/2} \frac{\cos x - \sin x}{1+x^2}\,\mathrm{d}x$$
 >
->[3] **合并积分并判断被积函数符号**：
->将变量统一记为 $x$，合并 $I_1$ 与 $I_2$：
->$$
->I = \int_0^{\pi/4} (\cos x - \sin x) \left[ \frac{1}{1+x^2} - \frac{1}{1+(\pi/2 - x)^2} \right]\,\mathrm{d}x
->$$
->考察区间 $(0, \pi/4)$ 内的两个因子：
->(1) 当 $x \in (0, \pi/4)$ 时，$\cos x > \sin x$，因此 $\cos x - \sin x > 0$；
->(2) 当 $x \in (0, \pi/4)$ 时，$0 < x < \pi/2 - x$，从而 $x^2 < (\pi/2 - x)^2$，所以：
->$$
->1 + x^2 < 1 + (\pi/2 - x)^2 \implies \frac{1}{1+x^2} - \frac{1}{1+(\pi/2 - x)^2} > 0
->$$
->因此在开区间 $(0, \pi/4)$ 上，被积函数恒为正数：
->$$
->(\cos x - \sin x) \left[ \frac{1}{1+x^2} - \frac{1}{1+(\pi/2 - x)^2} \right] > 0
->$$
->由定积分严格保号性，得：
->$$
->I > 0 \implies \int_0^{\pi/2} \frac{\cos x}{1+x^2}\,\mathrm{d}x > \int_0^{\pi/2} \frac{\sin x}{1+x^2}\,\mathrm{d}x
->$$
->原不等式成立。
-
-#### 方法二：推广积分第一中值定理法
->[1] **分段应用推广积分中值定理**：
->在区间 $[0, \pi/4]$ 上，$\cos x - \sin x \ge 0$，且 $\frac{1}{1+x^2}$ 连续，故存在 $\xi_1 \in [0, \pi/4]$ 使得：
->$$
->\int_0^{\pi/4} \frac{\cos x - \sin x}{1+x^2}\,\mathrm{d}x = \frac{1}{1+\xi_1^2} \int_0^{\pi/4} (\cos x - \sin x)\,\mathrm{d}x
->$$
->在区间 $[\pi/4, \pi/2]$ 上，$\sin x - \cos x \ge 0$，故存在 $\xi_2 \in [\pi/4, \pi/2]$ 使得：
->$$
->\int_{\pi/4}^{\pi/2} \frac{\sin x - \cos x}{1+x^2}\,\mathrm{d}x = \frac{1}{1+\xi_2^2} \int_{\pi/4}^{\pi/2} (\sin x - \cos x)\,\mathrm{d}x
->$$
+>[2]对后半区间进行对称换元：
 >
->[2] **对比积分基本量与系数值**：
->易算得：
->$$
->\int_0^{\pi/4} (\cos x - \sin x)\,\mathrm{d}x = [\sin x + \cos x]_0^{\pi/4} = \sqrt{2} - 1
->$$
->$$
->\int_{\pi/4}^{\pi/2} (\sin x - \cos x)\,\mathrm{d}x = [-\cos x - \sin x]_{\pi/4}^{\pi/2} = -1 - (-\sqrt{2}) = \sqrt{2} - 1
->$$
->两段积分的底积分完全相等，设为 $A = \sqrt{2} - 1 > 0$。\\ \\
->因此原差值为：
->$$
->I = A \left( \frac{1}{1+\xi_1^2} - \frac{1}{1+\xi_2^2} \right)
->$$
->因 $0 \le \xi_1 \le \pi/4 \le \xi_2 \le \pi/2$，且中值点不可能同时取在 $\pi/4$，故 $\xi_1 < \xi_2$。\\ \\
->由核函数单调性知 $\frac{1}{1+\xi_1^2} > \frac{1}{1+\xi_2^2}$，即证 $I > 0$。
-
-### 4. 考点延展与防坑警示
->[1] “**区间再现+对称拆分**”是解决考研中各类“正弦、余弦伴随非对称代数有理核”积分大小比较的最锐利武器。牢记变换 $x = a + b - t$。
-
----
-
-## 习题 11.3：变上限积分交换次序与分部积分恒等变形
-
-### 1. 题目描述
-设函数 $f(x)$ 在闭区间 $[0, 1]$ 上一阶连续可导，且对一切 $x \in [0, 1]$ 满足 $f'(x) > 0, f(0) = 0$。
-设单调增加函数 $\varphi(t)$ 连续，证明：
-$$
-\int_0^1 \left[ \int_0^{f(x)} \varphi(t)\,\mathrm{d}t \right]\,\mathrm{d}x = \int_0^{f(1)} (1 - f^{-1}(t))\varphi(t)\,\mathrm{d}t
-$$
-并由此讨论当 $\varphi(t) = t$ 且 $f(x) = x$ 时的几何意义。
-
-### 2. 解题思路与方法提炼
->[1] **分部积分法转化变上限积分**：
->令外层积分为 $\int_0^1 u\,\mathrm{d}v$ 的结构，将变上限积分记为 $u(x) = \int_0^{f(x)}\varphi(t)\,\mathrm{d}t$，而令 $\mathrm{d}v = \mathrm{d}x$（或凑为 $\mathrm{d}(x-1)$），通过分部积分消除外层不定项。
->[2] **二重积分交换积分次序视角（几何投影法）**：
->原式可视为平面区域 $D = \{(x, t) \mid 0 \le x \le 1,\, 0 \le t \le f(x)\}$ 上的二重积分 $\iint_D \varphi(t)\,\mathrm{d}x\mathrm{d}t$，通过将 $X$ 型区域转化为 $Y$ 型区域直接获证。
-
-### 3. 详细解答与规范步骤
-
-#### 方法一：二重积分交换积分次序法（最简证明）
->[1] **刻画积分区域**：
->原左端累次积分对应的二维平面积分区域为：
->$$
->D = \{(x, t) \mid 0 \le x \le 1,\, 0 \le t \le f(x)\}
->$$
->因为 $f'(x) > 0$ 且 $f(0) = 0$，$f(x)$ 严格单调增加。曲线 $t = f(x)$ 存在严格单调反函数 $x = f^{-1}(t)$，自变量取值范围为 $t \in [0, f(1)]$。
+>对第二项积分 $I_2 = \int_{\pi/4}^{\pi/2} \frac{\cos x - \sin x}{1+x^2}\,\mathrm{d}x$，做换元 $x = \frac{\pi}{2} - t$，$\mathrm{d}x = -\mathrm{d}t$。
 >
->[2] **转换为先对 $x$ 积分的 $Y$ 型区域**：
->将区域 $D$ 改写为：
->$$
->D = \{(x, t) \mid 0 \le t \le f(1),\, f^{-1}(t) \le x \le 1\}
->$$
+>当 $x = \pi/4$ 时 $t = \pi/4$；当 $x = \pi/2$ 时 $t = 0$。代入得：
 >
->[3] **交换次序并积分内层**：
->$$
->\begin{aligned}
->\int_0^1 \left[ \int_0^{f(x)} \varphi(t)\,\mathrm{d}t \right]\,\mathrm{d}x &= \iint_D \varphi(t)\,\mathrm{d}x\mathrm{d}t \\ \\
->&= \int_0^{f(1)} \left[ \int_{f^{-1}(t)}^1 \varphi(t)\,\mathrm{d}x \right]\,\mathrm{d}t \\ \\
->&= \int_0^{f(1)} \varphi(t) \left[ \int_{f^{-1}(t)}^1 1\,\mathrm{d}x \right]\,\mathrm{d}t \\ \\
->&= \int_0^{f(1)} (1 - f^{-1}(t))\varphi(t)\,\mathrm{d}t
->\end{aligned}
->$$
->等式直接获证。
-
-#### 方法二：一维分部积分与换元积分法
->[1] **设定分部积分**：
->设 $u(x) = \int_0^{f(x)} \varphi(t)\,\mathrm{d}t$，则由复合变上限积分求导法则：
->$$
->u'(x) = \varphi(f(x))f'(x)
->$$
->取 $v(x) = x - 1$，由分部积分公式：
->$$
->\begin{aligned}
->\int_0^1 u(x)\,\mathrm{d}x &= \int_0^1 u(x)\,\mathrm{d}(x-1) \\ \\
->&= \left[ (x-1)u(x) \right]_0^1 - \int_0^1 (x-1)u'(x)\,\mathrm{d}x \\ \\
->&= 0 - (-1)u(0) + \int_0^1 (1-x)\varphi(f(x))f'(x)\,\mathrm{d}x
->\end{aligned}
->$$
->因为 $f(0) = 0$，所以 $u(0) = \int_0^0 \varphi(t)\,\mathrm{d}t = 0$。
+>$$I_2 = \int_{\pi/4}^0 \frac{\cos(\pi/2 - t) - \sin(\pi/2 - t)}{1+(\pi/2 - t)^2}(-\mathrm{d}t) = \int_0^{\pi/4} \frac{\sin t - \cos t}{1+(\pi/2 - t)^2}\,\mathrm{d}t$$
 >
->[2] **进行变量替换**：
->令 $t = f(x)$，则 $\mathrm{d}t = f'(x)\,\mathrm{d}x$。当 $x = 0$ 时 $t = 0$；当 $x = 1$ 时 $t = f(1)$。\\ \\
->同时 $x = f^{-1}(t)$。代入上式得：
->$$
->\int_0^1 u(x)\,\mathrm{d}x = \int_0^{f(1)} (1 - f^{-1}(t))\varphi(t)\,\mathrm{d}t
->$$
->两法殊途同归。
-
-### 4. 考点延展与防坑警示
->[1] **特例检验与几何直观**：
->当 $\varphi(t) = t, f(x) = x$ 时：
->左端为 $\int_0^1 \left(\int_0^x t\,\mathrm{d}t\right)\mathrm{d}x = \int_0^1 \frac{x^2}{2}\,\mathrm{d}x = \frac{1}{6}$；
->右端为 $\int_0^1 (1-t)t\,\mathrm{d}t = \int_0^1 (t - t^2)\,\mathrm{d}t = \frac{1}{2} - \frac{1}{3} = \frac{1}{6}$。\\ \\
->这体现了三维空间中四面体体积积分沿不同截面切片计算的一致性。
-
----
-
-## 习题 11.4：区间再现变换证明单调加权积分不等式
-
-### 1. 题目描述
-设函数 $f(x)$ 在闭区间 $[a, b]$（其中 $a < b$）上单调递增且连续。
-证明不等式：
-$$
-(a+b)\int_a^b f(x)\,\mathrm{d}x \le 2\int_a^b x f(x)\,\mathrm{d}x
-$$
-并指出等号成立的充要条件。
-
-### 2. 解题思路与方法提炼
->[1] **区间再现（倒角对称）变换**：
->区间为 $[a, b]$ 时，中心对称点为 $\frac{a+b}{2}$。做变量替换 $x = a + b - t$，将积分自身重新表达后相加。
->[2] **单调函数的代数保号结构**：
->利用单调递增函数的本质性质：自变量越大函数值越大，即 $(x_1 - x_2)(f(x_1) - f(x_2)) \ge 0$。选取对称点即可直接证明被积式恒非负。
-
-### 3. 详细解答与规范步骤
-
-#### 方法一：区间再现变换法（最为巧妙快捷）
->[1] **对含权积分做区间再现换元**：
->设目标积分 $J = \int_a^b x f(x)\,\mathrm{d}x$。
->作变量代换：
->$$
->x = a + b - t,\quad \mathrm{d}x = -\mathrm{d}t
->$$
->当 $x = a$ 时 $t = b$；当 $x = b$ 时 $t = a$。代入得：
->$$
->J = \int_b^a (a + b - t) f(a + b - t)\,(-\mathrm{d}t) = \int_a^b (a + b - t) f(a + b - t)\,\mathrm{d}t
->$$
->将积分哑元重命名为 $x$，与原表达式相加：
->$$
->2J = \int_a^b x f(x)\,\mathrm{d}x + \int_a^b (a + b - x) f(a + b - x)\,\mathrm{d}x
->$$
+>[3]合并积分并利用单调性判定非负：
 >
->[2] **转化待证差值式**：
->待证不等式等价于：
->$$
->2J - (a+b)\int_a^b f(x)\,\mathrm{d}x \ge 0
->$$
->对 $(a+b)\int_a^b f(x)\,\mathrm{d}x$ 同样做区间再现分解：
->$$
->\int_a^b f(x)\,\mathrm{d}x = \frac{1}{2}\int_a^b [f(x) + f(a+b-x)]\,\mathrm{d}x
->$$
->两式相减可得：
->$$
->\begin{aligned}
->2J - (a+b)\int_a^b f(x)\,\mathrm{d}x &= \int_a^b \left[ x f(x) + (a+b-x)f(a+b-x) - \frac{a+b}{2}(f(x) + f(a+b-x)) \right]\,\mathrm{d}x \\ \\
->&= \int_a^b \left[ \left(x - \frac{a+b}{2}\right)f(x) - \left(x - \frac{a+b}{2}\right)f(a+b-x) \right]\,\mathrm{d}x \\ \\
->&= \int_a^b \left(x - \frac{a+b}{2}\right) [f(x) - f(a+b-x)]\,\mathrm{d}x
->\end{aligned}
->$$
+>将两项积分合并为一个积分（将哑元统一为 $x$）：
 >
->[3] **判定被积函数符号**：
->考察被积函数 $H(x) = \left(x - \frac{a+b}{2}\right) [f(x) - f(a+b-x)]$：
->(1) 当 $x > \frac{a+b}{2}$ 时，$x > a+b-x$。由于 $f$ 单调递增，故 $f(x) \ge f(a+b-x)$，两项均非负，乘积 $H(x) \ge 0$；
->(2) 当 $x < \frac{a+b}{2}$ 时，$x < a+b-x$。同理 $f(x) \le f(a+b-x)$，两项均为非正数，负负得正，乘积 $H(x) \ge 0$；
->(3) 当 $x = \frac{a+b}{2}$ 时，$H(x) = 0$。\\ \\
->综上，在整个闭区间 $[a, b]$ 上恒有 $H(x) \ge 0$。由定积分保号性：
->$$
->\int_a^b H(x)\,\mathrm{d}x \ge 0 \implies 2\int_a^b x f(x)\,\mathrm{d}x \ge (a+b)\int_a^b f(x)\,\mathrm{d}x
->$$
+>$$I = \int_0^{\pi/4} (\cos x - \sin x) \left[ \frac{1}{1+x^2} - \frac{1}{1+(\pi/2 - x)^2} \right]\,\mathrm{d}x$$
 >
->[4] **等号成立条件**：
->因 $f(x)$ 连续，等号成立当且仅当 $H(x) \equiv 0$，即对几乎所有 $x \in [a, b]$ 均有 $f(x) = f(a+b-x)$。结合 $f$ 单调递增，这意味着 $f(x)$ 恒为常数函数。
-
-#### 方法二：变上限积分辅助函数求导法
->[1] **设定变上限辅助函数**：
->固定左端点 $a$，设对于 $t \in [a, b]$：
->$$
->G(t) = 2\int_a^t x f(x)\,\mathrm{d}x - (a+t)\int_a^t f(x)\,\mathrm{d}x
->$$
->显然 $G(a) = 0$。
+>在区间 $(0, \pi/4)$ 上：
 >
->[2] **求导分析单调性**：
->$$
->\begin{aligned}
->G'(t) &= 2t f(t) - \int_a^t f(x)\,\mathrm{d}x - (a+t)f(t) \\ \\
->&= (t-a)f(t) - \int_a^t f(x)\,\mathrm{d}x \\ \\
->&= \int_a^t [f(t) - f(x)]\,\mathrm{d}x
->\end{aligned}
->$$
->因为 $f(x)$ 单调递增，当 $x \in [a, t]$ 时 $f(t) \ge f(x)$，故被积函数非负，定积分 $G'(t) \ge 0$。\\ \\
->因此 $G(t)$ 在 $[a, b]$ 上单调增加。故 $G(b) \ge G(a) = 0$，即证。
-
-### 4. 考点延展与防坑警示
->[1] 方法一展现的代数结构 $\left(x - \frac{a+b}{2}\right)[f(x) - f(a+b-x)] \ge 0$ 是处理考研高阶积分对称不等式的杀手级技巧，必须熟练默写。
-
----
-
-## 习题 11.5：单端点零值与导数有界条件下的积分模估计
-
-### 1. 题目描述
-设函数 $f(x)$ 在闭区间 $[0, a]$（$a > 0$）上可导，满足端点条件 $f(0) = 0$，且导函数有界：
-$$
-|f'(x)| \le M \quad (\forall x \in [0, a])
-$$
-证明：
-$$
-\left| \int_0^a f(x)\,\mathrm{d}x \right| \le \frac{1}{2} M a^2
-$$
-
-### 2. 解题思路与方法提炼
->[1] **拉格朗日中值定理点点放缩**：
->任取 $x \in [0, a]$，利用 $f(x) = f(x) - f(0) = f'(\xi)x$ 将函数值直接转化为关于自变量的线性上界 $Mx$。
->[2] **补项分部积分法**：
->通过分部积分，将 $f(x)\,\mathrm{d}x$ 转化为 $(x-a)f'(x)\,\mathrm{d}x$，直接将导数约束嵌入积分核中。
-
-### 3. 详细解答与规范步骤
-
-#### 方法一：微分中值定理逐点放缩法（最为直观）
->[1] **获得逐点绝对值上界**：
->对任意给定的 $x \in (0, a]$，函数 $f(t)$ 在区间 $[0, x]$ 上满足拉格朗日中值定理条件：
->$$
->f(x) - f(0) = f'(\xi) (x - 0) = f'(\xi) x \quad (\xi \in (0, x))
->$$
->由于 $f(0) = 0$ 且 $|f'(\xi)| \le M$：
->$$
->|f(x)| = |f'(\xi)| x \le M x
->$$
->该不等式对 $x = 0$ 显然亦成立。
+>(1) 因 $x \in (0, \pi/4)$，恒有 $\cos x > \sin x \implies \cos x - \sin x > 0$；
 >
->[2] **定积分绝对值放缩**：
->由定积分性质：
->$$
->\left| \int_0^a f(x)\,\mathrm{d}x \right| \le \int_0^a |f(x)|\,\mathrm{d}x \le \int_0^a M x\,\mathrm{d}x = M \left[ \frac{x^2}{2} \right]_0^a = \frac{1}{2} M a^2
->$$
->命题即刻得证。
-
-#### 方法二：补项分部积分法（规范解析核法）
->[1] **构造消除右端项的微分式**：
->$$
->\begin{aligned}
->\int_0^a f(x)\,\mathrm{d}x &= \int_0^a f(x)\,\mathrm{d}(x - a) \\ \\
->&= \left[ (x - a)f(x) \right]_0^a - \int_0^a (x - a)f'(x)\,\mathrm{d}x
->\end{aligned}
->$$
+>(2) 因 $x < \pi/2 - x$，故 $x^2 < (\pi/2 - x)^2 \implies 1 + x^2 < 1 + (\pi/2 - x)^2$；
 >
->[2] **代入端点值消去边界项**：
->当 $x = a$ 时，$x - a = 0$；当 $x = 0$ 时，$f(0) = 0$。因此边界项为零：
->$$
->\left[ (x - a)f(x) \right]_0^a = 0 - 0 = 0
->$$
->从而得到恒等式：
->$$
->\int_0^a f(x)\,\mathrm{d}x = \int_0^a (a - x)f'(x)\,\mathrm{d}x
->$$
+>从而 $\frac{1}{1+x^2} - \frac{1}{1+(\pi/2 - x)^2} > 0$。
 >
->[3] **应用绝对值放缩**：
->由于当 $x \in [0, a]$ 时 $a - x \ge 0$：
->$$
->\left| \int_0^a f(x)\,\mathrm{d}x \right| \le \int_0^a (a - x)|f'(x)|\,\mathrm{d}x \le M \int_0^a (a - x)\,\mathrm{d}x = M \left[ -\frac{(a-x)^2}{2} \right]_0^a = \frac{1}{2} M a^2
->$$
-
-### 4. 考点延展与防坑警示
->[1] **双端为零与单端为零的对比**：
->若条件增加 $f(a) = 0$，则上界收紧为 $\frac{1}{4}Ma^2$（例题 11.8）；若仅有单侧端点 $f(0) = 0$，则最优上界为 $\frac{1}{2}Ma^2$。考研选择填空中切勿记混系数。
-
----
-
-## 习题 11.6：凸函数切线不等式与中点积分下界
-
-### 1. 题目描述
-设函数 $f(x)$ 在闭区间 $[0, 1]$ 上二阶可导，且对一切 $x \in [0, 1]$ 均满足 $f''(x) \ge 0$。
-若已知中点函数值 $f\left(\frac{1}{2}\right) = 1$。证明：
-$$
-\int_0^1 f(x)\,\mathrm{d}x \ge 1
-$$
-
-### 2. 解题思路与方法提炼
->[1] **凸函数的核心几何性质：切线不等式**：
->由 $f''(x) \ge 0$ 知曲线呈现凹形（下凸函数）。下凸函数曲线始终位于其任意一切线的上方。
->[2] **中点泰勒展开积分对称消除法**：
->在中点 $x_0 = 1/2$ 处展开至一阶，由于对称区间上一阶线性项 $(x - 1/2)$ 的积分为零，二阶余项非负，直接积分得到严格下界。
-
-### 3. 详细解答与规范步骤
-
-#### 方法一：切线不等式与泰勒展开法（标准典范解法）
->[1] **在中点处展开**：
->由泰勒公式（带拉格朗日余项），对任意 $x \in [0, 1]$，将 $f(x)$ 在 $x_0 = \frac{1}{2}$ 处展开：
->$$
->f(x) = f\left(\frac{1}{2}\right) + f'\left(\frac{1}{2}\right)\left(x - \frac{1}{2}\right) + \frac{f''(\xi)}{2}\left(x - \frac{1}{2}\right)^2
->$$
->其中 $\xi$ 介于 $x$ 与 $\frac{1}{2}$ 之间。
+>被积函数在区间 $(0, \pi/4)$ 上严格大于零，由定积分保号性可知 $I > 0$。
 >
->[2] **利用凸性放缩为切线方程**：
->因为对任意 $\xi \in [0, 1]$ 均有 $f''(\xi) \ge 0$，且 $\left(x - \frac{1}{2}\right)^2 \ge 0$，所以：
->$$
->\frac{f''(\xi)}{2}\left(x - \frac{1}{2}\right)^2 \ge 0
->$$
->从而建立下界（切线不等式）：
->$$
->f(x) \ge f\left(\frac{1}{2}\right) + f'\left(\frac{1}{2}\right)\left(x - \frac{1}{2}\right) = 1 + f'\left(\frac{1}{2}\right)\left(x - \frac{1}{2}\right)
->$$
+>即：
 >
->[3] **两边积分并利用对称奇性**：
->在区间 $[0, 1]$ 上两端取定积分：
->$$
->\int_0^1 f(x)\,\mathrm{d}x \ge \int_0^1 \left[ 1 + f'\left(\frac{1}{2}\right)\left(x - \frac{1}{2}\right) \right]\,\mathrm{d}x = \int_0^1 1\,\mathrm{d}x + f'\left(\frac{1}{2}\right)\int_0^1 \left(x - \frac{1}{2}\right)\,\mathrm{d}x
->$$
->计算线性项积分：
->$$
->\int_0^1 \left(x - \frac{1}{2}\right)\,\mathrm{d}x = \left[ \frac{1}{2}\left(x - \frac{1}{2}\right)^2 \right]_0^1 = \frac{1}{2}\left( \frac{1}{4} - \frac{1}{4} \right) = 0
->$$
->因此：
->$$
->\int_0^1 f(x)\,\mathrm{d}x \ge 1 + 0 = 1
->$$
+>$$\int_0^{\pi/2} \frac{\cos x}{1+x^2}\,\mathrm{d}x > \int_0^{\pi/2} \frac{\sin x}{1+x^2}\,\mathrm{d}x$$
+>
 >命题得证。
 
-#### 方法二：琴生（Jensen）积分不等式法（高观点秒杀）
->[1] **陈述连续型琴生不等式**：
->若 $f(u)$ 为下凸函数（即 $f''(u) \ge 0$），$g(x)$ 为区间 $[0, 1]$ 上的概率密度（此处取均匀权 $g(x) = 1$），则恒有：
->$$
->\int_0^1 f(x)\,\mathrm{d}x \ge f\left( \int_0^1 x\,\mathrm{d}x \right)
->$$
->
->[2] **计算重心并代入**：
->由于 $\int_0^1 x\,\mathrm{d}x = \frac{1}{2}$，代入直接得出：
->$$
->\int_0^1 f(x)\,\mathrm{d}x \ge f\left(\frac{1}{2}\right) = 1
->$$
+**习题[11.3]:加权增量积分不等式证明**
 
-### 4. 考点延展与防坑警示
->[1] **哈达玛（Hermite-Hadamard）不等式**：
->对于定义在 $[a, b]$ 上的凸函数 $f$，恒有双向对称不等式：
->$$
->f\left(\frac{a+b}{2}\right) \le \frac{1}{b-a}\int_a^b f(x)\,\mathrm{d}x \le \frac{f(a)+f(b)}{2}
->$$
->本题结论正是 Hermite-Hadamard 不等式的左半侧。考研大题应写出方法一的泰勒展开全过程以确保拿满每一步的分数。
+设函数 $f(x)$ 在闭区间 $[0, 1]$ 上一阶连续可导，且对一切 $x \in [0, 1]$ 满足 $f'(x) > 0$。证明：
+$$\int_0^1 x f(x)\,\mathrm{d}x > \frac{1}{2}\int_0^1 f(x)\,\mathrm{d}x$$
+
+主要思路:构造变上限积分辅助函数 $F(t) = \int_0^t x f(x)\,\mathrm{d}x - \frac{t}{2}\int_0^t f(x)\,\mathrm{d}x$，通过求导与积分中值定理判定其严格单调递增，由 $F(0)=0$ 导出 $F(1)>0$
+
+>[1]构造变上限积分辅助函数：
+>
+>考虑辅助函数：
+>
+>$$F(t) = \int_0^t x f(x)\,\mathrm{d}x - \frac{t}{2}\int_0^t f(x)\,\mathrm{d}x \quad (t \in [0, 1])$$
+>
+>显然 $F(0) = 0$。欲证结论即证明 $F(1) > 0$。
+>
+>[2]求导并应用积分第一中值定理：
+>
+>对 $F(t)$ 关于 $t$ 求导：
+>
+>$$F'(t) = t f(t) - \left( \frac{1}{2}\int_0^t f(x)\,\mathrm{d}x + \frac{t}{2}f(t) \right) = \frac{t}{2}f(t) - \frac{1}{2}\int_0^t f(x)\,\mathrm{d}x = \frac{1}{2}\int_0^t [f(t) - f(x)]\,\mathrm{d}x$$
+>
+>因为对一切 $x \in [0, 1]$ 恒有 $f'(x) > 0$，所以 $f(x)$ 是严格单调递增函数。
+>
+>当 $t > 0$ 时，对任意 $x \in [0, t)$，恒有 $f(t) > f(x) \implies f(t) - f(x) > 0$。
+>
+>因此，对任意 $t \in (0, 1]$，恒有 $F'(t) > 0$。
+>
+>[3]严格单调增导出结论：
+>
+>函数 $F(t)$ 在 $[0, 1]$ 上连续，且在 $(0, 1)$ 内导数严格大于零，故 $F(t)$ 在 $[0, 1]$ 上严格单调递增。
+>
+>结合初值 $F(0) = 0$，必有：
+>
+>$$F(1) > F(0) = 0$$
+>
+>即：
+>
+>$$\int_0^1 x f(x)\,\mathrm{d}x > \frac{1}{2}\int_0^1 f(x)\,\mathrm{d}x$$
+>
+>命题得证。
+
+**习题[11.4]:区间对称变换与单调性加权积分不等式**
+
+设函数 $f(x)$ 在闭区间 $[a, b]$ ($a < b$) 上连续且单调递增，证明：
+$$\int_a^b x f(x)\,\mathrm{d}x \ge \frac{a+b}{2}\int_a^b f(x)\,\mathrm{d}x$$
+
+主要思路:做区间对称变换 $x = a + b - t$，将积分自身与其对称表达相加，提取公因式构造单调增函数的对称乘积项，利用保号性完成证明
+
+>[1]对称变换与同值积分相加：
+>
+>记 $J = \int_a^b x f(x)\,\mathrm{d}x$。做换元 $x = a + b - t$，$\mathrm{d}x = -\mathrm{d}t$。
+>
+>$$J = \int_b^a (a + b - t)f(a + b - t)(-\mathrm{d}t) = \int_a^b (a + b - x)f(a + b - x)\,\mathrm{d}x$$
+>
+>将两式相加：
+>
+>$$2J = \int_a^b [x f(x) + (a + b - x)f(a + b - x)]\,\mathrm{d}x$$
+>
+>[2]合并整理被积函数因式：
+>
+>两端同时减去 $(a + b)\int_a^b f(x)\,\mathrm{d}x$：
+>
+>$$2J - (a + b)\int_a^b f(x)\,\mathrm{d}x = \int_a^b [x f(x) + (a + b - x)f(a + b - x) - (a + b)f(x)]\,\mathrm{d}x$$
+>
+>$$= \int_a^b \left( x - \frac{a+b}{2} \right) [f(x) - f(a + b - x)]\,\mathrm{d}x$$
+>
+>[3]单调性判定被积函数非负：
+>
+>考查被积函数 $H(x) = \left( x - \frac{a+b}{2} \right) [f(x) - f(a + b - x)]$：
+>
+>(1) 当 $x > \frac{a+b}{2}$ 时，$x > a + b - x$。因 $f$ 单调递增，有 $f(x) \ge f(a + b - x)$，两因子同为正，乘积 $H(x) \ge 0$；
+>
+>(2) 当 $x < \frac{a+b}{2}$ 时，$x < a + b - x$。因 $f$ 单调递增，有 $f(x) \le f(a + b - x)$，两因子同为负，乘积 $H(x) \ge 0$；
+>
+>(3) 当 $x = \frac{a+b}{2}$ 时，$H(x) = 0$。
+>
+>因此在整个区间 $[a, b]$ 上恒有 $H(x) \ge 0$。
+>
+>由定积分保号性，积分非负，故 $2J \ge (a + b)\int_a^b f(x)\,\mathrm{d}x$，即：
+>
+>$$\int_a^b x f(x)\,\mathrm{d}x \ge \frac{a+b}{2}\int_a^b f(x)\,\mathrm{d}x$$
+>
+>命题得证。
+
+**习题[11.5]:端点零值导数约束下的积分模长估计**
+
+设函数 $f(x)$ 在闭区间 $[0, a]$ ($a > 0$) 上可导，且端点 $f(0) = 0$。记 $M = \max_{x \in [0, a]} |f'(x)|$。证明不等式：
+$$\int_0^a |f(x)|\,\mathrm{d}x \le \frac{a^2}{2} M$$
+
+主要思路:由微积分基本定理或拉格朗日中值定理建立 $|f(x)| \le M x$ 的线性上界控制，代入积分逐项放缩直接算出上界
+
+>[1]利用拉格朗日中值定理建立点值模长上界：
+>
+>对任意 $x \in (0, a]$，在区间 $[0, x]$ 上对 $f$ 应用拉格朗日中值定理：
+>
+>$$f(x) - f(0) = f'(\xi)(x - 0) = f'(\xi)x \quad (0 < \xi < x)$$
+>
+>代入端点值 $f(0) = 0$，取绝对值：
+>
+>$$|f(x)| = |f'(\xi)|x \le M x$$
+>
+>显然在 $x = 0$ 处该不等式亦平凡成立。故对一切 $x \in [0, a]$，恒有 $|f(x)| \le M x$。
+>
+>[2]在闭区间 $[0, a]$ 上进行绝对值定积分放缩：
+>
+>由定积分保序性：
+>
+>$$\int_0^a |f(x)|\,\mathrm{d}x \le \int_0^a M x\,\mathrm{d}x = M \int_0^a x\,\mathrm{d}x$$
+>
+>[3]计算定积分得出最终界限：
+>
+>计算初等积分：
+>
+>$$\int_0^a x\,\mathrm{d}x = \left[ \frac{x^2}{2} \right]_0^a = \frac{a^2}{2}$$
+>
+>因此直接得出：
+>
+>$$\int_0^a |f(x)|\,\mathrm{d}x \le \frac{a^2}{2} M$$
+>
+>命题得证。
+
+**习题[11.6]:下凸函数中点泰勒展开积分不等式**
+
+设函数 $f(x)$ 在闭区间 $[0, 1]$ 上二阶可导，且对一切 $x \in [0, 1]$ 满足 $f''(x) > 0$。证明不等式：
+$$\int_0^1 f(x)\,\mathrm{d}x > f\left(\frac{1}{2}\right)$$
+
+主要思路:选取对称中心点 $x_0 = 1/2$ 作带拉格朗日余项的一阶泰勒展开，在区间 $[0, 1]$ 上逐项定积分，奇对称一次项积分精确为零，二阶正余项提供正增量
+
+>[1]在中点 $x_0 = 1/2$ 处作带拉格朗日余项的一阶泰勒展开：
+>
+>对任意 $x \in [0, 1]$，将 $f(x)$ 在 $x_0 = \frac{1}{2}$ 处展开至一阶：
+>
+>$$f(x) = f\left(\frac{1}{2}\right) + f'\left(\frac{1}{2}\right)\left(x - \frac{1}{2}\right) + \frac{f''(\zeta)}{2}\left(x - \frac{1}{2}\right)^2$$
+>
+>其中 $\zeta$ 介于 $\frac{1}{2}$ 与 $x$ 之间。
+>
+>[2]在闭区间 $[0, 1]$ 上逐项定积分：
+>
+>对上式两端在 $[0, 1]$ 上求定积分：
+>
+>$$\int_0^1 f(x)\,\mathrm{d}x = \int_0^1 f\left(\frac{1}{2}\right)\,\mathrm{d}x + f'\left(\frac{1}{2}\right)\int_0^1 \left(x - \frac{1}{2}\right)\,\mathrm{d}x + \int_0^1 \frac{f''(\zeta)}{2}\left(x - \frac{1}{2}\right)^2\,\mathrm{d}x$$
+>
+>由于第一项中 $f(1/2)$ 为常数：
+>
+>$$\int_0^1 f\left(\frac{1}{2}\right)\,\mathrm{d}x = f\left(\frac{1}{2}\right) \cdot (1 - 0) = f\left(\frac{1}{2}\right)$$
+>
+>第二项关于 $x = \frac{1}{2}$ 呈奇对称，积分精确为零：
+>
+>$$\int_0^1 \left(x - \frac{1}{2}\right)\,\mathrm{d}x = \left[ \frac{1}{2}\left(x - \frac{1}{2}\right)^2 \right]_0^1 = \frac{1}{8} - \frac{1}{8} = 0$$
+>
+>[3]由二阶导数严格正性导出严格不等式：
+>
+>对于第三项，因为对一切 $x \in [0, 1]$ 恒有 $f''(x) > 0$，故 $\frac{f''(\zeta)}{2} > 0$。
+>
+>且 $(x - 1/2)^2$ 仅在孤立点 $x = 1/2$ 处为零，在其他点严格大于零。
+>
+>因此被积函数在 $[0, 1]$ 上连续非负且不恒为零，其定积分严格为正：
+>
+>$$\int_0^1 \frac{f''(\zeta)}{2}\left(x - \frac{1}{2}\right)^2\,\mathrm{d}x > 0$$
+>
+>综上所述：
+>
+>$$\int_0^1 f(x)\,\mathrm{d}x = f\left(\frac{1}{2}\right) + 0 + (\text{严格正项}) > f\left(\frac{1}{2}\right)$$
+>
+>命题得证。

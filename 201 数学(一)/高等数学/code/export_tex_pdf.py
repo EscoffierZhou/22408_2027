@@ -41,6 +41,8 @@ LATEX_PREAMBLE = r'''\documentclass[11pt,a4paper,UTF8]{ctexart}
 \usepackage{tikz}
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=1.5em, itemsep=2pt, parsep=0pt, topsep=2pt}
 
 % --- Color Palette (Purple & DeepPink Academic Theme) ---
 \definecolor{DeepPurple}{HTML}{4C1D95}
@@ -129,7 +131,7 @@ LATEX_PREAMBLE = r'''\documentclass[11pt,a4paper,UTF8]{ctexart}
     right=10pt,
     top=8pt,
     bottom=8pt,
-    title=#1,
+    title={#1},
     coltitle=white,
     colbacktitle=DeepPurple,
     fonttitle=\bfseries\small,
@@ -242,6 +244,32 @@ def clean_math(math_content):
 
 def escape_text(text):
     """Escapes LaTeX special characters in normal prose while sanitizing math."""
+    # 0. Pre-process HTML font color tags across inline math: <font color=deeppink>...</font>
+    font_pattern = re.compile(r'<font\s+color=[\'"]?([a-zA-Z0-9#]+)[\'"]?>(.*?)</font>', re.DOTALL | re.IGNORECASE)
+    font_replacements = []
+    if font_pattern.search(text):
+        def extract_font(m):
+            c = m.group(1).strip().lower()
+            body = m.group(2)
+            color_map = {
+                'deeppink': 'DeepPink',
+                'red': 'red',
+                'purple': 'TitlePurple',
+                'blue': 'blue',
+                'green': 'green!70!black',
+                'gold': 'GoldAccent',
+                'orange': 'GoldAccent'
+            }
+            tex_color = color_map.get(c, 'DeepPink')
+            esc_body = escape_text(body)
+            idx = len(font_replacements)
+            font_replacements.append(f"\\textcolor{{{tex_color}}}{{{esc_body}}}")
+            return f"XZFONTHOLDER{idx}XZ"
+        text = font_pattern.sub(extract_font, text)
+
+    # Strip any dangling/unclosed font tags
+    text = re.sub(r'</?font[^>]*>', '', text, flags=re.IGNORECASE)
+
     parts = []
     pattern = re.compile(r'(\$\$.*?\$\$|\$.*?\$)', re.DOTALL)
     tokens = pattern.split(text)
@@ -267,17 +295,6 @@ def escape_text(text):
             t = t.replace('}', r'\}')
             t = t.replace('^', r'\textasciicircum{}')
             
-            # HTML font colors: <font color=red>...</font>
-            def font_repl(m):
-                c = m.group(1).strip().lower()
-                body = m.group(2)
-                if c == 'deeppink':
-                    c = 'DeepPink'
-                elif c == 'purple':
-                    c = 'TitlePurple'
-                return f"\\textcolor{{{c}}}{{{body}}}"
-            t = re.sub(r'<font\s+color=["\']?([a-zA-Z]+)["\']?>(.*?)</font>', font_repl, t, flags=re.DOTALL)
-            
             # Chinese emphasis
             t = re.sub(r'【(.*?)】', r'\\textbf{【\1】}', t)
             # Markdown bold: **text**
@@ -288,14 +305,19 @@ def escape_text(text):
             t = re.sub(r'`(.*?)`', r'\\texttt{\1}', t)
             parts.append(t)
             
-    return ''.join(parts)
+    res = ''.join(parts)
+    for idx, rep in enumerate(font_replacements):
+        res = res.replace(f"XZFONTHOLDER{idx}XZ", rep)
+    return res
 
 def convert_display_math(tex_chunk):
     """Converts $$...$$ inside text to native LaTeX equation* or align* environments."""
     def repl(m):
         content = m.group(1).strip().replace('$', '')
         content = clean_math(content)
-        if r'\\' in content or '&' in content:
+        if r'\begin{aligned}' in content:
+            return f"\n\\begin{{equation*}}\n{content}\n\\end{{equation*}}\n"
+        elif r'\\' in content or '&' in content:
             return f"\n\\begin{{align*}}\n{content}\n\\end{{align*}}\n"
         else:
             return f"\n\\begin{{equation*}}\n{content}\n\\end{{equation*}}\n"
@@ -371,7 +393,36 @@ def parse_markdown_to_tex(md_content, file_path):
     # Strip invisible zero-width unicode characters
     md_content = md_content.replace('\u200b', '').replace('\ufeff', '').replace('\u200e', '').replace('\u200f', '')
     raw_lines = md_content.splitlines()
-    lines = [wrap_bare_math(fix_adjacent_inline_dollars(l)) for l in raw_lines]
+    
+    # Pre-process lines with awareness of code blocks and display math blocks
+    lines = []
+    in_code = False
+    in_math = False
+    for l in raw_lines:
+        s = l.strip()
+        if s.startswith('```'):
+            in_code = not in_code
+            lines.append(l)
+            continue
+        if in_code:
+            lines.append(l)
+            continue
+            
+        s_no_q = re.sub(r'^[>\s]+', '', s)
+        cnt = s_no_q.count('$$')
+        if not in_math:
+            if cnt % 2 == 1:
+                in_math = True
+                lines.append(l)
+            elif cnt == 0:
+                fixed = fix_adjacent_inline_dollars(l)
+                lines.append(wrap_bare_math(fixed))
+            else:
+                lines.append(l)
+        else:
+            if cnt % 2 == 1:
+                in_math = False
+            lines.append(l)
     file_basename = os.path.basename(file_path)
     parent_dirname = os.path.basename(os.path.dirname(os.path.abspath(file_path)))
     
@@ -445,7 +496,9 @@ def parse_markdown_to_tex(md_content, file_path):
                 while math_content.startswith('$') and math_content.endswith('$') and len(math_content) >= 2:
                     math_content = math_content[1:-1].strip()
                 math_content = clean_math(math_content)
-                if r'\\' in math_content or '&' in math_content:
+                if r'\begin{aligned}' in math_content:
+                    body_tex.append(f"\n\\begin{{equation*}}\n{math_content}\n\\end{{equation*}}\n")
+                elif r'\\' in math_content or '&' in math_content:
                     body_tex.append(f"\n\\begin{{align*}}\n{math_content}\n\\end{{align*}}\n")
                 else:
                     body_tex.append(f"\n\\begin{{equation*}}\n{math_content}\n\\end{{equation*}}\n")
@@ -462,13 +515,26 @@ def parse_markdown_to_tex(md_content, file_path):
             continue
 
         # Chapter purpose / goals at beginning
-        if re.match(r'^目的\[\d+\]:', stripped):
+        if re.match(r'^目的\s*\[\d+\]\s*[:：]', stripped):
             flush_block()
             target_items = []
-            while i < len(lines) and re.match(r'^目的\[\d+\]:', lines[i].strip()):
-                target_items.append(escape_text(lines[i].strip()))
-                i += 1
-            body_tex.append("\\begin{targetbox}[本章复习目标与核心知识图谱]\n\\begin{itemize}\n")
+            while i < len(lines):
+                cur_s = lines[i].strip()
+                if re.match(r'^目的\s*\[\d+\]\s*[:：]', cur_s):
+                    target_items.append(escape_text(cur_s))
+                    i += 1
+                elif cur_s == '':
+                    # Lookahead: skip blank lines if more '目的' follow
+                    k = i + 1
+                    while k < len(lines) and lines[k].strip() == '':
+                        k += 1
+                    if k < len(lines) and re.match(r'^目的\s*\[\d+\]\s*[:：]', lines[k].strip()):
+                        i = k
+                    else:
+                        break
+                else:
+                    break
+            body_tex.append("\\begin{targetbox}[{本章复习目标与核心知识图谱}]\n\\begin{itemize}\n")
             for item in target_items:
                 body_tex.append(f"  \\item {item}\n")
             body_tex.append("\\end{itemize}\n\\end{targetbox}\n")
@@ -477,21 +543,27 @@ def parse_markdown_to_tex(md_content, file_path):
         # Major Headings
         if stripped.startswith('## '):
             flush_block()
-            h_text = escape_text(stripped[3:].strip())
+            raw_h = stripped[3:].strip()
+            clean_h = re.sub(r'^(\d+\.)*\d+[\.、\s]\s*', '', raw_h)
+            h_text = escape_text(clean_h)
             body_tex.append(f"\n\\section{{{h_text}}}\n")
             i += 1
             continue
             
         if stripped.startswith('### '):
             flush_block()
-            h_text = escape_text(stripped[4:].strip())
+            raw_h = stripped[4:].strip()
+            clean_h = re.sub(r'^(\d+\.)*\d+[\.、\s]\s*', '', raw_h)
+            h_text = escape_text(clean_h)
             body_tex.append(f"\n\\subsection{{{h_text}}}\n")
             i += 1
             continue
             
         if stripped.startswith('#### '):
             flush_block()
-            h_text = escape_text(stripped[5:].strip())
+            raw_h = stripped[5:].strip()
+            clean_h = re.sub(r'^(\d+\.)*\d+[\.、\s]\s*', '', raw_h)
+            h_text = escape_text(clean_h)
             body_tex.append(f"\n\\subsubsection{{{h_text}}}\n")
             i += 1
             continue
@@ -532,13 +604,51 @@ def parse_markdown_to_tex(md_content, file_path):
                 block_env = "solbox"
                 block_title = "分步推导与答题规范"
             
-            q_line = re.sub(r'^>+\s?', '', line)
-            m_tag = re.match(r'^(\[\d+\]|\(\d+\))(.*)', q_line.strip())
+            # Completely strip all nested/spaced blockquote markers (e.g. >, >>, > >, > > >)
+            q_stripped = re.sub(r'^(?:>\s*)+', '', stripped)
+            
+            # If quote line was only '>' or '> >' (empty quote line for breathing space)
+            if not q_stripped:
+                block_lines.append("")
+                i += 1
+                continue
+
+            # Check if this line is display math inside blockquote
+            if q_stripped.startswith('$$'):
+                math_lines = []
+                if q_stripped.endswith('$$') and len(q_stripped) > 4:
+                    math_lines.append(q_stripped[2:-2].strip())
+                    i += 1
+                else:
+                    first_part = q_stripped[2:].strip()
+                    if first_part:
+                        math_lines.append(first_part)
+                    i += 1
+                    while i < len(lines):
+                        cur_raw = lines[i].strip()
+                        cur_no_q = re.sub(r'^(?:>\s*)+', '', cur_raw)
+                        if cur_no_q.endswith('$$'):
+                            last_part = cur_no_q[:-2].strip()
+                            if last_part:
+                                math_lines.append(last_part)
+                            i += 1
+                            break
+                        else:
+                            math_lines.append(cur_no_q)
+                            i += 1
+                math_content = clean_math('\n'.join(math_lines).strip().replace('$', ''))
+                block_lines.append(f"$${math_content}$$")
+                continue
+            
+            q_content = q_stripped.strip()
+            # Clean any stray pseudo-quote markers (e.g. inline > > or >>)
+            q_content = re.sub(r'(?:>\s*){2,}', ' ', q_content)
+            m_tag = re.match(r'^(\[\d+\]|\(\d+\))(.*)', q_content)
             if m_tag:
                 tag, rest = m_tag.group(1), m_tag.group(2)
-                q_line = f"\\textbf{{{tag}}} {escape_text(rest)}"
+                q_line = f"\\textbf{{{tag}}} {escape_text(rest)}\\\\[1.5mm]"
             else:
-                q_line = escape_text(q_line)
+                q_line = escape_text(q_content)
                 
             block_lines.append(q_line)
             i += 1
@@ -546,6 +656,39 @@ def parse_markdown_to_tex(md_content, file_path):
         else:
             if in_block and block_env == 'solbox':
                 flush_block()
+
+        # Unordered list items (- or *)
+        if re.match(r'^[-*]\s+', stripped):
+            list_items = []
+            while i < len(lines):
+                cur_s = lines[i].strip()
+                m_ul = re.match(r'^[-*]\s+(.*)', cur_s)
+                if m_ul:
+                    item_text = m_ul.group(1).strip()
+                    m_tag = re.match(r'^(\[\d+\]|\(\d+\))(.*)', item_text)
+                    if m_tag:
+                        item_text = f"\\textbf{{{m_tag.group(1)}}} {escape_text(m_tag.group(2))}"
+                    else:
+                        item_text = escape_text(item_text)
+                    list_items.append(item_text)
+                    i += 1
+                elif cur_s == '':
+                    k = i + 1
+                    while k < len(lines) and lines[k].strip() == '':
+                        k += 1
+                    if k < len(lines) and re.match(r'^[-*]\s+', lines[k].strip()):
+                        i = k
+                    else:
+                        break
+                else:
+                    break
+            
+            ul_tex = "\\begin{itemize}\n" + "".join(f"  \\item {it}\n" for it in list_items) + "\\end{itemize}\n"
+            if in_block:
+                block_lines.append(ul_tex)
+            else:
+                body_tex.append(ul_tex)
+            continue
 
         # Regular blank lines
         if stripped == '':
@@ -556,15 +699,45 @@ def parse_markdown_to_tex(md_content, file_path):
             i += 1
             continue
             
-        # Standalone display math outside blockquotes
-        if stripped.startswith('$$') and stripped.endswith('$$') and len(stripped) > 4:
-            math_content = stripped[2:-2].strip().replace('$', '')
-            math_content = clean_math(math_content)
-            if r'\\' in math_content or '&' in math_content:
-                body_tex.append(f"\n\\begin{{align*}}\n{math_content}\n\\end{{align*}}\n")
+        # Standalone display math outside/inside blockquotes
+        if stripped.startswith('$$'):
+            math_lines = []
+            trailing_text = ""
+            if stripped.endswith('$$') and len(stripped) > 4:
+                math_lines.append(stripped[2:-2].strip())
+                i += 1
+            elif stripped.count('$$') >= 2:
+                first_close = stripped.find('$$', 2)
+                math_lines.append(stripped[2:first_close].strip())
+                trailing_text = stripped[first_close+2:].strip()
+                i += 1
             else:
-                body_tex.append(f"\n\\begin{{equation*}}\n{math_content}\n\\end{{equation*}}\n")
-            i += 1
+                first_part = stripped[2:].strip()
+                if first_part:
+                    math_lines.append(first_part)
+                i += 1
+                while i < len(lines) and not lines[i].strip().endswith('$$'):
+                    math_lines.append(lines[i])
+                    i += 1
+                if i < len(lines):
+                    last_part = lines[i].strip()[:-2].strip()
+                    if last_part:
+                        math_lines.append(last_part)
+                    i += 1
+            math_content = clean_math('\n'.join(math_lines).strip().replace('$', ''))
+            if in_block:
+                block_lines.append(f"$${math_content}$$")
+                if trailing_text:
+                    block_lines.append(escape_text(trailing_text))
+            else:
+                if r'\begin{aligned}' in math_content:
+                    body_tex.append(f"\n\\begin{{equation*}}\n{math_content}\n\\end{{equation*}}\n")
+                elif r'\\' in math_content or '&' in math_content:
+                    body_tex.append(f"\n\\begin{{align*}}\n{math_content}\n\\end{{align*}}\n")
+                else:
+                    body_tex.append(f"\n\\begin{{equation*}}\n{math_content}\n\\end{{equation*}}\n")
+                if trailing_text:
+                    body_tex.append(escape_text(trailing_text) + "\n")
             continue
 
         # "主要思路:..."
@@ -579,6 +752,12 @@ def parse_markdown_to_tex(md_content, file_path):
         if m_item:
             tag, rest = m_item.group(1), m_item.group(2)
             line_esc = f"\\textbf{{{tag}}} {escape_text(rest)}"
+            if in_block:
+                block_lines.append(line_esc + r"\\[1.5mm]")
+            else:
+                body_tex.append(line_esc + "\n\n")
+            i += 1
+            continue
         else:
             line_esc = escape_text(line)
 
@@ -602,6 +781,17 @@ def compile_tex_to_pdf(tex_path):
     """Compiles a .tex file using xelatex twice to ensure TOC and references are complete."""
     work_dir = os.path.dirname(tex_path)
     tex_file = os.path.basename(tex_path)
+    base_no_ext = os.path.splitext(tex_path)[0]
+    pdf_path = base_no_ext + '.pdf'
+    
+    if os.path.exists(pdf_path):
+        try:
+            with open(pdf_path, 'a'):
+                pass
+        except IOError:
+            print(f"[!] 警告: 目标 PDF 文件已被外部阅读器 (如 Adobe Acrobat / Edge) 占用锁定: {pdf_path}")
+            print(f"[!] 请先关闭正在打开该 PDF 的阅读器窗口后再行编译！")
+            return False
     
     cmd = ['xelatex', '-interaction=nonstopmode', '-halt-on-error', tex_file]
     

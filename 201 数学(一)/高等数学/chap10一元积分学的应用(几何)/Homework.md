@@ -6,19 +6,13 @@
 
 主要思路:建立圆盘法切片体积微元，将问题转化为 $[0, +\infty)$ 上的反常定积分，利用反正切导数公式直接计算
 
->[1]构建圆盘切片体积微元：
+>[1]构建圆盘切片体积微元：垂直于 $x$ 轴切片，截面圆盘半径为 $y(x) = \frac{1}{\sqrt{1+x^2}}$，厚度为 $\mathrm{d}x$。
 >
->垂直于 $x$ 轴切片，截面圆盘半径为 $y(x) = \frac{1}{\sqrt{1+x^2}}$，厚度为 $\mathrm{d}x$。
->
->体积微元为：
->
->$$\mathrm{d}V_x = \pi y^2(x)\,\mathrm{d}x = \pi \left(\frac{1}{\sqrt{1+x^2}}\right)^2\,\mathrm{d}x = \frac{\pi}{1+x^2}\,\mathrm{d}x$$
+>体积微元为：$$\mathrm{d}V_x = \pi y^2(x)\,\mathrm{d}x = \pi \left(\frac{1}{\sqrt{1+x^2}}\right)^2\,\mathrm{d}x = \frac{\pi}{1+x^2}\,\mathrm{d}x$$
 >
 >[2]列出反常积分表达式：
 >
->图形在横轴方向无界延展，自变量范围为 $x \in [0, +\infty)$：
->
->$$V_x = \pi \int_0^{+\infty} \frac{1}{1+x^2}\,\mathrm{d}x$$
+>图形在横轴方向无界延展，自变量范围为 $x \in [0, +\infty)$：$$V_x = \pi \int_0^{+\infty} \frac{1}{1+x^2}\,\mathrm{d}x$$
 >
 >[3]计算极限与最终体积：
 >
@@ -70,13 +64,9 @@
 
 >[1]求导与平方和配方：
 >
->对 $y$ 求导：
+>对 $y$ 求导：$$x'(y) = \frac{1}{2}y - \frac{1}{2y}$$
 >
->$$x'(y) = \frac{1}{2}y - \frac{1}{2y}$$
->
->计算 $1 + [x'(y)]^2$：
->
->$$1 + [x'(y)]^2 = 1 + \left(\frac{1}{2}y - \frac{1}{2y}\right)^2 = 1 + \frac{1}{4}y^2 - \frac{1}{2} + \frac{1}{4y^2} = \frac{1}{4}y^2 + \frac{1}{2} + \frac{1}{4y^2} = \left(\frac{1}{2}y + \frac{1}{2y}\right)^2$$
+>计算 $1 + [x'(y)]^2$：$$1 + [x'(y)]^2 = 1 + \left(\frac{1}{2}y - \frac{1}{2y}\right)^2 = 1 + \frac{1}{4}y^2 - \frac{1}{2} + \frac{1}{4y^2} = \frac{1}{4}y^2 + \frac{1}{2} + \frac{1}{4y^2} = \left(\frac{1}{2}y + \frac{1}{2y}\right)^2$$
 >
 >[2]构建弧长微元：
 >
@@ -136,9 +126,7 @@
 >
 >利用二倍角降幂：
 >
->$$I = \int_{\frac{\pi}{6}}^{\frac{\pi}{3}} \frac{1 - \cos 2t}{2}\,\mathrm{d}t = \left[\frac{t}{2} - \frac{\sin 2t}{4}\right]_{\frac{\pi}{6}}^{\frac{\pi}{3}}$$
->
->$$= \left(\frac{\pi}{6} - \frac{\sqrt{3}}{8}\right) - \left(\frac{\pi}{12} - \frac{\sqrt{3}}{8}\right) = \frac{\pi}{12}$$
+>$$I = \int_{\frac{\pi}{6}}^{\frac{\pi}{3}} \frac{1 - \cos 2t}{2}\,\mathrm{d}t = \left[\frac{t}{2} - \frac{\sin 2t}{4}\right]_{\frac{\pi}{6}}^{\frac{\pi}{3}}$$$$= \left(\frac{\pi}{6} - \frac{\sqrt{3}}{8}\right) - \left(\frac{\pi}{12} - \frac{\sqrt{3}}{8}\right) = \frac{\pi}{12}$$
 >
 >[3]计算平均值：
 >
@@ -164,9 +152,7 @@
 >
 >在区间 $[0, 2]$ 上，上边界为切线，下边界为曲线 $y = \sqrt{x}$：
 >
->$$S(t) = \int_0^2 \left(\frac{x}{2\sqrt{t}} + \frac{\sqrt{t}}{2} - \sqrt{x}\right)\,\mathrm{d}x = \left[\frac{x^2}{4\sqrt{t}} + \frac{\sqrt{t}}{2}x - \frac{2}{3}x^{\frac{3}{2}}\right]_0^2$$
->
->$$= \frac{1}{\sqrt{t}} + \sqrt{t} - \frac{4\sqrt{2}}{3}$$
+>$$S(t) = \int_0^2 \left(\frac{x}{2\sqrt{t}} + \frac{\sqrt{t}}{2} - \sqrt{x}\right)\,\mathrm{d}x = \left[\frac{x^2}{4\sqrt{t}} + \frac{\sqrt{t}}{2}x - \frac{2}{3}x^{\frac{3}{2}}\right]_0^2$$$$= \frac{1}{\sqrt{t}} + \sqrt{t} - \frac{4\sqrt{2}}{3}$$
 >
 >[3]求导求极值点：
 >

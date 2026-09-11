@@ -20,8 +20,9 @@
 
 $$\frac{\mathrm{d}y}{\mathrm{d}t} = \lim_{\Delta t \to 0} \frac{\Delta y}{\Delta t}$$
 
-- 若$\frac{\mathrm{d}y}{\mathrm{d}t} > 0$，表示物理量随时间增加(如膨胀、上升、升温、加速)；
-- 若$\frac{\mathrm{d}y}{\mathrm{d}t} < 0$，表示物理量随时间减少(如收缩、下降、降温、减速)。
+(1) 若$\frac{\mathrm{d}y}{\mathrm{d}t} > 0$，表示物理量随时间增加(如膨胀、上升、升温、加速)；
+
+(2) 若$\frac{\mathrm{d}y}{\mathrm{d}t} < 0$，表示物理量随时间减少(如收缩、下降、降温、减速)。
 
 ###### **原理[2]:相关变化率模型与标准SOP流程**
 
@@ -49,9 +50,11 @@ $$F(x, y, \dots) = 0$$
 
 设质点沿直线运动的位置坐标随时间的变化规律为位移函数$s = s(t)$：
 
-- **瞬时速度(一阶导数):** $v(t) = \frac{\mathrm{d}s}{\mathrm{d}t} = s'(t)$
-- **瞬时加速度(二阶导数):** $a(t) = \frac{\mathrm{d}v}{\mathrm{d}t} = \frac{\mathrm{d}^2s}{\mathrm{d}t^2} = s''(t)$
-- **加加速度/变加速度(三阶导数Jerk):** $j(t) = \frac{\mathrm{d}a}{\mathrm{d}t} = \frac{\mathrm{d}^3s}{\mathrm{d}t^3} = s'''(t)$
+(1) **瞬时速度(一阶导数):** $v(t) = \frac{\mathrm{d}s}{\mathrm{d}t} = s'(t)$
+
+(2) **瞬时加速度(二阶导数):** $a(t) = \frac{\mathrm{d}v}{\mathrm{d}t} = \frac{\mathrm{d}^2s}{\mathrm{d}t^2} = s''(t)$
+
+(3) **加加速度/变加速度(三阶导数Jerk):** $j(t) = \frac{\mathrm{d}a}{\mathrm{d}t} = \frac{\mathrm{d}^3s}{\mathrm{d}t^3} = s'''(t)$
 
 ###### **原理[2]:以位移为自变量的链式法则变换**
 
@@ -69,17 +72,17 @@ $$a = \frac{\mathrm{d}v}{\mathrm{d}t} = \frac{\mathrm{d}v}{\mathrm{d}s} \cdot \f
 
 $$\vec{a} = a_\tau \vec{\tau} + a_n \vec{n}$$
 
-- **切向加速度$a_\tau$:** 反映**速率大小改变的快慢**：
+(1) **切向加速度$a_\tau$:** 反映**速率大小改变的快慢**：
 
-  $$a_\tau = \frac{\mathrm{d}v}{\mathrm{d}t} = \frac{\mathrm{d}^2s}{\mathrm{d}t^2}$$
+$$a_\tau = \frac{\mathrm{d}v}{\mathrm{d}t} = \frac{\mathrm{d}^2s}{\mathrm{d}t^2}$$
 
-- **法向加速度$a_n$:** 反映**运动速度方向改变的快慢**，与轨迹在当前点的曲率$K$及曲率半径$R$直接绑定：
+(2) **法向加速度$a_n$:** 反映**运动速度方向改变的快慢**，与轨迹在当前点的曲率$K$及曲率半径$R$直接绑定：
 
-  $$a_n = \frac{v^2}{R} = K v^2$$
+$$a_n = \frac{v^2}{R} = K v^2$$
 
-- **全加速度大小:** 
+(3) **全加速度大小:** 
 
-  $$a = \vert{}\vec{a}\vert{} = \sqrt{a_\tau^2 + a_n^2} = \sqrt{\left(\frac{\mathrm{d}v}{\mathrm{d}t}\right)^2 + (K v^2)^2}$$
+$$a = \vert{}\vec{a}\vert{} = \sqrt{a_\tau^2 + a_n^2} = \sqrt{\left(\frac{\mathrm{d}v}{\mathrm{d}t}\right)^2 + (K v^2)^2}$$
 
 ###### **原理[2]:平面直角坐标下的曲率计算**
 
@@ -115,9 +118,11 @@ $$K = \frac{\vert{}y''\vert{}}{[1 + (y')^2]^{\frac{3}{2}}}$$
 >
 >当火箭高度$y = 4\text{ km}$时：
 >
->- 水平距离为$3\text{ km}$，斜边视线距离为$\sqrt{3^2 + 4^2} = 5\text{ km}$；
->- 此时$\cos\theta = \frac{3}{5} \implies \sec\theta = \frac{5}{3}$；
->- 瞬时上升速度已知：$\frac{\mathrm{d}y}{\mathrm{d}t} = 800\text{ km/h}$。
+>(1) 水平距离为$3\text{ km}$，斜边视线距离为$\sqrt{3^2 + 4^2} = 5\text{ km}$；
+>
+>(2) 此时$\cos\theta = \frac{3}{5} \implies \sec\theta = \frac{5}{3}$；
+>
+>(3) 瞬时上升速度已知：$\frac{\mathrm{d}y}{\mathrm{d}t} = 800\text{ km/h}$。
 >
 >[4]代入计算仰角变化率：
 >
@@ -207,9 +212,11 @@ $$K = \frac{\vert{}y''\vert{}}{[1 + (y')^2]^{\frac{3}{2}}}$$
 >
 >[2]计算轨迹在点$x = 1$处的曲率$K$：
 >
->- $y' = x \implies y'(1) = 1$；
->- $y'' = 1 \implies y''(1) = 1$；
->- 代入平面曲线曲率公式：
+>(1) $y' = x \implies y'(1) = 1$；
+>
+>(2) $y'' = 1 \implies y''(1) = 1$；
+>
+>(3) 代入平面曲线曲率公式：
 >
 >  $$K = \frac{\vert{}y''\vert{}}{[1 + (y')^2]^{\frac{3}{2}}} = \frac{1}{[1 + 1^2]^{\frac{3}{2}}} = \frac{1}{2^{\frac{3}{2}}} = \frac{1}{2\sqrt{2}}$$
 >

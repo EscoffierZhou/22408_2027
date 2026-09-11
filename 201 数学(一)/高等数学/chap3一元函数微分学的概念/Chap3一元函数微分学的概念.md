@@ -335,13 +335,13 @@ Eg:设曲线$y = x^n$在点$(1, 1)$处的切线与$x$轴交点为$(\xi_n, 0)$,�
 
 ###### **题型四:微分和导数**
 
-$$\Delta y = {A \Delta x}\text{（线性主部） }+ {o(\Delta x)}\text{高阶误差}$$($dy = {A dx}\text{（线性主部） }+ {o(dx)}\text{高阶误差})$
+$$\Delta y = A \Delta x \text{（线性主部）} + o(\Delta x) \text{（高阶误差）} \quad (dy = A dx \text{为线性主部})$$
 
 >   $\Delta y$(真实增量):函数在曲线上真实的纵坐标变化量，$\Delta y = f(x_0 + \Delta x) - f(x_0)$
 >
 >   $dy$(微分/线性主部):切线上的纵坐标变化量，即 $dy = A \Delta x$
 >
->   在一元函数中，系数$A$必定就是导数，即 **$A = f'(x_0)$**,$$dy = f'(x_0) \Delta x = f'(x_0) dx$$
+>   在一元函数中，系数$A$必定就是导数，即 **$A = f'(x_0)$**，即 $dy = f'(x_0) \Delta x = f'(x_0) dx$
 
 **题型[1]微分逆推导数**
 
