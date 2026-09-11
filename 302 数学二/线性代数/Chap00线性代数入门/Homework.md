@@ -8,12 +8,19 @@
 
 计算下列各式的值，并严格按照分步流程写出推导：
 (1) $[1, 1] \begin{bmatrix} 1 \\ -1 \end{bmatrix}$
+
 (2) $[2, 0] \begin{bmatrix} 0 \\ -2 \end{bmatrix}$
+
 (3) $[1, -1] \begin{bmatrix} 2 & 1 \\ -1 & 3 \end{bmatrix}$
+
 (4) $\begin{bmatrix} 2 & 1 \\ -1 & 3 \end{bmatrix} \begin{bmatrix} 1 \\ -1 \end{bmatrix}$
+
 (5) $\begin{bmatrix} 1 \\ 1 \end{bmatrix} [1, -1]$
+
 (6) $\begin{bmatrix} 2 \\ 0 \end{bmatrix} [0, -2]$
+
 (7) $\begin{bmatrix} 1 & 1 \\ -1 & 1 \end{bmatrix} \begin{bmatrix} 2 & 1 \\ -1 & 3 \end{bmatrix}$
+
 (8) $\begin{bmatrix} 2 & 1 \\ -1 & 3 \end{bmatrix} \begin{bmatrix} 1 & 1 \\ -1 & 1 \end{bmatrix}$
 
 主要思路：依据“左行乘右列、对应项相乘后求和”的基本定义，区分内积（数）、行向量、列向量与方阵的维度差异，精确展开各项。
