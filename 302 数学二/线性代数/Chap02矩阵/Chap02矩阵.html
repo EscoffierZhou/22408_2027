@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chap02矩阵</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h1>Chap02 矩阵</h1>
+<p>目的[1]:深刻理解矩阵作为“有限维向量空间基变换与线性映射坐标表征”的本质，熟练掌握矩阵的线性运算、矩阵乘法、方阵的幂与转置运算律</p>
+<p>目的[2]:牢固掌握方阵行列式与特殊矩阵（对称阵、反对称阵、正交阵、幂等阵、幂零阵、对角阵、数量阵）的代数结构与性质</p>
+<p>目的[3]:深刻领会伴随矩阵 $A^*$ 的代数构造与核心恒等式 $AA^* = A^*A = |A|E$，熟练推导并运用伴随五大经典公式与伴随秩阶梯公式</p>
+<p>目的[4]:精通矩阵求逆的三大核心方法（定义配凑法、伴随矩阵法、初等行变换法）与常用分块矩阵求逆公式</p>
+<p>目的[5]:熟练掌握三类初等变换与初等矩阵的对应法则（左乘行变、右乘列变），熟练运用初等行变换求逆与化简行最简阶梯形（RREF）</p>
+<p>目的[6]:系统构建矩阵方程（$AX=B, XA=B, AXB=C$ 及含伴随/逆的混合矩阵方程）的标准化解法流程</p>
+<p>目的[7]:深刻理解矩阵秩的本质（最高阶非零子式与行/列向量组的极大线性无关组容量），系统熟练运用矩阵秩的八大核心不等式与 Sylvester 秩定理</p>
+<h2>1.矩阵的概念与基本运算</h2>
+<h6><strong>概念[1]:矩阵的定义与几何代数本质</strong></h6>
+<p>[1]代数定义：</p>
+<blockquote>
+<p>由 $m \times n$ 个数 $a_{ij}$ ($i=1,2,\dots,m; j=1,2,\dots,n$) 排列成的 $m$ 行 $n$ 列的数表：</p>
+<p>$$A = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ a_{m1} & a_{m2} & \cdots & a_{mn} \end{bmatrix}$$</p>
+<p>称为一个 $m \times n$ 矩阵，简记为 $A = (a_{ij})_{m \times n}$ 或 $A_{m \times n}$。</p>
+<p>当 $m = n$ 时，称 $A$ 为 $n$ 阶方阵。</p>
+</blockquote>
+<p>[2]几何代数本质：</p>
+<blockquote>
+<p>矩阵的本质是有限维线性空间之间线性映射（Linear Transformation）在给定基底下的坐标表征：</p>
+<p>(1) 设 $V$ 是 $n$ 维向量空间，$W$ 是 $m$ 维向量空间，$T: V \to W$ 为线性映射。固定 $V$ 的一组基与 $W$ 的一组基后，$T$ 被唯一的 $m \times n$ 矩阵 $A$ 所完全决定；</p>
+<p>(2) 矩阵与列向量的乘积 $y = Ax$，本质是将输入空间中的坐标向量 $x$ 映射为输出空间中的坐标向量 $y$，其中矩阵 $A$ 的第 $j$ 列即为原基向量在映射后的像向量在目标基底下的坐标。</p>
+</blockquote>
+<h6><strong>概念[2]:矩阵的线性运算</strong></h6>
+<p>[1]矩阵加法：</p>
+<blockquote>
+<p>设有两个同型矩阵 $A = (a_{ij})_{m \times n}$ 与 $B = (b_{ij})_{m \times n}$，则矩阵 $A$ 与 $B$ 的和定义为对应元素相加：</p>
+<p>$$C = A + B, \quad c_{ij} = a_{ij} + b_{ij}$$</p>
+<p>加法满足交换律 $A+B=B+A$ 与结合律 $(A+B)+C = A+(B+C)$。只有同型矩阵才能进行加法运算。</p>
+</blockquote>
+<p>[2]数乘矩阵：</p>
+<blockquote>
+<p>数 $k$ 与矩阵 $A = (a_{ij})_{m \times n}$ 的乘积定义为 $k$ 乘以 $A$ 的每一个元素：</p>
+<p>$$kA = (k a_{ij})_{m \times n}$$</p>
+<p>数乘满足分配律 $k(A+B) = kA + kB$，$(k+l)A = kA + lA$，及结合律 $k(lA) = (kl)A$。</p>
+<p><font color=red>【避坑警示】</font>数乘行列式与数乘矩阵的本质区别：数乘行列式 $|kA| = k^n |A|$（提取公因式每行提一个 $k$），而数乘矩阵是每个元素都乘 $k$。</p>
+</blockquote>
+<h6><strong>概念[3]:矩阵乘法及其非交换特性</strong></h6>
+<p>[1]矩阵乘法定义：</p>
+<blockquote>
+<p>设 $A = (a_{ik})_{m \times s}$，$B = (b_{kj})_{s \times n}$，则乘积 $C = AB$ 是一个 $m \times n$ 矩阵，其第 $i$ 行第 $j$ 列元素定义为：</p>
+<p>$$c_{ij} = \sum_{k=1}^s a_{ik} b_{kj} = a_{i1}b_{1j} + a_{i2}b_{2j} + \cdots + a_{is}b_{sj}$$</p>
+<p>乘法能进行的充要条件是：<font color=deeppink>左矩阵的列数等于右矩阵的行数</font>。</p>
+</blockquote>
+<p>[2]矩阵乘法的代数性质：</p>
+<blockquote>
+<p>乘法满足结合律 $(AB)C = A(BC)$ 与左右分配律 $A(B+C) = AB + AC, (B+C)A = BA + CA$。</p>
+</blockquote>
+<p>[3]矩阵乘法的反直觉特性（四大禁区）：</p>
+<blockquote>
+<p>(1) <strong>通常不满足交换律</strong>：即一般情况下 $AB \ne BA$。即使 $AB$ 与 $BA$ 均有意义且同阶，$AB$ 也不一定等于 $BA$。若 $AB = BA$，称方阵 $A$ 与 $B$ <strong>可交换</strong>；</p>
+<p>(2) <strong>不满足消去律</strong>：由 $AB = AC$ 且 $A \ne O$，不能推出 $B = C$；</p>
+<p>(3) <strong>零因子存在性</strong>：由 $AB = O$，不能推出 $A = O$ 或 $B = O$。若 $AB = O$ 且 $A \ne O, B \ne O$，则称 $A, B$ 互为零因子；</p>
+<p>(4) <strong>平方和展开公式受限</strong>：由于乘法不可交换，乘法二项式定理一般不成立：</p>
+<p>$$(A+B)^2 = A^2 + AB + BA + B^2$$</p>
+<p>只有当 $AB = BA$ 时，才有 $(A+B)^2 = A^2 + 2AB + B^2$ 以及 $(A-B)(A+B) = A^2 - B^2$。</p>
+</blockquote>
+<h6><strong>概念[4]:矩阵的转置及其运算律</strong></h6>
+<p>[1]转置定义：</p>
+<blockquote>
+<p>将 $m \times n$ 矩阵 $A$ 的行与列互换，得到的 $n \times m$ 矩阵称为 $A$ 的转置矩阵，记作 $A^T$。</p>
+</blockquote>
+<p>[2]转置运算五大定理：</p>
+<blockquote>
+<p>(1) $(A^T)^T = A$；</p>
+<p>(2) $(A + B)^T = A^T + B^T$；</p>
+<p>(3) $(kA)^T = k A^T$；</p>
+<p>(4) <font color=deeppink>$(AB)^T = B^T A^T$</font>（穿脱原则，顺序颠倒）；</p>
+<p>(5) 对多个矩阵连乘：$(A_1 A_2 \cdots A_k)^T = A_k^T \cdots A_2^T A_1^T$。</p>
+</blockquote>
+<h6><strong>概念[5]:方阵的幂与矩阵多项式</strong></h6>
+<p>[1]方阵的幂定义：</p>
+<blockquote>
+<p>设 $A$ 为 $n$ 阶方阵，$k$ 为正整数，定义 $A^k = \underbrace{A \cdot A \cdots A}_{k \text{ 个}}$，规定 $A^0 = E$。</p>
+<p>幂运算满足指标律：$A^k A^m = A^{k+m}$，$(A^k)^m = A^{km}$。但通常 $(AB)^k \ne A^k B^k$（仅在 $AB = BA$ 时成立）。</p>
+</blockquote>
+<p>[2]方阵的高次幂求法四大模型：</p>
+<blockquote>
+<p>(1) <strong>试探归纳法</strong>：计算 $A^2, A^3$，寻找周期性或通项规律，结合数学归纳法证明；</p>
+<p>(2) <strong>秩 1 矩阵分解法</strong>：若 $A = \alpha \beta^T$（其中 $\alpha, \beta$ 为非零列向量），则：</p>
+<p>$$A^2 = (\alpha \beta^T)(\alpha \beta^T) = \alpha (\beta^T \alpha) \beta^T = (\beta^T \alpha) A = [\mathrm{tr}(A)] A$$</p>
+<p>推广至 $n$ 次幂：<font color=deeppink>$A^n = (\beta^T \alpha)^{n-1} A = [\mathrm{tr}(A)]^{n-1} A$</font>；</p>
+<p>(3) <strong>拆分为可交换矩阵与二项式定理</strong>：若 $A = \lambda E + B$ 且 $B^k = O$（幂零矩阵），因 $\lambda E$ 与任何矩阵可交换，可直接套用二项式展开：</p>
+<p>$$A^n = (\lambda E + B)^n = \sum_{k=0}^n C_n^k (\lambda E)^{n-k} B^k$$</p>
+<p>(4) <strong>相似对角化法</strong>：若 $A = P \Lambda P^{-1}$，则 $A^n = P \Lambda^n P^{-1}$。</p>
+</blockquote>
+<h6><strong>概念[6]:方阵的行列式性质</strong></h6>
+<p>[1]基本运算公式：</p>
+<blockquote>
+<p>设 $A, B$ 为 $n$ 阶方阵，则：</p>
+<p>(1) $|A^T| = |A|$；</p>
+<p>(2) $|kA| = k^n |A|$；</p>
+<p>(3) <font color=deeppink>$|AB| = |A||B| = |BA|$</font>（柯西-比内定理的重要特例）；</p>
+<p>(4) $|A^k| = |A|^k$；</p>
+<p>(5) $|-A| = (-1)^n |A|$。</p>
+<p><font color=red>【避坑警示】</font>一般情况下 $|A+B| \ne |A| + |B|$，不可拆项相加。</p>
+</blockquote>
+<h6><strong>概念[7]:特殊矩阵谱系</strong></h6>
+<p>[1]对称矩阵与反对称矩阵：</p>
+<blockquote>
+<p>(1) <strong>对称矩阵</strong>：满足 $A^T = A$，即 $a_{ij} = a_{ji}$。其主对角线元素任意；</p>
+<p>(2) <strong>反对称矩阵</strong>：满足 $A^T = -A$，即 $a_{ij} = -a_{ji}$。特别地，当 $i=j$ 时，$a_{ii} = -a_{ii} \implies a_{ii} = 0$，故<font color=deeppink>反对称矩阵的主对角线元素全为 0</font>；</p>
+<p>(3) <strong>奇数阶反对称矩阵行列式必为 0</strong>：若 $A$ 是 $n$ 阶反对称矩阵且 $n$ 为奇数，则：</p>
+<p>$$|A| = |A^T| = |-A| = (-1)^n |A| = -|A| \implies 2|A| = 0 \implies |A| = 0$$</p>
+</blockquote>
+<p>[2]正交矩阵：</p>
+<blockquote>
+<p>满足 $A^T A = A A^T = E$ 的实方阵称为正交矩阵。其充要条件为 $A^{-1} = A^T$。</p>
+<p>正交矩阵的性质：$|A| = \pm 1$；列向量组（及行向量组）构成两两正交的单位向量组。</p>
+</blockquote>
+<p>[3]幂等矩阵与幂零矩阵：</p>
+<blockquote>
+<p>(1) <strong>幂等矩阵</strong>：满足 $A^2 = A$。其特征值只能是 0 或 1，满足 $r(A) = \mathrm{tr}(A)$；</p>
+<p>(2) <strong>幂零矩阵</strong>：存在正整数 $k$ 使得 $A^k = O$。其特征值全为 0。</p>
+</blockquote>
+<h6><strong>概念[8]:分块矩阵及其运算规则</strong></h6>
+<p>[1]分块加法与数乘：</p>
+<blockquote>
+<p>分块格式完全一致时，对应子块分别进行加法和数乘。</p>
+</blockquote>
+<p>[2]分块矩阵乘法：</p>
+<blockquote>
+<p>设 $A$ 的列分块划分与 $B$ 的行分块划分完全一致，则分块矩阵乘法按普通矩阵乘法规则计算子块乘积并累加。</p>
+</blockquote>
+<p>[3]准对角矩阵（分块对角阵）：</p>
+<blockquote>
+<p>形如 $A = \begin{bmatrix} A_1 & O \\ O & A_2 \end{bmatrix}$，其幂运算为 $A^k = \begin{bmatrix} A_1^k & O \\ O & A_2^k \end{bmatrix}$，行列式为 $|A| = |A_1| |A_2|$。</p>
+</blockquote>
+<hr />
+<h2>2.伴随矩阵与逆矩阵</h2>
+<h6><strong>概念[1]:伴随矩阵的代数定义与结构</strong></h6>
+<p>[1]伴随矩阵定义：</p>
+<blockquote>
+<p>设 $A = (a_{ij})_{n \times n}$ 是 $n$ 阶方阵，$A_{ij}$ 是元素 $a_{ij}$ 的代数余子式，由所有代数余子式构成的矩阵：</p>
+<p>$$A^* = \begin{bmatrix} A_{11} & A_{21} & \cdots & A_{n1} \\ A_{12} & A_{22} & \cdots & A_{n2} \\ \vdots & \vdots & \ddots & \vdots \\ A_{1n} & A_{2n} & \cdots & A_{nn} \end{bmatrix}$$</p>
+<p>称为方阵 $A$ 的伴随矩阵。</p>
+<p><font color=red>【核心记忆法则】</font>伴随矩阵中，第 $i$ 行元素的代数余子式排在第 $i$ <strong>列</strong>（即代数余子式矩阵的转置）。</p>
+</blockquote>
+<h6><strong>定理[1]:伴随矩阵基本恒等式与核心推论</strong></h6>
+<p>[1]基本恒等式：</p>
+<blockquote>
+<p>对任意 $n$ 阶方阵 $A$，恒有：</p>
+<p>$$AA^* = A^*A = |A|E$$</p>
+<p>证明由行列式按行（列）展开定理及异行代数余子式展开为零直接保证。</p>
+</blockquote>
+<p>[2]基本恒等式两边取行列式：</p>
+<blockquote>
+<p>$$|AA^*| = |A| |A^*| = ||A|E| = |A|^n \cdot |E| = |A|^n$$</p>
+<p>当 $|A| \ne 0$ 时，两边除以 $|A|$ 即得：<font color=deeppink>$|A^*| = |A|^{n-1}$</font>。</p>
+</blockquote>
+<h6><strong>性质[1]:伴随矩阵的五大经典公式体系</strong></h6>
+<p>[1]行列式公式：</p>
+<blockquote>
+<p>$$|A^*| = |A|^{n-1} \quad (n \ge 2)$$</p>
+</blockquote>
+<p>[2]双伴随公式：</p>
+<blockquote>
+<p>对可逆矩阵 $A$：</p>
+<p>$$(A^*)^* = |A|^{n-2} A \quad (n \ge 2)$$</p>
+<p>推导：由 $A^* (A^*)^* = |A^*|E = |A|^{n-1}E$，左乘 $A$ 得 $A A^* (A^*)^* = |A|E (A^*)^* = |A| (A^*)^*$，而 $A A^* = |A|E$，故 $|A|(A^*)^* = |A|^{n-1} A \implies (A^*)^* = |A|^{n-2} A$。</p>
+</blockquote>
+<p>[3]数乘伴随公式：</p>
+<blockquote>
+<p>$$(kA)^* = k^{n-1} A^*$$</p>
+<p>推导：每个代数余子式是 $n-1$ 阶子式，提取公因式每行提一个 $k$，共提取 $k^{n-1}$。</p>
+</blockquote>
+<p>[4]转置与求逆伴随公式：</p>
+<blockquote>
+<p>(1) $(A^T)^* = (A^*)^T$；</p>
+<p>(2) $(A^*)^{-1} = (A^{-1})^* = \frac{1}{|A|} A$。</p>
+</blockquote>
+<p>[5]矩阵乘积的伴随公式：</p>
+<blockquote>
+<p>若 $A, B$ 均可逆，则：</p>
+<p>$$(AB)^* = B^* A^*$$</p>
+<p>推导：$(AB) B^* A^* = A (B B^*) A^* = A (|B|E) A^* = |B| (A A^*) = |B| |A| E = |AB|E$。由伴随矩阵的唯一性得证。</p>
+</blockquote>
+<h6><strong>概念[2]:逆矩阵的定义与存在充要条件</strong></h6>
+<p>[1]逆矩阵定义：</p>
+<blockquote>
+<p>对于 $n$ 阶方阵 $A$，如果存在一个 $n$ 阶方阵 $B$，使得：</p>
+<p>$$AB = BA = E$$</p>
+<p>则称方阵 $A$ 是<strong>可逆的</strong>（或非奇异的、满秩的），称矩阵 $B$ 为 $A$ 的<strong>逆矩阵</strong>，记作 $A^{-1}$。逆矩阵是唯一的。</p>
+</blockquote>
+<p>[2]可逆的充要条件：</p>
+<blockquote>
+<p>方阵 $A$ 可逆 $\iff |A| \ne 0 \iff r(A) = n$（满秩）。</p>
+</blockquote>
+<h6><strong>性质[2]:逆矩阵的运算性质</strong></h6>
+<p>[1]常用恒等式：</p>
+<blockquote>
+<p>(1) $(A^{-1})^{-1} = A$；</p>
+<p>(2) $(kA)^{-1} = \frac{1}{k} A^{-1} \quad (k \ne 0)$；</p>
+<p>(3) $(A^T)^{-1} = (A^{-1})^T$；</p>
+<p>(4) $(AB)^{-1} = B^{-1} A^{-1}$（穿脱原则）；</p>
+<p>(5) $|A^{-1}| = \frac{1}{|A|} = |A|^{-1}$。</p>
+</blockquote>
+<h6><strong>方法[1]:矩阵求逆的三大经典方法</strong></h6>
+<p>[1]定义配凑法：</p>
+<blockquote>
+<p>若经过恒等变形能化出 $A \cdot (\text{表达式}) = E$ 或 $(\text{表达式}) \cdot A = E$，则由定义立即得出 $A^{-1} = \text{表达式}$。</p>
+<p>例如由多项式 $A^2 - 2A - 3E = O \implies A(A-2E) = 3E \implies A \cdot \left[\frac{1}{3}(A-2E)\right] = E \implies A^{-1} = \frac{1}{3}(A-2E)$。</p>
+</blockquote>
+<p>[2]伴随矩阵法（公式法）：</p>
+<blockquote>
+<p>若 $|A| \ne 0$，则：</p>
+<p>$$A^{-1} = \frac{1}{|A|} A^*$$</p>
+<p>二阶方阵速求公式：</p>
+<p>$$\begin{bmatrix} a & b \\ c & d \end{bmatrix}^{-1} = \frac{1}{ad-bc} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$$</p>
+<p>口诀：<font color=deeppink>主对调，副变号，除以行列式</font>。</p>
+</blockquote>
+<p>[3]初等行变换法：</p>
+<blockquote>
+<p>构造增广矩阵 $[A | E]$，仅使用初等行变换将其化简为 $[E | X]$，则右侧子块 $X = A^{-1}$。</p>
+</blockquote>
+<h6><strong>方法[2]:分块矩阵求逆标准公式</strong></h6>
+<p>[1]分块对角矩阵求逆：</p>
+<blockquote>
+<p>$$\begin{bmatrix} A & O \\ O & B \end{bmatrix}^{-1} = \begin{bmatrix} A^{-1} & O \\ O & B^{-1} \end{bmatrix}$$</p>
+</blockquote>
+<p>[2]分块副对角矩阵求逆：</p>
+<blockquote>
+<p>$$\begin{bmatrix} O & A \\ B & O \end{bmatrix}^{-1} = \begin{bmatrix} O & B^{-1} \\ A^{-1} & O \end{bmatrix}$$</p>
+<p><font color=red>【重点警示】</font>注意子块位置的上下颠倒与求逆。</p>
+</blockquote>
+<p>[3]分块三角矩阵求逆：</p>
+<blockquote>
+<p>$$\begin{bmatrix} A & C \\ O & B \end{bmatrix}^{-1} = \begin{bmatrix} A^{-1} & -A^{-1} C B^{-1} \\ O & B^{-1} \end{bmatrix}$$</p>
+<p>$$\begin{bmatrix} A & O \\ C & B \end{bmatrix}^{-1} = \begin{bmatrix} A^{-1} & O \\ -B^{-1} C A^{-1} & B^{-1} \end{bmatrix}$$</p>
+</blockquote>
+<hr />
+<h2>3.初等变换与初等矩阵</h2>
+<h6><strong>概念[1]:三类初等行/列变换</strong></h6>
+<p>[1]第一类初等变换（互换变换）：</p>
+<blockquote>
+<p>互换矩阵的第 $i$ 行与第 $j$ 行，记作 $r_i \leftrightarrow r_j$；或互换第 $i$ 列与第 $j$ 列，记作 $c_i \leftrightarrow c_j$。</p>
+</blockquote>
+<p>[2]第二类初等变换（倍乘变换）：</p>
+<blockquote>
+<p>用非零常数 $k \ne 0$ 乘以某一行（列）的所有元素，记作 $k r_i$ 或 $k c_i$。</p>
+</blockquote>
+<p>[3]第三类初等变换（倍加变换）：</p>
+<blockquote>
+<p>将第 $j$ 行（列）的 $k$ 倍加到第 $i$ 行（列）上，记作 $r_i + k r_j$ 或 $c_i + k c_j$。</p>
+</blockquote>
+<h6><strong>概念[2]:三类初等矩阵的代数形式与性质</strong></h6>
+<p>[1]定义：</p>
+<blockquote>
+<p>由单位矩阵 $E$ 经过一次初等变换得到的方阵称为初等矩阵。</p>
+</blockquote>
+<p>[2]三类初等矩阵对应的具体形态：</p>
+<blockquote>
+<p>(1) $E_{ij}$：单位矩阵互换第 $i, j$ 行（列）得到；</p>
+<p>(2) $E_i(k)$：单位矩阵第 $i$ 行（列）乘以非零数 $k$ 得到；</p>
+<p>(3) $E_{ij}(k)$：单位矩阵第 $j$ 行乘以 $k$ 加到第 $i$ 行得到（注意：非对角线非零元 $k$ 在第 $i$ 行第 $j$ 列）。</p>
+</blockquote>
+<p>[3]初等矩阵的行列式：</p>
+<blockquote>
+<p>(1) $|E_{ij}| = -1$；</p>
+<p>(2) $|E_i(k)| = k \ne 0$；</p>
+<p>(3) $|E_{ij}(k)| = 1$。</p>
+<p>初等矩阵均为可逆矩阵。</p>
+</blockquote>
+<p>[4]初等矩阵的逆矩阵与转置：</p>
+<blockquote>
+<p>(1) $E_{ij}^{-1} = E_{ij}, \quad E_{ij}^T = E_{ij}$；</p>
+<p>(2) $[E_i(k)]^{-1} = E_i\left(\frac{1}{k}\right), \quad [E_i(k)]^T = E_i(k)$；</p>
+<p>(3) $[E_{ij}(k)]^{-1} = E_{ij}(-k), \quad [E_{ij}(k)]^T = E_{ji}(k)$。</p>
+</blockquote>
+<h6><strong>定理[1]:初等变换的矩阵乘法法则</strong></h6>
+<p>[1]左乘行变，右乘列变：</p>
+<blockquote>
+<p>设 $A$ 是一个 $m \times n$ 矩阵：</p>
+<p>(1) 对 $A$ 作一次初等<font color=deeppink>行</font>变换，相当于用相应的 $m$ 阶初等矩阵<strong>左乘</strong> $A$；</p>
+<p>(2) 对 $A$ 作一次初等<font color=deeppink>列</font>变换，相当于用相应的 $n$ 阶初等矩阵<strong>右乘</strong> $A$。</p>
+</blockquote>
+<h6><strong>概念[3]:行阶梯形矩阵与行最简形矩阵（RREF）</strong></h6>
+<p>[1]行阶梯形矩阵：</p>
+<blockquote>
+<p>满足以下两个条件的矩阵称为行阶梯形矩阵：</p>
+<p>(1) 若有零行，零行全部位于矩阵的最下方；</p>
+<p>(2) 每个非零行的第一个非零元素（主元）所在的列指标，随着行指标的增加而严格单调递增。</p>
+</blockquote>
+<p>[2]行最简阶梯形矩阵（Reduced Row Echelon Form, RREF）：</p>
+<blockquote>
+<p>在行阶梯形矩阵的基础上，进一步满足：</p>
+<p>(1) 每个非零行的第一个非零元素（主元）必须严格为 $1$；</p>
+<p>(2) 每个主元所在的列中，除主元外的所有其余元素全为 $0$。</p>
+<p>任何实矩阵经过有限次初等行变换，都能唯一化简为行最简阶梯形。</p>
+</blockquote>
+<hr />
+<h2>4.矩阵方程求解体系</h2>
+<h6><strong>概念[1]:矩阵方程的基本分类与可解性准则</strong></h6>
+<p>[1]分类：</p>
+<blockquote>
+<p>矩阵方程主要分为三类基本形态：</p>
+<p>(1) 线性单侧型：$AX = B$ 或 $XA = B$；</p>
+<p>(2) 线性双侧型：$AXB = C$；</p>
+<p>(3) 伴随/逆矩阵混合型：含有 $X^*, X^{-1}$ 或 $A^* X$ 的方程。</p>
+</blockquote>
+<h6><strong>方法[1]:单侧可逆标准矩阵方程求解法</strong></h6>
+<p>[1]$AX = B$ 型：</p>
+<blockquote>
+<p>若系数矩阵 $A$ 可逆，两边左乘 $A^{-1}$ 得：</p>
+<p>$$X = A^{-1} B$$</p>
+<p>计算技巧：无需先求 $A^{-1}$ 再乘 $B$，可直接构造增广矩阵 $[A | B]$，通过初等行变换将其化为 $[E | A^{-1}B]$，直接读取右侧子块。</p>
+</blockquote>
+<p>[2]$XA = B$ 型：</p>
+<blockquote>
+<p>若系数矩阵 $A$ 可逆，两边右乘 $A^{-1}$ 得：</p>
+<p>$$X = B A^{-1}$$</p>
+<p>计算技巧：转置为 $A^T X^T = B^T$，初等行变换 $[A^T | B^T] \to [E | (X)^T]$，最后转置复原。</p>
+</blockquote>
+<p>[3]$AXB = C$ 型：</p>
+<blockquote>
+<p>若 $A, B$ 均可逆，两边左乘 $A^{-1}$、右乘 $B^{-1}$ 得：</p>
+<p>$$X = A^{-1} C B^{-1}$$</p>
+</blockquote>
+<h6><strong>方法[2]:提公因式与因式分解转化法</strong></h6>
+<p>[1]移项因式分解：</p>
+<blockquote>
+<p>若方程包含同名未知量但分散在不同项中，如 $AX + B = X + C$，移项提取公因式：</p>
+<p>$$(A - E) X = C - B$$</p>
+<p>若 $A-E$ 可逆，则 $X = (A-E)^{-1}(C-B)$。</p>
+<p><font color=red>【避坑警示】</font>提取公因式时注意左右位置不能调换，且数 1 必须化为单位阵 $E$。</p>
+</blockquote>
+<h6><strong>方法[3]:非方阵或不可逆系数矩阵方程（增广矩阵法）</strong></h6>
+<p>[1]解的存在充要条件：</p>
+<blockquote>
+<p>方程 $AX = B$ 有解 $\iff r(A) = r(A | B)$。</p>
+<p>设 $X = [x_1, x_2, \dots, x_k]$，$B = [b_1, b_2, \dots, b_k]$，则 $AX = B$ 等价于求解 $k$ 个线性方程组 $A x_j = b_j$ ($j=1,\dots,k$)。</p>
+<p>利用初等行变换对联合增广矩阵 $[A | B]$ 进行阶梯化与最简形化简，直接求出每个列向量的通解，拼接为矩阵 $X$ 的通解。</p>
+</blockquote>
+<hr />
+<h2>5.矩阵的秩与等价标准形</h2>
+<h6><strong>概念[1]:矩阵的秩的定义</strong></h6>
+<p>[1]子式定义：</p>
+<blockquote>
+<p>在 $m \times n$ 矩阵 $A$ 中，任取 $k$ 行与 $k$ 列，位于这些行列交叉点上的 $k^2$ 个元素按原次序构成的 $k$ 阶行列式，称为矩阵 $A$ 的一个 $k$ 阶子式。</p>
+<p>矩阵 $A$ 中<font color=deeppink>非零子式的最高阶数</font>，称为矩阵 $A$ 的秩，记作 $r(A)$ 或 $\mathrm{rank}(A)$。规定零矩阵的秩为 0。</p>
+</blockquote>
+<p>[2]等价判别定理：</p>
+<blockquote>
+<p>设 $A$ 为 $m \times n$ 矩阵，则：</p>
+<p>(1) $r(A) \ge r \iff A$ 中至少存在一个 $r$ 阶非零子式；</p>
+<p>(2) $r(A) \le r \iff A$ 中所有阶数大于 $r$ 的子式全为 0；</p>
+<p>(3) $r(A) = r \iff A$ 中有一个 $r$ 阶子式不为 0，且所有 $r+1$ 阶子式全为 0。</p>
+</blockquote>
+<h6><strong>定理[1]:矩阵秩的八大核心不等式与等式</strong></h6>
+<p>[1]基本界限：</p>
+<blockquote>
+<p>$$0 \le r(A_{m \times n}) \le \min(m, n)$$</p>
+</blockquote>
+<p>[2]可逆变换保秩性：</p>
+<blockquote>
+<p>若 $P, Q$ 可逆，则：</p>
+<p>$$r(PA) = r(A), \quad r(AQ) = r(A), \quad r(PAQ) = r(A)$$</p>
+<p>即：<font color=deeppink>初等变换不改变矩阵的秩</font>。</p>
+</blockquote>
+<p>[3]转置保秩性：</p>
+<blockquote>
+<p>$$r(A^T) = r(A) = r(A A^T) = r(A^T A)$$</p>
+</blockquote>
+<p>[4]矩阵和的秩不等式：</p>
+<blockquote>
+<p>$$r(A + B) \le r(A) + r(B)$$</p>
+</blockquote>
+<p>[5]矩阵积的秩不等式：</p>
+<blockquote>
+<p>$$r(AB) \le \min(r(A), r(B))$$</p>
+</blockquote>
+<p>[6]Sylvester 秩不等式：</p>
+<blockquote>
+<p>设 $A_{m \times n}$，$B_{n \times s}$，则：</p>
+<p>$$r(AB) \ge r(A) + r(B) - n$$</p>
+<p>特别推论：若 $AB = O$，则 $r(AB) = 0$，代入得：</p>
+<p>$$r(A) + r(B) \le n$$</p>
+</blockquote>
+<p>[7]分块对角矩阵的秩：</p>
+<blockquote>
+<p>$$r\begin{bmatrix} A & O \\ O & B \end{bmatrix} = r(A) + r(B)$$</p>
+<p>$$r\begin{bmatrix} A & C \\ O & B \end{bmatrix} \ge r(A) + r(B)$$</p>
+</blockquote>
+<h6><strong>定理[2]:伴随矩阵的秩阶梯公式</strong></h6>
+<p>[1]阶梯分布法则：</p>
+<blockquote>
+<p>设 $A$ 为 $n$ 阶方阵 ($n \ge 2$)，则伴随矩阵的秩 $r(A^*)$ 满足以下阶梯定理：</p>
+<p>$$r(A^*) = \begin{cases} n, & \text{若 } r(A) = n \\ 1, & \text{若 } r(A) = n - 1 \\ 0, & \text{若 } r(A) < n - 1 \end{cases}$$</p>
+<p>推导证明：</p>
+<p>(1) 当 $r(A) = n$ 时，$|A| \ne 0$，由 $|A^*| = |A|^{n-1} \ne 0$ 立即得出 $r(A^*) = n$；</p>
+<p>(2) 当 $r(A) = n-1$ 时，由秩的定义，$A$ 中至少存在一个 $n-1$ 阶非零子式，根据伴随矩阵定义，$A^*$ 中至少存在一个非零元素，故 $r(A^*) \ge 1$。又由 $AA^* = |A|E = O$，根据 Sylvester 秩不等式推论 $r(A) + r(A^*) \le n \implies (n-1) + r(A^*) \le n \implies r(A^*) \le 1$。综合得 $r(A^*) = 1$；</p>
+<p>(3) 当 $r(A) < n-1$ 时，$A$ 的所有 $n-1$ 阶子式全为 0，故伴随矩阵中的每一个元素代数余子式全为 0，即 $A^* = O$，故 $r(A^*) = 0$。</p>
+</blockquote>
+<h6><strong>概念[2]:矩阵的等价关系与等价标准形</strong></h6>
+<p>[1]等价定义：</p>
+<blockquote>
+<p>若矩阵 $A$ 经有限次初等变换化为矩阵 $B$，则称矩阵 $A$ 与 $B$ <strong>等价</strong>，记作 $A \cong B$。</p>
+<p>等价具有自反性、对称性与传递性。</p>
+<p>等价的矩阵代数表述：存在可逆矩阵 $P$ 和 $Q$，使得 $PAQ = B$。</p>
+</blockquote>
+<p>[2]等价标准形定理：</p>
+<blockquote>
+<p>任何秩为 $r$ 的 $m \times n$ 矩阵 $A$，都必然等价于如下形式的标准形矩阵：</p>
+<p>$$\begin{bmatrix} E_r & O \\ O & O \end{bmatrix}_{m \times n}$$</p>
+<p>即存在 $m$ 阶可逆方阵 $P$ 与 $n$ 阶可逆方阵 $Q$，使得 $PAQ = \begin{bmatrix} E_r & O \\ O & O \end{bmatrix}$。</p>
+</blockquote>
+<h6><strong>定理[3]:矩阵等价的充要条件</strong></h6>
+<p>[1]同型矩阵等价充要条件：</p>
+<blockquote>
+<p>设 $A, B$ 是同为 $m \times n$ 的两个矩阵，则：</p>
+<p>$$A \cong B \iff r(A) = r(B)$$</p>
+<p>即：<font color=deeppink>同型矩阵等价的充分必要条件是它们的秩相等</font>。</p>
+</blockquote>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

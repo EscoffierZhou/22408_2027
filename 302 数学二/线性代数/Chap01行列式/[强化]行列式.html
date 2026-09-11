@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>[强化]行列式</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h1>第一章 行列式 · 考研高阶冲刺与深水区强化</h1>
+<h2>1. 专题一：爪型（箭型）行列式的高维消爪与矩阵摄动</h2>
+<h3>1.1 爪型矩阵的标准代数形态与消元定理</h3>
+<blockquote>
+<p>爪型（又称箭型，Arrowhead Matrix）行列式是指非零元素主要集中在第一行、第一列以及主对角线上的特殊稀疏行列式。其一般代数形式表示为：</p>
+<p>$$D_n = \begin{vmatrix} a_1 & b_2 & b_3 & \cdots & b_n \\ c_2 & a_2 & 0 & \cdots & 0 \\ c_3 & 0 & a_3 & \cdots & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ c_n & 0 & 0 & \cdots & a_n \end{vmatrix}$$</p>
+<p>当主对角线元素满足 $a_i \neq 0 \, (i = 2, 3, \dots, n)$ 时，消爪的核心思想是：<strong>以对角元 $a_i$ 为主元，将第 $i$ 行乘以加权系数 $-\frac{b_i}{a_i}$ 累加到第 1 行</strong>，逐个将第一行的爪翼元素消为 0。</p>
+<p>消元完成后，第 1 行第 1 列元素转化为扰动和：</p>
+<p>$$a_1' = a_1 - \sum_{i=2}^n \frac{b_i c_i}{a_i}$$</p>
+<p>矩阵化为主对角线下三角行列式，其闭式解析通项为：</p>
+<p>$$D_n = \left( \prod_{i=2}^n a_i \right) \left( a_1 - \sum_{i=2}^n \frac{b_i c_i}{a_i} \right) = a_1 \prod_{i=2}^n a_i - \sum_{i=2}^n b_i c_i \prod_{k \neq i, k \ge 2} a_k$$</p>
+</blockquote>
+<h3>1.2 爪尖为零与对角元零摄动处理</h3>
+<blockquote>
+<p>若爪型行列式的主对角线上出现零元（例如某 $a_k = 0$），则除法 $\frac{b_k}{a_k}$ 失效。此时应采取以下两种高阶应对策略：</p>
+<p>(1) <strong>行（列）对换法</strong>：通过互换两行或两列，将非零元素调度至主元位置；</p>
+<p>(2) <strong>拉普拉斯降阶法</strong>：直接对含有零对角元的第 $k$ 行展开，由于该行仅有两个非零元 $c_k$ 与 $a_k = 0$（即仅有 $c_k$ 非零），可瞬间降阶为更低阶的子行列式。</p>
+</blockquote>
+<h6><strong>模型[1]:标准箭型消爪通用模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：仅第一行、第一列与主对角线存在非零元素，且主对角线上除 $(1,1)$ 外其余元素均非零。</p>
+<p>[2] <strong>操作流程</strong>：</p>
+<blockquote>
+<p>(1) 对每一个 $i \in \{2, 3, \dots, n\}$，执行初等行变换：<br />
+$$r_1 - \frac{b_i}{a_i} r_i \to r_1$$</p>
+<p>(2) 第一行第 $i$ 列元素被严格消零：$b_i - \frac{b_i}{a_i} \cdot a_i = 0$；</p>
+<p>(3) 首项元素演变为：<font color=deeppink>$a_1 - \sum_{i=2}^n \frac{b_i c_i}{a_i}$</font>；</p>
+<p>(4) 此时行列式为主对角线下三角形态，直接由主对角线连乘积得出最终解。</p>
+</blockquote>
+</blockquote>
+<h6><strong>模型[2]:含零对角元爪型的摄动与副爪转移模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：爪型行列式中某个对角元 $a_k = 0$ 导致无法直接构造除数。</p>
+<p>[2] <strong>操作流程</strong>：</p>
+<blockquote>
+<p>(1) 锁定仅含单个非零元的行（即第 $k$ 行，其元素仅有 $c_k$）；</p>
+<p>(2) 沿第 $k$ 行进行拉普拉斯代数余子式展开：<br />
+$$D_n = c_k \cdot (-1)^{k+1} M_{k1}$$</p>
+<p>(3) 观察其次级余子式 $M_{k1}$，其余子式通常自动退化为对角矩阵或分块三角矩阵，实现秒级化简。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>2. 专题二：各行（列）元素和相等型的高阶提纯与因式分离</h2>
+<h3>2.1 全列求和与公因式提纯机制</h3>
+<blockquote>
+<p>若 $n$ 阶行列式中每一行的所有元素之和均等于同一个常数或多项式 $S$：</p>
+<p>$$\sum_{j=1}^n a_{ij} = S \quad (\forall i = 1, 2, \dots, n)$$</p>
+<p>则由行列式的倍加行变换不变性，将第 2 列至第 $n$ 列全部累加到第 1 列（$c_1 + c_2 + \cdots + c_n \to c_1$）：</p>
+<p>(1) 第 1 列各元素全部变为恒等值 $S$；</p>
+<p>(2) 提取第 1 列公因式 $S$，使第 1 列彻底归一化为全 1 向量 $[1, 1, \dots, 1]^T$；</p>
+<p>(3) 以第 1 行为基准行，执行初等行变换 $r_i - r_1 \to r_i \, (i = 2, 3, \dots, n)$，消除下方全部首元并产生大量零元。</p>
+</blockquote>
+<h3>2.2 准各行和相等型的加权消元技巧</h3>
+<blockquote>
+<p>当各行和不严格相等，但存在某种线性组合关系（例如第 $j$ 列乘以系数 $k_j$ 后求和为常数，或各列和随行标呈等差数列变化时），可通过预乘对角阵或加权列变换，构造出整体公因式。</p>
+</blockquote>
+<h6><strong>模型[1]:完全对称循环矩阵的因式提取模型</strong></h6>
+<blockquote>
+<p>[1] <strong>典范形态</strong>：主对角线元素全为 $a$，其余所有非对角线元素全为 $b$：</p>
+<p>$$D_n = \begin{vmatrix} a & b & \cdots & b \\ b & a & \cdots & b \\ \vdots & \vdots & \ddots & \vdots \\ b & b & \cdots & a \end{vmatrix}$$</p>
+<p>[2] <strong>通项公式推导</strong>：</p>
+<blockquote>
+<p>(1) 每行元素之和为 $S = a + (n-1)b$，全部列加到第 1 列提出因式 $a + (n-1)b$：<br />
+$$D_n = [a + (n-1)b] \begin{vmatrix} 1 & b & \cdots & b \\ 1 & a & \cdots & b \\ \vdots & \vdots & \ddots & \vdots \\ 1 & b & \cdots & a \end{vmatrix}$$</p>
+<p>(2) 各行减去第 1 行（$r_i - r_1$），第 1 列下方全化为 0，对角线变为 $a-b$，非对角线变为 0：<br />
+$$D_n = [a + (n-1)b] \begin{vmatrix} 1 & b & \cdots & b \\ 0 & a-b & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & a-b \end{vmatrix}$$</p>
+<p>(3) 得到闭式通解：<br />
+<font color=deeppink>$$D_n = [a + (n-1)b](a - b)^{n-1}$$</font></p>
+</blockquote>
+</blockquote>
+<h6><strong>模型[2]:阶梯递增项各行和相等的加权消元模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：每一行元素构成公差相同的等差数列，或按某种阶梯递增规则分布。</p>
+<p>[2] <strong>操作流程</strong>：</p>
+<blockquote>
+<p>(1) 相邻两行自下而上依次相减（$r_k - r_{k-1} \to r_k$），将阶梯递增量转化为常数行向量；</p>
+<p>(2) 再次进行行相减，使下方行转化为全零行或仅含极少非零元，极大降低计算复杂度。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>3. 专题三：三对角（带状）行列式的差分与常系数线性递推</h2>
+<h3>3.1 三对角带状行列式的二阶常系数线性递推关系</h3>
+<blockquote>
+<p>标准三对角行列式（Tridiagonal Determinant）仅在主对角线以及与其紧邻的两条副对角线上含有非零元：</p>
+<p>$$D_n = \begin{vmatrix} a & b & 0 & \cdots & 0 & 0 \\ c & a & b & \cdots & 0 & 0 \\ 0 & c & a & \cdots & 0 & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\ 0 & 0 & 0 & \cdots & a & b \\ 0 & 0 & 0 & \cdots & c & a \end{vmatrix}$$</p>
+<p>沿第一行拉普拉斯展开：</p>
+<p>$$D_n = a D_{n-1} - b \cdot \begin{vmatrix} c & b & 0 & \cdots & 0 \\ 0 & a & b & \cdots & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & 0 & \cdots & a \end{vmatrix}_{(n-1)}$$</p>
+<p>对第二个 $n-1$ 阶行列式沿第 1 列展开，首元为 $c$，其代数余子式恰为 $D_{n-2}$，从而建立核心二阶常系数齐次线性递推关系：</p>
+<p><font color=deeppink>$$D_n - a D_{n-1} + bc D_{n-2} = 0 \quad (n \ge 3)$$</font></p>
+</blockquote>
+<h3>3.2 特征方程法求解递推通项</h3>
+<blockquote>
+<p>递推关系的特征方程为：</p>
+<p>$$r^2 - a r + bc = 0$$</p>
+<p>设特征判别式 $\Delta = a^2 - 4bc$：</p>
+<p>(1) <strong>两相异特征根</strong>（$r_1 \neq r_2$）：<br />
+通解形式为 $D_n = C_1 r_1^n + C_2 r_2^n$。利用初值 $D_1 = a, D_2 = a^2 - bc$ 定出待定常数：<br />
+$$D_n = \frac{r_1^{n+1} - r_2^{n+1}}{r_1 - r_2}$$</p>
+<p>(2) <strong>二重特征根</strong>（$r_1 = r_2 = r = \frac{a}{2}$）：<br />
+通解形式为 $D_n = (C_1 + C_2 n) r^n$。利用初值定出待定常数：<br />
+$$D_n = (n + 1) \left(\frac{a}{2}\right)^n$$</p>
+</blockquote>
+<h6><strong>模型[1]:不等特征根三对角通项求解模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：三对角元素均为常数，且特征方程判别式 $\Delta = a^2 - 4bc \neq 0$。</p>
+<p>[2] <strong>求解模版</strong>：</p>
+<blockquote>
+<p>(1) 写出特征方程 $r^2 - ar + bc = 0$，求出特征根 $r_1, r_2$；</p>
+<p>(2) 验证并套用无初值待定公式：$D_n = \frac{r_1^{n+1} - r_2^{n+1}}{r_1 - r_2}$；</p>
+<p>(3) 若 $bc = 1$ 且 $a = 2\cos\theta$，则通项为切比雪夫多项式形态：$D_n = \frac{\sin[(n+1)\theta]}{\sin\theta}$。</p>
+</blockquote>
+</blockquote>
+<h6><strong>模型[2]:等特征根退化与差分累加模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：特征方程存在二重实根 $\Delta = a^2 - 4bc = 0$。</p>
+<p>[2] <strong>求解模版</strong>：</p>
+<blockquote>
+<p>(1) 求出重根 $r = \frac{a}{2}$；</p>
+<p>(2) 递推关系改写为一阶差分形式：$D_n - r D_{n-1} = r (D_{n-1} - r D_{n-2})$；</p>
+<p>(3) 得到等差数列累加关系，直接得出通项公式：$D_n = (n+1) r^n$。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>4. 专题四：范德蒙德行列式的变体构造与拉格朗日插值</h2>
+<h3>4.1 范德蒙德行列式本质定理</h3>
+<blockquote>
+<p>标准范德蒙德（Vandermonde）行列式形态定义为：</p>
+<p>$$V_n = \begin{vmatrix} 1 & 1 & 1 & \cdots & 1 \\ x_1 & x_2 & x_3 & \cdots & x_n \\ x_1^2 & x_2^2 & x_3^2 & \cdots & x_n^2 \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ x_1^{n-1} & x_2^{n-1} & x_3^{n-1} & \cdots & x_n^{n-1} \end{vmatrix} = \prod_{1 \le i < j \le n} (x_j - x_i)$$</p>
+<p>记忆口诀为：<strong>下标大的变量减去下标小的变量的所有可能差值的连乘积</strong>。总乘积项数共有 $C_n^2 = \frac{n(n-1)}{2}$ 项。</p>
+</blockquote>
+<h3>4.2 考研变体构造四大技法</h3>
+<blockquote>
+<p>(1) <strong>缺行补项法</strong>：若行列式中缺少某一次方项（例如缺少 $x_i^{n-1}$ 而是出现 $x_i^n$），可构造辅助变量 $x$ 的 $n$ 次多项式：<br />
+引入包含待定元 $x$ 的加阶范德蒙德行列式，利用多项式根与韦达定理（Vieta's formulas）直接提取缺行对应的对称多项式系数。</p>
+<p>(2) <strong>提公因式构造单项式</strong>：当各行幂次不是从 0 次开始时，通过行提取公因式，使第一行化为全 1 向量。</p>
+<p>(3) <strong>多项式基底初等替换</strong>：若各行不是纯幂次 $x_i^k$，而是多项式 $P_k(x_i) = c_k x_i^k + \cdots$，通过行初等变换消去低次项，快速还原为标准范德蒙德型。</p>
+</blockquote>
+<h6><strong>模型[1]:缺行范德蒙德行列式的根与系数关系模型</strong></h6>
+<blockquote>
+<p>[1] <strong>典型形态</strong>：$n$ 阶行列式缺少第 $k$ 次幂，最高次幂达到 $n$ 次。</p>
+<p>[2] <strong>解法步骤</strong>：</p>
+<blockquote>
+<p>(1) 构造 $n+1$ 阶标准范德蒙德行列式 $V_{n+1}(x_1, \dots, x_n, x)$；</p>
+<p>(2) 展开该行列式为关于 $x$ 的多项式：<br />
+$$V_{n+1} = \left[ \prod_{1 \le i < j \le n} (x_j - x_i) \right] \prod_{i=1}^n (x - x_i)$$</p>
+<p>(3) 目标缺行行列式恰为该多项式中特定幂次项 $x^k$ 的代数余子式，通过比对韦达定理中的初等对称多项式 $\sigma_{n-k}(x_1, \dots, x_n)$ 即可直接得出结果。</p>
+</blockquote>
+</blockquote>
+<h6><strong>模型[2]:多项式基底化简构造标准范德蒙德模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：矩阵第 $k$ 行元素为基底多项式值 $P_{k-1}(x_j)$。</p>
+<p>[2] <strong>解法步骤</strong>：</p>
+<blockquote>
+<p>(1) 从最高次行开始，利用低次行将其非主项逐一消为 0；<br />
+(2) 提出各项主系数乘积 $\prod c_k$；<br />
+(3) 余下矩阵完全为标准范德蒙德行列式，直接套用乘积公式。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>5. 专题五：升阶加边法（Bordered Matrix 降阶）</h2>
+<h3>5.1 升阶加边的代数机制</h3>
+<blockquote>
+<p>升阶加边法（Bordering Method）的核心思想是：<strong>“以进为退”</strong>。对于难以直接消元的 $n$ 阶行列式，人为添加一行一列，构造出保持数值相等的 $n+1$ 阶行列式：</p>
+<p>$$D_n = \begin{vmatrix} 1 & 0 & 0 & \cdots & 0 \\ x_1 & a_{11} & a_{12} & \cdots & a_{1n} \\ x_2 & a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ x_n & a_{n1} & a_{n2} & \cdots & a_{nn} \end{vmatrix}_{(n+1)}$$</p>
+<p>只要新增加的第一行除 $(1,1)$ 元为 1 外其余全为 0，按第 1 行展开其值严格等于原 $n$ 阶行列式 $D_n$。</p>
+<p>加边的巨大优势在于：<strong>借助新引入的第 1 行与第 1 列的自由参数，可以通过行、列初等变换，将原矩阵内部复杂的公共部分批量消去</strong>，使原矩阵转化为爪型或对角矩阵。</p>
+</blockquote>
+<h3>5.2 经典结构：元素为 $a_i b_j + c_i \delta_{ij}$ 型</h3>
+<blockquote>
+<p>设矩阵元素由非对角公共积与对角独立元构成：</p>
+<p>$$a_{ij} = \begin{cases} x_i y_j + d_i, & i = j \\ x_i y_j, & i \neq j \end{cases}$$</p>
+<p>构造 $n+1$ 阶加边行列式：</p>
+<p>$$D = \begin{vmatrix} 1 & y_1 & y_2 & \cdots & y_n \\ 0 & d_1+x_1y_1 & x_1y_2 & \cdots & x_1y_n \\ 0 & x_2y_1 & d_2+x_2y_2 & \cdots & x_2y_n \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ 0 & x_ny_1 & x_ny_2 & \cdots & d_n+x_ny_n \end{vmatrix}$$</p>
+<p>用第 1 行的 $-x_i$ 倍加到第 $i+1$ 行，瞬间将矩阵内所有 $x_i y_j$ 全部消除，转化为标准的爪型行列式！</p>
+</blockquote>
+<h6><strong>模型[1]:乘积交叉和 $a_i b_j + c_i \delta_{ij}$ 加边消元模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：除对角线外，各元素均可分解为行指标因子与列指标因子的乘积 $x_i y_j$。</p>
+<p>[2] <strong>求解流程</strong>：</p>
+<blockquote>
+<p>(1) 扩充第 0 行 $[1, y_1, y_2, \dots, y_n]$ 与第 0 列 $[1, 0, \dots, 0]^T$；</p>
+<p>(2) 执行行变换 $r_i - x_i r_0 \to r_i \, (i = 1, \dots, n)$，消除内部所有 $x_i y_j$；</p>
+<p>(3) 得到关于第 0 行与第 0 列的标准爪型行列式；</p>
+<p>(4) 运用爪型消元通式得出最终闭式解：<font color=deeppink>$\left(\prod_{i=1}^n d_i\right) \left(1 + \sum_{i=1}^n \frac{x_i y_i}{d_i}\right)$</font>。</p>
+</blockquote>
+</blockquote>
+<h6><strong>模型[2]:双重公共项与外积升阶模型</strong></h6>
+<blockquote>
+<p>[1] <strong>适用场景</strong>：矩阵可表示为对角阵加上两个列向量的外积 $D = \text{diag}(d) + u v^T$。</p>
+<p>[2] <strong>求解结果</strong>：直接等价于矩阵行列式引理（Matrix Determinant Lemma）：<br />
+$$\det(A + u v^T) = (1 + v^T A^{-1} u) \det(A)$$</p>
+</blockquote>
+<hr />
+<h2>6. 专题六：按行（列）拆项法与列向量组合展开</h2>
+<h3>6.1 单行拆项与组合爆炸规避</h3>
+<blockquote>
+<p>行列式单行可加性定理表明：当某一行元素为两数之和时，可拆分为两个行列式之和。</p>
+<p>考研大忌：<strong>绝对不能将多行同时拆分</strong>！若将 $n$ 行同时拆开，项数将达到 $2^n$ 项，造成计算灾难。</p>
+<p>正确策略为：<strong>“单步定点拆分”</strong>。仅对非零元最集中、或拆开后能产生与其余行成比例（从而直接为零）的特定单一行进行拆项。</p>
+</blockquote>
+<h3>6.2 秩 1 摄动与外积拆分定理</h3>
+<blockquote>
+<p>在考研压轴题中，经常出现矩阵形式为 $A = B + C$，其中 $C = \alpha \beta^T$ 为秩 1 矩阵（例如所有元素全为 1 的矩阵 $J = e e^T$）。</p>
+<p>利用拆项法结合秩的性质：</p>
+<p>(1) 将每一列拆分为 $b_j + c_j$；</p>
+<p>(2) 由于 $C$ 的秩为 1，展开产生的子行列式中，凡是选取了 $C$ 中两列或两列以上的子行列式，其值<strong>恒等于零</strong>！</p>
+<p>(3) 因此 $2^n$ 个展开项中，绝大多数自动消亡，仅剩下：<br />
+- 选取 $B$ 的全部 $n$ 列的子行列式：$|B|$；<br />
+- 选取 $B$ 的 $n-1$ 列与 $C$ 的 1 列的子行列式，共有 $n$ 项。</p>
+</blockquote>
+<h6><strong>模型[1]:外积矩阵秩 1 摄动求模模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：矩阵可写为可逆对角阵加上秩 1 矩阵 $A = \text{diag}(d_1, \dots, d_n) + c \cdot e e^T$。</p>
+<p>[2] <strong>展开简化</strong>：</p>
+<blockquote>
+<p>(1) 高阶项自动清零：$\det(A) = \det(D) + \sum_{j=1}^n \det(D_j)$，其中 $D_j$ 为将第 $j$ 列替换为外积向量的子行列式；</p>
+<p>(2) 逐项求值并提取公因式；</p>
+<p>(3) 得到考研秒杀公式：<br />
+<font color=deeppink>$$\det(D + c \cdot e e^T) = \left(\prod_{i=1}^n d_i\right) \left( 1 + c \sum_{i=1}^n \frac{1}{d_i} \right)$$</font></p>
+</blockquote>
+</blockquote>
+<h6><strong>模型[2]:正交向量组线性组合的行列式拆项模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：行列式内部元素由已知抽象向量组的内积或线性组合构成。</p>
+<p>[2] <strong>操作流程</strong>：利用多重线性展开，将目标行列式表示为已知基底行列式的倍数，结合正交性将非对角项全部舍弃。</p>
+</blockquote>
+<hr />
+<h2>7. 专题七：广义拉普拉斯展开与舒尔补分块降阶定理</h2>
+<h3>7.1 分块方阵行列式通式与舒尔补（Schur Complement）</h3>
+<blockquote>
+<p>设分块矩阵 $M = \begin{bmatrix} A & B \\ C & D \end{bmatrix}$，其中 $A$ 为 $m \times m$ 阶方阵，$D$ 为 $n \times n$ 阶方阵。</p>
+<p>当子块 $A$ 可逆时，利用矩阵初等变换消除左下角块 $C$：</p>
+<p>$$\begin{bmatrix} E_m & O \\ -C A^{-1} & E_n \end{bmatrix} \begin{bmatrix} A & B \\ C & D \end{bmatrix} = \begin{bmatrix} A & B \\ O & D - C A^{-1} B \end{bmatrix}$$</p>
+<p>两端取行列式，由于左侧变换矩阵为对角线上全为 1 的下三角阵（行列式为 1），立即导出<strong>舒尔补行列式降阶恒等式</strong>：</p>
+<p><font color=deeppink>$$\begin{vmatrix} A & B \\ C & D \end{vmatrix} = |A| \cdot |D - C A^{-1} B|$$</font></p>
+<p>称矩阵 $S_A = D - C A^{-1} B$ 为子块 $A$ 在 $M$ 中的<strong>舒尔补（Schur Complement）</strong>。</p>
+<p>对称地，若 $D$ 可逆，消除右上角块 $B$，则有：</p>
+<p>$$\begin{vmatrix} A & B \\ C & D \end{vmatrix} = |D| \cdot |A - B D^{-1} C|$$</p>
+</blockquote>
+<h3>7.2 子块可交换时的考研秒杀特例</h3>
+<blockquote>
+<p>当分块矩阵中的子块满足乘法可交换性时，行列式具有极其简捷的代数降阶形式：</p>
+<p>(1) <strong>若 $A C = C A$ 且 $A$ 可逆</strong>：<br />
+$$|M| = |A(D - C A^{-1} B)| = |AD - A C A^{-1} B| = |AD - C A A^{-1} B| = |AD - CB|$$</p>
+<p>(2) <strong>若 $C D = D C$ 且 $D$ 可逆</strong>：<br />
+$$|M| = |AD - BC|$$</p>
+<p>警示防线：<strong>若子块之间不可交换（$AC \neq CA$ 且 $CD \neq DC$），公式 $|M| = |AD - BC|$ 绝对不成立！</strong> 考研中必须先严格检验子块可交换条件。</p>
+</blockquote>
+<h6><strong>模型[1]:舒尔补降阶消去高阶非零块模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：$2n$ 阶分块矩阵四个子块均为非零矩阵，但其中一个子块为极易求逆的特殊矩阵（如数量矩阵 $kE$ 或对角矩阵）。</p>
+<p>[2] <strong>操作流程</strong>：</p>
+<blockquote>
+<p>(1) 选定易逆块（例如 $A = kE$），则 $A^{-1} = \frac{1}{k}E$；</p>
+<p>(2) 计算舒尔补：$S = D - \frac{1}{k} CB$；</p>
+<p>(3) 原行列式直接降阶为：$|M| = k^m \cdot \left| D - \frac{1}{k} CB \right|$。</p>
+</blockquote>
+</blockquote>
+<h6><strong>模型[2]:可交换分块乘积行列式秒杀模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：题目中明确给出分块子阵满足可交换条件（如 $AB = BA$ 或 $CD = DC$）。</p>
+<p>[2] <strong>秒杀准则</strong>：直接将子块视为普通代数标量套用 2 阶行列式公式计算 $|AD - BC|$，随后再计算该组合矩阵的行列式。</p>
+</blockquote>
+<hr />
+<h2>8. 专题八：特征值因式分解与循环行列式高阶技巧</h2>
+<h3>8.1 矩阵特征值与行列式的本质联系</h3>
+<blockquote>
+<p>由线性代数谱理论，方阵 $A$ 的行列式在代数上严格等于其全部复特征值（计重数）的乘积：</p>
+<p>$$|A| = \prod_{i=1}^n \lambda_i$$</p>
+<p>对于某些高度对称、结构特殊的复杂行列式，若直接使用高斯消元极其繁琐，但若能巧妙观察出矩阵 $A$ 的特征值及其重数，则行列式的值可迎刃而解。</p>
+<p>常见特征值快速定位策略：<br />
+(1) 矩阵每行元素之和均为 $S \implies \lambda = S$ 必为一个特征值，对应特征向量为 $[1, 1, \dots, 1]^T$；<br />
+(2) 矩阵 $A - cE$ 的秩为 $r \implies \lambda = c$ 是 $A$ 的至少 $n-r$ 重特征值；<br />
+(3) 利用矩阵的迹等于特征值之和：$\sum \lambda_i = \text{tr}(A)$ 补齐最后一个未知特征值。</p>
+</blockquote>
+<h3>8.2 循环矩阵（Circulant Matrix）与离散傅里叶因式分解</h3>
+<blockquote>
+<p>循环矩阵是指每一行都是由上一行向右循环平移一个位置得到的矩阵：</p>
+<p>$$C = \begin{bmatrix} c_0 & c_1 & c_2 & \cdots & c_{n-1} \\ c_{n-1} & c_0 & c_1 & \cdots & c_{n-2} \\ c_{n-2} & c_{n-1} & c_0 & \cdots & c_{n-3} \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ c_1 & c_2 & c_3 & \cdots & c_0 \end{bmatrix}$$</p>
+<p>令多项式 $P(x) = c_0 + c_1 x + c_2 x^2 + \cdots + c_{n-1} x^{n-1}$。</p>
+<p>设 $\omega_k = e^{i \frac{2k\pi}{n}} \, (k = 0, 1, \dots, n-1)$ 为 $n$ 次单位复根，则循环矩阵的 $n$ 个互异特征值精确为：</p>
+<p>$$\lambda_k = P(\omega_k) = \sum_{j=0}^{n-1} c_j \omega_k^j$$</p>
+<p>从而循环行列式具有精美的离散傅里叶展开因式分解通解：</p>
+<p><font color=deeppink>$$\det(C) = \prod_{k=0}^{n-1} P(\omega_k) = \prod_{k=0}^{n-1} \left( c_0 + c_1 \omega_k + c_2 \omega_k^2 + \cdots + c_{n-1} \omega_k^{n-1} \right)$$</font></p>
+</blockquote>
+<h6><strong>模型[1]:特征值求和求积逆向还原行列式模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：矩阵具有强烈的对称性，易于求出其特征多项式或部分特征值。</p>
+<p>[2] <strong>解题流程</strong>：</p>
+<blockquote>
+<p>(1) 观察行和得到首个特征值 $\lambda_1 = S$；</p>
+<p>(2) 观察矩阵 $A - kE$ 降秩得到多重特征值 $\lambda_2 = \dots = \lambda_n = k$；</p>
+<p>(3) 验证迹定理：$\sum \lambda_i = \text{tr}(A)$；</p>
+<p>(4) 连乘求出行列式：$|A| = \prod_{i=1}^n \lambda_i$。</p>
+</blockquote>
+</blockquote>
+<h6><strong>模型[2]:循环矩阵单位根离散谱因式分解模型</strong></h6>
+<blockquote>
+<p>[1] <strong>典型形态</strong>：3 阶或 4 阶循环行列式。</p>
+<p>[2] <strong>3 阶循环矩阵典范公式</strong>：</p>
+<blockquote>
+<p>设 $C_3 = \begin{vmatrix} a & b & c \\ c & a & b \\ b & c & a \end{vmatrix}$。</p>
+<p>3 次单位根为 $1, \omega, \omega^2$（其中 $\omega = \frac{-1 + \sqrt{3}i}{2}$，满足 $1 + \omega + \omega^2 = 0, \omega^3 = 1$）。</p>
+<p>三个特征值为：<br />
+$$\lambda_1 = a + b + c$$<br />
+$$\lambda_2 = a + b\omega + c\omega^2$$<br />
+$$\lambda_3 = a + b\omega^2 + c\omega$$</p>
+<p>连乘积展开即得著名三次代数恒等式：<br />
+<font color=deeppink>$$\det(C_3) = (a + b + c)(a^2 + b^2 + c^2 - ab - bc - ca) = a^3 + b^3 + c^3 - 3abc$$</font></p>
+</blockquote>
+</blockquote>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

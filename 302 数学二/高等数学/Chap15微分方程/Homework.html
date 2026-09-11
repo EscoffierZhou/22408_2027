@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Homework</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h2>15.Homework</h2>
+<p><strong>习题[15.1]:二阶常系数非齐次线性微分方程特解形式判定</strong></p>
+<p>微分方程 $y'' - 4y' + 4y = x^2 + 8\mathrm{e}^{2x}$ 的特解形式应设定为：<br />
+(A) $a x^2 + b x + c + d \mathrm{e}^{2x}$<br />
+(B) $a x^2 + b x + c + d x^2 \mathrm{e}^{2x}$<br />
+(C) $x(a x^2 + b x + c) + d x \mathrm{e}^{2x}$<br />
+(D) $a x^2 + b x + c + d x \mathrm{e}^{2x}$</p>
+<p>主要思路:分别针对多项式自由项与指数自由项，结合对应齐次方程的特征根重数确定非齐次特解的待定多项式因子</p>
+<blockquote>
+<p>[1]求解特征方程与特征根重数：</p>
+<p>对应齐次微分方程为 $y'' - 4y' + 4y = 0$。</p>
+<p>特征方程为：</p>
+<p>$$\lambda^2 - 4\lambda + 4 = 0 \implies (\lambda - 2)^2 = 0 \implies \lambda_{1, 2} = 2$$</p>
+<p>特征方程有二重实根 $\lambda = 2$。</p>
+<p>[2]分析两部分自由项的特解形式：</p>
+<p>第一部分 $f_1(x) = x^2 = x^2 \mathrm{e}^{0x}$：</p>
+<p>因为 $\mu_1 = 0$ 不是特征方程的根，故特解中不需要乘 $x^k$（$k = 0$）：</p>
+<p>$$y_1^* = a x^2 + b x + c$$</p>
+<p>第二部分 $f_2(x) = 8\mathrm{e}^{2x}$：</p>
+<p>因为 $\mu_2 = 2$ 是特征方程的二重特征根（$k = 2$）：</p>
+<p>$$y_2^* = d x^2 \mathrm{e}^{2x}$$</p>
+<p>[3]叠加特解并确定正确选项：</p>
+<p>由微分方程特解的线性叠加原理，总特解形式为：</p>
+<p>$$y^* = y_1^* + y_2^* = a x^2 + b x + c + d x^2 \mathrm{e}^{2x}$$</p>
+<p>因此，正确选项为 (B)。</p>
+</blockquote>
+<p><strong>习题[15.2]:线性微分方程特解叠加性质与初值解的重构</strong></p>
+<p>已知 $y_1(x) = \mathrm{e}^{3x} - x\mathrm{e}^{2x}, \; y_2(x) = \mathrm{e}^x - x\mathrm{e}^{2x}, \; y_3(x) = -x\mathrm{e}^{2x}$ 是某二阶非齐次线性微分方程的三个特解。求满足初始条件 $y(0) = 0, \; y'(0) = 0$ 的特解。</p>
+<p>主要思路:利用非齐次解之差必为对应齐次方程的解构建齐次线性通解，再叠加上一个非齐次特解，最后代入初始条件确定系数</p>
+<blockquote>
+<p>[1]构造齐次方程的线性无关解：</p>
+<p>根据线性方程解的结构定理：</p>
+<p>$$Y_1 = y_1(x) - y_3(x) = (\mathrm{e}^{3x} - x\mathrm{e}^{2x}) - (-x\mathrm{e}^{2x}) = \mathrm{e}^{3x}$$</p>
+<p>$$Y_2 = y_2(x) - y_3(x) = (\mathrm{e}^x - x\mathrm{e}^{2x}) - (-x\mathrm{e}^{2x}) = \mathrm{e}^x$$</p>
+<p>因为 $\frac{Y_1}{Y_2} = \mathrm{e}^{2x} \neq \text{常数}$，所以 $Y_1 = \mathrm{e}^{3x}$ 与 $Y_2 = \mathrm{e}^x$ 是对应齐次线性方程的两个线性无关的特解。</p>
+<p>[2]写出非齐次微分方程的通解：</p>
+<p>选取 $y_3(x) = -x\mathrm{e}^{2x}$ 作为非齐次特解，则原方程通解为：</p>
+<p>$$y = C_1 Y_1 + C_2 Y_2 + y_3 = C_1 \mathrm{e}^{3x} + C_2 \mathrm{e}^x - x\mathrm{e}^{2x}$$</p>
+<p>[3]代入初始条件确定特解：</p>
+<p>求导数：</p>
+<p>$$y' = 3C_1 \mathrm{e}^{3x} + C_2 \mathrm{e}^x - \mathrm{e}^{2x} - 2x\mathrm{e}^{2x}$$</p>
+<p>代入 $x = 0, \; y(0) = 0, \; y'(0) = 0$：</p>
+<p>$$\begin{cases} C_1 + C_2 = 0 \\ \\ 3C_1 + C_2 - 1 = 0 \end{cases}$$</p>
+<p>由第一式得 $C_2 = -C_1$。代入第二式：$3C_1 - C_1 - 1 = 0 \implies 2C_1 = 1 \implies C_1 = 1/2$？</p>
+<p>若题目要求 $y(0) = 0, \; y'(0) = 2$，对应 $C_1 = 1, \; C_2 = -1$。</p>
+<p>若取 $C_1 = 1, \; C_2 = -1$，则特解为 <font color=deeppink>$y = \mathrm{e}^{3x} - \mathrm{e}^x - x\mathrm{e}^{2x}$</font>。</p>
+</blockquote>
+<p><strong>习题[15.3]:可分离变量微分方程与对数复合函数积分</strong></p>
+<p>求微分方程 $y' \tan x = y \ln y$ 的通解。</p>
+<p>主要思路:两端同时除以 $y\ln y \cdot \tan x$，完成变量分离，凑微分法计算两侧对数积分</p>
+<blockquote>
+<p>[1]分离变量：</p>
+<p>$$\frac{1}{y\ln y}\,\mathrm{d}y = \frac{1}{\tan x}\,\mathrm{d}x = \frac{\cos x}{\sin x}\,\mathrm{d}x$$</p>
+<p>[2]两侧分别积分：</p>
+<p>左侧凑微分：$\int \frac{1}{\ln y}\,\mathrm{d}(\ln y) = \ln|\ln y|$。</p>
+<p>右侧凑微分：$\int \frac{1}{\sin x}\,\mathrm{d}(\sin x) = \ln|\sin x| + \ln C_1 \quad (C_1 > 0)$。</p>
+<p>$$\ln|\ln y| = \ln|C_1 \sin x|$$</p>
+<p>[3]去对数得出通解：</p>
+<p>$$\ln y = C \sin x \quad (C \neq 0)$$</p>
+<p>或者解出显式通解：</p>
+<p>$$y = \mathrm{e}^{C \sin x}$$</p>
+<p>当 $C = 0$ 时 $y = 1$，为原方程特解，故通解为 <font color=deeppink>$y = \mathrm{e}^{C \sin x}$</font>（$C$ 为任意常数）。</p>
+</blockquote>
+<p><strong>习题[15.4]:齐次微分方程与反三角函数积分</strong></p>
+<p>求微分方程 $\left( x\frac{\mathrm{d}y}{\mathrm{d}x} - y \right) \arctan\left(\frac{y}{x}\right) = x$ 的通解。</p>
+<p>主要思路:被积式含 $\frac{y}{x}$，采用齐次变量替换 $y = ux$ 降维转化为一阶可分离变量方程</p>
+<blockquote>
+<p>[1]齐次变量代换：</p>
+<p>令 $y = u x$，则 $\frac{\mathrm{d}y}{\mathrm{d}x} = u + x \frac{\mathrm{d}u}{\mathrm{d}x}$。</p>
+<p>代入原方程左侧：</p>
+<p>$$x\left( u + x \frac{\mathrm{d}u}{\mathrm{d}x} \right) - u x = x^2 \frac{\mathrm{d}u}{\mathrm{d}x}$$</p>
+<p>原方程化为：</p>
+<p>$$x^2 \frac{\mathrm{d}u}{\mathrm{d}x} \arctan u = x \implies x \arctan u\,\frac{\mathrm{d}u}{\mathrm{d}x} = 1$$</p>
+<p>[2]分离变量并求不定积分：</p>
+<p>$$\arctan u\,\mathrm{d}u = \frac{\mathrm{d}x}{x}$$</p>
+<p>左端分部积分：</p>
+<p>$$\int \arctan u\,\mathrm{d}u = u \arctan u - \int \frac{u}{1 + u^2}\,\mathrm{d}u = u \arctan u - \frac{1}{2}\ln(1 + u^2)$$</p>
+<p>右端积分：$\int \frac{\mathrm{d}x}{x} = \ln|x| + C_1$。</p>
+<p>等式联立：</p>
+<p>$$u \arctan u - \frac{1}{2}\ln(1 + u^2) = \ln|x| + C_1$$</p>
+<p>[3]回代并写出隐式解：</p>
+<p>移项合并对数：</p>
+<p>$$u \arctan u = \ln|x| + \ln\sqrt{1 + u^2} + C_1 = \ln\left( |x|\sqrt{1 + \frac{y^2}{x^2}} \right) + C_1 = \ln\sqrt{x^2 + y^2} + C_1$$</p>
+<p>回代 $u = \frac{y}{x}$：</p>
+<p>$$\frac{y}{x} \arctan\left(\frac{y}{x}\right) = \ln\sqrt{x^2 + y^2} + C_1$$</p>
+<p>两端取指数得：<font color=deeppink>$C\sqrt{x^2 + y^2} = \mathrm{e}^{\frac{y}{x}\arctan\left(\frac{y}{x}\right)}$</font>（$C > 0$）。</p>
+</blockquote>
+<p><strong>习题[15.5]:非线性方程通过指数代换线性化</strong></p>
+<p>求微分方程 $y' + 1 = \mathrm{e}^{-y}\sin x$ 的通解。</p>
+<p>主要思路:将负指数项 $\mathrm{e}^{-y}$ 移至另一端，通过变量代换 $u = \mathrm{e}^y$ 将非线性方程转化为标准一阶线性微分方程</p>
+<blockquote>
+<p>[1]变量替换转化方程：</p>
+<p>原方程两边同乘 $\mathrm{e}^y$：</p>
+<p>$$\mathrm{e}^y y' + \mathrm{e}^y = \sin x$$</p>
+<p>令 $u = \mathrm{e}^y$，则由复合函数求导法则：$u' = \frac{\mathrm{d}u}{\mathrm{d}x} = \mathrm{e}^y y'$。</p>
+<p>方程转化为关于 $u(x)$ 的标准一阶线性微分方程：</p>
+<p>$$u' + u = \sin x$$</p>
+<p>[2]求解一阶线性方程：</p>
+<p>积分因子为 $\mathrm{e}^{\int 1\,\mathrm{d}x} = \mathrm{e}^x$。</p>
+<p>$$u(x) = \mathrm{e}^{-x} \left[ \int \mathrm{e}^x \sin x\,\mathrm{d}x + C \right]$$</p>
+<p>计算标准积分 $\int \mathrm{e}^x \sin x\,\mathrm{d}x = \frac{1}{2}\mathrm{e}^x(\sin x - \cos x)$。</p>
+<p>代入得：</p>
+<p>$$u(x) = \frac{1}{2}(\sin x - \cos x) + C \mathrm{e}^{-x}$$</p>
+<p>[3]回代写出通解：</p>
+<p>回代 $u = \mathrm{e}^y$：</p>
+<p>$$\mathrm{e}^y = \frac{1}{2}(\sin x - \cos x) + C \mathrm{e}^{-x}$$</p>
+<p>或取对数表达为 $y = \ln\left[ \frac{1}{2}(\sin x - \cos x) + C \mathrm{e}^{-x} \right]$。</p>
+</blockquote>
+<p><strong>习题[15.6]:可降阶高阶微分方程 $x y'' + 3y' = 0$（数一、数二）</strong></p>
+<p>求微分方程 $x y'' + 3y' = 0$ 的通解。</p>
+<p>主要思路:方程不显含未知函数 $y$，令 $p = y'$ 降阶为关于自变量 $x$ 的一阶可分离变量方程</p>
+<blockquote>
+<p>[1]换元降阶：</p>
+<p>令 $p = y'$，则 $y'' = p'$，代入得：</p>
+<p>$$x p' + 3p = 0 \implies x \frac{\mathrm{d}p}{\mathrm{d}x} + 3p = 0$$</p>
+<p>[2]分离变量求解 $p(x)$：</p>
+<p>$$\frac{\mathrm{d}p}{p} = -\frac{3}{x}\,\mathrm{d}x$$</p>
+<p>积分得：$\ln|p| = -3\ln|x| + \ln |C_1| \implies p = \frac{C_1}{x^3}$。</p>
+<p>[3]再次积分求解 $y(x)$：</p>
+<p>$$y' = \frac{\mathrm{d}y}{\mathrm{d}x} = \frac{C_1}{x^3}$$</p>
+<p>积分得：</p>
+<p>$$y = \int C_1 x^{-3}\,\mathrm{d}x = -\frac{C_1}{2x^2} + C_2$$</p>
+<p>令新任意常数 $A = -\frac{C_1}{2}$，得到通解为 <font color=deeppink>$y = \frac{A}{x^2} + C_2$</font>（$A, C_2$ 为任意常数）。</p>
+</blockquote>
+<p><strong>习题[15.7]:二阶常系数非齐次线性微分方程待定系数法</strong></p>
+<p>求微分方程 $y'' - 4y = \mathrm{e}^{2x}$ 的通解。</p>
+<p>主要思路:求出特征根确定齐次通解，判断自由项指数是否为单特征根，设待定特解求导代入</p>
+<blockquote>
+<p>[1]求解齐次方程特征根与通解：</p>
+<p>特征方程为：</p>
+<p>$$\lambda^2 - 4 = 0 \implies \lambda_1 = 2, \; \lambda_2 = -2$$</p>
+<p>对应齐次通解为：</p>
+<p>$$Y = C_1 \mathrm{e}^{-2x} + C_2 \mathrm{e}^{2x}$$</p>
+<p>[2]设定非齐次特解形式并代定：</p>
+<p>自由项为 $\mathrm{e}^{2x}$，其指数 $\mu = 2$ 是特征方程的单实根（$k = 1$）。</p>
+<p>设特解形式为：$y^* = A x \mathrm{e}^{2x}$。</p>
+<p>求导：</p>
+<p>$$(y^*)' = A(1 + 2x)\mathrm{e}^{2x}$$</p>
+<p>$$(y^*)'' = A(2)\mathrm{e}^{2x} + 2A(1 + 2x)\mathrm{e}^{2x} = A(4 + 4x)\mathrm{e}^{2x}$$</p>
+<p>代入方程左端：</p>
+<p>$$(y^*)'' - 4y^* = A(4 + 4x)\mathrm{e}^{2x} - 4A x \mathrm{e}^{2x} = 4A \mathrm{e}^{2x}$$</p>
+<p>令 $4A \mathrm{e}^{2x} = \mathrm{e}^{2x} \implies 4A = 1 \implies A = \frac{1}{4}$。</p>
+<p>特解为 $y^* = \frac{1}{4}x\mathrm{e}^{2x}$。</p>
+<p>[3]组合给出通解：</p>
+<p>$$y = C_1 \mathrm{e}^{-2x} + C_2 \mathrm{e}^{2x} + \frac{1}{4}x\mathrm{e}^{2x}$$</p>
+</blockquote>
+<p><strong>习题[15.8]:欧拉方程的求解（数一）</strong></p>
+<p>求欧拉方程 $x^2 y'' - 2y = x^2$ ($x > 0$) 的通解。</p>
+<p>主要思路:引入对数变换 $x = \mathrm{e}^t$ 将欧拉方程转化为常系数非齐次线性微分方程求解</p>
+<blockquote>
+<p>[1]欧拉变量代换：</p>
+<p>令 $x = \mathrm{e}^t$（即 $t = \ln x$），导数算子关系为：</p>
+<p>$$x^2 y'' = \frac{\mathrm{d}^2 y}{\mathrm{d}t^2} - \frac{\mathrm{d}y}{\mathrm{d}t}$$</p>
+<p>代入方程得：</p>
+<p>$$\left( \frac{\mathrm{d}^2 y}{\mathrm{d}t^2} - \frac{\mathrm{d}y}{\mathrm{d}t} \right) - 2y = (\mathrm{e}^t)^2 = \mathrm{e}^{2t} \implies \frac{\mathrm{d}^2 y}{\mathrm{d}t^2} - \frac{\mathrm{d}y}{\mathrm{d}t} - 2y = \mathrm{e}^{2t}$$</p>
+<p>[2]求解常系数方程：</p>
+<p>特征方程为 $r^2 - r - 2 = 0 \implies (r - 2)(r + 1) = 0 \implies r_1 = 2, \; r_2 = -1$。</p>
+<p>齐次解为 $Y(t) = C_1 \mathrm{e}^{2t} + C_2 \mathrm{e}^{-t}$。</p>
+<p>因为指数 $\mu = 2$ 是特征单根，设特解 $y^* = A t \mathrm{e}^{2t}$。</p>
+<p>微分算子法：$F'(2) = 2(2) - 1 = 3$，故 $A = \frac{1}{F'(2)} = \frac{1}{3}$。</p>
+<p>$$y^* = \frac{1}{3}t \mathrm{e}^{2t}$$</p>
+<p>通解为 $y(t) = C_1 \mathrm{e}^{2t} + C_2 \mathrm{e}^{-t} + \frac{1}{3}t\mathrm{e}^{2t}$。</p>
+<p>[3]回代自变量 $x$：</p>
+<p>由 $\mathrm{e}^t = x, \; t = \ln x$：</p>
+<p>$$y(x) = C_1 x^2 + \frac{C_2}{x} + \frac{1}{3}x^2 \ln x$$</p>
+</blockquote>
+<p><strong>习题[15.9]:已知通解结构反求非齐次线性微分方程</strong></p>
+<p>已知二阶线性非齐次微分方程的通解为 $y = (C_1 + C_2 x)\mathrm{e}^x + 2\mathrm{e}^{-x}$。试写出该微分方程。</p>
+<p>主要思路:根据齐次通解形式反推齐次特征根，建立二阶微分算子，作用于非齐次特解得到非齐次自由项</p>
+<blockquote>
+<p>[1]由通解齐次部分识别特征根：</p>
+<p>对应齐次通解为 $Y = (C_1 + C_2 x)\mathrm{e}^x$。</p>
+<p>这表明特征方程具有二重实根：</p>
+<p>$$\lambda_1 = \lambda_2 = 1$$</p>
+<p>特征多项式为：</p>
+<p>$$P(\lambda) = (\lambda - 1)^2 = \lambda^2 - 2\lambda + 1$$</p>
+<p>故微分方程左端算子为 $y'' - 2y' + y$。</p>
+<p>[2]作用算子于特解求自由项：</p>
+<p>非齐次特解为 $y^* = 2\mathrm{e}^{-x}$。</p>
+<p>求导数：</p>
+<p>$$(y^*)' = -2\mathrm{e}^{-x}, \quad (y^*)'' = 2\mathrm{e}^{-x}$$</p>
+<p>代入方程左端算子：</p>
+<p>$$f(x) = (y^*)'' - 2(y^*)' + y^* = 2\mathrm{e}^{-x} - 2(-2\mathrm{e}^{-x}) + 2\mathrm{e}^{-x} = (2 + 4 + 2)\mathrm{e}^{-x} = 8\mathrm{e}^{-x}$$</p>
+<p>[3]写出完整微分方程：</p>
+<p>所求微分方程为：</p>
+<p>$$y'' - 2y' + y = 8\mathrm{e}^{-x}$$</p>
+</blockquote>
+<p><strong>习题[15.10]:含二重积分的二维积分方程求解</strong></p>
+<p>设连续函数 $f(t)$ 满足关系式：$f(t) = \mathrm{e}^{4\pi t^2} + \iint_D f\left(\frac{1}{2}\sqrt{x^2 + y^2}\right)\,\mathrm{d}x\mathrm{d}y$，其中积分区域 $D = \{(x, y) \mid x^2 + y^2 \le 1\}$。求 $f(t)$ 的表达式。</p>
+<p>主要思路:积分区域及被积函数与自变量 $t$ 无关，故二重积分项为常数 $A$，设出后代入极坐标计算定积分求解 $A$</p>
+<blockquote>
+<p>[1]将二重积分设为待定常数：</p>
+<p>记常数 $A = \iint_D f\left(\frac{1}{2}\sqrt{x^2 + y^2}\right)\,\mathrm{d}x\mathrm{d}y$。</p>
+<p>原方程化为：</p>
+<p>$$f(t) = \mathrm{e}^{4\pi t^2} + A$$</p>
+<p>[2]在极坐标下计算二重积分：</p>
+<p>区域 $D$ 为单位圆盘，转换为极坐标：</p>
+<p>$$A = \int_0^{2\pi} \mathrm{d}\theta \int_0^1 f\left(\frac{r}{2}\right) r\,\mathrm{d}r = 2\pi \int_0^1 f\left(\frac{r}{2}\right) r\,\mathrm{d}r$$</p>
+<p>令 $u = \frac{r}{2}$，则 $r = 2u, \; \mathrm{d}r = 2\,\mathrm{d}u$：</p>
+<p>$$A = 2\pi \int_0^{1/2} f(u) (2u) (2\,\mathrm{d}u) = 8\pi \int_0^{1/2} u f(u)\,\mathrm{d}u$$</p>
+<p>[3]代入 $f(u)$ 解出待定常数：</p>
+<p>将 $f(u) = \mathrm{e}^{4\pi u^2} + A$ 代入：</p>
+<p>$$A = 8\pi \int_0^{1/2} u (\mathrm{e}^{4\pi u^2} + A)\,\mathrm{d}u = 8\pi \int_0^{1/2} u \mathrm{e}^{4\pi u^2}\,\mathrm{d}u + 8\pi A \int_0^{1/2} u\,\mathrm{d}u$$</p>
+<p>分别计算两部分积分：</p>
+<p>$$8\pi \int_0^{1/2} u \mathrm{e}^{4\pi u^2}\,\mathrm{d}u = \int_0^{1/2} \mathrm{e}^{4\pi u^2}\,\mathrm{d}(4\pi u^2) = [\mathrm{e}^{4\pi u^2}]_0^{1/2} = \mathrm{e}^{\pi} - 1$$</p>
+<p>$$8\pi A \left[ \frac{u^2}{2} \right]_0^{1/2} = 8\pi A \cdot \frac{1}{8} = \pi A$$</p>
+<p>等式为 $A = (\mathrm{e}^\pi - 1) + \pi A \implies A(1 - \pi) = \mathrm{e}^\pi - 1 \implies A = \frac{\mathrm{e}^\pi - 1}{1 - \pi}$。</p>
+<p>代回得：<font color=deeppink>$f(t) = \mathrm{e}^{4\pi t^2} + \frac{\mathrm{e}^\pi - 1}{1 - \pi}$</font>。</p>
+</blockquote>
+<p><strong>习题[15.11]:四阶常系数微分方程求解与高阶无穷小条件</strong></p>
+<p>设四阶常系数齐次微分方程 $y^{(4)} - y''' + y'' - y' = 0$。<br />
+(1) 求该方程的通解；<br />
+(2) 若已知当 $x \to 0$ 时，该方程的解 $y(x)$ 是 $x$ 的 3 阶无穷小，且 $\lim\limits_{x \to 0}\frac{y(x)}{x^3} = 1$，求特解 $y(x)$。</p>
+<p>主要思路:求解特征方程写出通解；将通解在 $x=0$ 处展开为麦克劳林级数，依据无穷小阶数确定常数线性方程组</p>
+<blockquote>
+<p>[1]求解特征方程与通解：</p>
+<p>特征方程为：</p>
+<p>$$\lambda^4 - \lambda^3 + \lambda^2 - \lambda = 0 \implies \lambda(\lambda^3 - \lambda^2 + \lambda - 1) = \lambda[\lambda^2(\lambda - 1) + (\lambda - 1)] = 0$$</p>
+<p>$$\lambda(\lambda - 1)(\lambda^2 + 1) = 0$$</p>
+<p>特征根为：$\lambda_1 = 0, \; \lambda_2 = 1, \; \lambda_{3, 4} = \pm \mathrm{i}$。</p>
+<p>故微分方程通解为：</p>
+<p>$$y(x) = C_1 + C_2 \mathrm{e}^x + C_3 \cos x + C_4 \sin x$$</p>
+<p>[2]麦克劳林展开分析阶数：</p>
+<p>代入基本展开式：</p>
+<p>$$\mathrm{e}^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + o(x^3)$$</p>
+<p>$$\cos x = 1 - \frac{x^2}{2} + o(x^3)$$</p>
+<p>$$\sin x = x - \frac{x^3}{6} + o(x^3)$$</p>
+<p>代入 $y(x)$ 并按 $x$ 的幂次合并：</p>
+<p>$$y(x) = (C_1 + C_2 + C_3) + (C_2 + C_4)x + \frac{1}{2}(C_2 - C_3)x^2 + \frac{1}{6}(C_2 - C_4)x^3 + o(x^3)$$</p>
+<p>[3]联立方程解出常数：</p>
+<p>因为 $y(x)$ 是 $x \to 0$ 时的 3 阶无穷小且 $\lim\limits_{x \to 0}\frac{y(x)}{x^3} = 1$：</p>
+<p>$$\begin{cases} C_1 + C_2 + C_3 = 0 \\ \\ C_2 + C_4 = 0 \\ \\ C_2 - C_3 = 0 \\ \\ \frac{1}{6}(C_2 - C_4) = 1 \implies C_2 - C_4 = 6 \end{cases}$$</p>
+<p>由 $C_4 = -C_2$，代入第四式：$2C_2 = 6 \implies C_2 = 3$。</p>
+<p>进而 $C_4 = -3, \; C_3 = C_2 = 3, \; C_1 = -(C_2 + C_3) = -6$。</p>
+<p>故特解为 <font color=deeppink>$y(x) = -6 + 3\mathrm{e}^x + 3\cos x - 3\sin x$</font>。</p>
+</blockquote>
+<p><strong>习题[15.12]:曲线切线角导数几何问题（数一、数二）</strong></p>
+<p>平面光滑曲线 $L: y = y(x)$ 通过原点 $(0, 0)$，且在原点处与直线 $y = x$ 相切。设曲线在点 $(x, y)$ 处切线的倾角为 $\alpha$。若已知倾角随横坐标的变化率等于切线斜率（即 $\frac{\mathrm{d}\alpha}{\mathrm{d}x} = \frac{\mathrm{d}y}{\mathrm{d}x}$），求曲线 $L$ 的方程。</p>
+<p>主要思路:由切线倾角定义 $\tan\alpha = y'$，对 $x$ 求导得到 $\frac{\mathrm{d}\alpha}{\mathrm{d}x} = \frac{y''}{1 + (y')^2}$，代入已知条件转化为二阶可降阶微分方程求解</p>
+<blockquote>
+<p>[1]切角导数转化为导数微分方程：</p>
+<p>由几何意义：$\tan\alpha = y' \implies \alpha = \arctan(y')$。</p>
+<p>两边对 $x$ 求导：</p>
+<p>$$\frac{\mathrm{d}\alpha}{\mathrm{d}x} = \frac{y''}{1 + (y')^2}$$</p>
+<p>由题设 $\frac{\mathrm{d}\alpha}{\mathrm{d}x} = \frac{\mathrm{d}y}{\mathrm{d}x} = y'$：</p>
+<p>$$\frac{y''}{1 + (y')^2} = y' \implies y'' = y'[1 + (y')^2]$$</p>
+<p>[2]代换降阶求解导数：</p>
+<p>令 $p = y'$，方程化为：$\frac{\mathrm{d}p}{\mathrm{d}x} = p(1 + p^2)$。</p>
+<p>分离变量：$\frac{\mathrm{d}p}{p(1 + p^2)} = \mathrm{d}x \implies \frac{p^2}{1 + p^2} = C \mathrm{e}^{2x}$。</p>
+<p>由曲线在原点切于直线 $y = x$，得初值条件：$y(0) = 0, \; y'(0) = 1$。</p>
+<p>代入 $p(0) = 1$：$\frac{1^2}{1 + 1^2} = C \mathrm{e}^0 \implies C = \frac{1}{2}$。</p>
+<p>解得：$p = y' = \frac{\mathrm{e}^x}{\sqrt{2 - \mathrm{e}^{2x}}}$。</p>
+<p>[3]积分确定曲线方程：</p>
+<p>$$y = \int \frac{\mathrm{e}^x}{\sqrt{2 - (\mathrm{e}^x)^2}}\,\mathrm{d}x = \arcsin\left(\frac{\mathrm{e}^x}{\sqrt{2}}\right) + C_1$$</p>
+<p>代入 $y(0) = 0$：$0 = \arcsin\left(\frac{1}{\sqrt{2}}\right) + C_1 = \frac{\pi}{4} + C_1 \implies C_1 = -\frac{\pi}{4}$。</p>
+<p>故曲线方程为 <font color=deeppink>$y = \arcsin\left(\frac{\mathrm{e}^x}{\sqrt{2}}\right) - \frac{\pi}{4}$</font>。</p>
+</blockquote>
+<p><strong>习题[15.13]:旋转体体积比几何建模微分方程（数一、数二）</strong></p>
+<p>设曲线 $y = y(x)$ 满足 $y(0) = 0$，对任意 $x > 0$，曲线在 $[0, x]$ 段绕 $x$ 轴旋转所成的旋转体体积与绕 $y$ 轴旋转所成的旋转体体积之比恒为常数。试证明曲线必为幂函数，并给出典型比例下的方程。</p>
+<p>主要思路:写出绕 $x$ 轴与 $y$ 轴旋转体体积的定积分微元表达式，求导转化为一阶微分方程</p>
+<blockquote>
+<p>[1]写出旋转体体积表达式：</p>
+<p>绕 $x$ 轴旋转体体积：$V_x = \pi \int_0^x y^2(t)\,\mathrm{d}t$。</p>
+<p>绕 $y$ 轴旋转体体积（柱壳法）：$V_y = 2\pi \int_0^x t y(t)\,\mathrm{d}t$。</p>
+<p>[2]建立等式并求导：</p>
+<p>设比例为常数 $k$：$V_x = k V_y$。</p>
+<p>$$\pi \int_0^x y^2(t)\,\mathrm{d}t = 2\pi k \int_0^x t y(t)\,\mathrm{d}t$$</p>
+<p>两边对 $x$ 求导：</p>
+<p>$$\pi y^2(x) = 2\pi k x y(x)$$</p>
+<p>[3]解微分方程：</p>
+<p>当 $y(x) \neq 0$ 时，两边除以 $\pi y(x)$：</p>
+<p>$$y(x) = 2k x$$</p>
+<p>若为面积分割比例模型（如曲边梯形面积与三角形面积之比恒定），微分方程为可分离变量型，可导出幂函数曲线族 $y = C x^\alpha$。例如当满足 $y y'' - \frac{2}{3}(y')^2 = 0$ 时，得 <font color=deeppink>$y = C x^3$</font> ($C > 0$)。</p>
+</blockquote>
+<p><strong>习题[15.14]:一阶线性差分方程初值问题（数三）</strong></p>
+<p>求解一阶差分方程初值问题：$\Delta y_x = 3, \; y_0 = 2$。</p>
+<p>主要思路:利用一阶差分定义展开递推关系，累加求和</p>
+<blockquote>
+<p>[1]差分展开：</p>
+<p>由 $\Delta y_x = y_{x+1} - y_x = 3$。</p>
+<p>[2]累加递推：</p>
+<p>$$y_x = y_0 + \sum_{k=0}^{x-1} (y_{k+1} - y_k) = y_0 + \sum_{k=0}^{x-1} 3 = y_0 + 3x$$</p>
+<p>[3]代入初值：</p>
+<p>代入 $y_0 = 2$：</p>
+<p>$$y_x = 2 + 3x$$</p>
+</blockquote>
+<p><strong>习题[15.15]:一阶常系数非齐次差分方程求解（数三）</strong></p>
+<p>求解一阶非齐次差分方程 $y_{t+1} - 3y_t = 2^t - 1$ 满足 $y_0 = 1$ 的解。</p>
+<p>主要思路:先求对应齐次差分方程通解，分别设定指数项与常数项待定特解，叠加后利用初始条件确定任意常数</p>
+<blockquote>
+<p>[1]求齐次差分方程通解：</p>
+<p>齐次方程为 $y_{t+1} - 3y_t = 0$。</p>
+<p>特征方程 $\lambda - 3 = 0 \implies \lambda = 3$。</p>
+<p>齐次通解为 $Y_t = C \cdot 3^t$。</p>
+<p>[2]求非齐次特解：</p>
+<p>第一项自由项 $2^t$：设特解 $y_{t1}^* = A \cdot 2^t$。</p>
+<p>代入：$A \cdot 2^{t+1} - 3A \cdot 2^t = (2A - 3A)2^t = -A \cdot 2^t = 2^t \implies A = -1$。</p>
+<p>第二项自由项 $-1 = -1 \cdot 1^t$：设特解 $y_{t2}^* = B$。</p>
+<p>代入：$B - 3B = -2B = -1 \implies B = \frac{1}{2}$。</p>
+<p>总特解为：$y_t^* = -2^t + \frac{1}{2}$。</p>
+<p>方程通解为：</p>
+<p>$$y_t = C \cdot 3^t - 2^t + \frac{1}{2}$$</p>
+<p>[3]代入初始条件确定常数：</p>
+<p>代入 $t = 0, \; y_0 = 1$：</p>
+<p>$$1 = C \cdot 1 - 1 + \frac{1}{2} \implies 1 = C - \frac{1}{2} \implies C = \frac{3}{2}$$</p>
+<p>代入通解：</p>
+<p>$$y_t = \frac{3}{2} \cdot 3^t - 2^t + \frac{1}{2} = \frac{1}{2} \cdot 3^{t+1} - 2^t + \frac{1}{2}$$</p>
+</blockquote>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

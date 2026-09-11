@@ -1,5 +1,17 @@
 # EscoffierZhou 22408 in 2027
 
+<p align="center">
+  <a href="https://escoffierzhou.github.io/22408_2027/">
+    <img src="https://img.shields.io/badge/📖_在线知识库门户-免下载·即点即看-8b5cf6?style=for-the-badge&logo=githubpages&logoColor=white" alt="Online Knowledge Base" />
+  </a>
+  <a href="https://github.com/EscoffierZhou/22408_2027">
+    <img src="https://img.shields.io/badge/Target-2027_UCAS_22408-3b82f6?style=for-the-badge&logo=google-scholar&logoColor=white" alt="Target" />
+  </a>
+</p>
+
+> 🚀 **全景在线阅读直达：** [https://escoffierzhou.github.io/22408_2027/](https://escoffierzhou.github.io/22408_2027/)  
+> **特性：** 手机/iPad/电脑跨端免下载阅读，支持多级折叠侧边栏自由切换章节、全局实时搜索、HTML / PDF / Markdown 格式无缝切换与暗色主题。
+
 > **Target:** 2027 考研 22408 | 中国科学院大学 (UCAS)  
 > **科目配置:**  
 > - **[101] 思想政治理论**  
@@ -30,5 +42,22 @@
 │   └── 11408计算机网络/       # 物理层、数据链路层、网络层、传输层、应用层协议栈
 ├── Leetcode/                 # 核心高频算法题型手写模板与解题复盘
 ├── NOTICE.md                 # 备考战略思维修正、时间节点、真实应试铁律与UCAS择校档案
-└── README.md                 # 仓库主页与备考指南
+├── README.md                 # 仓库主页与备考指南
+├── index.html                # 全库在线阅读门户 (GitHub Pages 部署即用)
+├── catalog.js                # 自动提取的全库结构化章节索引数据
+└── generate_catalog.py       # 知识库目录一键自动扫描生成脚本
 ```
+
+---
+
+### 🌐 在线阅读与目录同步指引
+
+1. **直接在线阅读**：
+   - 访问 [https://escoffierzhou.github.io/22408_2027/](https://escoffierzhou.github.io/22408_2027/) 即可即点即看，无需下载任何 HTML 或 PDF。
+2. **新增笔记后一键更新目录**：
+   - 当你在各科目添加了新章节的 Markdown、HTML 或 PDF 后，只需在仓库根目录执行一行命令：
+     ```bash
+     python generate_catalog.py
+     ```
+   - 脚本将自动扫描全库并更新 `catalog.js`，推送代码至 GitHub 后网页端秒级生效同步。
+

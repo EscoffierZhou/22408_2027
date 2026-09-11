@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>[强化]二重积分</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h1>[强化]二重积分</h1>
+<p>目的[1]:攻克雅可比行列式（Jacobian）在复杂非线性坐标变换与倾斜平行四边形、双曲坐标系中的高阶计算技巧</p>
+<p>目的[2]:系统掌握二维广义反常二重积分（无界区域与无界函数瑕点）的敛散性判据与极坐标极限定理（含广义高斯积分推广）</p>
+<p>目的[3]:攻克含参变量动边界二重积分的 Leibniz 积分导数定理（截面投影法与流体力学输运定理微元模型）</p>
+<p>目的[4]:融会贯通古鲁金第二定理（Pappus-Guldinus Theorem）在任意倾斜轴旋转体、相交截面环体及空心回转壳体体积中的秒杀模型</p>
+<p>目的[5]:精通旋转椭圆（交叉乘积项 $A x^2 + 2B xy + C y^2$）特征值对角化法与正交坐标旋转代换法</p>
+<p>目的[6]:攻克非光滑折面与分段极值函数（$\max\{f, g\}, |f(x, y)|$）的零位线拓扑划分与拼接积分技巧</p>
+<h2>1.高阶雅可比变换与双曲坐标系、广义极坐标</h2>
+<h6><strong>模型[1]:仿射变换与倾斜平行四边形区域的快速解耦</strong></h6>
+<p>在考研高分深水区中，积分区域常由两对平行直线簇界定，传统直角坐标需切分为三个子区域累加，计算极易出错。雅可比线性仿射变换能将其一键映射为矩形。</p>
+<p>[1]仿射变换矩阵与雅可比行列式：</p>
+<blockquote>
+<p>设积分区域 $D$ 的边界由四条直线界定：</p>
+<p>$$a_1 x + b_1 y = c_1, \quad a_1 x + b_1 y = c_2 \quad (c_1 < c_2)$$</p>
+<p>$$a_2 x + b_2 y = d_1, \quad a_2 x + b_2 y = d_2 \quad (d_1 < d_2)$$</p>
+<p>引入非奇异线性变换：</p>
+<p>$$u = a_1 x + b_1 y, \quad v = a_2 x + b_2 y$$</p>
+<p>其雅可比行列式满足倒数性质：</p>
+<p>$$\frac{\partial(u, v)}{\partial(x, y)} = \begin{vmatrix} a_1 & b_1 \\ \\ a_2 & b_2 \end{vmatrix} = a_1 b_2 - a_2 b_1 \neq 0$$</p>
+<p>从而微元面积关系为：</p>
+<p>$$\mathrm{d}x\mathrm{d}y = \left| \frac{\partial(x, y)}{\partial(u, v)} \right|\,\mathrm{d}u\mathrm{d}v = \frac{1}{|a_1 b_2 - a_2 b_1|}\,\mathrm{d}u\mathrm{d}v$$</p>
+<p>原区域 $D$ 在 $uOv$ 平面上映射为标准正交矩形 $D' = [c_1, c_2] \times [d_1, d_2]$，实现变量完全解耦。</p>
+</blockquote>
+<p>[2]面积与被积多项式计算模板：</p>
+<blockquote>
+<p>由上述变换，区域 $D$ 的几何面积可直接秒杀：</p>
+<p>$$S_D = \iint_D 1\,\mathrm{d}x\mathrm{d}y = \frac{(c_2 - c_1)(d_2 - d_1)}{|a_1 b_2 - a_2 b_1|}$$</p>
+</blockquote>
+<h6><strong>模型[2]:双曲坐标系与有理分式代换</strong></h6>
+<p>[1]双曲网格坐标变换：</p>
+<blockquote>
+<p>对于由双曲线族 $xy = p_1, xy = p_2$ ($0 < p_1 < p_2$) 与射线族 $y = q_1 x, y = q_2 x$ ($0 < q_1 < q_2$) 围成的弯曲区域：</p>
+<p>令新坐标为：</p>
+<p>$$u = xy, \quad v = \frac{y}{x}$$</p>
+<p>反解坐标：$x = \sqrt{\frac{u}{v}}, \; y = \sqrt{uv}$。</p>
+<p>计算雅可比行列式：</p>
+<p>$$\frac{\partial(u, v)}{\partial(x, y)} = \begin{vmatrix} y & x \\ \\ -\frac{y}{x^2} & \frac{1}{x} \end{vmatrix} = \frac{y}{x} - \left(-\frac{y}{x}\right) = 2\frac{y}{x} = 2v$$</p>
+<p>因此面积微元转换为：</p>
+<p>$$\mathrm{d}x\mathrm{d}y = \frac{1}{2v}\,\mathrm{d}u\mathrm{d}v$$</p>
+<p>新积分限变为完全解耦的常数区间：$u \in [p_1, p_2], \; v \in [q_1, q_2]$。</p>
+</blockquote>
+<h2>2.无界区域与瑕积分（反常二重积分）严密判据</h2>
+<h6><strong>概念[1]:二维反常积分的穷竭列严格定义</strong></h6>
+<p>[1]反常二重积分与一元反常积分的本质差异：</p>
+<blockquote>
+<p>一元反常积分 $\int_a^{+\infty} f(x)\,\mathrm{d}x$ 的积分路径仅有一种（沿实轴正向走向无穷）。</p>
+<p>而在二维平面上，点 $(x, y)$ 走向无穷远或趋近瑕点的方式具有无穷多种几何路径和区域形态。</p>
+<p><font color=red>核心理论准则</font>：多元微积分中只有当被积函数<font color=deeppink>绝对可积</font>（即 $\iint_D |f(x, y)|\,\mathrm{d}\sigma < +\infty$）时，反常二重积分才收敛，且其积分值才与区域的穷竭方式无关！</p>
+</blockquote>
+<p>[2]穷竭闭区域列定义：</p>
+<blockquote>
+<p>设平面无界区域为 $D$。若闭区域列 $\{D_n\}$ 满足：</p>
+<p>(1) 每个 $D_n$ 均为有界闭区域，且 $D_n \subset D_{n+1} \subset D$；</p>
+<p>(2) $D$ 内的任意有点集最终都被某个 $D_k$ 包含（即 $\bigcup_{n=1}^\infty D_n = D$）。</p>
+<p>则称 $\{D_n\}$ 为 $D$ 的一个穷竭列。</p>
+<p>若对于满足上述条件的任意穷竭列 $\{D_n\}$，极限 $\lim\limits_{n \to \infty} \iint_{D_n} f(x, y)\,\mathrm{d}\sigma$ 均存在且恒等于同一个数 $I$，则称反常二重积分收敛，其值为 $I$。</p>
+</blockquote>
+<h6><strong>模型[1]:极坐标判据与阶数准则 (p-测试)</strong></h6>
+<p>[1]无界区域（无穷远）的敛散性阶数定理：</p>
+<blockquote>
+<p>设区域 $D = \{(x, y) \mid x^2 + y^2 \ge R^2\}$ ($R > 0$)。</p>
+<p>考查经典径向核反常积分：</p>
+<p>$$I = \iint_D \frac{1}{(x^2 + y^2)^p}\,\mathrm{d}\sigma$$</p>
+<p>转化为极坐标累次积分：</p>
+<p>$$I = \int_0^{2\pi} \mathrm{d}\theta \int_R^{+\infty} \frac{1}{r^{2p}} \cdot r\,\mathrm{d}r = 2\pi \int_R^{+\infty} r^{1 - 2p}\,\mathrm{d}r = 2\pi \int_R^{+\infty} \frac{1}{r^{2p - 1}}\,\mathrm{d}r$$</p>
+<p>由一元 $p$-积分判据，收敛当且仅当 $2p - 1 > 1 \iff p > 1$。</p>
+<p><font color=red>重要对比记忆</font>：一元无穷积分 $\int_1^{+\infty} \frac{1}{x^p}\,\mathrm{d}x$ 收敛条件为 $p > 1$；而二维平面无穷积分 $\iint \frac{1}{(x^2+y^2)^p}\,\mathrm{d}\sigma$ 收敛条件同样为 $p > 1$（但注意此时被积函数分母相当于距离的 $2p$ 次方，即距离次数必须严格大于 $2$）。</p>
+</blockquote>
+<p>[2]无界函数（原点瑕点）的敛散性阶数定理：</p>
+<blockquote>
+<p>设区域 $D = \{(x, y) \mid 0 < x^2 + y^2 \le R^2\}$。</p>
+<p>考查原点瑕积分：</p>
+<p>$$I = \iint_D \frac{1}{(x^2 + y^2)^p}\,\mathrm{d}\sigma = 2\pi \int_0^R r^{1 - 2p}\,\mathrm{d}r$$</p>
+<p>收敛当且仅当 $1 - 2p > -1 \iff 2p < 2 \iff p < 1$。</p>
+</blockquote>
+<h6><strong>模型[2]:广义高斯积分族与二次型全平面积分</strong></h6>
+<p>[1]二维独立正态高斯积分：</p>
+<blockquote>
+<p>$$\iint_{\mathbb{R}^2} \mathrm{e}^{-(x^2 + y^2)}\,\mathrm{d}x\mathrm{d}y = \left( \int_{-\infty}^{+\infty} \mathrm{e}^{-x^2}\,\mathrm{d}x \right) \left( \int_{-\infty}^{+\infty} \mathrm{e}^{-y^2}\,\mathrm{d}y \right) = \sqrt{\pi} \cdot \sqrt{\pi} = \pi$$</p>
+</blockquote>
+<p>[2]含正定二次型的全平面反常高斯积分公式：</p>
+<blockquote>
+<p>设二次型 $Q(x, y) = a x^2 + 2b xy + c y^2$ 正定，即满足 $a > 0$ 且矩阵行列式 $\Delta = ac - b^2 > 0$。</p>
+<p>则全平面反常二重积分存在且具有普适公式：</p>
+<p>$$\iint_{\mathbb{R}^2} \mathrm{e}^{-(a x^2 + 2b xy + c y^2)}\,\mathrm{d}x\mathrm{d}y = \frac{\pi}{\sqrt{ac - b^2}}$$</p>
+<p>推导依据：配方法结合线性雅可比换元，令 $u = \sqrt{a}\left(x + \frac{b}{a}y\right), \; v = \sqrt{\frac{ac - b^2}{a}}y$，雅可比行列式倒数为 $\sqrt{ac - b^2}$，化为标准型 $\iint_{\mathbb{R}^2}\mathrm{e}^{-(u^2+v^2)}\frac{\mathrm{d}u\mathrm{d}v}{\sqrt{ac-b^2}} = \frac{\pi}{\sqrt{ac-b^2}}$。</p>
+</blockquote>
+<h2>3.动边界区域二重积分的高阶求导法则 (Leibniz-Reynolds)</h2>
+<h6><strong>定理[1]:含参动边界二重积分的一般求导公式</strong></h6>
+<p>[1]沿坐标投影边界求导模型：</p>
+<blockquote>
+<p>设二元连续可微函数 $F(t) = \iint_{D(t)} f(x, y)\,\mathrm{d}\sigma$，其中动区域 $D(t)$ 为 X 型区域：</p>
+<p>$$D(t) = \{(x, y) \mid a(t) \le x \le b(t), \; g_1(x, t) \le y \le g_2(x, t)\}$$</p>
+<p>则 $F(t)$ 关于参数 $t$ 的导数为：</p>
+<p>$$\begin{aligned}
+F'(t) &= \int_{a(t)}^{b(t)} \mathrm{d}x \int_{g_1(x,t)}^{g_2(x,t)} \frac{\partial f}{\partial t}(x, y)\,\mathrm{d}y \\ \\
+&\quad + \int_{a(t)}^{b(t)} \left[ f(x, g_2(x, t)) \frac{\partial g_2}{\partial t} - f(x, g_1(x, t)) \frac{\partial g_1}{\partial t} \right]\mathrm{d}x \\ \\
+&\quad + b'(t) \int_{g_1(b(t),t)}^{g_2(b(t),t)} f(b(t), y)\,\mathrm{d}y - a'(t) \int_{g_1(a(t),t)}^{g_2(a(t),t)} f(a(t), y)\,\mathrm{d}y
+\end{aligned}$$</p>
+</blockquote>
+<p>[2]径向膨胀圆盘的几何微元法：</p>
+<blockquote>
+<p>若区域为径向圆域 $D(t): x^2 + y^2 \le R^2(t)$，则：</p>
+<p>$$\frac{\mathrm{d}}{\mathrm{d}t} \iint_{D(t)} f(x, y)\,\mathrm{d}\sigma = R'(t) \cdot R(t) \int_0^{2\pi} f(R(t)\cos\theta, R(t)\sin\theta)\,\mathrm{d}\theta$$</p>
+<p>几何直观：参数 $t$ 的微小增量 $\Delta t$ 使得圆盘边界向外膨胀厚度为 $\Delta R = R'(t)\Delta t$ 的窄圆环壳，导数严格等于被积函数在边界线上的线积分乘以径向膨胀速度。</p>
+</blockquote>
+<h2>4.古鲁金第二定理的高阶扩展与空间任意轴旋转</h2>
+<h6><strong>模型[1]:平面图形绕任意倾斜直线的旋转体体积模型</strong></h6>
+<p>[1]一般倾斜直线的点线距离投影：</p>
+<blockquote>
+<p>设平面闭区域 $D$ 位于直线 $L: Ax + By + C = 0$ 的同侧（即 $Ax + By + C$ 在 $D$ 上恒不变号）。</p>
+<p>由古鲁金第二定理，区域 $D$ 绕轴 $L$ 旋转所得几何立体的体积为：</p>
+<p>$$V = 2\pi d \cdot S_D$$</p>
+<p>其中形心到直线的距离为：</p>
+<p>$$d = \frac{|A\bar{x} + B\bar{y} + C|}{\sqrt{A^2 + B^2}}$$</p>
+<p>将形心坐标 $\bar{x} = \frac{1}{S_D}\iint_D x\,\mathrm{d}\sigma, \; \bar{y} = \frac{1}{S_D}\iint_D y\,\mathrm{d}\sigma$ 代入，得到二重积分直接积分公式：</p>
+<p>$$V = \frac{2\pi}{\sqrt{A^2 + B^2}} \left| \iint_D (Ax + By + C)\,\mathrm{d}\sigma \right|$$</p>
+</blockquote>
+<p>[2]应用场景：</p>
+<blockquote>
+<p>无论旋转轴是平行于坐标轴的直线（如 $y = b, x = a$），还是倾斜直线（如 $y = x, y = -x, x + y = 2$ 等），只要旋转轴不穿入区域内部，即可直接将该直线的一般式代入二重积分，免去极其繁琐的截面切片与倾斜坐标系旋转变换。</p>
+</blockquote>
+<h6><strong>模型[2]:逆用古鲁金定理求解复杂相交形体质心</strong></h6>
+<p>[1]反求形心坐标的标准化流程：</p>
+<blockquote>
+<p>(1) <strong>计算区域面积</strong>：直接求出 $S_D$。</p>
+<p>(2) <strong>计算绕坐标轴旋转体的体积</strong>：</p>
+<p>利用一元微积分成熟的圆盘法或柱壳法求出：</p>
+<p>绕 $x$ 轴旋转体积：$V_x = \pi \int [y_2^2(x) - y_1^2(x)]\,\mathrm{d}x$；</p>
+<p>绕 $y$ 轴旋转体积：$V_y = 2\pi \int x [y_2(x) - y_1(x)]\,\mathrm{d}x$。</p>
+<p>(3) <strong>一秒反解形心</strong>：</p>
+<p>$$\bar{y} = \frac{V_x}{2\pi S_D}, \quad \bar{x} = \frac{V_y}{2\pi S_D}$$</p>
+</blockquote>
+<h2>5.二次型旋转椭圆区域的谱分解对角化积分法</h2>
+<h6><strong>模型[1]:正交变换与旋转椭圆的主轴化简</strong></h6>
+<p>[1]倾斜椭圆的矩阵与正交对角化：</p>
+<blockquote>
+<p>设倾斜椭圆方程为：</p>
+<p>$$A x^2 + 2B xy + C y^2 \le 1 \quad (A > 0, \; AC - B^2 > 0)$$</p>
+<p>二次型矩阵为实对称矩阵：</p>
+<p>$$\mathbf{K} = \begin{pmatrix} A & B \\ B & C \end{pmatrix}$$</p>
+<p>存在二阶正交矩阵 $\mathbf{P} \in \mathrm{SO}(2)$（即平面纯旋转变换 $\mathbf{X} = \mathbf{P}\mathbf{U}$），使得：</p>
+<p>$$\mathbf{P}^{\mathrm{T}} \mathbf{K} \mathbf{P} = \begin{pmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{pmatrix}$$</p>
+<p>其中 $\lambda_1, \lambda_2 > 0$ 为矩阵 $\mathbf{K}$ 的两个特征值，满足：</p>
+<p>$$\lambda_1 + \lambda_2 = A + C, \quad \lambda_1 \lambda_2 = AC - B^2$$</p>
+</blockquote>
+<p>[2]正交旋转变换的雅可比保测度性：</p>
+<blockquote>
+<p>由于正交矩阵行列式 $|\det \mathbf{P}| = 1$，正交旋转变换下的雅可比行列式恒等于 $1$：</p>
+<p>$$\mathrm{d}x\mathrm{d}y = |\det \mathbf{P}|\,\mathrm{d}u\mathrm{d}v = \mathrm{d}u\mathrm{d}v$$</p>
+<p>在新坐标系 $uOv$ 下，倾斜椭圆化为标准主轴椭圆：</p>
+<p>$$\lambda_1 u^2 + \lambda_2 v^2 \le 1$$</p>
+<p>半长轴和半短轴分别为 $a = \frac{1}{\sqrt{\lambda_1}}, \; b = \frac{1}{\sqrt{\lambda_2}}$。</p>
+<p>区域几何面积为：</p>
+<p>$$S_D = \pi a b = \frac{\pi}{\sqrt{\lambda_1 \lambda_2}} = \frac{\pi}{\sqrt{AC - B^2}}$$</p>
+</blockquote>
+<h2>6.分段最值函数与绝对值等高线分割积分模型</h2>
+<h6><strong>模型[1]:零位线与等高线区域剖分准则</strong></h6>
+<p>[1]绝对值函数的零位线剖分：</p>
+<blockquote>
+<p>对于包含绝对值的被积函数 $\iint_D |f(x, y) - g(x, y)|\,\mathrm{d}\sigma$：</p>
+<p>(1) <strong>求零位曲线</strong>：在区域 $D$ 内求解方程 $f(x, y) - g(x, y) = 0$，画出其交线或分界曲线 $\Gamma$。</p>
+<p>(2) <strong>拓扑区域剖分</strong>：曲线 $\Gamma$ 将区域 $D$ 分割为两个连通开子区域：</p>
+<p>$$D^+ = \{(x, y) \in D \mid f(x, y) \ge g(x, y)\}$$</p>
+<p>$$D^- = \{(x, y) \in D \mid f(x, y) \le g(x, y)\}$$</p>
+<p>(3) <strong>拆分去绝对值</strong>：</p>
+<p>$$\iint_D |f(x, y) - g(x, y)|\,\mathrm{d}\sigma = \iint_{D^+} [f(x, y) - g(x, y)]\,\mathrm{d}\sigma + \iint_{D^-} [g(x, y) - f(x, y)]\,\mathrm{d}\sigma$$</p>
+</blockquote>
+<p>[2]最大值与最小值函数的对称化简：</p>
+<blockquote>
+<p>恒等式关系：</p>
+<p>$$\max\{f, g\} = \frac{f + g + |f - g|}{2}, \quad \min\{f, g\} = \frac{f + g - |f - g|}{2}$$</p>
+<p>在具有对称性的区域上，优先利用轮换对称性对调变量化简，可免去繁杂的二重积分多项式直接拆分。</p>
+</blockquote>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Homework</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h1>第二章 矩阵 · 基础习题精练全解 (Homework)</h1>
+<h2>习题 2.1：秩 1 矩阵高次幂与矩阵多项式化简</h2>
+<h3>题目</h3>
+<p>设 3 维列向量 $\alpha = [1, 2, -1]^T$，$\beta = [2, -1, 1]^T$，3 阶方阵 $A = \alpha \beta^T$。求矩阵多项式 $f(A) = A^{10} - 2A^9 + A$ 的化简结果。</p>
+<h3>主要思路</h3>
+<p>考查外积矩阵（秩 1 矩阵）高次幂的迹数乘归纳公式。先求内积标量 $\beta^T \alpha$，建立 $A^n = (\beta^T \alpha)^{n-1} A$ 的化简关系，再代入多项式提取公因阵求解。</p>
+<h3>详细解答</h3>
+<blockquote>
+<p>[1] <strong>计算内积标量与高次幂递推关系</strong></p>
+<blockquote>
+<p>计算两向量的内积标量：<br />
+$$\beta^T \alpha = [2, -1, 1] \begin{bmatrix} 1 \\ \\ 2 \\ \\ -1 \end{bmatrix} = 2 \times 1 + (-1) \times 2 + 1 \times (-1) = -1$$</p>
+<p>由结合律可得：<br />
+$$A^2 = (\alpha \beta^T)(\alpha \beta^T) = \alpha (\beta^T \alpha) \beta^T = (\beta^T \alpha) A = -A$$</p>
+<p>进而对任意正整数 $n \ge 1$：<br />
+$$A^n = (-1)^{n-1} A$$</p>
+</blockquote>
+<p>[2] <strong>分别化简各高次幂项</strong></p>
+<blockquote>
+<p>(1) 当 $n = 10$ 时：<br />
+$$A^{10} = (-1)^9 A = -A$$</p>
+<p>(2) 当 $n = 9$ 时：<br />
+$$A^9 = (-1)^8 A = A$$</p>
+</blockquote>
+<p>[3] <strong>代入多项式完成最终化简</strong></p>
+<blockquote>
+<p>将上述各项代入 $f(A)$：<br />
+$$f(A) = A^{10} - 2A^9 + A = (-A) - 2(A) + A = -2A$$</p>
+<p>将 $A = \alpha \beta^T$ 展开具体写出数值矩阵：<br />
+$$A = \begin{bmatrix} 1 \\ \\ 2 \\ \\ -1 \end{bmatrix} \begin{bmatrix} 2 & -1 & 1 \end{bmatrix} = \begin{bmatrix} 2 & -1 & 1 \\ \\ 4 & -2 & 2 \\ \\ -2 & 1 & -1 \end{bmatrix}$$</p>
+<p>故最终化简结果为：<br />
+$$f(A) = -2A = \begin{bmatrix} -4 & 2 & -2 \\ \\ -8 & 4 & -4 \\ \\ 4 & -2 & 2 \end{bmatrix}$$</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>习题 2.2：矩阵乘法的非交换性与零因子反例</h2>
+<h3>题目</h3>
+<p>下列关于方阵乘法的命题中，正确的是（ ）。</p>
+<blockquote>
+<p>[1] (A) 若 $AB = O$，则必然有 $A = O$ 或 $B = O$</p>
+<p>[2] (B) 若 $AB = AC$ 且 $A \ne O$，则必然有 $B = C$</p>
+<p>[3] (C) 若 $A, B$ 均为同阶对称矩阵，则 $AB$ 亦为对称矩阵</p>
+<p>[4] (D) 若 $A, B$ 均为同阶对称矩阵，则 $AB$ 为对称矩阵的充要条件是 $AB = BA$</p>
+</blockquote>
+<h3>主要思路</h3>
+<p>深入剖析矩阵乘法的四大反直觉特性（无消去律、存在零因子、乘法不可交换），结合矩阵转置的穿脱原则 $(AB)^T = B^T A^T$ 严格判断对称性条件。</p>
+<h3>详细解答</h3>
+<blockquote>
+<p>[1] <strong>反例检验选项 (A) 与 (B)</strong></p>
+<blockquote>
+<p>(1) 取 $A = \begin{bmatrix} 1 & 0 \\ \\ 0 & 0 \end{bmatrix} \ne O$，$B = \begin{bmatrix} 0 & 0 \\ \\ 0 & 1 \end{bmatrix} \ne O$，则 $AB = \begin{bmatrix} 0 & 0 \\ \\ 0 & 0 \end{bmatrix} = O$。故 (A) 错误；</p>
+<p>(2) 取 $C = \begin{bmatrix} 0 & 0 \\ \\ 1 & 0 \end{bmatrix}$，由于 $AB = O$ 且 $AC = \begin{bmatrix} 0 & 0 \\ \\ 0 & 0 \end{bmatrix} = O$，有 $AB = AC$ 且 $A \ne O$，但显然 $B \ne C$。故 (B) 错误；</p>
+</blockquote>
+<p>[2] <strong>转置运算推导选项 (C) 与 (D)</strong></p>
+<blockquote>
+<p>若 $A, B$ 为对称矩阵，则 $A^T = A$ 且 $B^T = B$。</p>
+<p>对矩阵乘积 $AB$ 两边取转置：<br />
+$$(AB)^T = B^T A^T = BA$$</p>
+<p>$AB$ 为对称矩阵的定义为 $(AB)^T = AB$。因此：<br />
+$$(AB)^T = AB \iff BA = AB \iff AB = BA$$</p>
+<p>故 $AB$ 为对称矩阵必须满足 $A, B$ 可交换，一般情况下不可交换，故 (C) 错误，(D) 正确。</p>
+</blockquote>
+<p>[3] <strong>结论输出</strong></p>
+<blockquote>
+<p>正确答案为 <strong>(D)</strong>。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>习题 2.3：反对称矩阵行列式与奇偶阶代数特性</h2>
+<h3>题目</h3>
+<p>设 $A$ 为 5 阶反对称方阵，则行列式 $|A|$ 的值必然为（ ）。</p>
+<blockquote>
+<p>[1] (A) 1</p>
+<p>[2] (B) -1</p>
+<p>[3] (C) 0</p>
+<p>[4] (D) 无法确定</p>
+</blockquote>
+<h3>主要思路</h3>
+<p>利用反对称矩阵的定义式 $A^T = -A$，对两边同时取行列式，结合标量提取法则 $|kA| = k^n |A|$，由阶数 $n=5$ 为奇数推导出 $|A| = -|A|$。</p>
+<h3>详细解答</h3>
+<blockquote>
+<p>[1] <strong>利用反对称矩阵转置定义</strong></p>
+<blockquote>
+<p>由反对称矩阵定义，满足：<br />
+$$A^T = -A$$</p>
+</blockquote>
+<p>[2] <strong>两边取行列式并提取标量因数</strong></p>
+<blockquote>
+<p>两边同时取行列式：<br />
+$$|A^T| = |-A|$$</p>
+<p>根据行列式性质：<br />
+(1) 转置行列式保持不变：$|A^T| = |A|$；<br />
+(2) 对 5 阶方阵提取负号系数：$|-A| = (-1)^5 |A| = -|A|$。</p>
+<p>代入得：<br />
+$$|A| = -|A|$$</p>
+</blockquote>
+<p>[3] <strong>解代数方程得出结果</strong></p>
+<blockquote>
+<p>$$|A| + |A| = 0 \implies 2|A| = 0 \implies |A| = 0$$</p>
+<p>故任意奇数阶反对称矩阵的行列式恒为 0。正确答案为 <strong>(C)</strong>。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>习题 2.4：矩阵多项式可逆性判定与逆矩阵配凑法</h2>
+<h3>题目</h3>
+<p>设 3 阶方阵 $A$ 满足关系式 $A^2 - 3A + 2E = O$。证明：方阵 $A$ 及 $A - 4E$ 均可逆，并求出它们的逆矩阵。</p>
+<h3>主要思路</h3>
+<p>考查定义配凑法求逆矩阵。通过因式分解与移项变形，将常数项孤立在等式一侧并化为单位矩阵的形式 $M \cdot N = E$，从而直接读取逆矩阵。</p>
+<h3>详细解答</h3>
+<blockquote>
+<p>[1] <strong>证明 $A$ 可逆并求 $A^{-1}$</strong></p>
+<blockquote>
+<p>将等式变形，把含有 $A$ 的项留在左侧，常数项移到右侧：<br />
+$$A^2 - 3A = -2E \implies A(A - 3E) = -2E$$</p>
+<p>两边除以 $-2$：<br />
+$$A \cdot \left[ -\frac{1}{2}(A - 3E) \right] = E \quad \text{或} \quad A \cdot \left[ \frac{1}{2}(3E - A) \right] = E$$</p>
+<p>根据可逆矩阵的定义，方阵 $A$ 必然可逆，且：<br />
+$$A^{-1} = \frac{1}{2}(3E - A)$$</p>
+</blockquote>
+<p>[2] <strong>证明 $A - 4E$ 可逆并配凑其逆矩阵</strong></p>
+<blockquote>
+<p>欲配凑 $A - 4E$ 的因式，对多项式做恒等变形：<br />
+$$A^2 - 3A + 2E = (A - 4E)(A + E) + 6E = O$$</p>
+<p>验算展开：<br />
+$$(A - 4E)(A + E) + 6E = A^2 + AE - 4A - 4E + 6E = A^2 - 3A + 2E = O$$</p>
+<p>移项得：<br />
+$$(A - 4E)(A + E) = -6E$$</p>
+<p>两边同时除以 $-6$：<br />
+$$(A - 4E) \cdot \left[ -\frac{1}{6}(A + E) \right] = E$$</p>
+</blockquote>
+<p>[3] <strong>结论输出</strong></p>
+<blockquote>
+<p>故 $A - 4E$ 必然可逆，且其逆矩阵为：<br />
+$$(A - 4E)^{-1} = -\frac{1}{6}(A + E)$$</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>习题 2.5：伴随矩阵公式综合计算与标量提取</h2>
+<h3>题目</h3>
+<p>设 $A$ 为 3 阶方阵，且行列式 $|A| = 2$。计算行列式 $|(2A)^* - 3A^*|$ 的值。</p>
+<h3>主要思路</h3>
+<p>运用伴随矩阵的数乘公式 $(kA)^* = k^{n-1} A^*$，将 $(2A)^*$ 化简为 $A^*$ 的倍数，合并同类项后利用伴随行列式公式 $|A^*| = |A|^{n-1}$ 与数乘行列式法则求解。</p>
+<h3>详细解答</h3>
+<blockquote>
+<p>[1] <strong>化简数乘矩阵的伴随</strong></p>
+<blockquote>
+<p>根据伴随矩阵性质 $(kA)^* = k^{n-1} A^*$，此处方阵阶数 $n = 3$：<br />
+$$(2A)^* = 2^{3-1} A^* = 2^2 A^* = 4A^*$$</p>
+</blockquote>
+<p>[2] <strong>合并被求矩阵表达式</strong></p>
+<blockquote>
+<p>代入被求行列式内部：<br />
+$$(2A)^* - 3A^* = 4A^* - 3A^* = A^*$$</p>
+</blockquote>
+<p>[3] <strong>计算行列式的值</strong></p>
+<blockquote>
+<p>故所求行列式即为伴随矩阵的行列式：<br />
+$$|(2A)^* - 3A^*| = |A^*|$$</p>
+<p>根据伴随矩阵行列式公式 $|A^*| = |A|^{n-1}$（$n = 3$）：<br />
+$$|A^*| = |A|^{3-1} = |A|^2$$</p>
+<p>已知 $|A| = 2$，代入得：<br />
+$$|(2A)^* - 3A^*| = 2^2 = 4$$</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>习题 2.6：二阶矩阵快速求逆与矩阵方程</h2>
+<h3>题目</h3>
+<p>求解矩阵方程 $XA = B$，其中系数矩阵 $A = \begin{bmatrix} 3 & 5 \\ \\ 1 & 2 \end{bmatrix}$，常数矩阵 $B = \begin{bmatrix} 1 & 2 \\ \\ 3 & 4 \end{bmatrix}$。</p>
+<h3>主要思路</h3>
+<p>由于未知矩阵 $X$ 在左侧，方程两边应向右乘 $A^{-1}$，即 $X = B A^{-1}$。计算 $A^{-1}$ 时利用二阶方阵求逆速算公式“主对调，副变号，除以模”。</p>
+<h3>详细解答</h3>
+<blockquote>
+<p>[1] <strong>计算二阶系数矩阵的行列式与逆矩阵</strong></p>
+<blockquote>
+<p>计算 $|A|$：<br />
+$$|A| = 3 \times 2 - 5 \times 1 = 6 - 5 = 1 \ne 0$$</p>
+<p>由二阶矩阵求逆口诀（主对调，副变号）：<br />
+$$A^{-1} = \frac{1}{1} \begin{bmatrix} 2 & -5 \\ \\ -1 & 3 \end{bmatrix} = \begin{bmatrix} 2 & -5 \\ \\ -1 & 3 \end{bmatrix}$$</p>
+</blockquote>
+<p>[2] <strong>右乘求出未知矩阵 $X$</strong></p>
+<blockquote>
+<p>$$X = B A^{-1} = \begin{bmatrix} 1 & 2 \\ \\ 3 & 4 \end{bmatrix} \begin{bmatrix} 2 & -5 \\ \\ -1 & 3 \end{bmatrix}$$</p>
+</blockquote>
+<p>[3] <strong>矩阵乘法计算各项元素</strong></p>
+<blockquote>
+<p>(1) 第 1 行元素：<br />
+$$x_{11} = 1 \times 2 + 2 \times (-1) = 2 - 2 = 0$$<br />
+$$x_{12} = 1 \times (-5) + 2 \times 3 = -5 + 6 = 1$$</p>
+<p>(2) 第 2 行元素：<br />
+$$x_{21} = 3 \times 2 + 4 \times (-1) = 6 - 4 = 2$$<br />
+$$x_{22} = 3 \times (-5) + 4 \times 3 = -15 + 12 = -3$$</p>
+<p>故未知矩阵为：<br />
+$$X = \begin{bmatrix} 0 & 1 \\ \\ 2 & -3 \end{bmatrix}$$</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>习题 2.7：三阶矩阵初等行变换求逆全过程</h2>
+<h3>题目</h3>
+<p>设 3 阶方阵 $A = \begin{bmatrix} 1 & 0 & 1 \\ \\ 2 & 1 & 0 \\ \\ -1 & 1 & -2 \end{bmatrix}$。利用初等行变换法求 $A^{-1}$。</p>
+<h3>主要思路</h3>
+<p>构造增广矩阵 $[A | E]$，利用初等行变换，通过主元消元法将左侧矩阵化为单位矩阵 $E$，右侧即为所求逆矩阵 $A^{-1}$。</p>
+<h3>详细解答</h3>
+<blockquote>
+<p>[1] <strong>构造增广矩阵并消去第 1 列非对角元</strong></p>
+<blockquote>
+<p>$$[A | E] = \left[\begin{array}{ccc:ccc} 1 & 0 & 1 & 1 & 0 & 0 \\ \\ 2 & 1 & 0 & 0 & 1 & 0 \\ \\ -1 & 1 & -2 & 0 & 0 & 1 \end{array}\right]$$</p>
+<p>执行行变换 $r_2 - 2r_1 \to r_2$，$r_3 + r_1 \to r_3$：<br />
+$$\to \left[\begin{array}{ccc:ccc} 1 & 0 & 1 & 1 & 0 & 0 \\ \\ 0 & 1 & -2 & -2 & 1 & 0 \\ \\ 0 & 1 & -1 & 1 & 0 & 1 \end{array}\right]$$</p>
+</blockquote>
+<p>[2] <strong>消去第 2 列非对角元</strong></p>
+<blockquote>
+<p>执行行变换 $r_3 - r_2 \to r_3$：<br />
+$$\to \left[\begin{array}{ccc:ccc} 1 & 0 & 1 & 1 & 0 & 0 \\ \\ 0 & 1 & -2 & -2 & 1 & 0 \\ \\ 0 & 0 & 1 & 3 & -1 & 1 \end{array}\right]$$</p>
+</blockquote>
+<p>[3] <strong>向上消去第 3 列非对角元化为单位矩阵</strong></p>
+<blockquote>
+<p>执行行变换 $r_1 - r_3 \to r_1$，$r_2 + 2r_3 \to r_2$：<br />
+$$\to \left[\begin{array}{ccc:ccc} 1 & 0 & 0 & -2 & 1 & -1 \\ \\ 0 & 1 & 0 & 4 & -1 & 2 \\ \\ 0 & 0 & 1 & 3 & -1 & 1 \end{array}\right]$$</p>
+<p>左侧已完全化为单位矩阵 $E$，读取右侧即为逆矩阵：<br />
+$$A^{-1} = \begin{bmatrix} -2 & 1 & -1 \\ \\ 4 & -1 & 2 \\ \\ 3 & -1 & 1 \end{bmatrix}$$</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>习题 2.8：分块矩阵求逆与乘积性质</h2>
+<h3>题目</h3>
+<p>设方阵 $M = \begin{bmatrix} 1 & 2 & 0 & 0 \\ \\ 3 & 4 & 0 & 0 \\ \\ 0 & 0 & 2 & 0 \\ \\ 0 & 0 & 0 & 5 \end{bmatrix}$。求其逆矩阵 $M^{-1}$。</p>
+<h3>主要思路</h3>
+<p>观察到矩阵 $M$ 为分块对角矩阵形态 $M = \begin{bmatrix} A & O \\ O & B \end{bmatrix}$，其中 $A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}$，$B = \begin{bmatrix} 2 & 0 \\ 0 & 5 \end{bmatrix}$。根据分块对角阵求逆公式 $M^{-1} = \begin{bmatrix} A^{-1} & O \\ O & B^{-1} \end{bmatrix}$ 快速求解。</p>
+<h3>详细解答</h3>
+<blockquote>
+<p>[1] <strong>子块求逆计算</strong></p>
+<blockquote>
+<p>(1) 对子块 $A = \begin{bmatrix} 1 & 2 \\ \\ 3 & 4 \end{bmatrix}$：<br />
+行列式 $|A| = 4 - 6 = -2 \ne 0$。<br />
+由二阶快速求逆：<br />
+$$A^{-1} = -\frac{1}{2} \begin{bmatrix} 4 & -2 \\ \\ -3 & 1 \end{bmatrix} = \begin{bmatrix} -2 & 1 \\ \\ \frac{3}{2} & -\frac{1}{2} \end{bmatrix}$$</p>
+<p>(2) 对对角子块 $B = \begin{bmatrix} 2 & 0 \\ \\ 0 & 5 \end{bmatrix}$：<br />
+对角矩阵求逆即各对角元取倒数：<br />
+$$B^{-1} = \begin{bmatrix} \frac{1}{2} & 0 \\ \\ 0 & \frac{1}{5} \end{bmatrix}$$</p>
+</blockquote>
+<p>[2] <strong>装配分块对角逆矩阵</strong></p>
+<blockquote>
+<p>由分块对角矩阵求逆法则：<br />
+$$M^{-1} = \begin{bmatrix} A^{-1} & O \\ \\ O & B^{-1} \end{bmatrix} = \begin{bmatrix} -2 & 1 & 0 & 0 \\ \\ \frac{3}{2} & -\frac{1}{2} & 0 & 0 \\ \\ 0 & 0 & \frac{1}{2} & 0 \\ \\ 0 & 0 & 0 & \frac{1}{5} \end{bmatrix}$$</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>习题 2.9：伴随矩阵的秩阶梯判定</h2>
+<h3>题目</h3>
+<p>设 $A$ 为 4 阶方阵，且齐次线性方程组 $Ax = 0$ 的基础解系含有 2 个线性无关的解向量。则方阵 $A$ 的伴随矩阵的秩 $r(A^*)$ 等于（ ）。</p>
+<blockquote>
+<p>[1] (A) 4</p>
+<p>[2] (B) 2</p>
+<p>[3] (C) 1</p>
+<p>[4] (D) 0</p>
+</blockquote>
+<h3>主要思路</h3>
+<p>由齐次线性方程组基础解系容量公式 $n - r(A) = 2$ 反推矩阵的秩 $r(A)$，再结合伴随矩阵的秩阶梯分布定理确定 $r(A^*)$。</p>
+<h3>详细解答</h3>
+<blockquote>
+<p>[1] <strong>计算原矩阵的秩 $r(A)$</strong></p>
+<blockquote>
+<p>设未知量个数为 $n = 4$。<br />
+根据解空间维数定理，基础解系所含向量个数为：<br />
+$$n - r(A) = 2 \implies 4 - r(A) = 2 \implies r(A) = 2$$</p>
+</blockquote>
+<p>[2] <strong>套用伴随矩阵的秩阶梯定理</strong></p>
+<blockquote>
+<p>对任意 $n$ 阶方阵（此处 $n = 4$）：<br />
+$$r(A^*) = \begin{cases} n, & r(A) = n \\ \\ 1, & r(A) = n - 1 \\ \\ 0, & r(A) < n - 1 \end{cases}$$</p>
+<p>此处 $n - 1 = 3$。因为 $r(A) = 2 < 3$，原矩阵的所有 3 阶子式全为 0。</p>
+</blockquote>
+<p>[3] <strong>确定伴随矩阵的秩</strong></p>
+<blockquote>
+<p>因为所有 3 阶子式全为 0，故伴随矩阵中的所有元素（3 阶代数余子式）全部为 0，即：<br />
+$$A^* = O \implies r(A^*) = 0$$</p>
+<p>正确答案为 <strong>(D)</strong>。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>习题 2.10：初等矩阵左乘右乘的几何代数对应</h2>
+<h3>题目</h3>
+<p>设 3 阶方阵 $A = \begin{bmatrix} \alpha_1 \\ \\ \alpha_2 \\ \\ \alpha_3 \end{bmatrix}$，其中 $\alpha_i$ 为行向量。若通过初等变换将 $A$ 变换为矩阵 $B = \begin{bmatrix} \alpha_1 + 3\alpha_3 \\ \\ \alpha_2 \\ \\ \alpha_3 \end{bmatrix}$，则矩阵 $B$ 与 $A$ 的关系为（ ）。</p>
+<blockquote>
+<p>[1] (A) $B = A E_{13}(3)$</p>
+<p>[2] (B) $B = E_{13}(3) A$</p>
+<p>[3] (C) $B = A E_{31}(3)$</p>
+<p>[4] (D) $B = E_{31}(3) A$</p>
+</blockquote>
+<h3>主要思路</h3>
+<p>考查初等行/列变换与初等矩阵乘法的对应法则：“左乘行变，右乘列变”。将第 3 行的 3 倍加到第 1 行是初等行变换，必须用相应的初等矩阵左乘 $A$。</p>
+<h3>详细解答</h3>
+<blockquote>
+<p>[1] <strong>识别初等变换类型</strong></p>
+<blockquote>
+<p>观察矩阵 $B$ 的构成：第 1 行由 $\alpha_1$ 变为 $\alpha_1 + 3\alpha_3$，其余两行保持不变。<br />
+这属于第三类初等<strong>行</strong>变换：将第 3 行的 3 倍加到第 1 行，记作 $r_1 + 3r_3$。</p>
+</blockquote>
+<p>[2] <strong>确定乘法方向与初等矩阵形态</strong></p>
+<blockquote>
+<p>(1) 行变换必须是<strong>左乘</strong>初等矩阵，排除选项 (A) 与 (C)；<br />
+(2) 对单位矩阵 $E$ 作同样的行变换 $r_1 + 3r_3$：<br />
+$$E = \begin{bmatrix} 1 & 0 & 0 \\ \\ 0 & 1 & 0 \\ \\ 0 & 0 & 1 \end{bmatrix} \xlongequal{r_1 + 3r_3} \begin{bmatrix} 1 & 0 & 3 \\ \\ 0 & 1 & 0 \\ \\ 0 & 0 & 1 \end{bmatrix} = E_{13}(3)$$</p>
+</blockquote>
+<p>[3] <strong>结论输出</strong></p>
+<blockquote>
+<p>故 $B = E_{13}(3) A$。正确答案为 <strong>(B)</strong>。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>习题 2.11：双侧可逆矩阵方程求解</h2>
+<h3>题目</h3>
+<p>求解矩阵方程 $AXB = C$，其中：</p>
+<p>$$A = \begin{bmatrix} 1 & 1 \\ \\ 0 & 1 \end{bmatrix}, \quad B = \begin{bmatrix} 2 & 1 \\ \\ 1 & 1 \end{bmatrix}, \quad C = \begin{bmatrix} 1 & 0 \\ \\ 0 & 1 \end{bmatrix}$$</p>
+<h3>主要思路</h3>
+<p>由于 $A, B$ 均为 2 阶可逆方阵，两边分别左乘 $A^{-1}$、右乘 $B^{-1}$，得未知矩阵 $X = A^{-1} C B^{-1} = A^{-1} B^{-1} = (BA)^{-1}$。</p>
+<h3>详细解答</h3>
+<blockquote>
+<p>[1] <strong>计算 $A^{-1}$ 与 $B^{-1}$</strong></p>
+<blockquote>
+<p>(1) $|A| = 1 \ne 0$，由二阶求逆公式：<br />
+$$A^{-1} = \begin{bmatrix} 1 & -1 \\ \\ 0 & 1 \end{bmatrix}$$</p>
+<p>(2) $|B| = 2 \times 1 - 1 \times 1 = 1 \ne 0$，由二阶求逆公式：<br />
+$$B^{-1} = \begin{bmatrix} 1 & -1 \\ \\ -1 & 2 \end{bmatrix}$$</p>
+</blockquote>
+<p>[2] <strong>两边求乘积求解 $X$</strong></p>
+<blockquote>
+<p>因为 $C = E$，故：<br />
+$$X = A^{-1} E B^{-1} = A^{-1} B^{-1}$$</p>
+</blockquote>
+<p>[3] <strong>直接矩阵乘法计算</strong></p>
+<blockquote>
+<p>$$X = \begin{bmatrix} 1 & -1 \\ \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 1 & -1 \\ \\ -1 & 2 \end{bmatrix} = \begin{bmatrix} 1\times 1 + (-1)\times(-1) & 1\times(-1) + (-1)\times 2 \\ \\ 0\times 1 + 1\times(-1) & 0\times(-1) + 1\times 2 \end{bmatrix} = \begin{bmatrix} 2 & -3 \\ \\ -1 & 2 \end{bmatrix}$$</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>习题 2.12：同阶方阵单侧可逆等价于双侧可逆证明</h2>
+<h3>题目</h3>
+<p>设 $A, B$ 均为 $n$ 阶方阵，满足 $AB = E$。证明：$BA = E$ 且 $B = A^{-1}$。</p>
+<h3>主要思路</h3>
+<p>在线性空间中，同阶方阵满足单侧逆必然可推出双侧逆。利用行列式乘法定理 $|AB| = |A||B| = 1$ 证明方阵可逆，再利用可逆矩阵的逆矩阵唯一性完成证明。</p>
+<h3>详细解答</h3>
+<blockquote>
+<p>[1] <strong>利用行列式乘法定理证明可逆性</strong></p>
+<blockquote>
+<p>对已知等式 $AB = E$ 两边取行列式：<br />
+$$|AB| = |E| \implies |A| |B| = 1$$</p>
+<p>因为数域中两数乘积为 1，故 $|A| \ne 0$ 且 $|B| \ne 0$。<br />
+由可逆矩阵充要条件，方阵 $A$ 与 $B$ 均可逆。</p>
+</blockquote>
+<p>[2] <strong>推导双侧逆恒等式</strong></p>
+<blockquote>
+<p>因为 $A$ 可逆，存在逆矩阵 $A^{-1}$。<br />
+在等式 $AB = E$ 两边同时左乘 $A^{-1}$：<br />
+$$A^{-1} (AB) = A^{-1} E \implies (A^{-1} A) B = A^{-1} \implies E B = A^{-1} \implies B = A^{-1}$$</p>
+</blockquote>
+<p>[3] <strong>验证反向乘积</strong></p>
+<blockquote>
+<p>将 $B = A^{-1}$ 代入 $BA$：<br />
+$$BA = A^{-1} A = E$$<br />
+命题得证。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>习题 2.13：矩阵和的秩与分块降维不等式</h2>
+<h3>题目</h3>
+<p>设 $A, B$ 为 3 阶方阵，已知 $r(A) = 2$，$r(B) = 1$。则矩阵 $A + B$ 的秩 $r(A+B)$ 的可能取值范围是（ ）。</p>
+<blockquote>
+<p>[1] (A) 只能为 3</p>
+<p>[2] (B) 只能为 1</p>
+<p>[3] (C) 可以为 1, 2, 3</p>
+<p>[4] (D) 可以为 0, 1, 2, 3</p>
+</blockquote>
+<h3>主要思路</h3>
+<p>考查矩阵和的秩双向不等式 $|r(A) - r(B)| \le r(A+B) \le r(A) + r(B)$，并结合 3 阶方阵的最高秩上限 $\min(3, 3) = 3$ 确定上下界。</p>
+<h3>详细解答</h3>
+<blockquote>
+<p>[1] <strong>运用矩阵和的秩双向下界与上界不等式</strong></p>
+<blockquote>
+<p>根据三角秩不等式：<br />
+$$r(A+B) \le r(A) + r(B) = 2 + 1 = 3$$</p>
+<p>又由差的秩不等式：<br />
+$$r(A) = r((A+B) - B) \le r(A+B) + r(-B) = r(A+B) + r(B)$$<br />
+得：<br />
+$$r(A+B) \ge r(A) - r(B) = 2 - 1 = 1$$</p>
+<p>综合得：<br />
+$$1 \le r(A+B) \le 3$$</p>
+</blockquote>
+<p>[2] <strong>构造具体实例验证各值的可达性</strong></p>
+<blockquote>
+<p>(1) 取 $A = \mathrm{diag}(1, 1, 0)$，$B = \mathrm{diag}(0, 0, 1)$，则 $A+B = E_3$，$r(A+B) = 3$；<br />
+(2) 取 $A = \mathrm{diag}(1, 1, 0)$，$B = \mathrm{diag}(1, 0, 0)$，则 $A+B = \mathrm{diag}(2, 1, 0)$，$r(A+B) = 2$；<br />
+(3) 取 $A = \mathrm{diag}(1, 1, 0)$，$B = \mathrm{diag}(-1, 0, 0)$，则 $A+B = \mathrm{diag}(0, 1, 0)$，$r(A+B) = 1$。</p>
+</blockquote>
+<p>[3] <strong>结论输出</strong></p>
+<blockquote>
+<p>因此 $r(A+B)$ 可以取 1, 2, 3。正确答案为 <strong>(C)</strong>。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>习题 2.14：矩阵等价标准形与初等变换充要条件</h2>
+<h3>题目</h3>
+<p>设矩阵 $A = \begin{bmatrix} 1 & 2 & -1 \\ \\ 2 & 4 & -2 \\ \\ -1 & -2 & 1 \end{bmatrix}$，求矩阵 $A$ 的等价标准形，并指出其充要条件。</p>
+<h3>主要思路</h3>
+<p>同型矩阵等价的充要条件是秩相等。求等价标准形的核心是求出矩阵 $A$ 的秩 $r(A) = r$，其标准形即为 $\begin{bmatrix} E_r & O \\ O & O \end{bmatrix}$。</p>
+<h3>详细解答</h3>
+<blockquote>
+<p>[1] <strong>初等行变换求矩阵的秩</strong></p>
+<blockquote>
+<p>$$A = \begin{bmatrix} 1 & 2 & -1 \\ \\ 2 & 4 & -2 \\ \\ -1 & -2 & 1 \end{bmatrix} \xlongequal[r_3 + r_1]{r_2 - 2r_1} \begin{bmatrix} 1 & 2 & -1 \\ \\ 0 & 0 & 0 \\ \\ 0 & 0 & 0 \end{bmatrix}$$</p>
+<p>矩阵仅有 1 个非零行，故矩阵的秩为：<br />
+$$r(A) = 1$$</p>
+</blockquote>
+<p>[2] <strong>写出等价标准形</strong></p>
+<blockquote>
+<p>任意秩为 $r = 1$ 的 $3 \times 3$ 矩阵，均可通过可逆行变换与列变换化为标准形：<br />
+$$\begin{bmatrix} E_1 & O \\ \\ O & O \end{bmatrix} = \begin{bmatrix} 1 & 0 & 0 \\ \\ 0 & 0 & 0 \\ \\ 0 & 0 & 0 \end{bmatrix}$$</p>
+</blockquote>
+<p>[3] <strong>总结矩阵等价的充要条件</strong></p>
+<blockquote>
+<p>两个同为 $m \times n$ 的矩阵 $A$ 与 $B$ 等价的充分必要条件是：<br />
+$$r(A) = r(B)$$</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>习题 2.15：幂等矩阵的代数性质与空间直和分解</h2>
+<h3>题目</h3>
+<p>设 $n$ 阶方阵 $A$ 满足 $A^2 = A$（即 $A$ 为幂等矩阵）。证明：</p>
+<p>(1) 矩阵 $E - A$ 亦为幂等矩阵；</p>
+<p>(2) $r(A) + r(E - A) = n$。</p>
+<h3>主要思路</h3>
+<p>考查幂等算子的核心性质。通过展开 $(E-A)^2$ 证明其幂等性；利用 $A(E-A) = O$ 结合 Sylvester 秩不等式与和的秩不等式双向夹逼证明秩和恒等于 $n$。</p>
+<h3>详细解答</h3>
+<blockquote>
+<p>[1] <strong>证明 $E - A$ 为幂等矩阵</strong></p>
+<blockquote>
+<p>计算 $(E - A)^2$：<br />
+$$(E - A)^2 = (E - A)(E - A) = E^2 - EA - AE + A^2 = E - 2A + A^2$$</p>
+<p>因为已知 $A^2 = A$，代入得：<br />
+$$(E - A)^2 = E - 2A + A = E - A$$</p>
+<p>故 $E - A$ 亦为幂等矩阵。</p>
+</blockquote>
+<p>[2] <strong>利用乘积零矩阵给出秩和上界</strong></p>
+<blockquote>
+<p>计算乘积 $A(E - A)$：<br />
+$$A(E - A) = A - A^2 = A - A = O$$</p>
+<p>由乘积为零矩阵的 Sylvester 秩不等式推论：<br />
+$$r(A) + r(E - A) \le n$$</p>
+</blockquote>
+<p>[3] <strong>利用矩阵和的性质给出秩和下界完成夹逼</strong></p>
+<blockquote>
+<p>考虑单位矩阵的分解：<br />
+$$E = A + (E - A)$$</p>
+<p>根据矩阵和的秩不等式：<br />
+$$r(E) = r(A + (E - A)) \le r(A) + r(E - A)$$</p>
+<p>因为 $r(E) = n$，所以：<br />
+$$n \le r(A) + r(E - A)$$</p>
+<p>综合上界与下界：<br />
+$$n \le r(A) + r(E - A) \le n \implies r(A) + r(E - A) = n$$<br />
+命题完全得证。</p>
+</blockquote>
+</blockquote>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

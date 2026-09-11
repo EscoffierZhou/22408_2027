@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>例题</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h1>Chap01 行列式 · 核心大例题精讲</h1>
+<h2>知识考点与题型导航</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">例题编号</th>
+<th style="text-align: left;">核心考点与矩阵形态</th>
+<th style="text-align: left;">解题主干方法与技巧</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>例 1.1</strong></td>
+<td style="text-align: left;">4阶循环三对角行列式</td>
+<td style="text-align: left;">按第 1 列拉普拉斯降阶展开</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 1.2</strong></td>
+<td style="text-align: left;">4阶标准爪型 / 箭型行列式</td>
+<td style="text-align: left;">加权消爪法化为上三角</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 1.3</strong></td>
+<td style="text-align: left;">4阶含参副三角矩阵消元</td>
+<td style="text-align: left;">基准行相减提取公因式</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 1.4</strong></td>
+<td style="text-align: left;">$n$ 阶行和相等型与副对角反转</td>
+<td style="text-align: left;">所有列加到第 1 列与列对换反号</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 1.5</strong></td>
+<td style="text-align: left;">4阶 \"X\" 型与 $2k$ 阶推广</td>
+<td style="text-align: left;">广义拉普拉斯展开与相邻对换分块</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 1.6</strong></td>
+<td style="text-align: left;">构造法化简为范德蒙德型</td>
+<td style="text-align: left;">行变换提公因式与二次插值克拉默法则</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 1.7</strong></td>
+<td style="text-align: left;">三对角行列式降阶递推数列</td>
+<td style="text-align: left;">二阶线性常系数递推数列解法</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 1.8</strong></td>
+<td style="text-align: left;">行列式函数的一阶差分与导数</td>
+<td style="text-align: left;">初等变换消爪与行列式求导法则</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 1.9</strong></td>
+<td style="text-align: left;">特征方程重根讨论与因式分解</td>
+<td style="text-align: left;">分块对角展开与判别式因式分解三步法</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 1.10</strong></td>
+<td style="text-align: left;">4阶抽象行列式列向量拆分</td>
+<td style="text-align: left;">单列线性可加性与列对换反对称性</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 1.11</strong></td>
+<td style="text-align: left;">抽象向量组线性表出的矩阵积</td>
+<td style="text-align: left;">过渡矩阵构造与行列式乘法定理</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 1.12</strong></td>
+<td style="text-align: left;">代数余子式任意线性组合</td>
+<td style="text-align: left;">构造新矩阵换数法</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 1.13</strong></td>
+<td style="text-align: left;">齐次线性方程组与行列式综合</td>
+<td style="text-align: left;">矩阵乘积零矩阵与可逆反证法</td>
+</tr>
+</tbody>
+</table>
+<h2>核心大例题全景精讲</h2>
+<p><strong>例题[1.1]: [4阶循环三对角行列式计算与展开技巧]</strong></p>
+<p>计算 4 阶行列式的值：</p>
+<p>$$D_4 = \\begin{vmatrix} 2 & -1 & 0 & 0 \\ \\ 0 & 2 & -1 & 0 \\ \\ 0 & 0 & 2 & -1 \\ \\ -1 & 0 & 0 & 2 \\end{vmatrix}$$</p>
+<p>并在考研选择题选项中确定正确项：(A) 12 \quad (B) 15 \quad (C) 16 \quad (D) 17。</p>
+<p>主要思路: 观察到第 1 列仅有两个非零元 $2$ 和 $-1$，优先采用按第 1 列拉普拉斯展开定理降阶，将其拆分为两个 3 阶上三角和下三角行列式的代数和。</p>
+<blockquote>
+<p>[1] 运用拉普拉斯展开定理按第 1 列展开：</p>
+<p>根据按列展开定理：</p>
+<p>$$D_4 = 2 \\cdot A_{11} + (-1) \\cdot A_{41}$$</p>
+<p>其中代数余子式分别对应正负符号因子：</p>
+<p>$$A_{11} = (-1)^{1+1} M_{11} = M_{11}$$</p>
+<p>$$A_{41} = (-1)^{4+1} M_{41} = -M_{41}$$</p>
+<p>代入得：</p>
+<p>$$D_4 = 2 M_{11} - (-1)(-M_{41}) = 2 M_{11} + M_{41}$$</p>
+<p>[2] 分别计算 3 阶余子式：</p>
+<p>余子式 $M_{11}$ 为划去第 1 行第 1 列后的 3 阶子式：</p>
+<p>$$M_{11} = \\begin{vmatrix} 2 & -1 & 0 \\ \\ 0 & 2 & -1 \\ \\ 0 & 0 & 2 \\end{vmatrix}$$</p>
+<p>此为标准的上三角行列式，其值等于主对角线元素的乘积：</p>
+<p>$$M_{11} = 2 \\times 2 \\times 2 = 8$$</p>
+<p>余子式 $M_{41}$ 为划去第 4 行第 1 列后的 3 阶子式：</p>
+<p>$$M_{41} = \\begin{vmatrix} -1 & 0 & 0 \\ \\ 2 & -1 & 0 \\ \\ 0 & 2 & -1 \\end{vmatrix}$$</p>
+<p>此为标准的下三角行列式，其值等于主对角线元素的乘积：</p>
+<p>$$M_{41} = (-1) \\times (-1) \\times (-1) = -1$$</p>
+<p>[3] 综合代入与解法对比总结：</p>
+<p>将余子式数值回代：</p>
+<p>$$D_4 = 2 \\times 8 + (-1) = 16 - 1 = 15$$</p>
+<p>故正确选项为 (B)。</p>
+<p><font color=deeppink>多解法拓展 (加边法与消元法)</font>：</p>
+<p>将第 2、3、4 列全部加到第 1 列，第 1 列各元素之和为 $2-1=1$。提取公因式 1 之后，各行减去第 1 行化为上三角或爪型，同样可在 30 秒内秒杀求得结果 15。</p>
+</blockquote>
+<p><strong>例题[1.2]: [4阶标准爪型行列式与加权消爪法]</strong></p>
+<p>计算 4 阶行列式：</p>
+<p>$$D = \\begin{vmatrix} 1 & 1 & 1 & 1 \\ \\ 1 & 2 & 0 & 0 \\ \\ 1 & 0 & 3 & 0 \\ \\ 1 & 0 & 0 & 4 \\end{vmatrix}$$</p>
+<p>主要思路: 该行列式为经典的“爪型/箭型”结构。破题核心在于<strong>加权消爪法</strong>：利用主对角线上非零元 $2, 3, 4$ 分别对第 1 列实施初等列变换消去第 1 列的“竖爪”，瞬间化为上三角行列式。</p>
+<blockquote>
+<p>[1] 构造初等列变换消爪算子：</p>
+<p>为消除第 1 列中第 2、3、4 行的元素 1，利用各列的对角元分别做倍加变换：</p>
+<p>$$c_1 - \\frac{1}{2} c_2 \\to c_1$$</p>
+<p>$$c_1 - \\frac{1}{3} c_3 \\to c_1$$</p>
+<p>$$c_1 - \\frac{1}{4} c_4 \\to c_1$$</p>
+<p>[2] 计算消元后的首项与三角化：</p>
+<p>经过上述变换后，第 1 列的第 2、3、4 行元素全部被精准消为 0。</p>
+<p>左上角首元素 $a_{11}$ 经历三次减法变为：</p>
+<p>$$a_{11}' = 1 - 1 \\times \\frac{1}{2} - 1 \\times \\frac{1}{3} - 1 \\times \\frac{1}{4} = 1 - \\frac{1}{2} - \\frac{1}{3} - \\frac{1}{4}$$</p>
+<p>通分计算得：</p>
+<p>$$a_{11}' = \\frac{12 - 6 - 4 - 3}{12} = -\\frac{1}{12}$$</p>
+<p>此时行列式化为标准的上三角行列式：</p>
+<p>$$D = \\begin{vmatrix} -\\frac{1}{12} & 1 & 1 & 1 \\ \\ 0 & 2 & 0 & 0 \\ \\ 0 & 0 & 3 & 0 \\ \\ 0 & 0 & 0 & 4 \\end{vmatrix}$$</p>
+<p>[3] 计算行列式数值与通用公式提炼：</p>
+<p>利用上三角行列式对角元乘积公式：</p>
+<p>$$D = \\left(-\\frac{1}{12}\\right) \\times 2 \\times 3 \\times 4 = -\\frac{1}{12} \\times 24 = -2$$</p>
+<p><font color=deeppink>考研通法提炼</font>：</p>
+<p>对于一般 $n+1$ 阶爪型行列式 $D = \\det(A)$，若主对角元 $a_i \\neq 0$，则通解公式为：</p>
+<p>$$D = \\left(\\prod_{i=1}^n a_i\\right) \\left(a_0 - \\sum_{i=1}^n \\frac{b_i c_i}{a_i}\\right)$$</p>
+</blockquote>
+<p><strong>例题[1.3]: [含变量参数的4阶副爪型矩阵消元]</strong></p>
+<p>计算 4 阶行列式：</p>
+<p>$$D = \\begin{vmatrix} 1 & -1 & 1 & x-1 \\ \\ 1 & -1 & x+1 & -1 \\ \\ 1 & x-1 & 1 & -1 \\ \\ x+1 & -1 & 1 & -1 \\end{vmatrix}$$</p>
+<p>主要思路: 观察矩阵结构，各行元素均包含大量常数 $1, -1$ 与含参项。选取第 1 行为基准行，让第 2、3、4 行分别减去第 1 行，快速将非对角元素清零并提公因式 $x$。</p>
+<blockquote>
+<p>[1] 执行基准行相减变换构造大量零元：</p>
+<p>保持第 1 行不动，对以下各行实施初等行变换：</p>
+<p>$$r_2 - r_1 \\to r_2$$</p>
+<p>$$r_3 - r_1 \\to r_3$$</p>
+<p>$$r_4 - r_1 \\to r_4$$</p>
+<p>计算各项差值：</p>
+<p>第 2 行变为：$(1-1, -1-(-1), x+1-1, -1-(x-1)) = (0, 0, x, -x)$</p>
+<p>第 3 行变为：$(1-1, x-1-(-1), 1-1, -1-(x-1)) = (0, x, 0, -x)$</p>
+<p>第 4 行变为：$(x+1-1, -1-(-1), 1-1, -1-(x-1)) = (x, 0, 0, -x)$</p>
+<p>行列式化为：</p>
+<p>$$D = \\begin{vmatrix} 1 & -1 & 1 & x-1 \\ \\ 0 & 0 & x & -x \\ \\ 0 & x & 0 & -x \\ \\ x & 0 & 0 & -x \\end{vmatrix}$$</p>
+<p>[2] 提取各行公因式并实施列消元：</p>
+<p>分别从第 2 行、第 3 行、第 4 行提取公因子 $x$：</p>
+<p>$$D = x^3 \\begin{vmatrix} 1 & -1 & 1 & x-1 \\ \\ 0 & 0 & 1 & -1 \\ \\ 0 & 1 & 0 & -1 \\ \\ 1 & 0 & 0 & -1 \\end{vmatrix}$$</p>
+<p>对当前行列式执行初等行变换 $r_1 - r_4 \\to r_1$：</p>
+<p>$$r_1 \\to (0, -1, 1, x)$$</p>
+<p>进一步执行列变换：将第 2 列加到第 4 列 ($c_4 + c_2 \\to c_4$)，第 3 列加到第 4 列 ($c_4 + c_3 \\to c_4$)：</p>
+<p>第 2、3、4 行的最后一列均被消为 0，而第 1 行最后一列变为 $x - 1 + 1 = x$。</p>
+<p>矩阵化为分块副三角型，直接计算得到其展开值为 $x$。</p>
+<p>[3] 结论与特值代入检验技巧：</p>
+<p>综上计算得到：</p>
+<p>$$D = x^3 \\times x = x^4$$</p>
+<p><font color=deeppink>考研特值速检技巧</font>：</p>
+<p>若代入 $x=0$，原行列式第 2 行与第 1 行相同，行列式必为 0；</p>
+<p>代入 $x=1$，原行列式对角占优，直接计算可知值为 1；</p>
+<p>由于展开式各项乘积最高次数为 4 次且首项系数为 1，直接锁定 $D = x^4$。</p>
+</blockquote>
+<p><strong>例题[1.4]: [$n$ 阶行和相等型行列式通解与副对角线反转通式]</strong></p>
+<p>(1) 计算 $n$ 阶行列式：</p>
+<p>$$D_n = \\begin{vmatrix} a & b & b & \\cdots & b \\ \\ b & a & b & \\cdots & b \\ \\ b & b & a & \\cdots & b \\ \\ \\vdots & \\vdots & \\vdots & \\ddots & \\vdots \\ \\ b & b & b & \\cdots & a \\end{vmatrix}$$</p>
+<p>(2) 探讨其副对角线反转型行列式 $G_n$ 的通解公式：</p>
+<p>$$G_n = \\begin{vmatrix} b & b & \\cdots & b & a \\ \\ b & b & \\cdots & a & b \\ \\ \\vdots & \\vdots & \\ddots & \\vdots & \\vdots \\ \\ a & b & \\cdots & b & b \\end{vmatrix}$$</p>
+<p>主要思路:<br />
+(1) 各行各列元素之和恒相等为 $S = a + (n-1)b$。将所有列加到第 1 列提出公因式，再以第 1 行为基准行作差化为上三角。<br />
+(2) 副对角线反转型通过列对换排列完全倒序化为标准型，乘以逆序数符号因子。</p>
+<blockquote>
+<p>[1] 所有列累加至第 1 列提取公因式：</p>
+<p>对 $D_n$ 实施初等列变换：</p>
+<p>$$c_1 + c_2 + \\cdots + c_n \\to c_1$$</p>
+<p>第 1 列各行元素统一变为 $a + (n-1)b$。提出第 1 列公因式：</p>
+<p>$$D_n = [a + (n-1)b] \\begin{vmatrix} 1 & b & b & \\cdots & b \\ \\ 1 & a & b & \\cdots & b \\ \\ 1 & b & a & \\cdots & b \\ \\ \\vdots & \\vdots & \\vdots & \\ddots & \\vdots \\ \\ 1 & b & b & \\cdots & a \\end{vmatrix}$$</p>
+<p>[2] 基准行作差化为严格上三角行列式：</p>
+<p>保持第 1 行不变，从第 2 行到第 $n$ 行分别减去第 1 行：</p>
+<p>$$r_i - r_1 \\to r_i \\quad (i = 2, 3, \\dots, n)$$</p>
+<p>第 $i$ 行变为 $(0, 0, \\dots, a-b, \\dots, 0)$，即仅在第 $i$ 个对角位置为 $a-b$。</p>
+<p>行列式化为标准的上三角矩阵：</p>
+<p>$$\\begin{vmatrix} 1 & b & b & \\cdots & b \\ \\ 0 & a-b & 0 & \\cdots & 0 \\ \\ 0 & 0 & a-b & \\cdots & 0 \\ \\ \\vdots & \\vdots & \\vdots & \\ddots & \\vdots \\ \\ 0 & 0 & 0 & \\cdots & a-b \\end{vmatrix} = 1 \\times (a-b)^{n-1}$$</p>
+<p>故 $D_n = [a + (n-1)b](a-b)^{n-1}$。</p>
+<p>[3] 副对角线反转型 $G_n$ 的列对换推导：</p>
+<p>观察 $G_n$，将其各列完全对称翻转（第 1 列与第 $n$ 列互换，第 2 列与第 $n-1$ 列互换...）：</p>
+<p>排列 $(n, n-1, \\dots, 2, 1)$ 的逆序数为 $\\tau = \\frac{n(n-1)}{2}$。</p>
+<p>每对换一次列，行列式反号一次，总共产生符号因子 $(-1)^{\\frac{n(n-1)}{2}}$。</p>
+<p>翻转后主对角线上元素全部变为 $a$，其余非对角元全为 $b$，恰好完全等于 $D_n$！</p>
+<p>由此直接导出副对角线反转通式：</p>
+<p>$$G_n = (-1)^{\\frac{n(n-1)}{2}} [a + (n-1)b](a-b)^{n-1}$$</p>
+</blockquote>
+<p><strong>例题[1.5]: [4阶 \"X\" 型行列式拉普拉斯展开与 $2k$ 阶推广]</strong></p>
+<p>计算 4 阶交叉 \"X\" 型行列式：</p>
+<p>$$D_4 = \\begin{vmatrix} a_1 & 0 & 0 & b_1 \\ \\ 0 & a_2 & b_2 & 0 \\ \\ 0 & b_3 & a_3 & 0 \\ \\ b_4 & 0 & 0 & a_4 \\end{vmatrix}$$</p>
+<p>并推导 $2k$ 阶 \"X\" 型行列式的通解公式。</p>
+<p>主要思路: 该行列式为外层第 1、4 行与内层第 2、3 行相互解耦的十字交叉结构。采用广义拉普拉斯展开定理，或相邻行/列对换将其化为分块对角矩阵。</p>
+<blockquote>
+<p>[1] 广义拉普拉斯展开法：</p>
+<p>在第 1 行与第 4 行中，选取第 1 列与第 4 列构成的 2 阶子式：</p>
+<p>$$N = \\begin{vmatrix} a_1 & b_1 \\ \\ b_4 & a_4 \\end{vmatrix} = a_1 a_4 - b_1 b_4$$</p>
+<p>若选取其他任意两列，所得 2 阶子式均包含一整列零元，其值恒为 0。</p>
+<p>子式 $N$ 的行标为 $1, 4$，列标为 $1, 4$，其代数余子式的代数符号因子为：</p>
+<p>$$(-1)^{(1+4)+(1+4)} = (-1)^{10} = +1$$</p>
+<p>对应的余子式为划去第 1、4 行和第 1、4 列后的 2 阶子式：</p>
+<p>$$M = \\begin{vmatrix} a_2 & b_2 \\ \\ b_3 & a_3 \\end{vmatrix} = a_2 a_3 - b_2 b_3$$</p>
+<p>由此直接得到：</p>
+<p>$$D_4 = (+1) \\cdot N \\cdot M = (a_1 a_4 - b_1 b_4)(a_2 a_3 - b_2 b_3)$$</p>
+<p>[2] 初等行列变换分块对角化验证：</p>
+<p>将第 4 行连续与第 3、2 行对换移至第 2 行（对换 2 次）；</p>
+<p>将第 4 列连续与第 3、2 列对换移至第 2 列（对换 2 次）；</p>
+<p>总对换次数为 $2 + 2 = 4$（偶数次），行列式绝对值与符号均不变：</p>
+<p>$$D_4 = \\begin{vmatrix} a_1 & b_1 & 0 & 0 \\ \\ b_4 & a_4 & 0 & 0 \\ \\ 0 & 0 & a_2 & b_2 \\ \\ 0 & 0 & b_3 & a_3 \\end{vmatrix} = \\begin{vmatrix} a_1 & b_1 \\ \\ b_4 & a_4 \\end{vmatrix} \\times \\begin{vmatrix} a_2 & b_2 \\ \\ b_3 & a_3 \\end{vmatrix} = (a_1 a_4 - b_1 b_4)(a_2 a_3 - b_2 b_3)$$</p>
+<p>[3] 结论与 $2k$ 阶偶数阶通用定理：</p>
+<p>对于一般的 $2k$ 阶 \"X\" 型行列式，第 $i$ 行与第 $2k-i+1$ 行交叉，通过逐层对换解耦为 $k$ 个独立的 2 阶子式之积：</p>
+<p>$$D_{2k} = \\prod_{i=1}^k (a_i a_{2k-i+1} - b_i b_{2k-i+1})$$</p>
+<p><font color=deeppink>奇数阶拓展</font>：</p>
+<p>若阶数为 $2k+1$ 阶，中心唯一孤立元素为 $c$，则通解为 $D_{2k+1} = c \\prod_{i=1}^k (a_i a_{2k-i+2} - b_i b_{2k-i+2})$。</p>
+</blockquote>
+<p><strong>例题[1.6]: [构造法化简为范德蒙德型与抛物线三点插值]</strong></p>
+<p>(1) 计算 3 阶行列式：</p>
+<p>$$D = \\begin{vmatrix} 1 & 1 & 1 \\ \\ a & b & c \\ \\ b+c & c+a & a+b \\end{vmatrix}$$</p>
+<p>(2) 证明平面上横坐标互不相同的三个点 $(a, y_1), (b, y_2), (c, y_3)$ 恒能唯一确定一条抛物线 $y = A x^2 + B x + C$。</p>
+<p>主要思路:<br />
+(1) 观察第 2 行与第 3 行，$(b+c) + a = a+b+c$。通过行倍加提出公因式 $(a+b+c)$，制造两行相同判定值为 0。<br />
+(2) 三点二次插值问题本质是关于待定系数 $(A, B, C)$ 的线性方程组，其系数行列式为转置范德蒙德行列式，非零性直接由两两互异保证。</p>
+<blockquote>
+<p>[1] 行初等变换提取公因式：</p>
+<p>对行列式执行变换：$r_3 + r_2 \\to r_3$：</p>
+<p>$$D = \\begin{vmatrix} 1 & 1 & 1 \\ \\ a & b & c \\ \\ a+b+c & a+b+c & a+b+c \\end{vmatrix}$$</p>
+<p>从第 3 行提取公共因子 $(a+b+c)$：</p>
+<p>$$D = (a+b+c) \\begin{vmatrix} 1 & 1 & 1 \\ \\ a & b & c \\ \\ 1 & 1 & 1 \\end{vmatrix}$$</p>
+<p>[2] 利用行列式性质求值：</p>
+<p>由于变换后第 1 行与第 3 行完全相同，由行列式两行相同其值必为 0 的性质：</p>
+<p>$$D = (a+b+c) \\times 0 = 0$$</p>
+<p>[3] 抛物线二次插值的范德蒙德本质证明：</p>
+<p>将三点坐标分别代入抛物线方程，建立关于未知数 $A, B, C$ 的非齐次线性方程组：</p>
+<p>$$\\begin{cases} a^2 A + a B + C = y_1 \\ \\ b^2 A + b B + C = y_2 \\ \\ c^2 A + c B + C = y_3 \\end{cases}$$</p>
+<p>该方程组的系数矩阵为 $K = \\begin{pmatrix} a^2 & a & 1 \\ \\ b^2 & b & 1 \\ \\ c^2 & c & 1 \\end{pmatrix}$。</p>
+<p>将其按列倒序翻转并转置，对应标准的 3 阶范德蒙德行列式：</p>
+<p>$$|K| = (-1) \\begin{vmatrix} 1 & a & a^2 \\ \\ 1 & b & b^2 \\ \\ 1 & c & c^2 \\end{vmatrix} = -(b-a)(c-a)(c-b)$$</p>
+<p>因为横坐标 $a, b, c$ 两两互不相同，所以 $(b-a) \\neq 0$, $(c-a) \\neq 0$, $(c-b) \\neq 0$，故 $|K| \\neq 0$。</p>
+<p>根据克拉默法则，系数行列式不为 0 时方程组恒有且仅有唯一的一组解 $(A, B, C)$，故抛物线存在且唯一。</p>
+</blockquote>
+<p><strong>例题[1.7]: [三对角行列式降阶递推数列法与等比求和]</strong></p>
+<p>设 4 阶三对角行列式：</p>
+<p>$$D_4 = \\begin{vmatrix} a & -1 & 0 & 0 \\ \\ 1 & a & -1 & 0 \\ \\ 0 & 1 & a & -1 \\ \\ 0 & 0 & 1 & a \\end{vmatrix}$$</p>
+<p>求 $D_4$ 的值，并给出 $n$ 阶三对角行列式 $D_n$ 的二阶常系数递推关系。</p>
+<p>主要思路: 该行列式主对角元全为 $a$，次对角元分别为 $1$ 和 $-1$。按第 1 列（或第 1 行）降阶展开，建立二阶线性常系数差分递推关系 $D_n = a D_{n-1} + D_{n-2}$，求出初值递推计算。</p>
+<blockquote>
+<p>[1] 按第 1 列实施拉普拉斯降阶展开：</p>
+<p>$$D_n = a \\cdot A_{11} + 1 \\cdot A_{21} = a D_{n-1} + (-1)^{2+1} M_{21} = a D_{n-1} - M_{21}$$</p>
+<p>其中 $M_{21}$ 为划去第 2 行第 1 列后的 $(n-1)$ 阶行列式：</p>
+<p>$$M_{21} = \\begin{vmatrix} -1 & 0 & 0 & \\cdots & 0 \\ \\ 1 & a & -1 & \\cdots & 0 \\ \\ \\vdots & \\vdots & \\vdots & \\ddots & \\vdots \\ \\ 0 & 0 & \\cdots & 1 & a \\end{vmatrix}_{(n-1)}$$</p>
+<p>[2] 对子式 $M_{21}$ 按其第 1 行展开建立递推方程：</p>
+<p>在 $M_{21}$ 中，第 1 行仅有首项 $-1$ 非零，划去第 1 行第 1 列后剩余部分恰好是 $(n-2)$ 阶三对角行列式 $D_{n-2}$：</p>
+<p>$$M_{21} = (-1) \\cdot D_{n-2}$$</p>
+<p>代回原展开式中，得到标准的二阶常系数齐次递推关系式：</p>
+<p>$$D_n = a D_{n-1} - (-1) D_{n-2} = a D_{n-1} + D_{n-2}$$</p>
+<p>[3] 计算初始值并递推求解 $D_4$：</p>
+<p>计算前两阶基础项：</p>
+<p>$$D_1 = |a| = a$$</p>
+<p>$$D_2 = \\begin{vmatrix} a & -1 \\ \\ 1 & a \\end{vmatrix} = a^2 - (-1)(1) = a^2 + 1$$</p>
+<p>逐级应用递推关系式递推：</p>
+<p>$$D_3 = a D_2 + D_1 = a(a^2 + 1) + a = a^3 + 2a$$</p>
+<p>$$D_4 = a D_3 + D_2 = a(a^3 + 2a) + (a^2 + 1) = a^4 + 3a^2 + 1$$</p>
+<p><font color=deeppink>考研通法点睛</font>：</p>
+<p>三对角行列式通项可通过特征方程 $r^2 - ar - 1 = 0$ 的根 $r_1, r_2$ 直接写出通项 $D_n = C_1 r_1^n + C_2 r_2^n$。</p>
+</blockquote>
+<p><strong>例题[1.8]: [行列式函数的差分分析与列拆分算子]</strong></p>
+<p>设函数 $f(x) = \\begin{vmatrix} x+1 & x & x \\ \\ x & x+2 & x \\ \\ x & x & x+3 \\end{vmatrix}$，计算其一阶差分 $\\Delta f(x) = f(x+1) - f(x)$ 的解析式。</p>
+<p>主要思路: 先运用初等行变换将行列式 $f(x)$ 化简为 $x$ 的显式多项式，再直接进行有限差分运算；或者运用行列式的导数定理与差分算子。</p>
+<blockquote>
+<p>[1] 初等行变换将 $f(x)$ 化为爪型结构：</p>
+<p>对 $f(x)$ 实施行变换：保持第 1 行不变，第 2 行减第 1 行，第 3 行减第 1 行：</p>
+<p>$$r_2 - r_1 \\to r_2$$</p>
+<p>$$r_3 - r_1 \\to r_3$$</p>
+<p>得到：</p>
+<p>$$f(x) = \\begin{vmatrix} x+1 & x & x \\ \\ -1 & 2 & 0 \\ \\ -1 & 0 & 3 \\end{vmatrix}$$</p>
+<p>[2] 加权消爪法计算 $f(x)$ 显式表达式：</p>
+<p>利用第 2 列对角元 2 和第 3 列对角元 3 消去第 1 列的爪：</p>
+<p>$$c_1 + \\frac{1}{2} c_2 + \\frac{1}{3} c_3 \\to c_1$$</p>
+<p>第 1 列的第 2、3 行元素变为 0，首项变为：</p>
+<p>$$(x+1) + \\frac{1}{2}(x) + \\frac{1}{3}(x) = 1 + \\left(1 + \\frac{1}{2} + \\frac{1}{3}\\right) x = 1 + \\frac{11}{6} x$$</p>
+<p>此时行列式化为上三角矩阵，对角元乘积为：</p>
+<p>$$f(x) = \\left(1 + \\frac{11}{6} x\\right) \\times 2 \\times 3 = 6 \\left(1 + \\frac{11}{6} x\\right) = 11x + 6$$</p>
+<p>[3] 计算一阶差分 $\\Delta f(x)$：</p>
+<p>根据一阶差分的定义：</p>
+<p>$$\\Delta f(x) = f(x+1) - f(x) = [11(x+1) + 6] - [11x + 6] = 11$$</p>
+<p><font color=deeppink>考研导数算子拓展</font>：</p>
+<p>若题目要求导数 $f'(x)$，由多项式导数直接得 $f'(x) = 11$；由行列式求导法则，对各列分别求导求和亦得相同结论。</p>
+</blockquote>
+<p><strong>例题[1.9]: [特征方程重根判定与矩阵因式分解三步法]</strong></p>
+<p>设 3 阶矩阵 $A = \\begin{pmatrix} 2 & 0 & 0 \\ \\ 0 & 3 & a \\ \\ 0 & a & 3 \\end{pmatrix}$，已知其特征方程 $|\\lambda E - A| = 0$ 存在二重特征根，求参数 $a$ 的所有可能取值。</p>
+<p>主要思路: 建立特征行列式 $|\\lambda E - A|$，利用分块对角矩阵拉普拉斯展开因式分解为一次因式与二次因式的乘积，然后根据“一次因式的根与二次因式的根重合”或“二次因式自身判别式为零产生重根”分类讨论。</p>
+<blockquote>
+<p>[1] 建立特征行列式并因式分解：</p>
+<p>根据特征多项式的定义：</p>
+<p>$$|\\lambda E - A| = \\begin{vmatrix} \\lambda - 2 & 0 & 0 \\ \\ 0 & \\lambda - 3 & -a \\ \\ 0 & -a & \\lambda - 3 \\end{vmatrix}$$</p>
+<p>按第 1 行展开：</p>
+<p>$$|\\lambda E - A| = (\\lambda - 2) \\begin{vmatrix} \\lambda - 3 & -a \\ \\ -a & \\lambda - 3 \\end{vmatrix} = (\\lambda - 2) [(\\lambda - 3)^2 - (-a)^2] = (\\lambda - 2) [(\\lambda - 3)^2 - a^2]$$</p>
+<p>利用平方差公式彻底因式分解：</p>
+<p>$$|\\lambda E - A| = (\\lambda - 2)(\\lambda - 3 - a)(\\lambda - 3 + a) = 0$$</p>
+<p>[2] 分类讨论二重特征根条件：</p>
+<p>特征方程的三根分别为：</p>
+<p>$$\\lambda_1 = 2, \\quad \\lambda_2 = 3 + a, \\quad \\lambda_3 = 3 - a$$</p>
+<p>存在二重根意味着三根中恰好有两根相等：</p>
+<p>(1) 情况一：二次因式自身产生重根，即 $\\lambda_2 = \\lambda_3$：</p>
+<p>$$3 + a = 3 - a \\implies 2a = 0 \\implies a = 0$$</p>
+<p>此时三根为 $2, 3, 3$，满足 $\\lambda = 3$ 为二重特征根。</p>
+<p>(2) 情况二：一次因式的根与 $\\lambda_2$ 重合，即 $\\lambda_1 = \\lambda_2$：</p>
+<p>$$2 = 3 + a \\implies a = -1$$</p>
+<p>此时三根为 $2, 2, 4$，满足 $\\lambda = 2$ 为二重特征根。</p>
+<p>(3) 情况三：一次因式的根与 $\\lambda_3$ 重合，即 $\\lambda_1 = \\lambda_3$：</p>
+<p>$$2 = 3 - a \\implies a = 1$$</p>
+<p>此时三根为 $2, 4, 2$，满足 $\\lambda = 2$ 为二重特征根。</p>
+<p>[3] 结论与实对称矩阵对角化验证：</p>
+<p>综上所述，参数 $a$ 的取值为 $a = 0$ 或 $a = \\pm 1$。</p>
+<p><font color=red>考研高频避坑提醒</font>：</p>
+<p>若题目附加条件“矩阵不可相似对角化”，则需检验几何重数。但本题矩阵 $A$ 恒为实对称矩阵，根据实对称矩阵基本定理，无论 $a$ 取何值均必能相似对角化，故 $a = 0, \\pm 1$ 均符合题意。</p>
+</blockquote>
+<p><strong>例题[1.10]: [4阶抽象行列式列向量拆分与对换性质]</strong></p>
+<p>设 4 阶方阵 $A = [\\alpha_1, \\alpha_2, \\alpha_3, \\alpha_4]$，已知 $|A| = |\\alpha_1, \\alpha_2, \\alpha_3, \\alpha_4| = a$。另设列向量 $\\beta$ 满足 $|\\alpha_1, \\alpha_2, \\alpha_3, \\beta| = b$。</p>
+<p>求抽象行列式 $D = |\\alpha_2 + \\alpha_3, \\alpha_1, \\alpha_3, \\beta + \\alpha_4|$ 的值。</p>
+<p>主要思路: 行列式关于每一列具有单列线性可加性与反对称性（列互换反号，两列相同为零）。先利用单列线性可加性完全拆分为若干项，再利用列对换调整至标准基排列顺序。</p>
+<blockquote>
+<p>[1] 运用单列可加性逐列拆分：</p>
+<p>首先按第 4 列拆分：</p>
+<p>$$D = |\\alpha_2 + \\alpha_3, \\alpha_1, \\alpha_3, \\beta| + |\\alpha_2 + \\alpha_3, \\alpha_1, \\alpha_3, \\alpha_4|$$</p>
+<p>再分别按第 1 列拆分：</p>
+<p>$$|\\alpha_2 + \\alpha_3, \\alpha_1, \\alpha_3, \\beta| = |\\alpha_2, \\alpha_1, \\alpha_3, \\beta| + |\\alpha_3, \\alpha_1, \\alpha_3, \\beta|$$</p>
+<p>$$|\\alpha_2 + \\alpha_3, \\alpha_1, \\alpha_3, \\alpha_4| = |\\alpha_2, \\alpha_1, \\alpha_3, \\alpha_4| + |\\alpha_3, \\alpha_1, \\alpha_3, \\alpha_4|$$</p>
+<p>[2] 判别相同列为零并实施列对换：</p>
+<p>观察到第 2 项 $|\\alpha_3, \\alpha_1, \\alpha_3, \\beta|$ 与第 4 项 $|\\alpha_3, \\alpha_1, \\alpha_3, \\alpha_4|$ 均包含两个相同的列向量 $\\alpha_3$，由行列式性质可知这两项严格为 0。</p>
+<p>剩余两项通过互换第 1 列与第 2 列调整为标准升序排列：</p>
+<p>$$|\\alpha_2, \\alpha_1, \\alpha_3, \\beta| = -|\\alpha_1, \\alpha_2, \\alpha_3, \\beta| = -b$$</p>
+<p>$$|\\alpha_2, \\alpha_1, \\alpha_3, \\alpha_4| = -|\\alpha_1, \\alpha_2, \\alpha_3, \\alpha_4| = -a$$</p>
+<p>[3] 综合求和与结论：</p>
+<p>将各项结果相加：</p>
+<p>$$D = (-b) + (-a) = -(a+b)$$</p>
+</blockquote>
+<p><strong>例题[1.11]: [抽象向量组线性表出的矩阵积行列式计算]</strong></p>
+<p>设 3 阶方阵 $A = [\\alpha_1, \\alpha_2, \\alpha_3]$，其行列式 $|A| = 2$。已知向量组 $\\beta_1, \\beta_2, \\beta_3$ 满足：</p>
+<p>$$\\begin{cases} \\beta_1 = \\alpha_1 + 2\\alpha_2 \\ \\ \\beta_2 = 2\\alpha_2 + 3\\alpha_3 \\ \\ \\beta_3 = 3\\alpha_1 + \\alpha_3 \\end{cases}$$</p>
+<p>记矩阵 $B = [\\beta_1, \\beta_2, \\beta_3]$。求 $|B|$ 及行列式 $|B - A|$ 的值。</p>
+<p>主要思路: 将向量组的线性组合关系转化为矩阵乘积形式 $B = A C$。根据方阵乘法行列式定理 $|B| = |A||C|$ 以及分配律 $|B - A| = |A(C - E)| = |A||C - E|$ 求解。</p>
+<blockquote>
+<p>[1] 建立向量组线性组合的过渡矩阵方程：</p>
+<p>由题设线性组合方程，写成矩阵乘法形式：</p>
+<p>$$[\\beta_1, \\beta_2, \\beta_3] = [\\alpha_1, \\alpha_2, \\alpha_3] \\begin{pmatrix} 1 & 0 & 3 \\ \\ 2 & 2 & 0 \\ \\ 0 & 3 & 1 \\end{pmatrix}$$</p>
+<p>令过渡矩阵 $C = \\begin{pmatrix} 1 & 0 & 3 \\ \\ 2 & 2 & 0 \\ \\ 0 & 3 & 1 \\end{pmatrix}$，则有 $B = A C$。</p>
+<p>[2] 计算过渡矩阵行列式 $|C|$ 与 $|B|$：</p>
+<p>按第 1 行展开计算 $|C|$：</p>
+<p>$$|C| = 1 \\cdot (2 \\times 1 - 0) + 3 \\cdot (2 \\times 3 - 2 \\times 0) = 2 + 3 \\times 6 = 20$$</p>
+<p>根据行列式乘法定理：</p>
+<p>$$|B| = |A C| = |A| |C| = 2 \\times 20 = 40$$</p>
+<p>[3] 计算差矩阵行列式 $|B - A|$：</p>
+<p>利用矩阵乘法分配律提取公因子矩阵 $A$：</p>
+<p>$$B - A = A C - A E = A (C - E)$$</p>
+<p>其中矩阵 $C - E$ 为：</p>
+<p>$$C - E = \\begin{pmatrix} 0 & 0 & 3 \\ \\ 2 & 1 & 0 \\ \\ 0 & 3 & 0 \\end{pmatrix}$$</p>
+<p>按第 3 列展开计算 $|C - E|$：</p>
+<p>$$|C - E| = 3 \\cdot (-1)^{1+3} \\begin{vmatrix} 2 & 1 \\ \\ 0 & 3 \\end{vmatrix} = 3 \\times (2 \\times 3 - 0) = 18$$</p>
+<p>因此：</p>
+<p>$$|B - A| = |A(C - E)| = |A| |C - E| = 2 \\times 18 = 36$$</p>
+</blockquote>
+<p><strong>例题[1.12]: [代数余子式任意线性组合的“换数法”构造]</strong></p>
+<p>设 4 阶方阵 $A = \\begin{pmatrix} 1 & 0 & -1 & 2 \\ \\ 2 & 1 & 0 & 1 \\ \\ 3 & -1 & 1 & 1 \\ \\ 0 & 2 & 1 & -1 \\end{pmatrix}$，$A_{ij}$ 为其元素 $a_{ij}$ 的代数余子式。</p>
+<p>求线性组合 $S = 2 A_{31} - A_{32} + 3 A_{33} + A_{34}$ 的数值。</p>
+<p>主要思路: 采用<strong>构造新矩阵换数法</strong>。根据拉普拉斯展开定理，某行代数余子式与一组指定常数 $k_1, k_2, k_3, k_4$ 的线性组合，数值上严格等于将该行元素替换为该组常数后所构成的新矩阵的行列式。</p>
+<blockquote>
+<p>[1] 构造目标替换矩阵 $B$：</p>
+<p>所求式子为第 3 行代数余子式的线性组合，组合系数向量为 $(2, -1, 3, 1)$。</p>
+<p>构造方阵 $B$，将 $A$ 的第 3 行元素替换为 $(2, -1, 3, 1)$，其余各行完全保持不变：</p>
+<p>$$B = \\begin{pmatrix} 1 & 0 & -1 & 2 \\ \\ 2 & 1 & 0 & 1 \\ \\ 2 & -1 & 3 & 1 \\ \\ 0 & 2 & 1 & -1 \\end{pmatrix}$$</p>
+<p>根据拉普拉斯展开定理，按第 3 行展开即为所求：</p>
+<p>$$|B| = 2 A_{31} + (-1) A_{32} + 3 A_{33} + 1 \\cdot A_{34} = S$$</p>
+<p>[2] 初等行变换化简计算 $|B|$：</p>
+<p>对 $B$ 实施行初等变换消去第 1 列的非零元：</p>
+<p>$$r_2 - 2r_1 \\to r_2 \\implies (0, 1, 2, -3)$$</p>
+<p>$$r_3 - 2r_1 \\to r_3 \\implies (0, -1, 5, -3)$$</p>
+<p>按第 1 列展开降为 3 阶行列式：</p>
+<p>$$|B| = 1 \\cdot \\begin{vmatrix} 1 & 2 & -3 \\ \\ -1 & 5 & -3 \\ \\ 2 & 1 & -1 \\end{vmatrix}$$</p>
+<p>继续化简 3 阶行列式：</p>
+<p>$$r_2 + r_1 \\to r_2 \\implies (0, 7, -6)$$</p>
+<p>$$r_3 - 2r_1 \\to r_3 \\implies (0, -3, 5)$$</p>
+<p>按第 1 列展开降为 2 阶：</p>
+<p>$$|B| = 1 \\cdot \\begin{vmatrix} 7 & -6 \\ \\ -3 & 5 \\end{vmatrix} = 7 \\times 5 - (-6) \\times (-3) = 35 - 18 = 17$$</p>
+<p>[3] 结论与换数法核心价值总结：</p>
+<p>所求线性组合数值为 $S = 17$。</p>
+<p><font color=deeppink>考研考点归纳</font>：</p>
+<p>本方法将 4 个 3 阶行列式的复杂独立计算，降维转化为单个 4 阶行列式的一次初等变换，是考研数学解答此类试题的标准高分模板。</p>
+</blockquote>
+<p><strong>例题[1.13]: [齐次方程解矩阵行列式判定与反证法综合]</strong></p>
+<p>设 $A$ 为 3 阶非零方阵，存在 3 阶非零方阵 $B$ ($B \\neq O$)，使得 $B$ 的每一个列向量都是齐次线性方程组 $Ax = 0$ 的解向量。</p>
+<p>(1) 证明：$|A| = 0$ 且 $|B| = 0$；</p>
+<p>(2) 若已知 $A = \\begin{pmatrix} 1 & 1 & \\lambda \\ \\ 1 & \\lambda & 1 \\ \\ \\lambda & 1 & 1 \\end{pmatrix}$，求参数 $\\lambda$ 的所有可能取值。</p>
+<p>主要思路:<br />
+(1) 方程组解向量与矩阵乘积的关系：$B = [b_1, b_2, b_3]$ 且 $A b_i = 0 \\implies AB = O$。若假设某方阵可逆，左乘或右乘逆矩阵将导致另一个方阵为零矩阵而导出矛盾，从而由反证法证明行列式必为 0。<br />
+(2) 令 $|A| = 0$ 求解三次循环对称行列式的特征根。</p>
+<blockquote>
+<p>[1] 证明 $|A| = 0$：</p>
+<p>设 $B = [b_1, b_2, b_3]$。由题设 $b_1, b_2, b_3$ 均为 $Ax = 0$ 的解：</p>
+<p>$$A b_1 = 0, \\quad A b_2 = 0, \\quad A b_3 = 0$$</p>
+<p>根据分块矩阵乘法法则：</p>
+<p>$$A B = A [b_1, b_2, b_3] = [A b_1, A b_2, A b_3] = [0, 0, 0] = O$$</p>
+<p>反证法：假设 $|A| \\neq 0$，则 $A$ 为可逆矩阵，$A^{-1}$ 存在。</p>
+<p>在等式 $AB = O$ 两边左乘 $A^{-1}$：</p>
+<p>$$A^{-1}(AB) = (A^{-1}A)B = E B = B = A^{-1}O = O$$</p>
+<p>这与已知条件 $B \\neq O$ 产生直接矛盾！</p>
+<p>故假设不成立，必有 $|A| = 0$。</p>
+<p>[2] 证明 $|B| = 0$：</p>
+<p>反证法：假设 $|B| \\neq 0$，则 $B$ 为可逆矩阵，$B^{-1}$ 存在。</p>
+<p>在等式 $AB = O$ 两边右乘 $B^{-1}$：</p>
+<p>$$(AB)B^{-1} = A(BB^{-1}) = A E = A = O B^{-1} = O$$</p>
+<p>这与已知条件 $A$ 为非零方阵 ($A \\neq O$) 产生直接矛盾！</p>
+<p>故假设不成立，必有 $|B| = 0$。</p>
+<p>[3] 计算参数 $\\lambda$ 的可能取值：</p>
+<p>由 (1) 知 $|A| = 0$，计算 3 阶循环行列式：</p>
+<p>$$|A| = \\begin{vmatrix} 1 & 1 & \\lambda \\ \\ 1 & \\lambda & 1 \\ \\ \\lambda & 1 & 1 \\end{vmatrix}$$</p>
+<p>将第 2、3 列全部加到第 1 列，提出公共因子 $(\\lambda + 2)$：</p>
+<p>$$|A| = (\\lambda + 2) \\begin{vmatrix} 1 & 1 & \\lambda \\ \\ 1 & \\lambda & 1 \\ \\ 1 & 1 & 1 \\end{vmatrix}$$</p>
+<p>保持第 1 行不变，第 2 行减第 1 行，第 3 行减第 1 行：</p>
+<p>$$|A| = (\\lambda + 2) \\begin{vmatrix} 1 & 1 & \\lambda \\ \\ 0 & \\lambda - 1 & 1 - \\lambda \\ \\ 0 & 0 & 1 - \\lambda \\end{vmatrix}$$</p>
+<p>此为上三角行列式，对角元相乘得：</p>
+<p>$$|A| = (\\lambda + 2)(\\lambda - 1)(1 - \\lambda) = -(\\lambda + 2)(\\lambda - 1)^2$$</p>
+<p>令 $|A| = 0$，解得：</p>
+<p>$$\\lambda_1 = -2, \\quad \\lambda_2 = \\lambda_3 = 1$$</p>
+<p>经检验，当 $\\lambda = 1$ 时 $r(A) = 1 < 3$；当 $\\lambda = -2$ 时 $r(A) = 2 < 3$，均存在非零解矩阵 $B$。</p>
+<p>因此，参数 $\\lambda$ 的取值为 $\\lambda = 1$ 或 $\\lambda = -2$。</p>
+</blockquote>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

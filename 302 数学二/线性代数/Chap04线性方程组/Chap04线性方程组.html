@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chap04线性方程组</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h1>Chap04 线性方程组</h1>
+<p>目的[1]:掌握线性方程组的三种等价表述（代数、向量、矩阵形式），深刻理解方程组有解与向量线性表出的本质对应</p>
+<p>目的[2]:精通齐次线性方程组 $Ax=0$ 的解空间结构、基础解系定义与存在判定，深刻理解解空间维数公式 $\dim N(A) = n-r(A)$</p>
+<p>目的[3]:精通非齐次线性方程组 $Ax=b$ 的 Rouché-Capelli 相容性判据（$r(A)=r(A,b)$）与“通解=特解+齐次通解”结构定理，掌握解的仿射组合性质</p>
+<p>目的[4]:掌握克拉默法则适用边界及其在含参方程组讨论中的应用</p>
+<p>目的[5]:熟练运用初等行变换阶梯化标准范式（严格仅用行变换）求解方程组通解，掌握自由未知量单位化赋基与最简特解选取技巧</p>
+<p>目的[6]:掌握两方程组公共解与同解的判定准则与三大求解模型，严格掌握实矩阵四大秩恒等式 $r(A)=r(A^T)=r(A^TA)=r(AA^T)$ 的证明推导</p>
+<h2>1.线性方程组的理论框架与基本表述</h2>
+<h6><strong>模型[1]:线性方程组的三种等价表达形式</strong></h6>
+<p>[1]代数方程组形式：</p>
+<blockquote>
+<p>给出含有 $m$ 个方程、$n$ 个未知量的线性方程组：</p>
+<p>$$\begin{cases} a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1 \\ a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2 \\ \cdots\cdots \\ a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n = b_m \end{cases}$$</p>
+</blockquote>
+<p>[2]向量方程形式：</p>
+<blockquote>
+<p>记列向量 $\alpha_j = [a_{1j}, a_{2j}, \dots, a_{mj}]^T$ ($j=1,2,\dots,n$)，常数项向量 $b = [b_1, b_2, \dots, b_m]^T$：</p>
+<p>$$x_1\alpha_1 + x_2\alpha_2 + \cdots + x_n\alpha_n = b$$</p>
+<p>几何与代数本质：线性方程组是否有解，等价于常数项向量 $b$ 能否由系数矩阵的列向量组 $\alpha_1, \alpha_2, \dots, \alpha_n$ 线性表出。</p>
+</blockquote>
+<p>[3]矩阵方程形式：</p>
+<blockquote>
+<p>记系数矩阵 $A = (a_{ij})_{m \times n}$，未知量列向量 $x = [x_1, x_2, \dots, x_n]^T$：</p>
+<p>$$Ax = b$$</p>
+<p>(1) 当 $b = 0$ 时，称为<strong>齐次线性方程组</strong> $Ax = 0$；</p>
+<p>(2) 当 $b \ne 0$ 时，称为<strong>非齐次线性方程组</strong> $Ax = b$，$Ax = 0$ 称为其对应的<strong>导出齐次线性方程组</strong>。</p>
+</blockquote>
+<h2>2.齐次线性方程组的解空间与基础解系</h2>
+<h6><strong>定理[1]:解的线性叠加性与解空间</strong></h6>
+<p>[1]解的线性叠加性：</p>
+<blockquote>
+<p>若 $x = \xi_1, x = \xi_2$ 是 $Ax = 0$ 的解，则对任意实数 $k_1, k_2$，$k_1\xi_1 + k_2\xi_2$ 也是 $Ax = 0$ 的解。</p>
+<p>证明推导：</p>
+<p>$$A(k_1\xi_1 + k_2\xi_2) = k_1(A\xi_1) + k_2(A\xi_2) = k_1 \cdot 0 + k_2 \cdot 0 = 0$$</p>
+</blockquote>
+<p>[2]解空间的代数本质：</p>
+<blockquote>
+<p>齐次线性方程组 $Ax = 0$ 的全体解向量构成了 $\mathbb{R}^n$ 的一个线性子空间，称为方程组的<strong>解空间</strong>（或矩阵 $A$ 的零空间，记为 $N(A)$ 或 $\ker(A)$）。</p>
+</blockquote>
+<h6><strong>定理[2]:齐次线性方程组零解与非零解判准</strong></h6>
+<p>[1]零解与非零解判准：</p>
+<blockquote>
+<p>设 $A$ 为 $m \times n$ 矩阵：</p>
+<p>(1) $Ax = 0$ 恒有零解 $x = 0$。</p>
+<p>(2) $Ax = 0$ 只有零解 $\iff r(A) = n$（系数矩阵列满秩，列向量组线性无关）。</p>
+<p>(3) $Ax = 0$ 有非零解（无穷多解）$\iff r(A) < n$（系数矩阵列不满秩，列向量组线性相关）。</p>
+</blockquote>
+<p>[2]方阵情形判定：</p>
+<blockquote>
+<p>特别地，当方程个数等于未知量个数（$m = n$）时：</p>
+<p>$$Ax = 0 \text{ 只有零解} \iff |A| \ne 0$$</p>
+<p>$$Ax = 0 \text{ 有非零解} \iff |A| = 0$$</p>
+</blockquote>
+<h6><strong>概念[1]:基础解系的定义</strong></h6>
+<p>[1]基础解系的充要定义：</p>
+<blockquote>
+<p>若向量组 $\xi_1, \xi_2, \dots, \xi_s$ 满足以下两个条件：</p>
+<p>(1) $\xi_1, \xi_2, \dots, \xi_s$ 是 $Ax = 0$ 的解向量，且自身<font color=deeppink>线性无关</font>；</p>
+<p>(2) $Ax = 0$ 的任意一个解向量均可由 $\xi_1, \xi_2, \dots, \xi_s$ 线性表出；</p>
+<p>则称 $\xi_1, \xi_2, \dots, \xi_s$ 为齐次线性方程组 $Ax = 0$ 的一个<strong>基础解系</strong>。此时，$Ax = 0$ 的通解可表示为：</p>
+<p>$$x = k_1\xi_1 + k_2\xi_2 + \cdots + k_s\xi_s \quad (k_1, k_2, \dots, k_s \text{ 为任意常数})$$</p>
+</blockquote>
+<h6><strong>定理[3]:解空间维数公式与基础解系判准</strong></h6>
+<p>[1]解空间维数公式：</p>
+<blockquote>
+<p>设 $A$ 为 $m \times n$ 矩阵，若 $r(A) = r < n$，则齐次线性方程组 $Ax = 0$ 的解空间维数为：</p>
+<p>$$\dim N(A) = n - r(A) = n - r$$</p>
+<p>即 $Ax = 0$ 的基础解系中所含解向量的个数恰好等于 <font color=red>$n - r(A)$</font>。</p>
+</blockquote>
+<p>[2]基础解系的判定充要条件：</p>
+<blockquote>
+<p>设 $r(A) = r < n$，向量组 $\xi_1, \dots, \xi_s$ 是 $Ax = 0$ 的解：</p>
+<p>(1) 若 $s = n - r(A)$ 且 $\xi_1, \dots, \xi_s$ 线性无关，则它们必为 $Ax = 0$ 的基础解系。</p>
+<p>(2) 若 $s = n - r(A)$ 且能线性表出某一个已知基础解系，则它们必为基础解系。</p>
+</blockquote>
+<p>[3]基础解系的线性替换定理：</p>
+<blockquote>
+<p>设 $\xi_1, \dots, \xi_{n-r}$ 为 $Ax = 0$ 的基础解系，另有一组解向量 $[\eta_1, \dots, \eta_{n-r}] = [\xi_1, \dots, \xi_{n-r}] C$，其中 $C$ 为 $(n-r)$ 阶方阵，则：</p>
+<p>$$\eta_1, \dots, \eta_{n-r} \text{ 是 } Ax = 0 \text{ 的基础解系} \iff |C| \ne 0$$</p>
+</blockquote>
+<h6><strong>定理[4]:列满秩矩阵的伪消去律与左逆</strong></h6>
+<p>[1]列满秩消去律：</p>
+<blockquote>
+<p>设 $A$ 为 $m \times n$ 矩阵。若 $A$ 列满秩（$r(A) = n$），且 $AB = AC$，则必有 <font color=deeppink>$B = C$</font>。</p>
+<p>证明推导：</p>
+<p>$$A(B - C) = 0$$</p>
+<p>记 $B - C$ 的第 $j$ 列向量为 $x_j$，则有 $Ax_j = 0$。因 $r(A) = n$，$Ax = 0$ 仅有零解，故必有 $x_j = 0$，即 $B - C = 0 \implies B = C$。</p>
+</blockquote>
+<p>[2]左逆矩阵：</p>
+<blockquote>
+<p>若 $A_{m \times n}$ 列满秩，则矩阵 $A^TA$ 为 $n$ 阶对称正定可逆矩阵，存在左逆矩阵 $A_L = (A^TA)^{-1}A^T$，满足 $A_L A = I_n$。</p>
+</blockquote>
+<h2>3.非齐次线性方程组的理论体系</h2>
+<h6><strong>定理[1]:非齐次线性方程组解的判定定理 (Rouché-Capelli 定理)</strong></h6>
+<p>[1]相容性三大判据：</p>
+<blockquote>
+<p>设 $A$ 为 $m \times n$ 系数矩阵，$[A \mid b]$ 为增广矩阵：</p>
+<p>(1) <strong>无解</strong> $\iff r(A) < r(A \mid b) \iff r(A) + 1 = r(A \mid b)$。</p>
+<p>(2) <strong>有唯一解</strong> $\iff r(A) = r(A \mid b) = n$（未知量个数）。</p>
+<p>(3) <strong>有无穷多解</strong> $\iff r(A) = r(A \mid b) = r < n$。</p>
+</blockquote>
+<p>[2]行满秩恒有解定理：</p>
+<blockquote>
+<p>若 $r(A) = m$（行满秩），则由于增广矩阵行数为 $m$，必有 $r(A \mid b) = m = r(A)$，故对<font color=red>任意常数项向量 $b$</font>，方程组 $Ax = b$ <strong>恒有解</strong>。</p>
+</blockquote>
+<h6><strong>定理[2]:非齐次线性方程组通解结构与仿射性质</strong></h6>
+<p>[1]通解结构定理：</p>
+<blockquote>
+<p>设 $\eta^*$ 是 $Ax = b$ 的一个特解，$\xi_1, \xi_2, \dots, \xi_{n-r}$ 是对应导出齐次方程组 $Ax = 0$ 的基础解系，则 $Ax = b$ 的通解为：</p>
+<p>$$x = \eta^* + k_1\xi_1 + k_2\xi_2 + \cdots + k_{n-r}\xi_{n-r} \quad (k_1, \dots, k_{n-r} \text{ 为任意常数})$$</p>
+<p>通解结构口诀：<strong>非齐次通解 = 非齐次特解 + 齐次通解</strong>。</p>
+</blockquote>
+<p>[2]非齐次解的线性组合性质：</p>
+<blockquote>
+<p>设 $\eta_1, \dots, \eta_k$ 是非齐次方程组 $Ax = b$ 的解向量，$c_1, \dots, c_k$ 为实数：</p>
+<p>(1) $\sum_{i=1}^k c_i \eta_i$ 仍是 $Ax = b$ 的解 $\iff \sum_{i=1}^k c_i = 1$（仿射组合）。</p>
+<p>(2) $\sum_{i=1}^k c_i \eta_i$ 是导出组 $Ax = 0$ 的解 $\iff \sum_{i=1}^k c_i = 0$。</p>
+<p>(3) 任意两个非齐次解之差 $\eta_i - \eta_j$ 必为对应齐次方程组 $Ax = 0$ 的解。</p>
+<p>(4) 给定 $Ax = b$ 的 $k$ 个线性无关解 $\eta_1, \dots, \eta_k$，其对应的导出齐次方程组的线性无关解向量组可取为：</p>
+<p>$$\eta_2 - \eta_1, \eta_3 - \eta_1, \dots, \eta_k - \eta_1$$</p>
+<p>导出组解空间维数满足 $n - r(A) \ge k - 1$。</p>
+</blockquote>
+<h6><strong>定理[3]:克拉默法则及其适用边界</strong></h6>
+<p>[1]克拉默法则内容：</p>
+<blockquote>
+<p>设方程组包含 $n$ 个方程和 $n$ 个未知量（系数矩阵 $A$ 为 $n \times n$ 方阵）：</p>
+<p>若系数行列式 $|A| = D \ne 0$，则方程组有且仅有唯一解：</p>
+<p>$$x_j = \frac{D_j}{D} \quad (j = 1, 2, \dots, n)$$</p>
+<p>其中 $D_j$ 是将 $D$ 中第 $j$ 列替换为常数项列向量 $b$ 后所得的行列式。</p>
+</blockquote>
+<p>[2]考研避坑指南：</p>
+<blockquote>
+<p>(1) 克拉默法则仅适用于方程个数等于未知量个数且系数行列式非零的特殊情形；</p>
+<p>(2) 若 $|A| = 0$，不能直接断言无解，方程组可能无解，也可能有无穷多解，必须使用增广矩阵初等行变换讨论秩。</p>
+</blockquote>
+<h2>4.初等行变换阶梯化法求解标准范式</h2>
+<h6><strong>辨析[1]:行变换唯一性铁律</strong></h6>
+<p>[1]严格仅用初等行变换：</p>
+<blockquote>
+<p>求解线性方程组增广矩阵 $[A \mid b]$ 时，<font color=red>严禁使用初等列变换</font>！</p>
+</blockquote>
+<p>[2]原因剖析：</p>
+<blockquote>
+<p>初等行变换本质是对方程组施行等价消元，变换前后的方程组同解；而初等列变换会交换未知量的次序或对未知量施加线性组合变换，导致解向量分量发生错位与扭曲。</p>
+</blockquote>
+<h6><strong>方法[1]:行最简形 (RREF) 与自由未知量赋基算法</strong></h6>
+<p>[1]行最简形判准：</p>
+<blockquote>
+<p>设经过初等行变换后，增广矩阵化为行最简阶梯形：</p>
+<p>$$[A \mid b] \to \begin{bmatrix} 1 & 0 & \cdots & 0 & c_{1, r+1} & \cdots & c_{1n} & \tilde{b}_1 \\ 0 & 1 & \cdots & 0 & c_{2, r+1} & \cdots & c_{2n} & \tilde{b}_2 \\ \vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \vdots & \vdots \\ 0 & 0 & \cdots & 1 & c_{r, r+1} & \cdots & c_{rn} & \tilde{b}_r \\ 0 & 0 & \cdots & 0 & 0 & \cdots & 0 & \tilde{b}_{r+1} \\ 0 & 0 & \cdots & 0 & 0 & \cdots & 0 & 0 \end{bmatrix}$$</p>
+<p>(1) 若 $\tilde{b}_{r+1} \ne 0$，出现矛盾方程 $0 = \tilde{b}_{r+1}$，方程组无解。</p>
+<p>(2) 若 $\tilde{b}_{r+1} = 0$，主元变量 $x_1, \dots, x_r$ 由自由变量 $x_{r+1}, \dots, x_n$ 唯一显式表示。</p>
+</blockquote>
+<p>[2]单位阵构造法确定基础解系：</p>
+<blockquote>
+<p>令自由变量向量依次取标准正交单位向量：</p>
+<p>$$\begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix}, \quad \begin{bmatrix} 0 \\ 1 \\ \vdots \\ 0 \end{bmatrix}, \quad \dots, \quad \begin{bmatrix} 0 \\ 0 \\ \vdots \\ 1 \end{bmatrix}$$</p>
+<p>即可直接读出 $n-r$ 个线性无关的基础解系向量 $\xi_1, \dots, \xi_{n-r}$。</p>
+</blockquote>
+<p>[3]特解的最简选取法则：</p>
+<blockquote>
+<p>令全部自由变量均为 0（即 $x_{r+1} = \cdots = x_n = 0$），直接得到最简特解：</p>
+<p>$$\eta^* = [\tilde{b}_1, \tilde{b}_2, \dots, \tilde{b}_r, 0, \dots, 0]^T$$</p>
+</blockquote>
+<h2>5.公共解、同解理论与四大秩恒等式</h2>
+<h6><strong>概念[1]:公共解与三大求解模型</strong></h6>
+<p>[1]公共解定义：</p>
+<blockquote>
+<p>向量 $\alpha$ 既是方程组 (I) 的解，又是方程组 (II) 的解，则称 $\alpha$ 为两方程组的<strong>公共解</strong>。</p>
+</blockquote>
+<p>[2]求公共解的三大方法：</p>
+<blockquote>
+<p>(1) <strong>联立矩阵法</strong>：将两方程组合并联立，求系数矩阵增广 $\begin{bmatrix} A \\ B \end{bmatrix} x = 0$ 的通解。</p>
+<p>(2) <strong>解代入法</strong>：求出方程组 (I) 的通解后，将其整体代入方程组 (II) 的方程中，解出自由参数之间的约束方程。</p>
+<p>(3) <strong>通解参数配对法</strong>：设出两方程组的通解表达式，令 $k_1\xi_1 + \dots = l_1\eta_1 + \dots$，转化为关于待定常数 $k_i, l_j$ 的齐次线性方程组求解。</p>
+</blockquote>
+<h6><strong>定理[1]:同解方程组的判定准则</strong></h6>
+<p>[1]同解方程组定义：</p>
+<blockquote>
+<p>方程组 (I) 与 (II) 拥有完全相同的解集，称为<strong>同解方程组</strong>。</p>
+</blockquote>
+<p>[2]同解充要条件：</p>
+<blockquote>
+<p>(1) 齐次方程组同解充要条件：</p>
+<p>$$Ax = 0 \text{ 与 } Bx = 0 \text{ 同解} \iff r(A) = r(B) = r\begin{bmatrix} A \\ B \end{bmatrix}$$</p>
+<p>(2) 若方程组 (I) 的每个解都是方程组 (II) 的解，且 $r(A) \ge r(B)$，则两方程组必同解。</p>
+</blockquote>
+<h6><strong>定理[2]:实矩阵四大秩恒等式严格证明</strong></h6>
+<p>[1]四大秩恒等式：</p>
+<blockquote>
+<p>对任意实矩阵 $A_{m \times n}$，必有：</p>
+<p>$$r(A) = r(A^T) = r(A^TA) = r(AA^T)$$</p>
+</blockquote>
+<p>[2]严格证明推导：</p>
+<blockquote>
+<p>考察齐次线性方程组 $Ax = 0$ 与 $A^TAx = 0$ 的解空间关系：</p>
+<p>(1) 若 $Ax = 0$，两边左乘 $A^T$ 得 $A^TAx = 0$，故 $Ax = 0$ 的解必是 $A^TAx = 0$ 的解；</p>
+<p>(2) 反之，若 $A^TAx = 0$，两边左乘 $x^T$ 可得：</p>
+<p>$$x^TA^TAx = 0 \implies (Ax)^T(Ax) = \|Ax\|^2 = 0$$</p>
+<p>由于 $A$ 与 $x$ 均为实矩阵与实向量，由实欧氏空间内积正定性，向量模长平方为 0 必有 <font color=deeppink>$Ax = 0$</font>。</p>
+<p>(3) 故 $Ax = 0$ 与 $A^TAx = 0$ 是<font color=red>同解方程组</font>！</p>
+<p>(4) 根据解空间维数公式：$n - r(A) = n - r(A^TA) \implies r(A) = r(A^TA)$。</p>
+<p>(5) 对转置矩阵 $A^T$ 应用上述结论，同理可得 $r(A^T) = r(AA^T)$。</p>
+<p>(6) 再由矩阵初等变换性质 $r(A) = r(A^T)$，恒等式完全成立：</p>
+<p>$$r(A) = r(A^T) = r(A^TA) = r(AA^T)$$</p>
+</blockquote>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

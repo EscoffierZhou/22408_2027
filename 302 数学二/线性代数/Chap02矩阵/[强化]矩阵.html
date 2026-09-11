@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>[强化]矩阵</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h1>第二章 矩阵 · 考研高阶冲刺与深水区强化</h1>
+<h2>1. 专题一：伴随矩阵高阶秩阶梯与双伴随公式体系</h2>
+<h3>1.1 伴随矩阵的秩阶梯定理深度证明与几何拓扑</h3>
+<blockquote>
+<p>伴随矩阵 $A^*$ 是方阵代数中最重要的构造之一。对任意 $n$ 阶方阵 $A$（$n \ge 2$），其伴随矩阵的秩 $r(A^*)$ 呈现离散阶梯跳跃特性：</p>
+<p>$$r(A^*) = \begin{cases} n, & \text{若 } r(A) = n \\ 1, & \text{若 } r(A) = n - 1 \\ 0, & \text{若 } r(A) \le n - 2 \end{cases}$$</p>
+<p>其本质机理可从几何映射与代数子式两个维度深刻剖析：</p>
+<p>(1) <strong>当 $r(A) = n$ 时</strong>：$|A| \ne 0$。由伴随行列式公式 $|A^*| = |A|^{n-1} \ne 0$，方阵 $A^*$ 满秩，故 $r(A^*) = n$；</p>
+<p>(2) <strong>当 $r(A) = n - 1$ 时</strong>：根据矩阵秩的定义，$A$ 中至少存在一个 $n-1$ 阶非零子式。由代数余子式定义，伴随矩阵 $A^*$ 中至少存在一个非零元素，因此 $r(A^*) \ge 1$。<br />
+另一方面，由基本恒等式 $AA^* = |A|E = O$，将 $A^*$ 的每个列向量视为齐次方程组 $Ax = 0$ 的解。该方程组的基础解系维数为 $n - r(A) = n - (n-1) = 1$。因此 $A^*$ 的列向量张成的空间维数不能超过 1，即 $r(A^*) \le 1$。两向夹逼必然得出 $r(A^*) = 1$；</p>
+<p>(3) <strong>当 $r(A) \le n - 2$ 时</strong>：$A$ 的所有 $n-1$ 阶子式全为 0。而 $A^*$ 中的每一个元素都是某个 $n-1$ 阶子式乘以符号因子，故 $A^*$ 的所有元素全为 0，即 $A^* = O$，其秩恒为 0。</p>
+</blockquote>
+<h3>1.2 双伴随与高阶伴随公式体系</h3>
+<blockquote>
+<p>在高阶考研真题中，伴随矩阵的复合嵌套是常见考点：</p>
+<p>(1) <strong>双伴随定理</strong>：若 $A$ 可逆，则：</p>
+<p>$$(A^*)^* = |A|^{n-2} A \quad (n \ge 2)$$</p>
+<p>证明思路：由伴随定义，对矩阵 $A^*$ 套用基本恒等式：$A^* (A^*)^* = |A^*|E = |A|^{n-1}E$。两边左乘可逆矩阵 $A$，利用 $A A^* = |A|E$，得 $|A|E (A^*)^* = |A|^{n-1} A$，消去标量 $|A|$ 即得结论；</p>
+<p>(2) <strong>双伴随行列式</strong>：</p>
+<p>$$|(A^*)^*| = |A^*|^{n-1} = (|A|^{n-1})^{n-1} = |A|^{(n-1)^2}$$</p>
+</blockquote>
+<h6><strong>模型[1]:伴随矩阵混合化简通用模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：表达式中混杂有 $A^*, A^{-1}, |A|$ 及方阵乘积。</p>
+<p>[2] <strong>消去策略</strong>：</p>
+<blockquote>
+<p>(1) 优先利用基本恒等式 $A^* = |A| A^{-1}$ 将伴随矩阵全部替换为逆矩阵；</p>
+<p>(2) 矩阵多项式化简后，利用穿脱原则 $(AB)^{-1} = B^{-1} A^{-1}$ 提取因子；</p>
+<p>(3) 若求行列式，牢记标量提取公式 $|kA| = k^n |A|$ 与 $|A^*| = |A|^{n-1}$。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>2. 专题二：矩阵高次幂运算的五大经典通用模型</h2>
+<h3>2.1 矩阵幂运算的核心难点与分类思想</h3>
+<blockquote>
+<p>矩阵乘法不满足交换律，因此标量代数中的展开公式在矩阵中受限。求解方阵高次幂 $A^m$ 的核心是寻找矩阵内部的“退化结构”或“对称结构”。</p>
+</blockquote>
+<h6><strong>模型[1]:秩 1 外积模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：$A$ 可以表示为非零列向量与行向量的乘积 $A = \alpha \beta^T$，或者矩阵的所有行（列）成比例，$r(A) = 1$。</p>
+<p>[2] <strong>求解通式</strong>：</p>
+<blockquote>
+<p>利用结合律：$A^2 = (\alpha \beta^T)(\alpha \beta^T) = \alpha (\beta^T \alpha) \beta^T = (\beta^T \alpha) A = [\mathrm{tr}(A)] A$。</p>
+<p>归纳递推可得：<br />
+<font color=deeppink>$$A^m = [\mathrm{tr}(A)]^{m-1} A$$</font></p>
+</blockquote>
+</blockquote>
+<h6><strong>模型[2]:幂零分解与二项式定理模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：方阵主对角线元素全相等，且次对角线或上三角区域含有元素。</p>
+<p>[2] <strong>求解通式</strong>：</p>
+<blockquote>
+<p>将矩阵拆分为标量单位阵与严格上（下）三角阵：$A = \lambda E + N$。</p>
+<p>严格三角阵必为幂零矩阵（即存在有限阶数 $k$ 使得 $N^k = O$）。</p>
+<p>因为 $\lambda E$ 与任何矩阵可交换，直接套用二项式定理截断展开：<br />
+$$A^m = (\lambda E + N)^m = \lambda^m E + C_m^1 \lambda^{m-1} N + C_m^2 \lambda^{m-2} N^2 + \cdots + C_m^{k-1} \lambda^{m-k+1} N^{k-1}$$</p>
+</blockquote>
+</blockquote>
+<h6><strong>模型[3]:试探归纳与周期性周期模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：正交矩阵、反射矩阵、对换矩阵。</p>
+<p>[2] <strong>求解通式</strong>：</p>
+<blockquote>
+<p>直接计算 $A^2, A^3$，观察是否出现 $A^2 = E$（对合矩阵）、$A^2 = -E$、$A^3 = A$ 或 $A^2 = kE$。</p>
+<p>根据出现的周期 $T$，将指数化简：$m = qT + r \implies A^m = (A^T)^q A^r$。</p>
+</blockquote>
+</blockquote>
+<h6><strong>模型[4]:Cayley-Hamilton 降次模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：已知矩阵满足低阶多项式方程 $f(A) = O$。</p>
+<p>[2] <strong>求解通式</strong>：</p>
+<blockquote>
+<p>用多项式除法将 $\lambda^m$ 表示为特征多项式（或已知多项式）的商与余式：<br />
+$$\lambda^m = q(\lambda) f(\lambda) + r(\lambda)$$</p>
+<p>将矩阵 $A$ 代入，由 $f(A) = O$ 可得：$A^m = r(A)$，瞬间实现将任意超高次幂降至 $n-1$ 次多项式。</p>
+</blockquote>
+</blockquote>
+<h6><strong>模型[5]:相似对角化模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：矩阵有 $n$ 个线性无关的特征向量。</p>
+<p>[2] <strong>求解通式</strong>：</p>
+<blockquote>
+<p>若 $P^{-1} A P = \Lambda = \mathrm{diag}(\lambda_1, \dots, \lambda_n)$，则：<br />
+$$A^m = P \Lambda^m P^{-1} = P \mathrm{diag}(\lambda_1^m, \dots, \lambda_n^m) P^{-1}$$</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>3. 专题三：矩阵方程的消去律限制、广义逆与极小范数解</h2>
+<h3>3.1 矩阵方程的消去律陷阱</h3>
+<blockquote>
+<p>在处理矩阵方程 $AX = B$ 时，考研学生极易犯直接“消去 $A$”的逻辑错误。只有当 $A$ 为可逆方阵时，消去律才完全成立。若 $A$ 不可逆或非方阵，方程可能无解、有唯一解或无穷多解。</p>
+</blockquote>
+<h6><strong>模型[1]:初等行变换统一解矩阵方程模型</strong></h6>
+<blockquote>
+<p>[1] <strong>判定特征</strong>：系数矩阵 $A_{m \times n}$ 不可逆或为非方阵。</p>
+<p>[2] <strong>求解流程</strong>：</p>
+<blockquote>
+<p>(1) 构造联合增广矩阵 $[A | B]$；</p>
+<p>(2) 仅使用初等行变换将 $[A | B]$ 化为行最简阶梯形（RREF）$[R | \tilde{B}]$；</p>
+<p>(3) 比较 $r(A)$ 与 $r(A|B)$：<br />
+若 $r(A) < r(A|B)$，则矩阵方程<strong>无解</strong>；<br />
+若 $r(A) = r(A|B) = n$，则矩阵方程有<strong>唯一解</strong>；<br />
+若 $r(A) = r(A|B) = r < n$，则有<strong>无穷多解</strong>，解包含自由未知量矩阵。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>4. 专题四：分块矩阵的初等变换技巧与 Schur 补降维</h2>
+<h3>4.1 分块初等变换与高斯消元</h3>
+<blockquote>
+<p>分块矩阵是研究高维矩阵问题的通用放大镜。设分块矩阵为：</p>
+<p>$$M = \begin{bmatrix} A & B \\ C & D \end{bmatrix}$$</p>
+<p>若 $A$ 可逆，通过左乘分块初等矩阵对其进行分块行变换：</p>
+<p>$$\begin{bmatrix} E & O \\ -CA^{-1} & E \end{bmatrix} \begin{bmatrix} A & B \\ C & D \end{bmatrix} = \begin{bmatrix} A & B \\ O & D - CA^{-1}B \end{bmatrix}$$</p>
+<p>矩阵 $S = D - CA^{-1}B$ 称为子块 $A$ 在 $M$ 中的 <strong>Schur 补（Schur Complement）</strong>。</p>
+</blockquote>
+<h3>4.2 Schur 补引理与行列式降维定理</h3>
+<blockquote>
+<p>对上述等式两边取行列式：</p>
+<p>$$\begin{vmatrix} E & O \\ -CA^{-1} & E \end{vmatrix} \cdot \begin{vmatrix} A & B \\ C & D \end{vmatrix} = \begin{vmatrix} A & B \\ O & D - CA^{-1}B \end{vmatrix}$$</p>
+<p>由于左侧初等分块矩阵为下三角且对角线上全为单位阵，其行列式恒为 1。右侧为分块上三角矩阵，行列式等于对角子块行列式的乘积。故得出考研著名的降维定理：</p>
+<p><font color=deeppink>$$\det \begin{bmatrix} A & B \\ C & D \end{bmatrix} = \det(A) \cdot \det(D - CA^{-1}B)$$</font></p>
+<p>同理，若 $D$ 可逆，亦有：</p>
+<p>$$\det \begin{bmatrix} A & B \\ C & D \end{bmatrix} = \det(D) \cdot \det(A - BD^{-1}C)$$</p>
+</blockquote>
+<hr />
+<h2>5. 专题五：Sylvester 与 Frobenius 秩不等式的深度证明与几何投影</h2>
+<h3>5.1 Sylvester 秩不等式的构造法证明</h3>
+<blockquote>
+<p>设 $A_{m \times n}$，$B_{n \times s}$，证明：$r(AB) \ge r(A) + r(B) - n$。</p>
+<p>构造分块矩阵并利用分块初等变换保秩性证明：</p>
+<p>[1] 构造分块矩阵：</p>
+<p>$$M = \begin{bmatrix} E_n & O \\ O & AB \end{bmatrix}$$</p>
+<p>[2] 构造等价变换：</p>
+<p>$$\begin{bmatrix} E_n & O \\ A & E_m \end{bmatrix} \begin{bmatrix} E_n & B \\ A & O \end{bmatrix} \begin{bmatrix} E_n & -B \\ O & E_s \end{bmatrix} = \begin{bmatrix} E_n & O \\ O & -AB \end{bmatrix}$$</p>
+<p>中间矩阵通过初等行变换与列变换后，其非零子块显见为 $E_n$ 与 $AB$。由初等变换保秩性：</p>
+<p>$$r \begin{bmatrix} E_n & B \\ A & O \end{bmatrix} = r \begin{bmatrix} E_n & O \\ O & AB \end{bmatrix} = n + r(AB)$$</p>
+<p>[3] 另一方面，对分块矩阵进行列变换：</p>
+<p>$$r \begin{bmatrix} E_n & B \\ A & O \end{bmatrix} \le r \begin{bmatrix} E_n \\ A \end{bmatrix} + r \begin{bmatrix} B \\ O \end{bmatrix} = n + r(B)$$</p>
+<p>结合子空间映射，可严谨推出 $r(AB) \ge r(A) + r(B) - n$。</p>
+</blockquote>
+<h3>5.2 Frobenius 秩不等式</h3>
+<blockquote>
+<p>对三个矩阵连乘 $A_{m \times n}, B_{n \times p}, C_{p \times q}$，恒有：</p>
+<p><font color=deeppink>$$r(ABC) \ge r(AB) + r(BC) - r(B)$$</font></p>
+<p>当 $B = E_n$ 时，Frobenius 不等式即退化为 Sylvester 不等式。</p>
+</blockquote>
+<hr />
+<h2>6. 专题六：反对称矩阵与正交矩阵的代数性质与谱特征</h2>
+<h3>6.1 反对称矩阵代数全景</h3>
+<blockquote>
+<p>满足 $A^T = -A$ 的方阵称为反对称矩阵。</p>
+<p>(1) <strong>主对角线特性</strong>：$a_{ii} = -a_{ii} \implies a_{ii} = 0$；</p>
+<p>(2) <strong>奇数阶行列式</strong>：若 $n$ 为奇数，则 $|A| = 0$；</p>
+<p>(3) <strong>偶数阶行列式</strong>：若 $n$ 为偶数，反对称矩阵的行列式必然是一个整系数多项式的平方（称 Pfaffian），故必满足 $|A| \ge 0$；</p>
+<p>(4) <strong>特征值谱分布</strong>：实反对称矩阵的特征值只能是 0 或纯虚数 $\pm b i$。</p>
+</blockquote>
+<h3>6.2 实方阵的正交分解（对称与反对称直和分解）</h3>
+<blockquote>
+<p>任何实方阵 $M$ 都可以唯一分解为一个对称矩阵 $S$ 与一个反对称矩阵 $K$ 的和：</p>
+<p>$$M = S + K$$</p>
+<p>其中：</p>
+<p>$$S = \frac{M + M^T}{2} \quad (\text{实对称矩阵}), \quad K = \frac{M - M^T}{2} \quad (\text{反对称矩阵})$$</p>
+<p>这反映了方阵线性空间 $\mathbb{R}^{n \times n}$ 是对称子空间与反对称子空间的直和分解：$\mathbb{R}^{n \times n} = \mathrm{Sym}_n \oplus \mathrm{Skew}_n$。</p>
+</blockquote>
+<hr />
+<h2>7. 专题七：幂等矩阵与空间直和投影分解</h2>
+<h3>7.1 幂等算子的代数与几何等价</h3>
+<blockquote>
+<p>满足 $A^2 = A$ 的方阵称为幂等矩阵。其几何本质是沿某一子空间的<strong>投影算子（Projection Operator）</strong>。</p>
+<p>(1) <strong>特征值限制</strong>：设 $\lambda$ 是 $A$ 的特征值，$Ax = \lambda x$ ($x \ne 0$)。两边作用 $A$ 得 $A^2 x = \lambda A x = \lambda^2 x$。又 $A^2 = A \implies \lambda^2 x = \lambda x \implies (\lambda^2 - \lambda)x = 0 \implies \lambda(\lambda - 1) = 0$。因此：</p>
+<p>$$\lambda \in \{0, 1\}$$</p>
+<p>(2) <strong>秩等于迹公式</strong>：任何幂等矩阵均可相似对角化，其对角线上只有 0 和 1。因此：</p>
+<p><font color=deeppink>$$r(A) = \mathrm{tr}(A)$$</font></p>
+<p>(3) <strong>正交互补性</strong>：若 $A$ 是幂等阵，则 $E - A$ 亦为幂等阵，且 $A(E-A) = (E-A)A = O$。</p>
+</blockquote>
+<hr />
+<h2>8. 专题八：矩阵等价标准形与三大关系辨析</h2>
+<h3>8.1 矩阵三大核心等价关系横向全景对比</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">关系类型</th>
+<th style="text-align: left;">数学定义式</th>
+<th style="text-align: left;">可逆变换矩阵限制</th>
+<th style="text-align: left;">保持不变的核心特征（不变量）</th>
+<th style="text-align: left;">几何映射本质</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>等价</strong> ($A \cong B$)</td>
+<td style="text-align: left;">$PAQ = B$</td>
+<td style="text-align: left;">$P, Q$ 仅需可逆</td>
+<td style="text-align: left;">秩 $r(A) = r(B)$</td>
+<td style="text-align: left;">不同基下的同一个线性映射</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>相似</strong> ($A \sim B$)</td>
+<td style="text-align: left;">$P^{-1} A P = B$</td>
+<td style="text-align: left;">$P$ 可逆且左矩阵为 $P^{-1}$</td>
+<td style="text-align: left;">秩、行列式、迹、特征值、特征多项式</td>
+<td style="text-align: left;">同一线性变换在不同基下的矩阵表示</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>合同</strong> ($A \simeq B$)</td>
+<td style="text-align: left;">$C^T A C = B$</td>
+<td style="text-align: left;">$C$ 可逆且左矩阵为 $C^T$</td>
+<td style="text-align: left;">秩、正负惯性指数（规范形完全相同）</td>
+<td style="text-align: left;">双线性型在不同基下的度量矩阵表示</td>
+</tr>
+</tbody>
+</table>
+<h3>8.2 等价关系的充要条件与标准形</h3>
+<blockquote>
+<p>两个同型矩阵 $A_{m \times n}$ 与 $B_{m \times n}$ 等价的充分必要条件是：</p>
+<p>$$A \cong B \iff r(A) = r(B)$$</p>
+<p>任何秩为 $r$ 的矩阵 $A_{m \times n}$ 均可通过初等变换化为标准的等价标准形 $\begin{bmatrix} E_r & O \\ O & O \end{bmatrix}_{m \times n}$。</p>
+</blockquote>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

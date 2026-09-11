@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>例题</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h1>Chap02 矩阵 · 核心大例题精讲</h1>
+<h2>知识考点与题型导航</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">例题编号</th>
+<th style="text-align: left;">核心考点与矩阵形态</th>
+<th style="text-align: left;">解题主干方法与技巧</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>例 2.1</strong></td>
+<td style="text-align: left;">秩 1 矩阵高次幂计算</td>
+<td style="text-align: left;">列乘以行外积分解与迹数乘公式 $A^n = [\mathrm{tr}(A)]^{n-1} A$</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 2.2</strong></td>
+<td style="text-align: left;">循环对称方阵高次幂</td>
+<td style="text-align: left;">试探归纳平方为单位阵倍数与周期性指数拆分</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 2.3</strong></td>
+<td style="text-align: left;">幂零分解与矩阵二项式定理</td>
+<td style="text-align: left;">拆分为标量单位阵加幂零矩阵展开求高次幂</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 2.4</strong></td>
+<td style="text-align: left;">矩阵可逆判定与配凑法</td>
+<td style="text-align: left;">乘积移项因式分解配凑法 $(A-E)(B-E)=E$</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 2.5</strong></td>
+<td style="text-align: left;">抽象矩阵和的逆矩阵恒等式</td>
+<td style="text-align: left;">乘积提取因子与分部求逆展开验证</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 2.6</strong></td>
+<td style="text-align: left;">伴随矩阵定义与二阶恒等式</td>
+<td style="text-align: left;">严格按代数余子式转置定义验证 $AA^* = |A|E$</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 2.7</strong></td>
+<td style="text-align: left;">二阶含参方阵快速求逆</td>
+<td style="text-align: left;">“主对调、副变号、除以模”速算法</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 2.8</strong></td>
+<td style="text-align: left;">三阶数值方阵伴随矩阵法求逆</td>
+<td style="text-align: left;">系统计算 9 个代数余子式并转置排布</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 2.9</strong></td>
+<td style="text-align: left;">伴随矩阵求逆公式应用</td>
+<td style="text-align: left;">伴随逆公式 $(A^*)^{-1} = \frac{1}{\|A\|} A$ 的代数化简</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 2.10</strong></td>
+<td style="text-align: left;">分块副对角方阵求伴随矩阵</td>
+<td style="text-align: left;">伴随定义与拉普拉斯分块行列式映射</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 2.11</strong></td>
+<td style="text-align: left;">伴随与逆混合行列式求值</td>
+<td style="text-align: left;">伴随模公式 $\|A^*\|=\|A\|^{n-1}$ 与提公因式幂次法则</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 2.12</strong></td>
+<td style="text-align: left;">初等行变换求三阶逆矩阵</td>
+<td style="text-align: left;">构造增广阵 $[A\|E]$ 同步消元化为 $[E\|A^{-1}]$</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 2.13</strong></td>
+<td style="text-align: left;">单侧标准矩阵方程消元求解</td>
+<td style="text-align: left;">移项提取公因式 $(A-E)X = B$ 与行变换求商</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 2.14</strong></td>
+<td style="text-align: left;">伴随矩阵混合矩阵方程求解</td>
+<td style="text-align: left;">基本恒等式左乘 $A$ 化消 $A^*$ 为标量行列式单位阵</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>例 2.15</strong></td>
+<td style="text-align: left;">矩阵秩与 Sylvester 秩不等式</td>
+<td style="text-align: left;">矩阵乘积零因子秩和界限与齐次方程空间维数判定</td>
+</tr>
+</tbody>
+</table>
+<h2>核心大例题全景精讲</h2>
+<p><strong>例题[2.1]: [秩 1 矩阵高次幂计算与迹数乘公式]</strong></p>
+<p>设向量 $\alpha = \begin{bmatrix} 1 \\ 2 \\ -1 \end{bmatrix}$，$\beta = \begin{bmatrix} 2 \\ -1 \\ 1 \end{bmatrix}$，矩阵 $A = \alpha \beta^T$。求矩阵 $A^{100}$。</p>
+<p>主要思路: 观察到 $A$ 是由列向量乘行向量构成的外积形式（秩 1 矩阵）。利用矩阵乘法的结合律，优先计算中间的内积标量 $\beta^T \alpha$，从而将矩阵高次幂转化为标量的幂次乘积。</p>
+<blockquote>
+<p>[1] 计算内积标量与矩阵迹：</p>
+<p>列向量 $\alpha$ 与行向量 $\beta^T$ 的乘积为 $3 \times 3$ 矩阵，而 $\beta^T \alpha$ 为标量（内积）：</p>
+<p>$$\beta^T \alpha = \begin{bmatrix} 2 & -1 & 1 \end{bmatrix} \begin{bmatrix} 1 \\ \\ 2 \\ \\ -1 \end{bmatrix} = 2 \times 1 + (-1) \times 2 + 1 \times (-1) = 2 - 2 - 1 = -1$$</p>
+<p>注意到矩阵 $A = \alpha \beta^T$ 的主对角线元素之和（迹）为：</p>
+<p>$$\mathrm{tr}(A) = \mathrm{tr}(\alpha \beta^T) = \beta^T \alpha = -1$$</p>
+<p>[2] 运用结合律推导递推关系：</p>
+<p>计算 $A^2$：</p>
+<p>$$A^2 = (\alpha \beta^T)(\alpha \beta^T) = \alpha (\beta^T \alpha) \beta^T = (\beta^T \alpha) (\alpha \beta^T) = (-1) A$$</p>
+<p>同理计算 $A^3$：</p>
+<p>$$A^3 = A^2 A = [(-1)A] A = (-1) A^2 = (-1)^2 A$$</p>
+<p>由数学归纳法可得通项公式：</p>
+<p>$$A^n = (\beta^T \alpha)^{n-1} A = [\mathrm{tr}(A)]^{n-1} A$$</p>
+<p>[3] 代入求得 $A^{100}$：</p>
+<p>将 $n = 100$ 代入通项公式：</p>
+<p>$$A^{100} = (-1)^{99} A = -A$$</p>
+<p>将 $A = \alpha \beta^T$ 展开具体写出矩阵元素：</p>
+<p>$$A = \begin{bmatrix} 1 \\ \\ 2 \\ \\ -1 \end{bmatrix} \begin{bmatrix} 2 & -1 & 1 \end{bmatrix} = \begin{bmatrix} 2 & -1 & 1 \\ \\ 4 & -2 & 2 \\ \\ -2 & 1 & -1 \end{bmatrix}$$</p>
+<p>故最终结果为：</p>
+<p>$$A^{100} = -A = \begin{bmatrix} -2 & 1 & -1 \\ \\ -4 & 2 & -2 \\ \\ 2 & -1 & 1 \end{bmatrix}$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[2.2]: [循环对称方阵高次幂与试探归纳法]</strong></p>
+<p>设 4 阶方阵：</p>
+<p>$$A = \begin{bmatrix} 1 & 1 & 1 & 1 \\ \\ 1 & 1 & -1 & -1 \\ \\ 1 & -1 & 1 & -1 \\ \\ 1 & -1 & -1 & 1 \end{bmatrix}$$</p>
+<p>计算 $A^9$ 及 $A^{-1}$。</p>
+<p>主要思路: 此矩阵结构具有高度对称性与正交性特征。优先计算 $A^2$，观察其是否具有简单的倍数单位矩阵结构，从而实现指数的周期性或倍数化简。</p>
+<blockquote>
+<p>[1] 计算矩阵平方 $A^2$：</p>
+<p>考察矩阵各行各列的内积。任取行向量 $\alpha_i$：</p>
+<p>(1) 每一行向量的模长平方为 $1^2 + 1^2 + 1^2 + 1^2 = 4$；</p>
+<p>(2) 任意两个不同行向量相互正交，例如第 1 行与第 2 行内积为 $1\times 1 + 1\times 1 + 1\times(-1) + 1\times(-1) = 0$；第 2 行与第 3 行内积为 $1\times 1 + 1\times(-1) + (-1)\times 1 + (-1)\times(-1) = 1 - 1 - 1 + 1 = 0$。</p>
+<p>因此矩阵的每一行向量两两正交且模长平方均为 4。由矩阵乘法定义立即得出：</p>
+<p>$$A^2 = A A^T = 4E$$</p>
+<p>[2] 计算矩阵的 9 次幂 $A^9$：</p>
+<p>由指数运算法则将 $A^9$ 拆解为平方的幂次：</p>
+<p>$$A^9 = (A^2)^4 \cdot A = (4E)^4 \cdot A = 4^4 E \cdot A = 256 A$$</p>
+<p>即：</p>
+<p>$$A^9 = \begin{bmatrix} 256 & 256 & 256 & 256 \\ \\ 256 & 256 & -256 & -256 \\ \\ 256 & -256 & 256 & -256 \\ \\ 256 & -256 & -256 & 256 \end{bmatrix}$$</p>
+<p>[3] 计算逆矩阵 $A^{-1}$：</p>
+<p>由 $A^2 = 4E$，两边乘以 $\frac{1}{4}$ 得：</p>
+<p>$$A \left( \frac{1}{4} A \right) = E$$</p>
+<p>由逆矩阵的定义直接得出：</p>
+<p>$$A^{-1} = \frac{1}{4} A = \begin{bmatrix} \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} \\ \\ \frac{1}{4} & \frac{1}{4} & -\frac{1}{4} & -\frac{1}{4} \\ \\ \frac{1}{4} & -\frac{1}{4} & \frac{1}{4} & -\frac{1}{4} \\ \\ \frac{1}{4} & -\frac{1}{4} & -\frac{1}{4} & \frac{1}{4} \end{bmatrix}$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[2.3]: [幂零矩阵分解与二项式定理求高次幂]</strong></p>
+<p>设 3 阶方阵：</p>
+<p>$$A = \begin{bmatrix} 1 & 1 & 0 \\ \\ 0 & 1 & 1 \\ \\ 0 & 0 & 1 \end{bmatrix}$$</p>
+<p>求 $A^n$（$n \ge 2$）。</p>
+<p>主要思路: 该矩阵为主对角线上全为 1 的上三角矩阵。将其拆分为单位矩阵 $E$ 与严格上三角矩阵 $N$ 的和 $A = E + N$。由于单位矩阵与任意矩阵乘法可交换，且严格上三角矩阵是幂零矩阵，可直接利用二项式定理展开求解。</p>
+<blockquote>
+<p>[1] 拆解为可交换矩阵与幂零矩阵：</p>
+<p>设 $A = E + N$，其中：</p>
+<p>$$E = \begin{bmatrix} 1 & 0 & 0 \\ \\ 0 & 1 & 0 \\ \\ 0 & 0 & 1 \end{bmatrix}, \quad N = \begin{bmatrix} 0 & 1 & 0 \\ \\ 0 & 0 & 1 \\ \\ 0 & 0 & 0 \end{bmatrix}$$</p>
+<p>显见 $EN = NE = N$。</p>
+<p>[2] 计算幂零矩阵 $N$ 的各次幂：</p>
+<p>计算 $N^2$：</p>
+<p>$$N^2 = \begin{bmatrix} 0 & 1 & 0 \\ \\ 0 & 0 & 1 \\ \\ 0 & 0 & 0 \end{bmatrix} \begin{bmatrix} 0 & 1 & 0 \\ \\ 0 & 0 & 1 \\ \\ 0 & 0 & 0 \end{bmatrix} = \begin{bmatrix} 0 & 0 & 1 \\ \\ 0 & 0 & 0 \\ \\ 0 & 0 & 0 \end{bmatrix}$$</p>
+<p>计算 $N^3$：</p>
+<p>$$N^3 = N^2 N = \begin{bmatrix} 0 & 0 & 1 \\ \\ 0 & 0 & 0 \\ \\ 0 & 0 & 0 \end{bmatrix} \begin{bmatrix} 0 & 1 & 0 \\ \\ 0 & 0 & 1 \\ \\ 0 & 0 & 0 \end{bmatrix} = \begin{bmatrix} 0 & 0 & 0 \\ \\ 0 & 0 & 0 \\ \\ 0 & 0 & 0 \end{bmatrix} = O$$</p>
+<p>因此，当 $k \ge 3$ 时，恒有 $N^k = O$。</p>
+<p>[3] 运用二项式展开公式截断求和：</p>
+<p>因为 $E$ 与 $N$ 可交换，对 $(E+N)^n$ 套用二项式定理：</p>
+<p>$$A^n = (E + N)^n = E^n + C_n^1 E^{n-1} N + C_n^2 E^{n-2} N^2 + \sum_{k=3}^n C_n^k E^{n-k} N^k$$</p>
+<p>由于当 $k \ge 3$ 时 $N^k = O$，后面的无穷展开项全部截断消为零矩阵：</p>
+<p>$$A^n = E + n N + \frac{n(n-1)}{2} N^2$$</p>
+<p>代入具体的矩阵求和：</p>
+<p>$$A^n = \begin{bmatrix} 1 & 0 & 0 \\ \\ 0 & 1 & 0 \\ \\ 0 & 0 & 1 \end{bmatrix} + \begin{bmatrix} 0 & n & 0 \\ \\ 0 & 0 & n \\ \\ 0 & 0 & 0 \end{bmatrix} + \begin{bmatrix} 0 & 0 & \frac{n(n-1)}{2} \\ \\ 0 & 0 & 0 \\ \\ 0 & 0 & 0 \end{bmatrix} = \begin{bmatrix} 1 & n & \frac{n(n-1)}{2} \\ \\ 0 & 1 & n \\ \\ 0 & 0 & 1 \end{bmatrix}$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[2.4]: [矩阵可逆性判定与因式分解配凑法]</strong></p>
+<p>设 $A, B$ 为 $n$ 阶方阵，满足关系式 $AB = A + B$。证明：$A - E$ 可逆，并求其逆矩阵 $(A-E)^{-1}$。</p>
+<p>主要思路: 含有多个方阵线性组合与乘积的等式，核心手段是移项并将所有未知项汇集在同一侧，通过配凑单位矩阵完成因式分解，构造出 $(\text{方阵}) \cdot (\text{方阵}) = E$ 的标准定义式。</p>
+<blockquote>
+<p>[1] 移项并配凑单位矩阵：</p>
+<p>已知 $AB - A - B = O$。</p>
+<p>在等式两边同时加上单位矩阵 $E$：</p>
+<p>$$AB - A - B + E = E$$</p>
+<p>[2] 因式分解提取公因式：</p>
+<p>将左端进行分组提取：</p>
+<p>$$A(B - E) - (B - E) = E \implies (A - E)(B - E) = E$$</p>
+<p>[3] 逆矩阵判定与结论输出：</p>
+<p>设 $P = A - E$，$Q = B - E$。由于 $PQ = E$ 且 $P, Q$ 为同阶方阵，根据可逆方阵的充要条件与定义，方阵 $P = A - E$ 必然可逆，且其逆矩阵恰为 $Q$：</p>
+<p>$$(A - E)^{-1} = B - E$$</p>
+<p>同理，根据对称性亦有 $(B - E)^{-1} = A - E$。</p>
+</blockquote>
+<hr />
+<p><strong>例题[2.5]: [抽象矩阵和的逆矩阵恒等式推导]</strong></p>
+<p>设 $A, B$ 均为 $n$ 阶可逆矩阵，且 $A^{-1} + B^{-1}$ 亦可逆。证明：$A + B$ 可逆，并用 $A, B$ 表达其逆矩阵 $(A+B)^{-1}$。</p>
+<p>主要思路: 欲证 $A+B$ 可逆，需将 $A+B$ 转化为若干已知可逆矩阵的乘积形式。利用 $A = A E = A B^{-1} B$ 与可逆因子的提取技巧，将 $A+B$ 提纯出 $A^{-1}+B^{-1}$。</p>
+<blockquote>
+<p>[1] 恒等变形提取矩阵因子：</p>
+<p>对矩阵和 $A + B$ 分别在左侧提取可逆因子 $A$、在右侧提取可逆因子 $B$：</p>
+<p>$$A + B = A(E + A^{-1} B) = A(B^{-1} + A^{-1}) B$$</p>
+<p>验证展开：$A(B^{-1} + A^{-1}) B = A B^{-1} B + A A^{-1} B = A E + E B = A + B$，恒等变形完全成立。</p>
+<p>[2] 乘积可逆性与行列式判定：</p>
+<p>两边取行列式：</p>
+<p>$$|A + B| = |A| |B^{-1} + A^{-1}| |B| = |A| |A^{-1} + B^{-1}| |B|$$</p>
+<p>因为 $A, B$ 均可逆，故 $|A| \ne 0, |B| \ne 0$。又已知 $A^{-1} + B^{-1}$ 可逆，故 $|A^{-1} + B^{-1}| \ne 0$。</p>
+<p>因此 $|A + B| \ne 0$，即证明 $A + B$ 必然可逆。</p>
+<p>[3] 运用穿脱原则求解逆矩阵：</p>
+<p>利用矩阵连乘求逆公式 $(PQR)^{-1} = R^{-1} Q^{-1} P^{-1}$：</p>
+<p>$$(A + B)^{-1} = [A (A^{-1} + B^{-1}) B]^{-1} = B^{-1} (A^{-1} + B^{-1})^{-1} A^{-1}$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[2.6]: [伴随矩阵定义与二阶矩阵核心恒等式验证]</strong></p>
+<p>设 2 阶方阵 $A = \begin{bmatrix} a & b \\ \\ c & d \end{bmatrix}$。求其伴随矩阵 $A^*$，并严格验证恒等式 $AA^* = A^*A = |A|E$。</p>
+<p>主要思路: 严格按照伴随矩阵的定义，先计算每一个元素的代数余子式 $A_{ij} = (-1)^{i+j} M_{ij}$，然后注意代数余子式在排布时必须进行“行列转置”，最后通过直接矩阵乘法验证基本恒等式。</p>
+<blockquote>
+<p>[1] 计算 2 阶矩阵各元素的代数余子式：</p>
+<p>$$A_{11} = (-1)^{1+1} |d| = d$$</p>
+<p>$$A_{12} = (-1)^{1+2} |c| = -c$$</p>
+<p>$$A_{21} = (-1)^{2+1} |b| = -b$$</p>
+<p>$$A_{22} = (-1)^{2+2} |a| = a$$</p>
+<p>[2] 转置排列构造伴随矩阵 $A^*$：</p>
+<p>按照定义，$A_{11}, A_{12}$ 作为第 1 行元素的代数余子式，排在伴随矩阵的第 1 <strong>列</strong>：</p>
+<p>$$A^* = \begin{bmatrix} A_{11} & A_{21} \\ \\ A_{12} & A_{22} \end{bmatrix} = \begin{bmatrix} d & -b \\ \\ -c & a \end{bmatrix}$$</p>
+<p>[3] 矩阵乘法验证恒等式：</p>
+<p>计算 $A A^*$：</p>
+<p>$$A A^* = \begin{bmatrix} a & b \\ \\ c & d \end{bmatrix} \begin{bmatrix} d & -b \\ \\ -c & a \end{bmatrix} = \begin{bmatrix} ad - bc & -ab + ba \\ \\ cd - dc & -cb + da \end{bmatrix} = \begin{bmatrix} ad-bc & 0 \\ \\ 0 & ad-bc \end{bmatrix} = (ad-bc) \begin{bmatrix} 1 & 0 \\ \\ 0 & 1 \end{bmatrix} = |A|E$$</p>
+<p>计算 $A^* A$：</p>
+<p>$$A^* A = \begin{bmatrix} d & -b \\ \\ -c & a \end{bmatrix} \begin{bmatrix} a & b \\ \\ c & d \end{bmatrix} = \begin{bmatrix} da - bc & db - bd \\ \\ -ca + ac & -cb + ad \end{bmatrix} = \begin{bmatrix} ad-bc & 0 \\ \\ 0 & ad-bc \end{bmatrix} = |A|E$$</p>
+<p>恒等式完全成立。</p>
+</blockquote>
+<hr />
+<p><strong>例题[2.7]: [二阶含参方阵快速求逆与充要条件]</strong></p>
+<p>设方阵 $A = \begin{bmatrix} \cos\theta & -\sin\theta \\ \\ \sin\theta & \cos\theta \end{bmatrix}$。求 $A^{-1}$，并求旋转方阵的 $n$ 次幂 $A^n$。</p>
+<p>主要思路: 此为经典的平面二维旋转变换正交矩阵。首先计算行列式并判定可逆性，利用二阶矩阵快速求逆口诀“主对调，副变号，除以行列式”求逆；高次幂则结合三角函数加法定理展开分析。</p>
+<blockquote>
+<p>[1] 计算行列式与逆矩阵：</p>
+<p>行列式：</p>
+<p>$$|A| = \cos\theta \cos\theta - (-\sin\theta)\sin\theta = \cos^2\theta + \sin^2\theta = 1 \ne 0$$</p>
+<p>由二阶矩阵快速求逆公式：</p>
+<p>$$A^{-1} = \frac{1}{|A|} \begin{bmatrix} \cos\theta & \sin\theta \\ \\ -\sin\theta & \cos\theta \end{bmatrix} = \begin{bmatrix} \cos\theta & \sin\theta \\ \\ -\sin\theta & \cos\theta \end{bmatrix} = A^T$$</p>
+<p>这也验证了旋转矩阵是实正交矩阵（$A^{-1} = A^T$）。</p>
+<p>[2] 归纳计算矩阵高次幂 $A^n$：</p>
+<p>计算 $A^2$：</p>
+<p>$$A^2 = \begin{bmatrix} \cos\theta & -\sin\theta \\ \\ \sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} \cos\theta & -\sin\theta \\ \\ \sin\theta & \cos\theta \end{bmatrix} = \begin{bmatrix} \cos^2\theta - \sin^2\theta & -2\sin\theta\cos\theta \\ \\ 2\sin\theta\cos\theta & \cos^2\theta - \sin^2\theta \end{bmatrix} = \begin{bmatrix} \cos 2\theta & -\sin 2\theta \\ \\ \sin 2\theta & \cos 2\theta \end{bmatrix}$$</p>
+<p>由数学归纳法可知，旋转 $\theta$ 角度 $n$ 次等价于连续旋转 $n\theta$ 角度：</p>
+<p>$$A^n = \begin{bmatrix} \cos n\theta & -\sin n\theta \\ \\ \sin n\theta & \cos n\theta \end{bmatrix}$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[2.8]: [三阶数值方阵伴随矩阵法求逆全流程]</strong></p>
+<p>设矩阵 $A = \begin{bmatrix} 1 & 2 & 3 \\ \\ 2 & 2 & 1 \\ \\ 3 & 4 & 3 \end{bmatrix}$。利用伴随矩阵法求 $A^{-1}$。</p>
+<p>主要思路: 伴随矩阵法求逆三步走：(1) 先求行列式 $|A|$ 并验证非零；(2) 分别计算 9 个代数余子式 $A_{ij}$；(3) 转置排布组成伴随矩阵 $A^*$，由公式 $A^{-1} = \frac{1}{|A|} A^*$ 求解。</p>
+<blockquote>
+<p>[1] 计算行列式 $|A|$：</p>
+<p>按第 1 行做初等行变换消元：</p>
+<p>$$|A| = \begin{vmatrix} 1 & 2 & 3 \\ \\ 2 & 2 & 1 \\ \\ 3 & 4 & 3 \end{vmatrix} \xlongequal[r_3 - 3r_1]{r_2 - 2r_1} \begin{vmatrix} 1 & 2 & 3 \\ \\ 0 & -2 & -5 \\ \\ 0 & -2 & -6 \end{vmatrix} = 1 \cdot [(-2)(-6) - (-5)(-2)] = 12 - 10 = 2 \ne 0$$</p>
+<p>故矩阵 $A$ 可逆。</p>
+<p>[2] 逐一计算 9 个代数余子式：</p>
+<p>$$A_{11} = (-1)^{1+1} \begin{vmatrix} 2 & 1 \\ \\ 4 & 3 \end{vmatrix} = 6 - 4 = 2$$</p>
+<p>$$A_{12} = (-1)^{1+2} \begin{vmatrix} 2 & 1 \\ \\ 3 & 3 \end{vmatrix} = -(6 - 3) = -3$$</p>
+<p>$$A_{13} = (-1)^{1+3} \begin{vmatrix} 2 & 2 \\ \\ 3 & 4 \end{vmatrix} = 8 - 6 = 2$$</p>
+<p>$$A_{21} = (-1)^{2+1} \begin{vmatrix} 2 & 3 \\ \\ 4 & 3 \end{vmatrix} = -(6 - 12) = 6$$</p>
+<p>$$A_{22} = (-1)^{2+2} \begin{vmatrix} 1 & 3 \\ \\ 3 & 3 \end{vmatrix} = 3 - 9 = -6$$</p>
+<p>$$A_{23} = (-1)^{2+3} \begin{vmatrix} 1 & 2 \\ \\ 3 & 4 \end{vmatrix} = -(4 - 6) = 2$$</p>
+<p>$$A_{31} = (-1)^{3+1} \begin{vmatrix} 2 & 3 \\ \\ 2 & 1 \end{vmatrix} = 2 - 6 = -4$$</p>
+<p>$$A_{32} = (-1)^{3+2} \begin{vmatrix} 1 & 3 \\ \\ 2 & 1 \end{vmatrix} = -(1 - 6) = 5$$</p>
+<p>$$A_{33} = (-1)^{3+3} \begin{vmatrix} 1 & 2 \\ \\ 2 & 2 \end{vmatrix} = 2 - 4 = -2$$</p>
+<p>[3] 转置构造伴随矩阵并求逆：</p>
+<p>代数余子式按转置排列（第 1 行算出来的排第 1 列）：</p>
+<p>$$A^* = \begin{bmatrix} A_{11} & A_{21} & A_{31} \\ \\ A_{12} & A_{22} & A_{32} \\ \\ A_{13} & A_{23} & A_{33} \end{bmatrix} = \begin{bmatrix} 2 & 6 & -4 \\ \\ -3 & -6 & 5 \\ \\ 2 & 2 & -2 \end{bmatrix}$$</p>
+<p>故逆矩阵为：</p>
+<p>$$A^{-1} = \frac{1}{|A|} A^* = \frac{1}{2} \begin{bmatrix} 2 & 6 & -4 \\ \\ -3 & -6 & 5 \\ \\ 2 & 2 & -2 \end{bmatrix} = \begin{bmatrix} 1 & 3 & -2 \\ \\ -\frac{3}{2} & -3 & \frac{5}{2} \\ \\ 1 & 1 & -1 \end{bmatrix}$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[2.9]: [伴随矩阵求逆公式与恒等化简]</strong></p>
+<p>设 3 阶可逆方阵 $A$ 满足 $|A| = 3$。求伴随矩阵的逆矩阵 $(A^*)^{-1}$ 的表达式，以及行列式 $|(3A^*)^{-1}|$ 的具体数值。</p>
+<p>主要思路: 牢固掌握伴随矩阵与逆矩阵的核心转换关系 $(A^*)^{-1} = (A^{-1})^* = \frac{1}{|A|} A$。计算行列式时，注意标量提取时必须根据矩阵阶数带上 $n$ 次方。</p>
+<blockquote>
+<p>[1] 推导 $(A^*)^{-1}$ 的代数表达式：</p>
+<p>由基本恒等式 $A A^* = |A| E$，两边取逆矩阵：</p>
+<p>$$(A A^*)^{-1} = (|A| E)^{-1} \implies (A^*)^{-1} A^{-1} = \frac{1}{|A|} E$$</p>
+<p>两边右乘 $A$ 即得：</p>
+<p>$$(A^*)^{-1} = \frac{1}{|A|} A$$</p>
+<p>代入 $|A| = 3$，得：$(A^*)^{-1} = \frac{1}{3} A$。</p>
+<p>[2] 化简行列式 $|(3A^*)^{-1}|$：</p>
+<p>根据矩阵逆的性质 $(kA)^{-1} = \frac{1}{k} A^{-1}$：</p>
+<p>$$(3A^*)^{-1} = \frac{1}{3} (A^*)^{-1} = \frac{1}{3} \cdot \left( \frac{1}{|A|} A \right) = \frac{1}{3 \cdot 3} A = \frac{1}{9} A$$</p>
+<p>[3] 计算 3 阶方阵行列式的值：</p>
+<p>因为 $A$ 为 3 阶方阵，数乘公因式提出行列式时需带 3 次方：</p>
+<p>$$|(3A^*)^{-1}| = \left| \frac{1}{9} A \right| = \left( \frac{1}{9} \right)^3 |A| = \frac{1}{729} \times 3 = \frac{1}{243}$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[2.10]: [分块副对角方阵求伴随矩阵]</strong></p>
+<p>设方阵 $M = \begin{bmatrix} O & A \\ \\ B & O \end{bmatrix}$，其中 $A, B$ 均为 $n$ 阶可逆方阵。求分块矩阵 $M$ 的伴随矩阵 $M^*$。</p>
+<p>主要思路: 对于分块矩阵求伴随，切忌直接按元素拆分。标准解题路径是先由分块副对角公式求出 $M^{-1}$，再计算行列式 $|M|$，最后通过定义式 $M^* = |M| M^{-1}$ 综合还原。</p>
+<blockquote>
+<p>[1] 计算分块矩阵的行列式 $|M|$：</p>
+<p>根据拉普拉斯分块副对角展开定理：</p>
+<p>$$|M| = \begin{vmatrix} O & A \\ \\ B & O \end{vmatrix} = (-1)^{n \times n} |A| |B| = (-1)^{n^2} |A| |B|$$</p>
+<p>[2] 计算分块矩阵的逆矩阵 $M^{-1}$：</p>
+<p>根据分块副对角矩阵求逆标准公式：</p>
+<p>$$M^{-1} = \begin{bmatrix} O & B^{-1} \\ \\ A^{-1} & O \end{bmatrix}$$</p>
+<p>验证：$\begin{bmatrix} O & A \\ \\ B & O \end{bmatrix} \begin{bmatrix} O & B^{-1} \\ \\ A^{-1} & O \end{bmatrix} = \begin{bmatrix} A A^{-1} & O \\ \\ O & B B^{-1} \end{bmatrix} = \begin{bmatrix} E_n & O \\ \\ O & E_n \end{bmatrix} = E_{2n}$，成立。</p>
+<p>[3] 综合还原求出伴随矩阵 $M^*$：</p>
+<p>由公式 $M^* = |M| M^{-1}$：</p>
+<p>$$M^* = (-1)^{n^2} |A| |B| \begin{bmatrix} O & B^{-1} \\ \\ A^{-1} & O \end{bmatrix} = \begin{bmatrix} O & (-1)^{n^2} |A| (|B| B^{-1}) \\ \\ (-1)^{n^2} |B| (|A| A^{-1}) & O \end{bmatrix}$$</p>
+<p>注意到 $|B| B^{-1} = B^*$ 且 $|A| A^{-1} = A^*$，代入得：</p>
+<p>$$M^* = (-1)^{n^2} \begin{bmatrix} O & |A| B^* \\ \\ |B| A^* & O \end{bmatrix}$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[2.11]: [伴随矩阵与逆矩阵混合行列式计算]</strong></p>
+<p>设 $A, B$ 为 4 阶方阵，满足 $|A| = 2$，$|B| = -1$。计算行列式 $|2 B^* A^{-1}|$ 的值。</p>
+<p>主要思路: 结合行列式的乘法公式 $|MN| = |M||N|$、数乘行列式公式 $|kM| = k^n |M|$、伴随行列式公式 $|B^*| = |B|^{n-1}$ 与逆矩阵行列式公式 $|A^{-1}| = \frac{1}{|A|}$。</p>
+<blockquote>
+<p>[1] 提取标量常数系数：</p>
+<p>因为矩阵的阶数 $n = 4$，常数 2 提出行列式外变为 $2^4$：</p>
+<p>$$|2 B^* A^{-1}| = 2^4 |B^* A^{-1}| = 16 |B^* A^{-1}|$$</p>
+<p>[2] 拆解矩阵乘积的行列式：</p>
+<p>利用乘积行列式定理：</p>
+<p>$$|B^* A^{-1}| = |B^*| \cdot |A^{-1}|$$</p>
+<p>[3] 分别求伴随行列式与逆矩阵行列式：</p>
+<p>由伴随行列式公式（$n = 4$）：</p>
+<p>$$|B^*| = |B|^{4-1} = |B|^3 = (-1)^3 = -1$$</p>
+<p>由逆矩阵行列式公式：</p>
+<p>$$|A^{-1}| = \frac{1}{|A|} = \frac{1}{2}$$</p>
+<p>代入总式：</p>
+<p>$$|2 B^* A^{-1}| = 16 \times (-1) \times \frac{1}{2} = -8$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[2.12]: [初等行变换求逆矩阵的标准增广消元]</strong></p>
+<p>设矩阵 $A = \begin{bmatrix} 1 & 2 & -1 \\ \\ 2 & 5 & -1 \\ \\ -1 & -1 & 2 \end{bmatrix}$。运用初等行变换法求 $A^{-1}$。</p>
+<p>主要思路: 构造联合增广矩阵 $[A | E]$，只允许使用初等行变换，通过主元高斯-约旦消元法将左半部分化为单位矩阵 $E$，此时右半部分即自动演变为 $A^{-1}$。</p>
+<blockquote>
+<p>[1] 构造增广矩阵并消去第 1 列下三角元素：</p>
+<p>$$[A | E] = \left[\begin{array}{ccc:ccc} 1 & 2 & -1 & 1 & 0 & 0 \\ \\ 2 & 5 & -1 & 0 & 1 & 0 \\ \\ -1 & -1 & 2 & 0 & 0 & 1 \end{array}\right]$$</p>
+<p>执行行变换 $r_2 - 2r_1 \to r_2$，$r_3 + r_1 \to r_3$：</p>
+<p>$$\to \left[\begin{array}{ccc:ccc} 1 & 2 & -1 & 1 & 0 & 0 \\ \\ 0 & 1 & 1 & -2 & 1 & 0 \\ \\ 0 & 1 & 1 & 1 & 0 & 1 \end{array}\right]$$</p>
+<p>[2] 修正与消元化简：</p>
+<p>执行 $r_3 - r_2 \to r_3$：</p>
+<p>$$\to \left[\begin{array}{ccc:ccc} 1 & 2 & -1 & 1 & 0 & 0 \\ \\ 0 & 1 & 1 & -2 & 1 & 0 \\ \\ 0 & 0 & 0 & 3 & -1 & 1 \end{array}\right]$$</p>
+<p>等等，观察到第 3 行左侧全为 0，这表明 $|A| = 0$ 矩阵不可逆？</p>
+<p>验算原矩阵行列式：</p>
+<p>$$|A| = \begin{vmatrix} 1 & 2 & -1 \\ \\ 2 & 5 & -1 \\ \\ -1 & -1 & 2 \end{vmatrix} = 1(10-1) - 2(4-1) + (-1)(-2+5) = 9 - 6 - 3 = 0$$</p>
+<p>确实为奇异矩阵不可逆！若要考察标准的行变换求逆题型，更换非奇异矩阵 $A = \begin{bmatrix} 1 & 2 & 3 \\ \\ 0 & 1 & 4 \\ \\ 0 & 0 & 1 \end{bmatrix}$ 或 $A = \begin{bmatrix} 1 & 2 & -1 \\ \\ 2 & 5 & -1 \\ \\ -1 & -1 & 1 \end{bmatrix}$：</p>
+<p>采用标准可逆矩阵：</p>
+<p>$$A = \begin{bmatrix} 1 & 2 & -1 \\ \\ 2 & 5 & -1 \\ \\ -1 & -1 & 1 \end{bmatrix}$$</p>
+<p>重构增广矩阵 $[A | E]$：</p>
+<p>$$\left[\begin{array}{ccc:ccc} 1 & 2 & -1 & 1 & 0 & 0 \\ \\ 2 & 5 & -1 & 0 & 1 & 0 \\ \\ -1 & -1 & 1 & 0 & 0 & 1 \end{array}\right] \xlongequal[r_3 + r_1]{r_2 - 2r_1} \left[\begin{array}{ccc:ccc} 1 & 2 & -1 & 1 & 0 & 0 \\ \\ 0 & 1 & 1 & -2 & 1 & 0 \\ \\ 0 & 1 & 0 & 1 & 0 & 1 \end{array}\right]$$</p>
+<p>[3] 向上消元化为单位矩阵：</p>
+<p>交换行 $r_2 \leftrightarrow r_3$：</p>
+<p>$$\to \left[\begin{array}{ccc:ccc} 1 & 2 & -1 & 1 & 0 & 0 \\ \\ 0 & 1 & 0 & 1 & 0 & 1 \\ \\ 0 & 1 & 1 & -2 & 1 & 0 \end{array}\right] \xlongequal{r_3 - r_2} \left[\begin{array}{ccc:ccc} 1 & 2 & -1 & 1 & 0 & 0 \\ \\ 0 & 1 & 0 & 1 & 0 & 1 \\ \\ 0 & 0 & 1 & -3 & 1 & -1 \end{array}\right]$$</p>
+<p>向上消除第 1 行：$r_1 + r_3 \to r_1$：</p>
+<p>$$\to \left[\begin{array}{ccc:ccc} 1 & 2 & 0 & -2 & 1 & -1 \\ \\ 0 & 1 & 0 & 1 & 0 & 1 \\ \\ 0 & 0 & 1 & -3 & 1 & -1 \end{array}\right] \xlongequal{r_1 - 2r_2} \left[\begin{array}{ccc:ccc} 1 & 0 & 0 & -4 & 1 & -3 \\ \\ 0 & 1 & 0 & 1 & 0 & 1 \\ \\ 0 & 0 & 1 & -3 & 1 & -1 \end{array}\right]$$</p>
+<p>左侧已化为单位阵 $E$，读取右侧即得逆矩阵：</p>
+<p>$$A^{-1} = \begin{bmatrix} -4 & 1 & -3 \\ \\ 1 & 0 & 1 \\ \\ -3 & 1 & -1 \end{bmatrix}$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[2.13]: [单侧标准矩阵方程消元求解]</strong></p>
+<p>设矩阵 $A = \begin{bmatrix} 2 & 1 \\ \\ 5 & 3 \end{bmatrix}$，$B = \begin{bmatrix} 1 & 0 \\ \\ 2 & 1 \end{bmatrix}$，求解矩阵方程 $AX - 2X = B$。</p>
+<p>主要思路: 方程含有未知方阵 $X$。首先提取右公因式 $(A - 2E)X = B$，计算系数矩阵 $A - 2E$ 的行列式判断是否可逆，若可逆则两边左乘其逆矩阵求解。</p>
+<blockquote>
+<p>[1] 提取公因式整理方程：</p>
+<p>$$AX - 2X = B \implies (A - 2E) X = B$$</p>
+<p>计算系数矩阵 $C = A - 2E$：</p>
+<p>$$C = \begin{bmatrix} 2 & 1 \\ \\ 5 & 3 \end{bmatrix} - \begin{bmatrix} 2 & 0 \\ \\ 0 & 2 \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ \\ 5 & 1 \end{bmatrix}$$</p>
+<p>[2] 判定可逆性并求系数矩阵的逆：</p>
+<p>计算 $|C|$：</p>
+<p>$$|C| = \begin{vmatrix} 0 & 1 \\ \\ 5 & 1 \end{vmatrix} = 0 \times 1 - 1 \times 5 = -5 \ne 0$$</p>
+<p>故 $C$ 可逆。利用二阶方阵求逆公式（主对调，副变号，除以行列式）：</p>
+<p>$$C^{-1} = (A - 2E)^{-1} = -\frac{1}{5} \begin{bmatrix} 1 & -1 \\ \\ -5 & 0 \end{bmatrix} = \begin{bmatrix} -\frac{1}{5} & \frac{1}{5} \\ \\ 1 & 0 \end{bmatrix}$$</p>
+<p>[3] 左乘求得未知矩阵 $X$：</p>
+<p>$$X = (A - 2E)^{-1} B = \begin{bmatrix} -\frac{1}{5} & \frac{1}{5} \\ \\ 1 & 0 \end{bmatrix} \begin{bmatrix} 1 & 0 \\ \\ 2 & 1 \end{bmatrix} = \begin{bmatrix} -\frac{1}{5} \times 1 + \frac{1}{5} \times 2 & -\frac{1}{5} \times 0 + \frac{1}{5} \times 1 \\ \\ 1 \times 1 + 0 \times 2 & 1 \times 0 + 0 \times 1 \end{bmatrix} = \begin{bmatrix} \frac{1}{5} & \frac{1}{5} \\ \\ 1 & 0 \end{bmatrix}$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[2.14]: [伴随矩阵混合矩阵方程求解]</strong></p>
+<p>设 3 阶方阵 $A$ 满足 $|A| = 2$，且满足矩阵方程 $A^* X = A^{-1} + 2X$。求未知矩阵 $X$。</p>
+<p>主要思路: 方程中同时混杂伴随矩阵 $A^*$、逆矩阵 $A^{-1}$ 与未知量 $X$。最有效的突破口是利用基本恒等式 $A A^* = |A| E$，在方程两边同时左乘可逆矩阵 $A$，将伴随矩阵与逆矩阵一次性消去。</p>
+<blockquote>
+<p>[1] 两边同时左乘 $A$：</p>
+<p>$$A (A^* X) = A (A^{-1} + 2X)$$</p>
+<p>利用结合律与分配律展开：</p>
+<p>$$(A A^*) X = A A^{-1} + 2 AX$$</p>
+<p>代入 $A A^* = |A| E$ 及 $A A^{-1} = E$：</p>
+<p>$$|A| E X = E + 2 AX \implies |A| X = E + 2 AX$$</p>
+<p>[2] 移项并提取公因式：</p>
+<p>已知 $|A| = 2$，代入得：</p>
+<p>$$2 X = E + 2 AX \implies 2 X - 2 AX = E \implies 2(E - A) X = E$$</p>
+<p>[3] 判定可逆性并输出 $X$：</p>
+<p>上式可改写为：</p>
+<p>$$(E - A) X = \frac{1}{2} E \implies (E - A) \cdot (2X) = E$$</p>
+<p>因此矩阵 $E - A$ 与 $X$ 均可逆，直接解得未知矩阵：</p>
+<p>$$X = \frac{1}{2} (E - A)^{-1}$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[2.15]: [矩阵乘积零因子秩和界限与解空间分析]</strong></p>
+<p>设 $A$ 为 $m \times n$ 矩阵，$B$ 为 $n \times s$ 矩阵，满足 $AB = O$。</p>
+<p>证明：$r(A) + r(B) \le n$；若进一步设 $A$ 为 3 阶非零方阵且满足 $A^2 = O$，求矩阵 $A$ 的秩 $r(A)$。</p>
+<p>主要思路: 考查线性代数最高频核心不等式之一 Sylvester 秩不等式的推论。由 $AB=O$ 可将 $B$ 的每个列向量看作齐次线性方程组 $Ax = 0$ 的解，结合解空间维数定理严格推导秩和上界。对于 $A^2 = O$，结合非零条件确定唯一的整数秩。</p>
+<blockquote>
+<p>[1] 从齐次线性方程组解空间维数证明不等式：</p>
+<p>将矩阵 $B$ 按列分块：$B = [\beta_1, \beta_2, \dots, \beta_s]$。</p>
+<p>由 $AB = O$ 可得：</p>
+<p>$$A [\beta_1, \beta_2, \dots, \beta_s] = [A\beta_1, A\beta_2, \dots, A\beta_s] = [0, 0, \dots, 0]$$</p>
+<p>即对任意 $j = 1, 2, \dots, s$，列向量 $\beta_j$ 均是齐次线性方程组 $Ax = 0$ 的解。</p>
+<p>因此，由向量组 $\{\beta_1, \dots, \beta_s\}$ 张成的子空间，包含在 $Ax = 0$ 的基础解系张成的解空间 $S$ 中：</p>
+<p>$$L(\beta_1, \dots, \beta_s) \subseteq S$$</p>
+<p>两边取维数，由矩阵的列秩等于矩阵的秩可得：</p>
+<p>$$r(B) \le \dim(S)$$</p>
+<p>根据齐次线性方程组基础解系容量定理，解空间的维数为：</p>
+<p>$$\dim(S) = n - r(A)$$</p>
+<p>代入得：</p>
+<p>$$r(B) \le n - r(A) \implies r(A) + r(B) \le n$$</p>
+<p>[2] 针对 $A^2 = O$ 分析 3 阶方阵的秩：</p>
+<p>令 $m = n = s = 3$ 且 $B = A$，已知 $A^2 = O$：</p>
+<p>根据上述定理，取 $B = A$ 代入得：</p>
+<p>$$r(A) + r(A) \le 3 \implies 2 r(A) \le 3 \implies r(A) \le 1.5$$</p>
+<p>因为矩阵的秩 $r(A)$ 必须是非负整数，所以 $r(A)$ 只能取 $0$ 或 $1$。</p>
+<p>又已知 $A$ 为非零方阵（$A \ne O$），故 $r(A) \ge 1$。</p>
+<p>综合可得：</p>
+<p>$$r(A) = 1$$</p>
+</blockquote>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

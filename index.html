@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EscoffierZhou 22408 考研备考知识库</title>
+  <link rel="icon" href="./assets/cover2.png" type="image/png">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+  
+  <!-- KaTeX for Markdown Math Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Marked.js for Markdown Rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.1/marked.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #8b5cf6;
+      --primary-dark: #6d28d9;
+      --primary-light: #ede9fe;
+      --primary-border: #ddd6fe;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --bg-body: #f8fafc;
+      --bg-sidebar: #ffffff;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --sidebar-width: 320px;
+      --header-height: 60px;
+      --tag-html: #8b5cf6;
+      --tag-pdf: #ef4444;
+      --tag-md: #3b82f6;
+    }
+
+    [data-theme="dark"] {
+      --primary: #a78bfa;
+      --primary-dark: #8b5cf6;
+      --primary-light: #2e1065;
+      --primary-border: #4c1d95;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --bg-body: #0f172a;
+      --bg-sidebar: #1e293b;
+      --bg-card: #1e293b;
+      --border-color: #334155;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Navbar */
+    header.top-nav {
+      height: var(--header-height);
+      background-color: var(--bg-sidebar);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      z-index: 30;
+      flex-shrink: 0;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sidebar-toggle-btn {
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 8px 10px;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+    .sidebar-toggle-btn:hover {
+      background-color: var(--primary-light);
+    }
+
+    .site-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .site-brand i {
+      color: var(--primary);
+      font-size: 1.25rem;
+    }
+
+    .target-badge {
+      font-size: 0.75rem;
+      background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+      color: #fff;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .action-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .action-btn:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      background-color: var(--primary-light);
+    }
+
+    /* Main Container */
+    .app-layout {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Sidebar */
+    aside.sidebar {
+      width: var(--sidebar-width);
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      transition: transform 0.25s ease;
+      z-index: 20;
+    }
+
+    .sidebar-search-box {
+      padding: 12px 14px 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .search-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-input-wrapper i.fa-search {
+      position: absolute;
+      left: 10px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 7px 30px 7px 32px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-input:focus {
+      border-color: var(--primary);
+    }
+
+    .clear-search-btn {
+      position: absolute;
+      right: 8px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: none;
+      font-size: 0.85rem;
+    }
+
+    .sidebar-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 14px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-color);
+      background-color: rgba(0,0,0,0.01);
+    }
+
+    .sidebar-actions button {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.75rem;
+      padding: 2px 4px;
+    }
+    .sidebar-actions button:hover {
+      color: var(--primary);
+    }
+
+    .tree-scroll-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px 6px;
+    }
+
+    /* Tree Styling */
+    .tree-group {
+      margin-bottom: 10px;
+    }
+
+    .tree-group-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 6px 10px 4px;
+      letter-spacing: 0.05em;
+    }
+
+    .tree-node {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .node-header {
+      display: flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      transition: background-color 0.15s;
+      gap: 8px;
+    }
+    .node-header:hover {
+      background-color: var(--primary-light);
+    }
+
+    .node-header.active {
+      background-color: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .node-icon {
+      width: 16px;
+      text-align: center;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .node-title {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .node-badge {
+      font-size: 0.68rem;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background-color: var(--border-color);
+      color: var(--text-muted);
+    }
+
+    .node-chevron {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      transition: transform 0.2s;
+    }
+    .node-chevron.expanded {
+      transform: rotate(90deg);
+    }
+
+    .node-children {
+      margin-left: 14px;
+      border-left: 1px dashed var(--border-color);
+      padding-left: 4px;
+      display: none;
+    }
+    .node-children.expanded {
+      display: block;
+    }
+
+    /* Document item inside tree */
+    .doc-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 8px 5px 6px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      margin: 1px 0;
+      color: var(--text-main);
+      transition: all 0.15s;
+      gap: 6px;
+    }
+    .doc-item:hover {
+      background-color: var(--primary-light);
+    }
+    .doc-item.active {
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 600;
+      border-left: 3px solid var(--primary);
+    }
+
+    .doc-item-title {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .doc-formats-badge {
+      display: inline-flex;
+      gap: 3px;
+      flex-shrink: 0;
+    }
+
+    .fmt-pill {
+      font-size: 0.62rem;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-weight: 600;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+    .fmt-pill.html {
+      background-color: rgba(139, 92, 246, 0.15);
+      color: #8b5cf6;
+    }
+    .fmt-pill.pdf {
+      background-color: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+    }
+    .fmt-pill.md {
+      background-color: rgba(59, 130, 246, 0.15);
+      color: #3b82f6;
+    }
+
+    /* Main Reader Area */
+    main.content-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--bg-body);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Reader Header / Breadcrumb Bar */
+    .reader-header {
+      height: 44px;
+      border-bottom: 1px solid var(--border-color);
+      background-color: var(--bg-sidebar);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 0.8rem;
+    }
+    .breadcrumb span.curr {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .reader-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .format-switcher {
+      display: flex;
+      background-color: var(--bg-body);
+      border-radius: 6px;
+      padding: 2px;
+      border: 1px solid var(--border-color);
+    }
+
+    .format-tab {
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+    .format-tab.active {
+      background-color: var(--primary);
+      color: #fff;
+    }
+
+    .tool-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.15s;
+    }
+    .tool-btn:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* Frame View Container */
+    .frame-container {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    iframe#readerFrame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background-color: #ffffff;
+    }
+
+    /* Markdown Reader Container */
+    #markdownContainer {
+      display: none;
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 24px 32px 64px 32px;
+      max-width: 960px;
+      margin: 0 auto;
+      background-color: var(--bg-sidebar);
+      border-left: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+    }
+
+    /* Markdown Typora-Like Styling */
+    #markdownContainer h1 {
+      font-size: 24px;
+      color: var(--primary-dark);
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 8px;
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+    #markdownContainer h2 {
+      font-size: 18px;
+      border-bottom: 1px solid var(--primary-border);
+      padding-bottom: 6px;
+      margin-top: 24px;
+      margin-bottom: 12px;
+      color: var(--primary);
+    }
+    #markdownContainer h3 {
+      font-size: 15px;
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+    #markdownContainer p {
+      line-height: 1.75;
+      margin-bottom: 12px;
+      font-size: 14.5px;
+    }
+    #markdownContainer pre {
+      background-color: #1e293b;
+      color: #e2e8f0;
+      padding: 12px 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 14px 0;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 13px;
+    }
+    #markdownContainer code {
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.88em;
+    }
+    #markdownContainer blockquote {
+      border-left: 4px solid var(--primary);
+      background-color: var(--primary-light);
+      padding: 10px 14px;
+      border-radius: 0 6px 6px 0;
+      margin: 14px 0;
+      color: var(--text-main);
+    }
+    #markdownContainer table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 14px 0;
+      font-size: 13.5px;
+    }
+    #markdownContainer th, #markdownContainer td {
+      border: 1px solid var(--border-color);
+      padding: 8px 12px;
+      text-align: left;
+    }
+    #markdownContainer th {
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    /* Welcome Dashboard */
+    #dashboardView {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%);
+      color: #fff;
+      border-radius: 14px;
+      padding: 32px 36px;
+      box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.25);
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-banner::after {
+      content: "";
+      position: absolute;
+      right: -20px;
+      bottom: -40px;
+      width: 220px;
+      height: 220px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+    }
+
+    .hero-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .hero-subtitle {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      max-width: 680px;
+      line-height: 1.6;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.08);
+      border-color: var(--primary);
+    }
+
+    .stat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .stat-info h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+    .stat-info p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quick-links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .quick-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .quick-card:hover {
+      border-color: var(--primary);
+      background-color: var(--primary-light);
+    }
+
+    .quick-card h5 {
+      font-size: 0.92rem;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quick-card p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      aside.sidebar {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+      }
+      aside.sidebar.mobile-open {
+        transform: translateX(0);
+      }
+      .sidebar-overlay {
+        display: none;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 15;
+      }
+      .sidebar-overlay.active {
+        display: block;
+      }
+      .target-badge {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <header class="top-nav">
+    <div class="nav-left">
+      <button class="sidebar-toggle-btn" id="toggleSidebarBtn" title="折叠/展开侧边栏">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <a href="javascript:void(0)" class="site-brand" id="brandHomeBtn">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>22408 知识库</span>
+      </a>
+      <span class="target-badge">2027 UCAS 目标</span>
+    </div>
+
+    <div class="nav-right">
+      <button class="action-btn" id="themeToggleBtn" title="切换深色/浅色模式">
+        <i class="fa-solid fa-moon"></i>
+        <span class="btn-text">暗色</span>
+      </button>
+      <a href="https://github.com/EscoffierZhou/22408_2027" target="_blank" class="action-btn" title="访问 GitHub 源码仓库">
+        <i class="fa-brands fa-github"></i>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="app-layout">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-search-box">
+        <div class="search-input-wrapper">
+          <i class="fa-solid fa-search"></i>
+          <input type="text" id="searchInput" class="search-input" placeholder="全局搜索科目、章节、例题...">
+          <button class="clear-search-btn" id="clearSearchBtn">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="sidebar-actions">
+        <span id="docCountInfo">正在加载目录...</span>
+        <div>
+          <button id="expandAllBtn" title="展开全部">展开</button> |
+          <button id="collapseAllBtn" title="折叠全部">折叠</button>
+        </div>
+      </div>
+
+      <div class="tree-scroll-container" id="treeContainer">
+        <!-- 由 JavaScript 动态渲染树形导航 -->
+      </div>
+    </aside>
+
+    <!-- Content Reader Area -->
+    <main class="content-area">
+      <!-- Breadcrumb Bar -->
+      <div class="reader-header" id="readerHeader" style="display: none;">
+        <div class="breadcrumb" id="breadcrumbTrail">
+          <i class="fa-solid fa-book-bookmark"></i>
+          <span class="curr">首页</span>
+        </div>
+
+        <div class="reader-controls">
+          <div class="format-switcher" id="formatSwitcher">
+            <!-- 格式按钮（HTML / PDF / MD） -->
+          </div>
+          <button class="tool-btn" id="fullscreenBtn" title="全屏沉浸阅读">
+            <i class="fa-solid fa-expand"></i>
+          </button>
+          <button class="tool-btn" id="copyLinkBtn" title="复制当前页面直达链接">
+            <i class="fa-solid fa-link"></i>
+          </button>
+          <a class="tool-btn" id="openExternalBtn" target="_blank" title="在新标签页中打开">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Frame Area for HTML and PDF -->
+      <div class="frame-container" id="frameContainer">
+        <!-- Dashboard View (Default) -->
+        <div id="dashboardView">
+          <div class="hero-banner">
+            <h1 class="hero-title">EscoffierZhou 22408 考研备考知识库</h1>
+            <p class="hero-subtitle">
+              目标院校：中国科学院大学 (UCAS) | 2027 考研全套核心体系：数学二 (302)、计算机学科专业基础 (408)、英语二 (204) 与思想政治理论 (101)。
+            </p>
+          </div>
+
+          <h3 class="section-title"><i class="fa-solid fa-cubes"></i> 学科总览与快捷进入</h3>
+          <div class="stats-grid" id="statsGrid">
+            <!-- 由 JS 渲染学科卡片 -->
+          </div>
+
+          <h3 class="section-title"><i class="fa-solid fa-compass"></i> 核心备考总纲</h3>
+          <div class="quick-links-grid" id="quickLinksGrid">
+            <!-- 根目录总纲卡片 -->
+          </div>
+        </div>
+
+        <!-- iframe for HTML & Native PDF preview -->
+        <iframe id="readerFrame" style="display: none; width: 100%; height: 100%; border: none;"></iframe>
+
+        <!-- Markdown container for dynamic rendering -->
+        <div id="markdownContainer"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- 引入自动生成的目录数据 -->
+  <script src="catalog.js"></script>
+
+  <script>
+    (function() {
+      // 状态管理
+      const state = {
+        catalog: window.CATALOG_DATA || null,
+        currentDoc: null,
+        currentFormat: null,
+        isSearchMode: false,
+        theme: localStorage.getItem('kb_theme') || 'light'
+      };
+
+      // DOM 元素
+      const els = {
+        sidebar: document.getElementById('sidebar'),
+        sidebarOverlay: document.getElementById('sidebarOverlay'),
+        toggleSidebarBtn: document.getElementById('toggleSidebarBtn'),
+        brandHomeBtn: document.getElementById('brandHomeBtn'),
+        themeToggleBtn: document.getElementById('themeToggleBtn'),
+        searchInput: document.getElementById('searchInput'),
+        clearSearchBtn: document.getElementById('clearSearchBtn'),
+        docCountInfo: document.getElementById('docCountInfo'),
+        expandAllBtn: document.getElementById('expandAllBtn'),
+        collapseAllBtn: document.getElementById('collapseAllBtn'),
+        treeContainer: document.getElementById('treeContainer'),
+        readerHeader: document.getElementById('readerHeader'),
+        breadcrumbTrail: document.getElementById('breadcrumbTrail'),
+        formatSwitcher: document.getElementById('formatSwitcher'),
+        fullscreenBtn: document.getElementById('fullscreenBtn'),
+        copyLinkBtn: document.getElementById('copyLinkBtn'),
+        openExternalBtn: document.getElementById('openExternalBtn'),
+        dashboardView: document.getElementById('dashboardView'),
+        statsGrid: document.getElementById('statsGrid'),
+        quickLinksGrid: document.getElementById('quickLinksGrid'),
+        readerFrame: document.getElementById('readerFrame'),
+        markdownContainer: document.getElementById('markdownContainer')
+      };
+
+      // 初始化主题
+      applyTheme(state.theme);
+      els.themeToggleBtn.addEventListener('click', () => {
+        const nextTheme = state.theme === 'light' ? 'dark' : 'light';
+        applyTheme(nextTheme);
+      });
+
+      function applyTheme(theme) {
+        state.theme = theme;
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('kb_theme', theme);
+        const icon = els.themeToggleBtn.querySelector('i');
+        const text = els.themeToggleBtn.querySelector('.btn-text');
+        if (theme === 'dark') {
+          icon.className = 'fa-solid fa-sun';
+          text.textContent = '亮色';
+        } else {
+          icon.className = 'fa-solid fa-moon';
+          text.textContent = '暗色';
+        }
+      }
+
+      // 侧边栏折叠 (Mobile & Desktop)
+      els.toggleSidebarBtn.addEventListener('click', () => {
+        els.sidebar.classList.toggle('mobile-open');
+        els.sidebarOverlay.classList.toggle('active');
+      });
+      els.sidebarOverlay.addEventListener('click', () => {
+        els.sidebar.classList.remove('mobile-open');
+        els.sidebarOverlay.classList.remove('active');
+      });
+
+      // 首页按钮
+      els.brandHomeBtn.addEventListener('click', showDashboard);
+
+      // 全屏阅读
+      els.fullscreenBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+          els.fullscreenBtn.innerHTML = '<i class="fa-solid fa-compress"></i>';
+        } else {
+          document.exitFullscreen().catch(() => {});
+          els.fullscreenBtn.innerHTML = '<i class="fa-solid fa-expand"></i>';
+        }
+      });
+
+      // 复制链接
+      els.copyLinkBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          const orig = els.copyLinkBtn.innerHTML;
+          els.copyLinkBtn.innerHTML = '<i class="fa-solid fa-check" style="color: #10b981;"></i>';
+          setTimeout(() => els.copyLinkBtn.innerHTML = orig, 1500);
+        });
+      });
+
+      // 初始化数据
+      if (!state.catalog) {
+        els.docCountInfo.textContent = '未能加载 catalog.js，请检查脚本。';
+        return;
+      }
+
+      renderDashboard();
+      renderSidebarTree(state.catalog);
+      handleInitialUrlHash();
+
+      // 展开/折叠全部
+      els.expandAllBtn.addEventListener('click', () => {
+        document.querySelectorAll('.node-children').forEach(el => el.classList.add('expanded'));
+        document.querySelectorAll('.node-chevron').forEach(el => el.classList.add('expanded'));
+      });
+      els.collapseAllBtn.addEventListener('click', () => {
+        document.querySelectorAll('.node-children').forEach(el => el.classList.remove('expanded'));
+        document.querySelectorAll('.node-chevron').forEach(el => el.classList.remove('expanded'));
+      });
+
+      // 搜索功能
+      els.searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.trim().toLowerCase();
+        if (query) {
+          els.clearSearchBtn.style.display = 'block';
+          doSearch(query);
+        } else {
+          els.clearSearchBtn.style.display = 'none';
+          resetSearch();
+        }
+      });
+      els.clearSearchBtn.addEventListener('click', () => {
+        els.searchInput.value = '';
+        els.clearSearchBtn.style.display = 'none';
+        resetSearch();
+      });
+
+      function doSearch(query) {
+        state.isSearchMode = true;
+        let matchCount = 0;
+        const allDocItems = document.querySelectorAll('.doc-item');
+        allDocItems.forEach(item => {
+          const title = item.dataset.title.toLowerCase();
+          const path = item.dataset.path.toLowerCase();
+          if (title.includes(query) || path.includes(query)) {
+            item.style.display = 'flex';
+            matchCount++;
+            // 向上展开所有父级
+            let parent = item.closest('.node-children');
+            while (parent) {
+              parent.classList.add('expanded');
+              const prevHeader = parent.previousElementSibling;
+              if (prevHeader) {
+                const chevron = prevHeader.querySelector('.node-chevron');
+                if (chevron) chevron.classList.add('expanded');
+              }
+              parent = parent.parentElement.closest('.node-children');
+            }
+          } else {
+            item.style.display = 'none';
+          }
+        });
+        els.docCountInfo.textContent = `找到 ${matchCount} 个相关材料`;
+      }
+
+      function resetSearch() {
+        state.isSearchMode = false;
+        document.querySelectorAll('.doc-item').forEach(item => item.style.display = 'flex');
+        let total = 0;
+        state.catalog.subjects.forEach(s => total += s.stats.totalDocs);
+        els.docCountInfo.textContent = `已收录 ${total} 份材料`;
+      }
+
+      // 渲染仪表盘
+      function renderDashboard() {
+        let total = 0;
+        state.catalog.subjects.forEach(s => total += s.stats.totalDocs);
+        els.docCountInfo.textContent = `已收录 ${total} 份材料`;
+
+        // 渲染科目卡片
+        els.statsGrid.innerHTML = '';
+        state.catalog.subjects.forEach((subj, idx) => {
+          const card = document.createElement('div');
+          card.className = 'stat-card';
+          card.innerHTML = `
+            <div class="stat-icon" style="background-color: ${subj.color}20; color: ${subj.color};">
+              <i class="fa-solid ${subj.icon}"></i>
+            </div>
+            <div class="stat-info">
+              <h4>${subj.name}</h4>
+              <p>${subj.stats.totalDocs} 篇资料 · HTML(${subj.stats.formats.html || 0}) PDF(${subj.stats.formats.pdf || 0})</p>
+            </div>
+          `;
+          card.addEventListener('click', () => {
+            // 点击卡片展开侧边栏对应的科目
+            const header = document.querySelector(`.subject-header[data-index="${idx}"]`);
+            if (header) {
+              header.click();
+              header.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          });
+          els.statsGrid.appendChild(card);
+        });
+
+        // 渲染根目录总纲
+        els.quickLinksGrid.innerHTML = '';
+        state.catalog.rootDocs.forEach(rd => {
+          const qcard = document.createElement('div');
+          qcard.className = 'quick-card';
+          qcard.innerHTML = `
+            <h5><i class="fa-solid ${rd.icon}" style="color: var(--primary);"></i> ${rd.name}</h5>
+            <p>点击在线阅读该核心指引文档与战略规划 (${rd.path})</p>
+          `;
+          qcard.addEventListener('click', () => {
+            loadDocument({
+              name: rd.name,
+              defaultType: rd.type,
+              defaultPath: rd.path,
+              formats: { [rd.type]: rd.path }
+            }, rd.type);
+          });
+          els.quickLinksGrid.appendChild(qcard);
+        });
+      }
+
+      // 渲染侧边栏树形
+      function renderSidebarTree(catalog) {
+        els.treeContainer.innerHTML = '';
+
+        // 1. 根目录总纲分组
+        if (catalog.rootDocs && catalog.rootDocs.length > 0) {
+          const rootGroup = document.createElement('div');
+          rootGroup.className = 'tree-group';
+          rootGroup.innerHTML = `<div class="tree-group-title">备考指南与总纲</div>`;
+
+          catalog.rootDocs.forEach(doc => {
+            const item = document.createElement('div');
+            item.className = 'doc-item';
+            item.dataset.title = doc.name;
+            item.dataset.path = doc.path;
+            item.innerHTML = `
+              <div class="doc-item-title"><i class="fa-solid ${doc.icon}" style="margin-right: 6px; color: var(--primary);"></i>${doc.name}</div>
+              <div class="doc-formats-badge"><span class="fmt-pill md">MD</span></div>
+            `;
+            item.addEventListener('click', () => {
+              loadDocument({
+                name: doc.name,
+                defaultType: doc.type,
+                defaultPath: doc.path,
+                formats: { [doc.type]: doc.path }
+              }, doc.type);
+            });
+            rootGroup.appendChild(item);
+          });
+          els.treeContainer.appendChild(rootGroup);
+        }
+
+        // 2. 各个学科大类
+        const subjGroup = document.createElement('div');
+        subjGroup.className = 'tree-group';
+        subjGroup.innerHTML = `<div class="tree-group-title">科目知识体系</div>`;
+
+        catalog.subjects.forEach((subj, subjIdx) => {
+          const node = document.createElement('div');
+          node.className = 'tree-node';
+
+          const header = document.createElement('div');
+          header.className = 'node-header subject-header';
+          header.dataset.index = subjIdx;
+          header.innerHTML = `
+            <i class="node-icon fa-solid ${subj.icon}" style="color: ${subj.color};"></i>
+            <span class="node-title" style="font-weight: 600;">${subj.name}</span>
+            <span class="node-badge">${subj.stats.totalDocs}</span>
+            <i class="node-chevron fa-solid fa-chevron-right"></i>
+          `;
+
+          const childrenContainer = document.createElement('div');
+          childrenContainer.className = 'node-children';
+
+          // 递归渲染子节点
+          renderChildren(subj.children, childrenContainer);
+
+          header.addEventListener('click', () => {
+            const isExpanded = childrenContainer.classList.toggle('expanded');
+            header.querySelector('.node-chevron').classList.toggle('expanded', isExpanded);
+          });
+
+          // 默认展开第一个科目 (数学二)
+          if (subjIdx === 0) {
+            childrenContainer.classList.add('expanded');
+            header.querySelector('.node-chevron').classList.add('expanded', true);
+          }
+
+          node.appendChild(header);
+          node.appendChild(childrenContainer);
+          subjGroup.appendChild(node);
+        });
+
+        els.treeContainer.appendChild(subjGroup);
+      }
+
+      function renderChildren(items, parentEl) {
+        if (!items || items.length === 0) return;
+
+        items.forEach(item => {
+          if (item.type === 'folder') {
+            const folderNode = document.createElement('div');
+            folderNode.className = 'tree-node';
+
+            const folderHeader = document.createElement('div');
+            folderHeader.className = 'node-header';
+            folderHeader.innerHTML = `
+              <i class="node-icon fa-regular fa-folder" style="color: #64748b;"></i>
+              <span class="node-title">${item.name}</span>
+              <i class="node-chevron fa-solid fa-chevron-right"></i>
+            `;
+
+            const folderChildren = document.createElement('div');
+            folderChildren.className = 'node-children';
+
+            renderChildren(item.children, folderChildren);
+
+            folderHeader.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const isExpanded = folderChildren.classList.toggle('expanded');
+              folderHeader.querySelector('.node-chevron').classList.toggle('expanded', isExpanded);
+              const icon = folderHeader.querySelector('.node-icon');
+              icon.className = isExpanded ? 'node-icon fa-regular fa-folder-open' : 'node-icon fa-regular fa-folder';
+            });
+
+            folderNode.appendChild(folderHeader);
+            folderNode.appendChild(folderChildren);
+            parentEl.appendChild(folderNode);
+          } else if (item.type === 'doc') {
+            const docItem = document.createElement('div');
+            docItem.className = 'doc-item';
+            docItem.dataset.title = item.name;
+            docItem.dataset.path = item.defaultPath;
+
+            // 格式标签
+            let badgesHtml = '';
+            if (item.formats.html) badgesHtml += `<span class="fmt-pill html">HTML</span>`;
+            if (item.formats.pdf) badgesHtml += `<span class="fmt-pill pdf">PDF</span>`;
+            if (item.formats.md) badgesHtml += `<span class="fmt-pill md">MD</span>`;
+
+            // 图标
+            let iconClass = 'fa-file-lines';
+            if (item.defaultType === 'html') iconClass = 'fa-globe';
+            else if (item.defaultType === 'pdf') iconClass = 'fa-file-pdf';
+
+            docItem.innerHTML = `
+              <div class="doc-item-title"><i class="fa-solid ${iconClass}" style="margin-right: 6px; opacity: 0.7;"></i>${item.name}</div>
+              <div class="doc-formats-badge">${badgesHtml}</div>
+            `;
+
+            docItem.addEventListener('click', (e) => {
+              e.stopPropagation();
+              loadDocument(item, item.defaultType);
+            });
+
+            parentEl.appendChild(docItem);
+          }
+        });
+      }
+
+      // 加载文档
+      function loadDocument(doc, format) {
+        state.currentDoc = doc;
+        state.currentFormat = format || doc.defaultType;
+
+        // 更新高亮激活项
+        document.querySelectorAll('.doc-item').forEach(el => el.classList.remove('active'));
+        const activeEl = document.querySelector(`.doc-item[data-path="${doc.defaultPath}"]`);
+        if (activeEl) activeEl.classList.add('active');
+
+        // 更新面包屑
+        const pathParts = (doc.formats[state.currentFormat] || doc.defaultPath).split('/');
+        els.breadcrumbTrail.innerHTML = `
+          <i class="fa-solid fa-book-open" style="color: var(--primary);"></i>
+          ${pathParts.map((p, i) => i === pathParts.length - 1 ? `<span class="curr">${p}</span>` : `<span>${p}</span> &gt; `).join('')}
+        `;
+        els.readerHeader.style.display = 'flex';
+
+        // 渲染格式切换选项卡
+        els.formatSwitcher.innerHTML = '';
+        Object.keys(doc.formats).forEach(fmt => {
+          const tab = document.createElement('button');
+          tab.className = `format-tab ${fmt === state.currentFormat ? 'active' : ''}`;
+          tab.textContent = fmt.toUpperCase();
+          tab.addEventListener('click', () => {
+            loadDocument(doc, fmt);
+          });
+          els.formatSwitcher.appendChild(tab);
+        });
+
+        // 外部打开按钮链接
+        const targetUrl = doc.formats[state.currentFormat] || doc.defaultPath;
+        els.openExternalBtn.href = encodeURI(targetUrl);
+
+        // 更新 URL Hash
+        window.location.hash = `doc=${encodeURIComponent(targetUrl)}&fmt=${state.currentFormat}`;
+
+        // 移动端自动收起侧边栏
+        if (window.innerWidth <= 768) {
+          els.sidebar.classList.remove('mobile-open');
+          els.sidebarOverlay.classList.remove('active');
+        }
+
+        // 隐藏仪表盘
+        els.dashboardView.style.display = 'none';
+
+        // 根据格式分别渲染
+        if (state.currentFormat === 'html' || state.currentFormat === 'pdf') {
+          els.markdownContainer.style.display = 'none';
+          els.readerFrame.style.display = 'block';
+          els.readerFrame.src = encodeURI(targetUrl);
+        } else if (state.currentFormat === 'md') {
+          els.readerFrame.style.display = 'none';
+          els.markdownContainer.style.display = 'block';
+          renderMarkdownFile(targetUrl);
+        }
+      }
+
+      // Markdown 在线解析渲染
+      function renderMarkdownFile(url) {
+        els.markdownContainer.innerHTML = '<div style="text-align:center; padding: 40px; color: var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 正在加载 Markdown 笔记...</div>';
+
+        fetch(encodeURI(url))
+          .then(res => {
+            if (!res.ok) throw new Error('网络请求失败: ' + res.status);
+            return res.text();
+          })
+          .then(mdText => {
+            // 保护数学公式，防止 marked 破坏 LaTeX 内部的下标与星号
+            const mathBlocks = [];
+            let safeText = mdText.replace(/\$\$([\s\S]*?)\$\$/g, (match, formula) => {
+              mathBlocks.push({ type: 'display', formula: formula.trim() });
+              return `%%MATH_BLOCK_${mathBlocks.length - 1}%%`;
+            });
+            safeText = safeText.replace(/(?<!\$)\$([^\$\n]+)\$(?!\$)/g, (match, formula) => {
+              mathBlocks.push({ type: 'inline', formula: formula.trim() });
+              return `%%MATH_INLINE_${mathBlocks.length - 1}%%`;
+            });
+
+            // 使用 marked 解析 Markdown
+            let htmlContent = marked.parse(safeText);
+
+            // 恢复并使用 KaTeX 渲染数学公式
+            htmlContent = htmlContent.replace(/%%MATH_BLOCK_(\d+)%%/g, (match, idx) => {
+              try {
+                return '<div class="katex-display">' + katex.renderToString(mathBlocks[idx].formula, { displayMode: true, throwOnError: false }) + '</div>';
+              } catch (e) {
+                return `$$${mathBlocks[idx].formula}$$`;
+              }
+            });
+            htmlContent = htmlContent.replace(/%%MATH_INLINE_(\d+)%%/g, (match, idx) => {
+              try {
+                return katex.renderToString(mathBlocks[idx].formula, { displayMode: false, throwOnError: false });
+              } catch (e) {
+                return `$${mathBlocks[idx].formula}$`;
+              }
+            });
+
+            els.markdownContainer.innerHTML = htmlContent;
+          })
+          .catch(err => {
+            els.markdownContainer.innerHTML = `
+              <div style="padding: 30px; text-align: center; color: #ef4444;">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size: 2rem; margin-bottom: 12px;"></i>
+                <h4>Markdown 在线预览受限</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">
+                  如果直接在本地通过 file:// 协议双击打开，浏览器可能会出于安全策略拦截 fetch。<br>
+                  推送至 <b>GitHub Pages</b> 或启动本地静态服务（如 python -m http.server）后即可完全顺畅秒开！
+                </p>
+                <div style="margin-top: 16px;">
+                  <a href="${encodeURI(url)}" target="_blank" class="action-btn" style="color: var(--primary);">直接下载/查看源文件</a>
+                </div>
+              </div>
+            `;
+          });
+      }
+
+      function showDashboard() {
+        els.dashboardView.style.display = 'block';
+        els.readerFrame.style.display = 'none';
+        els.markdownContainer.style.display = 'none';
+        els.readerHeader.style.display = 'none';
+        window.location.hash = '';
+      }
+
+      // 处理初始 URL Hash 路由 (如 #doc=...&fmt=...)
+      function handleInitialUrlHash() {
+        if (!window.location.hash) return;
+        const hash = window.location.hash.substring(1);
+        const params = new URLSearchParams(hash);
+        const docPath = params.get('doc');
+        const fmt = params.get('fmt');
+
+        if (docPath) {
+          // 查找对应的 doc
+          const decodedPath = decodeURIComponent(docPath);
+          const found = findDocByPath(state.catalog, decodedPath);
+          if (found) {
+            loadDocument(found, fmt || found.defaultType);
+          }
+        }
+      }
+
+      function findDocByPath(catalog, path) {
+        for (let rd of catalog.rootDocs) {
+          if (rd.path === path) {
+            return { name: rd.name, defaultType: rd.type, defaultPath: rd.path, formats: { [rd.type]: rd.path } };
+          }
+        }
+        function searchItems(items) {
+          for (let item of items) {
+            if (item.type === 'doc') {
+              if (item.defaultPath === path || Object.values(item.formats).includes(path)) {
+                return item;
+              }
+            } else if (item.type === 'folder' && item.children) {
+              const res = searchItems(item.children);
+              if (res) return res;
+            }
+          }
+          return null;
+        }
+        for (let subj of catalog.subjects) {
+          const res = searchItems(subj.children);
+          if (res) return res;
+        }
+        return null;
+      }
+
+    })();
+  </script>
+</body>
+</html>

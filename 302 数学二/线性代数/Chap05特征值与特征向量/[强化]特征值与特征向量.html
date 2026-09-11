@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>[强化]特征值与特征向量</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h1>第五章 特征值与特征向量·考研高阶冲刺与深水区强化</h1>
+<h2>知识框架拓扑</h2>
+<pre><code class="language-mermaid">graph TD
+    A[&quot;特征值与特征向量深水区强化&quot;] --&gt; B[&quot;代数重数与几何重数深度不等式&quot;]
+    A --&gt; C[&quot;矩阵相似对角化六大模型与决策树&quot;]
+    A --&gt; D[&quot;实对称矩阵正交谱分解定理&quot;]
+    A --&gt; E[&quot;矩阵相似判定七步黄金攻防策略&quot;]
+    A --&gt; F[&quot;同时对角化与可交换矩阵谱理论&quot;]
+    A --&gt; G[&quot;Cayley-Hamilton与极小多项式&quot;]
+    A --&gt; H[&quot;左右特征向量拓扑与对偶结构&quot;]
+    A --&gt; I[&quot;循环矩阵与反对称矩阵解析模型&quot;]
+
+    B --&gt; B1[&quot;代数重数k_i与特征方程根&quot;]
+    B --&gt; B2[&quot;几何重数s_i=n-r(lambda E-A)&quot;]
+    B --&gt; B3[&quot;基础不等式链1 &lt;= s_i &lt;= k_i&quot;]
+
+    C --&gt; C1[&quot;互异单根与实对称天然对角化&quot;]
+    C --&gt; C2[&quot;秩1外积阵可对角化充要判定&quot;]
+    C --&gt; C3[&quot;幂等阵A^2=A与幂零阵A^k=O&quot;]
+
+    D --&gt; D1[&quot;谱分解A=sum lambda_i q_i q_i^T&quot;]
+    D --&gt; D2[&quot;正交投影算子性质P_i P_j = delta_ij P_i&quot;]
+    D --&gt; D3[&quot;矩阵高次幂与函数演算&quot;]
+
+    E --&gt; E1[&quot;不变量初筛排除&quot;]
+    E --&gt; E2[&quot;实对称矩阵特征值全同准则&quot;]
+    E --&gt; E3[&quot;特征矩阵秩与初等因子匹配&quot;]
+
+    F --&gt; F1[&quot;AB=BA充要定理&quot;]
+    F --&gt; F2[&quot;公共特征向量空间&quot;]
+
+    G --&gt; G1[&quot;零化多项式与特征降次&quot;]
+    G --&gt; G2[&quot;极小多项式无重根等价对角化&quot;]
+
+    H --&gt; H1[&quot;左右特征向量对偶正交性&quot;]
+    H --&gt; H2[&quot;伴随阵与逆阵特征向量共线性&quot;]
+
+    I --&gt; I1[&quot;循环矩阵单位根离散傅里叶谱&quot;]
+    I --&gt; I2[&quot;反对称矩阵纯虚特征值定理&quot;]
+</code></pre>
+<hr />
+<h2>1. 代数重数与几何重数的代数几何拓扑深度不等式</h2>
+<h3>1.1 代数重数与几何重数的本质界定</h3>
+<h6><strong>定义[1]: 两类重数的代数与几何根基</strong></h6>
+<blockquote>
+<p>[1] <strong>代数重数 (Algebraic Multiplicity, $k_i$)</strong>：</p>
+<p>设 $\lambda_i$ 为方阵 $A$ 的特征值，在特征多项式因式分解式：</p>
+<p>$$f(\lambda) = |\lambda E - A| = (\lambda - \lambda_1)^{k_1} (\lambda - \lambda_2)^{k_2} \dots (\lambda - \lambda_m)^{k_m}$$</p>
+<p>中，根 $(\lambda - \lambda_i)$ 的指数 $k_i$ 称为特征值 $\lambda_i$ 的 <strong>代数重数</strong>。它从多项式代数根的重数角度描述了特征值的重合度，满足 $\sum_{i=1}^m k_i = n$。</p>
+<p>[2] <strong>几何重数 (Geometric Multiplicity, $s_i$)</strong>：</p>
+<p>特征值 $\lambda_i$ 对应的齐次线性方程组 $(\lambda_i E - A)x = 0$ 的基础解系所含解向量个数：</p>
+<p>$$s_i = \dim(\text{Null}(\lambda_i E - A)) = n - r(\lambda_i E - A)$$</p>
+<p>称为特征值 $\lambda_i$ 的 <strong>几何重数</strong>。它从空间拓扑角度度量了特征子空间 $V_{\lambda_i}$ 的维数。</p>
+</blockquote>
+<h3>1.2 几何重数与代数重数的基本不等式链</h3>
+<h6><strong>定理[1]: 经典重数基本不等式</strong></h6>
+<blockquote>
+<p>[1] 不等式表述：</p>
+<p>对任意方阵 $A$ 的任意特征值 $\lambda_i$，其几何重数 $s_i$ 与代数重数 $k_i$ 严格满足：</p>
+<p>$$1 \le s_i = n - r(\lambda_i E - A) \le k_i$$</p>
+<p>[2] 核心推论与若尔当结构对应：</p>
+<blockquote>
+<p>(1) 单特征值（$k_i = 1$）必满足 $s_i = 1$，即单特征值的几何重数严格等于 1，绝无亏损；</p>
+<p>(2) 亏格 (Geometric Deficiency) $\delta_i = k_i - s_i \ge 0$ 度量了矩阵偏离可对角化的缺陷程度；</p>
+<p>(3) 在若尔当标准型中，$s_i$ 恰好等于对应于特征值 $\lambda_i$ 的若尔当块 (Jordan Blocks) 的总个数；而各若尔当块阶数之和等于代数重数 $k_i$。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>2. 矩阵相似对角化的六大判别模型与考研决策树</h2>
+<h3>2.1 考研六大对角化判别模型</h3>
+<h6><strong>定理[1]: 对角化六大判别模型</strong></h6>
+<blockquote>
+<p>[1] <strong>模型一：互异特征值模型（单根充分条件）</strong>：</p>
+<p>若 $n$ 阶方阵 $A$ 在复数域（或实数域）内有 $n$ 个互不相同的特征值，则 $A$ <font color=deeppink>必可相似对角化</font>。</p>
+<p>[2] <strong>模型二：实对称矩阵模型（实对称特权充分条件）</strong>：</p>
+<p>若 $A$ 为实对称矩阵（$A^{\mathrm{T}} = A$），则 $A$ <font color=deeppink>必可正交相似对角化</font>（每个重特征值的几何重数恒等于代数重数）。</p>
+<p>[3] <strong>模型三：重根几何重数模型（充要判别标准）</strong>：</p>
+<p>设 $A$ 的全部特征值为 $\lambda_1, \dots, \lambda_m$，其代数重数分别为 $k_1, \dots, k_m$。方阵 $A$ 可对角化 $\iff$ 对每一个重特征值（$k_i \ge 2$），恒有：</p>
+<p>$$r(\lambda_i E - A) = n - k_i \iff n - r(\lambda_i E - A) = k_i$$</p>
+<p>[4] <strong>模型四：秩 1 矩阵模型（外积矩阵充要判别）</strong>：</p>
+<p>设 $A = \alpha \beta^{\mathrm{T}} \ne O$ 为 $n$ 阶秩 1 矩阵。</p>
+<blockquote>
+<p>(1) 若 $\text{tr}(A) = \beta^{\mathrm{T}}\alpha \ne 0 \iff A$ <font color=deeppink>可相似对角化</font>（相似于 $\text{diag}(\text{tr} A, 0, \dots, 0)$）；</p>
+<p>(2) 若 $\text{tr}(A) = \beta^{\mathrm{T}}\alpha = 0 \iff A$ <font color=red>绝不可对角化</font>（此时 $A^2 = O$，为非零幂零矩阵）。</p>
+</blockquote>
+<p>[5] <strong>模型五：幂等矩阵模型（投影算子对角化）</strong>：</p>
+<p>若方阵满足 $A^2 = A$（幂等矩阵），则 $A$ 的特征值只能为 0 或 1，且 $A$ <font color=deeppink>必可相似对角化</font>，相似于 $\text{diag}(E_r, O_{n-r})$，其中 $r = r(A) = \text{tr}(A)$。</p>
+<p>[6] <strong>模型六：幂零矩阵模型（非零必不可对角化）</strong>：</p>
+<p>若方阵满足 $A^k = O$（幂零矩阵），则其全部特征值全为 0。</p>
+<blockquote>
+<p>(1) 若 $A = O$，平凡对角阵；</p>
+<p>(2) 若 $A \ne O$，则 $A$ <font color=red>绝不可相似对角化</font>（若可对角化，则相似于零阵，推出 $A = O$，矛盾）。</p>
+</blockquote>
+</blockquote>
+<h3>2.2 考研对角化快速判断决策树</h3>
+<pre><code class="language-mermaid">graph TD
+    Start[&quot;待判断方阵 A (n阶)&quot;] --&gt; C1{&quot;是否为实对称矩阵 A^T=A ?&quot;}
+    C1 -- 是 --&gt; Ans1[&quot;必可对角化 (且可正交对角化)&quot;]
+    C1 -- 否 --&gt; C2{&quot;计算特征值: 是否有 n 个互异根 ?&quot;}
+    C2 -- 是 --&gt; Ans2[&quot;必可相似对角化&quot;]
+    C2 -- 否 --&gt; C3{&quot;是否存在重特征值 lambda_i (重数 k_i &gt;= 2) ?&quot;}
+    C3 -- 是 --&gt; C4{&quot;检验方程: r(lambda_i E - A) == n - k_i ?&quot;}
+    C4 -- 是 --&gt; Ans3[&quot;所有重根均满足: 可相似对角化&quot;]
+    C4 -- 否 --&gt; Ans4[&quot;存在重根不满足: 不可相似对角化&quot;]
+</code></pre>
+<hr />
+<h2>3. 实对称矩阵的正交谱分解定理（Spectral Decomposition）</h2>
+<h3>3.1 正交谱分解定理</h3>
+<h6><strong>定理[1]: 谱分解公式与正交投影算子</strong></h6>
+<blockquote>
+<p>[1] 谱分解定理表述：</p>
+<p>设 $A$ 为 $n$ 阶实对称矩阵，其特征值为 $\lambda_1, \lambda_2, \dots, \lambda_n$，对应的单位正交特征向量组为 $q_1, q_2, \dots, q_n$。</p>
+<p>则矩阵 $A$ 具有唯一的正交谱分解：</p>
+<p>$$A = Q \Lambda Q^{\mathrm{T}} = \sum_{i=1}^n \lambda_i q_i q_i^{\mathrm{T}}$$</p>
+<p>若矩阵 $A$ 有 $m$ 个互不相同的特征值 $\mu_1, \dots, \mu_m$，则谱分解可合并为：</p>
+<p>$$A = \sum_{j=1} ^m \mu_j P_j$$</p>
+<p>其中 $P_j = \sum_{q \in S_j} q q^{\mathrm{T}}$ 为到特征子空间 $V_{\mu_j}$ 上的正交投影矩阵。</p>
+<p>[2] 正交投影算子的四大核心性质：</p>
+<blockquote>
+<p>(1) <strong>对称性</strong>：$P_j^{\mathrm{T}} = P_j$；</p>
+<p>(2) <strong>幂等性</strong>：$P_j^2 = P_j$；</p>
+<p>(3) <strong>正交互斥性</strong>：$P_j P_k = O$ ($j \ne k$)；</p>
+<p>(4) <strong>完全恒等性（单位分解）</strong>：$\sum_{j=1}^m P_j = E$。</p>
+</blockquote>
+</blockquote>
+<h3>3.2 谱分解在矩阵函数运算中的极速应用</h3>
+<h6><strong>方法[1]: 利用谱分解计算高次幂与矩阵多项式</strong></h6>
+<blockquote>
+<p>[1] 矩阵高次幂计算：</p>
+<p>由于投影算子的正交幂等性（$P_j P_k = \delta_{jk} P_j$），矩阵高次幂可直接逐项作用：</p>
+<p>$$A^k = \left( \sum_{j=1}^m \mu_j P_j \right)^k = \sum_{j=1}^m \mu_j^k P_j$$</p>
+<p>[2] 矩阵分析函数演算：</p>
+<p>对任意在矩阵谱上收敛的函数 $f(x)$（如多项式、逆矩阵、指数矩阵 $e^A$）：</p>
+<p>$$f(A) = \sum_{j=1}^m f(\mu_j) P_j$$</p>
+</blockquote>
+<hr />
+<h2>4. 矩阵相似判定（$A \sim B$）的七步黄金攻防策略</h2>
+<h3>4.1 七步相似攻防判别准则</h3>
+<h6><strong>方法[1]: 七步排查流程</strong></h6>
+<blockquote>
+<p>[1] <strong>第一步：九大不变量初筛排除（快速否定）</strong>：</p>
+<p>计算并对比两矩阵的必要不变量：秩 $r$、行列式 $|M|$、迹 $\text{tr}$、特征多项式 $|\lambda E - M|$。</p>
+<p>若有任一不变量不相等，立即判定 $A \not\sim B$。</p>
+<p>[2] <strong>第二步：实对称矩阵判定法（终极武器）</strong>：</p>
+<p>若矩阵 $A$ 与 $B$ 均为实对称矩阵，则：</p>
+<p>$$A \sim B \iff A \text{ 与 } B \text{ 的特征值完全相同}$$</p>
+<p>[3] <strong>第三步：同可对角化判定法</strong>：</p>
+<p>若矩阵 $A$ 与 $B$ 均可相似对角化，则：</p>
+<p>$$A \sim B \iff A \sim \Lambda \text{ 且 } B \sim \Lambda \iff A \text{ 与 } B \text{ 拥有相同的特征值}$$</p>
+<p>[4] <strong>第四步：一可对角化一不可对角化排除法</strong>：</p>
+<p>若 $A$ 可相似对角化，而 $B$ 不可相似对角化，则必然 $A \not\sim B$。</p>
+<p>[5] <strong>第五步：特征矩阵秩检验法</strong>：</p>
+<p>若两矩阵均不可对角化，进一步计算公共重特征值 $\lambda_0$ 处的特征矩阵秩：</p>
+<p>$$A \sim B \implies r(\lambda_0 E - A) = r(\lambda_0 E - B)$$</p>
+<p>若秩不相等，则必然 $A \not\sim B$。</p>
+<p>[6] <strong>第六步：极小多项式匹配法</strong>：</p>
+<p>检查方阵 $A$ 与 $B$ 的极小多项式是否完全相同：$m_A(\lambda) = m_B(\lambda)$。</p>
+<p>[7] <strong>第七步：若尔当标准型终极一致性判定</strong>：</p>
+<p>在复数域内，$A \sim B \iff A$ 与 $B$ 拥有完全一致的若尔当标准型（初等因子组完全相同）。</p>
+</blockquote>
+<hr />
+<h2>5. 同时对角化定理与可交换矩阵（$AB=BA$）的谱特征</h2>
+<h3>5.1 同时对角化定理</h3>
+<h6><strong>定理[1]: 同时对角化充要条件</strong></h6>
+<blockquote>
+<p>[1] 定理表述：</p>
+<p>设 $A, B$ 是两个可相似对角化的 $n$ 阶方阵。则存在同一个可逆矩阵 $P$，使得：</p>
+<p>$$P^{-1} A P = \Lambda_A \quad \text{且} \quad P^{-1} B P = \Lambda_B$$</p>
+<p>同时为对角矩阵的充要条件是：矩阵 $A$ 与 $B$ 可交换，即：</p>
+<p>$$A B = B A$$</p>
+<p>[2] 实对称矩阵的同时正交对角化：</p>
+<p>设 $A, B$ 是两个实对称矩阵，则存在同一个正交矩阵 $Q$ 使得 $Q^{\mathrm{T}}AQ$ 与 $Q^{\mathrm{T}}BQ$ 同时为对角阵的充要条件是 $AB = BA$。</p>
+</blockquote>
+<h3>5.2 可交换矩阵的核心谱推论</h3>
+<h6><strong>定理[2]: $AB=BA$ 的代数结构定理</strong></h6>
+<blockquote>
+<p>[1] 谱分离定理：</p>
+<p>若 $AB = BA$，则 $A$ 的每一个特征子空间 $V_\lambda$ 都是矩阵 $B$ 的 <strong>不变子空间</strong>（即 $x \in V_\lambda \implies Bx \in V_\lambda$）。</p>
+<p>[2] 矩阵多项式表示定理：</p>
+<p>设 $n$ 阶方阵 $A$ 拥有 $n$ 个互不相同的特征值。若方阵 $B$ 满足 $AB = BA$，则矩阵 $B$ 必可唯一表示为矩阵 $A$ 的一个次数不超过 $n-1$ 次的多项式：</p>
+<p>$$B = c_0 E + c_1 A + c_2 A^2 + \dots + c_{n-1} A^{n-1}$$</p>
+</blockquote>
+<hr />
+<h2>6. Cayley-Hamilton 定理与极小多项式深水区运用</h2>
+<h3>6.1 Cayley-Hamilton 定理</h3>
+<h6><strong>定理[1]: 矩阵特征多项式零化定理</strong></h6>
+<blockquote>
+<p>[1] 定理表述：</p>
+<p>设 $f(\lambda) = |\lambda E - A| = \lambda^n + c_{n-1}\lambda^{n-1} + \dots + c_1\lambda + c_0$ 是方阵 $A$ 的特征多项式，则矩阵 $A$ 满足自身的特征方程：</p>
+<p>$$f(A) = A^n + c_{n-1} A^{n-1} + \dots + c_1 A + c_0 E = O$$</p>
+<p>[2] 矩阵求逆降阶公式：</p>
+<p>若方阵 $A$ 可逆（$c_0 = (-1)^n |A| \ne 0$），移项直接给出逆矩阵的矩阵多项式展开：</p>
+<p>$$A^{-1} = -\frac{1}{c_0} (A^{n-1} + c_{n-1}A^{n-2} + \dots + c_1 E)$$</p>
+</blockquote>
+<h3>6.2 极小多项式与可对角化深水区准则</h3>
+<h6><strong>定理[2]: 极小多项式无重根判定准则</strong></h6>
+<blockquote>
+<p>[1] 极小多项式定义：</p>
+<p>使 $m(A) = O$ 成立的次数最低、首项系数为 1 的非零多项式 $m(\lambda)$ 称为矩阵 $A$ 的 <strong>极小多项式 (Minimal Polynomial)</strong>。</p>
+<p>[2] 极小多项式两大性质：</p>
+<blockquote>
+<p>(1) 极小多项式整除特征多项式：$f(\lambda) = q(\lambda) m(\lambda)$；</p>
+<p>(2) 极小多项式的根与特征多项式的根完全相同（仅根的重数可能更低）。</p>
+</blockquote>
+<p>[3] 高阶可对角化充要准则：</p>
+<p>方阵 $A$ 可相似对角化 $\iff$ 矩阵 $A$ 的极小多项式 $m(\lambda)$ 在数域内 <font color=deeppink>无重根</font>（即极小多项式分解为一次互异单因式的乘积）：</p>
+<p>$$m(\lambda) = (\lambda - \lambda_1)(\lambda - \lambda_2)\dots(\lambda - \lambda_m) \quad (\lambda_i \text{ 互不相等})$$</p>
+</blockquote>
+<hr />
+<h2>7. 伴随矩阵、转置矩阵与逆矩阵的特征向量拓扑关联</h2>
+<h3>7.1 左右特征向量的对偶正交结构</h3>
+<h6><strong>定理[1]: 左右特征向量正交性定理</strong></h6>
+<blockquote>
+<p>[1] 定义：</p>
+<p>满足 $A \xi = \lambda \xi$ ($\xi \ne 0$) 的列向量 $\xi$ 称为 <strong>右特征向量</strong>；</p>
+<p>满足 $\eta^{\mathrm{T}} A = \mu \eta^{\mathrm{T}}$ ($\eta \ne 0$) 的列向量 $\eta$ 称为 <strong>左特征向量</strong>（即 $A^{\mathrm{T}}\eta = \mu\eta$）。</p>
+<p>[2] 互异特征值的左右特征向量正交定理：</p>
+<p>若 $\lambda \ne \mu$，则矩阵 $A$ 属于 $\lambda$ 的右特征向量 $\xi$ 与属于 $\mu$ 的左特征向量 $\eta$ 必严格正交：</p>
+<p>$$\eta^{\mathrm{T}} \xi = 0$$</p>
+<p>证明：$\mu (\eta^{\mathrm{T}} \xi) = (\eta^{\mathrm{T}} A) \xi = \eta^{\mathrm{T}} (A\xi) = \lambda (\eta^{\mathrm{T}} \xi) \implies (\lambda - \mu)(\eta^{\mathrm{T}}\xi) = 0$。由 $\lambda \ne \mu$ 得 $\eta^{\mathrm{T}}\xi = 0$。</p>
+</blockquote>
+<h3>7.2 伴随矩阵与逆矩阵特征向量的共线性</h3>
+<h6><strong>定理[2]: 逆矩阵与伴随矩阵特征向量恒同定理</strong></h6>
+<blockquote>
+<p>[1] 伴随与逆矩阵特征向量一致性：</p>
+<p>设方阵 $A$ 可逆，特征值为 $\lambda$，对应特征向量为 $\xi$。则：</p>
+<blockquote>
+<p>(1) 逆矩阵 $A^{-1}$ 属于特征值 $\frac{1}{\lambda}$ 的特征向量仍为 $\xi$；</p>
+<p>(2) 伴随矩阵 $A^*$ 属于特征值 $\frac{|A|}{\lambda}$ 的特征向量仍为 $\xi$。</p>
+</blockquote>
+<p>即：$A, A^{-1}, A^*$ <font color=deeppink>共享完全相同的特征向量集合</font>。</p>
+</blockquote>
+<hr />
+<h2>8. 循环矩阵、反称矩阵与外积矩阵的特征值显式通项解析模型</h2>
+<h3>8.1 循环矩阵的离散傅里叶谱模型</h3>
+<h6><strong>模型[1]: 循环矩阵特征值公式</strong></h6>
+<blockquote>
+<p>[1] 循环矩阵结构：</p>
+<p>形如 $C = \begin{bmatrix} c_0 & c_1 & \dots & c_{n-1} \\ c_{n-1} & c_0 & \dots & c_{n-2} \\ \vdots & \vdots & \ddots & \vdots \\ c_1 & c_2 & \dots & c_0 \end{bmatrix}$ 的矩阵称为 <strong>循环矩阵 (Circulant Matrix)</strong>。</p>
+<p>[2] 显式特征值通项公式：</p>
+<p>令 $\omega_k = e^{\mathrm{i} \frac{2\pi k}{n}} = \cos\frac{2\pi k}{n} + \mathrm{i}\sin\frac{2\pi k}{n}$ ($k = 0, 1, \dots, n-1$) 为 $n$ 次单位根。</p>
+<p>则循环矩阵 $C$ 的全部 $n$ 个特征值由离散傅里叶变换显式给出：</p>
+<p>$$\lambda_k = \sum_{j=0}^{n-1} c_j \omega_k^j = c_0 + c_1 \omega_k + c_2 \omega_k^2 + \dots + c_{n-1} \omega_k^{n-1} \quad (k = 0, 1, \dots, n-1)$$</p>
+</blockquote>
+<h3>8.2 反称矩阵的纯虚谱性质</h3>
+<h6><strong>模型[2]: 反对称矩阵代数性质</strong></h6>
+<blockquote>
+<p>[1] 定义：</p>
+<p>满足 $A^{\mathrm{T}} = -A$ 的实数方阵称为 <strong>反对称矩阵 (Skew-symmetric Matrix)</strong>。</p>
+<p>[2] 谱特权定理：</p>
+<blockquote>
+<p>(1) 反对称矩阵的实特征值只能为 0；复特征值必为 <strong>纯虚数</strong>（形如 $\pm \mathrm{i} b$）；</p>
+<p>(2) 奇数阶实反对称矩阵必有零特征值，故奇数阶反对称矩阵行列式恒为零：</p>
+</blockquote>
+<p>$$|A| = |A^{\mathrm{T}}| = |-A| = (-1)^n |A| \implies |A| = 0 \quad (\text{当 } n \text{ 为奇数})$$</p>
+<blockquote>
+<p>(3) 任意阶实反对称矩阵的秩必为 <strong>偶数</strong>：$r(A) = 2k$。<br />
+</p>
+</blockquote>
+</blockquote>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

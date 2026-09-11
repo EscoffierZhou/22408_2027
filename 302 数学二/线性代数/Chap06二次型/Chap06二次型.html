@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chap06二次型</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h1>Chap06 二次型</h1>
+<p>目的[1]:掌握二次型的概念、二次齐次多项式与实对称矩阵的唯一对应关系及二次型的秩</p>
+<p>目的[2]:精通非退化线性坐标变换 $x=Cy$ 与矩阵合同定义 $B=C^TAC$，掌握合同关系全系不变量（正负惯性指数）及合同充要条件</p>
+<p>目的[3]:深刻理解惯性定理，掌握正惯性指数、负惯性指数、符号差及规范形准对角阵 $\text{diag}(E_p, -E_q, O)$ 的代数与几何意义</p>
+<p>目的[4]:精通正交变换法化二次型为标准型的完整流程（求特征值、求特征向量正交化单位化、构造正交阵 $Q$），深刻理解其保距性与标准型系数必为特征值的几何本质</p>
+<p>目的[5]:熟练运用拉格朗日配方法化二次型为标准型（含平方项法与全交叉项和差代换法），掌握配方变换矩阵 $C$ 的求解与惯性指数确定</p>
+<p>目的[6]:融会贯通正定二次型与正定矩阵概念及几何椭球面意义，系统掌握五大充要判定准则（特征值全正、顺序主子式全正、合同于单位阵等）与三大快速排除必要条件</p>
+<h2>1.二次型的基本概念与矩阵表示</h2>
+<h6><strong>概念[1]:二次型的定义与对称矩阵表示</strong></h6>
+<p>[1]二次型的数学定义：</p>
+<blockquote>
+<p>含有 $n$ 个变量 $x_1, x_2, \dots, x_n$ 的二次齐次多项式称为 <strong>$n$ 元二次型</strong>，一般形式为：</p>
+<p>$$f(x_1, \dots, x_n) = \sum_{i=1}^n \sum_{j=1}^n a_{ij} x_i x_j = \sum_{i=1}^n a_{ii}x_i^2 + 2\sum_{1 \le i < j \le n} a_{ij} x_i x_j$$</p>
+</blockquote>
+<p>[2]二次型的对称矩阵表示：</p>
+<blockquote>
+<p>任一二次型均可唯一表示为向量与实对称矩阵的二次齐次积：</p>
+<p>$$f(x) = x^T A x$$</p>
+<p>其中列向量 $x = [x_1, \dots, x_n]^T$，系数矩阵 $A = (a_{ij})_{n \times n}$ 必须为<strong>实对称矩阵</strong>（$A^T = A$）。</p>
+<p>(1) 主对角线元素 $a_{ii}$ 严格等于纯平方项 $x_i^2$ 的系数；</p>
+<p>(2) 非对角线元素 $a_{ij} = a_{ji}$ 严格平分交叉项 $x_i x_j$ 的系数，即 $a_{ij} = \frac{1}{2} \text{coeff}(x_i x_j)$；</p>
+<p>(3) 实二次型与实对称矩阵之间存在 <font color=deeppink>一一对应</font> 关系。</p>
+</blockquote>
+<p>[3]二次型的秩：</p>
+<blockquote>
+<p>二次型对应矩阵 $A$ 的秩 $r(A)$ 称为该二次型的秩，记作 $r(f) = r(A)$。</p>
+</blockquote>
+<h2>2.线性变换与矩阵合同</h2>
+<h6><strong>概念[1]:非退化线性坐标变换</strong></h6>
+<p>[1]坐标变换模型：</p>
+<blockquote>
+<p>设 $x_1, \dots, x_n$ 与新变量 $y_1, \dots, y_n$ 之间存在线性代换：</p>
+<p>$$x = C y \quad (|C| \ne 0)$$</p>
+<p>代入原二次型 $f(x) = x^T A x$，可得关于新变量 $y$ 的二次型：</p>
+<p>$$g(y) = (Cy)^T A (Cy) = y^T (C^T A C) y = y^T B y$$</p>
+<p>新二次型的矩阵为 $B = C^T A C$。</p>
+</blockquote>
+<h6><strong>定理[1]:矩阵合同的定义与基本性质</strong></h6>
+<p>[1]矩阵合同定义：</p>
+<blockquote>
+<p>设 $A, B$ 是数域上的两个 $n$ 阶方阵，若存在可逆矩阵 $C$（$|C| \ne 0$），使得：</p>
+<p>$$B = C^T A C$$</p>
+<p>则称矩阵 $A$ 与 $B$ <strong>合同</strong>，记作 $A \simeq B$。</p>
+</blockquote>
+<p>[2]矩阵合同的核心性质：</p>
+<blockquote>
+<p>(1) <strong>等价关系</strong>：满足反身性（$A \simeq A$）、对称性（$A \simeq B \implies B \simeq A$）与传递性（$A \simeq B, B \simeq D \implies A \simeq D$）。</p>
+<p>(2) <strong>保持对称性</strong>：若 $A$ 是对称矩阵，则与其合同的 $B = C^TAC$ 必为对称矩阵。</p>
+<p>(3) <strong>保持矩阵秩</strong>：$r(B) = r(C^T A C) = r(A)$。</p>
+<p>(4) <strong>保持行列式符号</strong>：$|B| = |C|^2 |A|$。由于实可逆矩阵满足 $|C|^2 > 0$，故 $|A|$ 与 $|B|$ 同号。</p>
+</blockquote>
+<h2>3.标准型、规范形与惯性定理</h2>
+<h6><strong>概念[1]:二次型的标准型与规范形</strong></h6>
+<p>[1]标准型：</p>
+<blockquote>
+<p>只含有变量平方项而没有任何交叉乘积项的二次型称为 <strong>标准型</strong>：</p>
+<p>$$f = d_1 y_1^2 + d_2 y_2^2 + \dots + d_n y_n^2$$</p>
+<p>其对应的矩阵为对角矩阵 $\Lambda = \text{diag}(d_1, d_2, \dots, d_n)$。</p>
+</blockquote>
+<p>[2]实二次型的规范形：</p>
+<blockquote>
+<p>在实数域内，平方项系数仅取 $+1, -1, 0$ 的标准型称为实二次型的 <strong>规范形</strong>：</p>
+<p>$$f = z_1^2 + \dots + z_p^2 - z_{p+1}^2 - \dots - z_r^2$$</p>
+<p>(1) 系数为 $+1$ 的项数 $p$ 称为 <strong>正惯性指数</strong>；</p>
+<p>(2) 系数为 $-1$ 的项数 $q = r - p$ 称为 <strong>负惯性指数</strong>；</p>
+<p>(3) 符号差为 $s = p - q$；</p>
+<p>(4) 规范形矩阵为准对角形：$J = \text{diag}(E_p, -E_q, O_{n-r})$。</p>
+</blockquote>
+<h6><strong>定理[1]:惯性定理与实对称矩阵合同充要条件</strong></h6>
+<p>[1]实二次型惯性定理：</p>
+<blockquote>
+<p>任一实二次型 $f(x) = x^T A x$，经过任何可逆实线性变换化为标准型时，其正项项数 $p$ 和负项项数 $q$ 是由实对称矩阵 $A$ 本身唯一确定的，与所采用的可逆线性变换方法完全无关。</p>
+</blockquote>
+<p>[2]实对称矩阵合同充要条件：</p>
+<blockquote>
+<p>两个同阶实对称矩阵 $A$ 与 $B$ 合同（$A \simeq B$）的充分必要条件是：</p>
+<p>$$A \text{ 与 } B \text{ 具有完全相同的正惯性指数 } p \text{ 和负惯性指数 } q$$</p>
+<p><font color=red>【考研深度辨析】</font> 秩相同是合同的必要条件（$r = p + q$），但非充分条件。例如 $\text{diag}(1, 1)$ 与 $\text{diag}(1, -1)$ 秩相同但正惯性指数不同，故绝不合同。</p>
+</blockquote>
+<h2>4.化二次型为标准型的两大经典方法</h2>
+<h6><strong>方法[1]:正交变换法化二次型为标准型</strong></h6>
+<p>[1]正交变换化标准型定理：</p>
+<blockquote>
+<p>对于任一实对称矩阵 $A$，必存在正交矩阵 $Q$（满足 $Q^T Q = E$），使得：</p>
+<p>$$Q^T A Q = Q^{-1} A Q = \text{diag}(\lambda_1, \lambda_2, \dots, \lambda_n)$$</p>
+<p>其中 $\lambda_i$ 为 $A$ 的特征值。作正交变换 $x = Qy$，原二次型化为标准型：</p>
+<p>$$f = \lambda_1 y_1^2 + \lambda_2 y_2^2 + \dots + \lambda_n y_n^2$$</p>
+</blockquote>
+<p>[2]正交变换法标准操作流程：</p>
+<blockquote>
+<p>(1) 写出二次型的实对称矩阵 $A$；</p>
+<p>(2) 求特征多项式 $|\lambda E - A| = 0$ 的全部特征值 $\lambda_1, \dots, \lambda_n$；</p>
+<p>(3) 对各特征值解齐次方程 $(\lambda_i E - A)x = 0$ 求特征向量。重根特征值对应的线性无关特征向量必须用<strong>施密特正交化</strong>并单位化；</p>
+<p>(4) 将求得的两两正交单位特征向量按列构成正交矩阵 $Q$；</p>
+<p>(5) 写出正交变换 $x = Qy$，标准型系数 <font color=red>严格等于矩阵 A 的特征值</font>。</p>
+</blockquote>
+<h6><strong>方法[2]:拉格朗日配方法分步准则</strong></h6>
+<p>[1]情形一（含有平方项）：</p>
+<blockquote>
+<p>(1) 将含某元（如 $x_1$）的项集中，提出平方项系数配成完全平方式：</p>
+<p>$$f = a_{11} \left( x_1 + \frac{a_{12}}{a_{11}}x_2 + \dots + \frac{a_{1n}}{a_{11}}x_n \right)^2 + f_1(x_2, \dots, x_n)$$</p>
+<p>(2) 对剩余不含 $x_1$ 的部分重复上述配方，逐次降元；</p>
+<p>(3) 令各平方括号内部分分别为 $y_1, \dots, y_n$，求出可逆代换矩阵 $C$。</p>
+</blockquote>
+<p>[2]情形二（无平方项，仅有交叉项）：</p>
+<blockquote>
+<p>(1) 先作非退化和差代换：令 $x_1 = y_1 + y_2, x_2 = y_1 - y_2, x_k = y_k$ ($k \ge 3$)；</p>
+<p>(2) 代入后展开 $x_1 x_2 = y_1^2 - y_2^2$，构造出平方项；</p>
+<p>(3) 随后转入情形一继续配方。</p>
+</blockquote>
+<h2>5.正定二次型与正定矩阵</h2>
+<h6><strong>概念[1]:正定与各类定态二次型定义</strong></h6>
+<p>[1]正定二次型与正定矩阵定义：</p>
+<blockquote>
+<p>设二次型 $f(x) = x^T A x$，其中 $A$ 为实对称矩阵：</p>
+<p>(1) <strong>正定</strong>：若对任意非零向量 $x \ne 0$，恒有 $x^T A x > 0$，则称 $f(x)$ 为正定二次型，$A$ 为正定矩阵（$A > 0$）。</p>
+<p>(2) <strong>负定</strong>：若对任意非零向量 $x \ne 0$，恒有 $x^T A x < 0$，则称 $f(x)$ 为负定二次型，$A$ 为负定矩阵（$A < 0$）。</p>
+<p>(3) <strong>半正定</strong>：对任意 $x$，恒有 $x^T A x \ge 0$，且存在非零 $x_0$ 使得 $x_0^T A x_0 = 0$。</p>
+<p>(4) <strong>半负定</strong>：对任意 $x$，恒有 $x^T A x \le 0$，且存在非零 $x_0$ 使得 $x_0^T A x_0 = 0$。</p>
+<p>(5) <strong>不定</strong>：$x^T A x$ 既可取正值又可取负值。</p>
+</blockquote>
+<p>[2]正定几何直观意义：</p>
+<blockquote>
+<p>二次曲面方程 $x^T A x = 1$ 中，若 $A$ 正定，所有特征值 $\lambda_i > 0$，标准方程为椭球面，包围原点且有界闭合。</p>
+</blockquote>
+<h6><strong>定理[1]:正定二次型与正定矩阵充要判据全集</strong></h6>
+<p>[1]五大等价充要判据：</p>
+<blockquote>
+<p>设 $A$ 是 $n$ 阶实对称矩阵，以下命题完全等价：</p>
+<p>(1) $A$ 是正定矩阵（$\forall x \ne 0, x^T A x > 0$）；</p>
+<p>(2) $A$ 的正惯性指数 $p = n$（规范形为 $f = z_1^2 + \dots + z_n^2$）；</p>
+<p>(3) $A \simeq E$（合同于单位矩阵）；</p>
+<p>(4) 存在可逆矩阵 $D$（$|D| \ne 0$），使得 $A = D^T D$；</p>
+<p>(5) $A$ 的所有特征值严格全为正数：$\lambda_i > 0$ ($i = 1, 2, \dots, n$)；</p>
+<p>(6) $A$ 的各阶顺序主子式全大于零：$\Delta_k > 0$ ($k = 1, 2, \dots, n$)（Sylvester 准则）。</p>
+</blockquote>
+<h6><strong>定理[2]:正定矩阵的三大快速排除必要条件</strong></h6>
+<p>[1]三大必要条件：</p>
+<blockquote>
+<p>若实对称矩阵 $A = (a_{ij})_{n \times n}$ 正定，则必有：</p>
+<p>(1) 主对角线元素全为正数：$a_{ii} > 0$；</p>
+<p>(2) 行列式为正数：$|A| = \prod_{i=1}^n \lambda_i > 0$；</p>
+<p>(3) 全矩阵绝对值最大元素必在主对角线上：$\max |a_{ij}| = \max a_{ii}$。</p>
+</blockquote>
+<p>[2]考研避坑警示：</p>
+<blockquote>
+<p>上述条件仅为<strong>必要条件</strong>，满足 $a_{ii} > 0$ 且 $|A| > 0$ 的矩阵不一定正定！常用于选择题快速排除错误选项。</p>
+</blockquote>
+<h6><strong>定理[3]:正定矩阵的核心代数运算性质</strong></h6>
+<p>[1]代数性质：</p>
+<blockquote>
+<p>若 $A, B$ 为同阶正定矩阵，$k > 0$：</p>
+<p>(1) $A^{-1}$ 与伴随矩阵 $A^*$ 均是正定矩阵；</p>
+<p>(2) $k A$ 与 $A + B$ 均是正定矩阵；</p>
+<p>(3) 对任一可逆矩阵 $C$，$C^T A C$ 必为正定矩阵；</p>
+<p>(4) 对任意正整数 $m$，$A^m$ 是正定矩阵。</p>
+</blockquote>
+<h2>6.各类定态二次型判据汇总对照</h2>
+<h6><strong>模型[1]:五大定态二次型判据对比表</strong></h6>
+<p>[1]特征与判据全景对照：</p>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">矩阵类型</th>
+<th style="text-align: left;">定义条件 ($\forall x \ne 0$)</th>
+<th style="text-align: left;">特征值条件</th>
+<th style="text-align: left;">惯性指数</th>
+<th style="text-align: left;">顺序主子式条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>正定</strong> ($A > 0$)</td>
+<td style="text-align: left;">$x^T A x > 0$</td>
+<td style="text-align: left;">全部 $\lambda_i > 0$</td>
+<td style="text-align: left;">$p = n, q = 0$</td>
+<td style="text-align: left;">各阶顺序主子式 $\Delta_k > 0$</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>负定</strong> ($A < 0$)</td>
+<td style="text-align: left;">$x^T A x < 0$</td>
+<td style="text-align: left;">全部 $\lambda_i < 0$</td>
+<td style="text-align: left;">$p = 0, q = n$</td>
+<td style="text-align: left;">奇数阶 $<0$，偶数阶 $>0$</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>半正定</strong> ($A \ge 0$)</td>
+<td style="text-align: left;">$x^T A x \ge 0$</td>
+<td style="text-align: left;">全部 $\lambda_i \ge 0$</td>
+<td style="text-align: left;">$p \le n, q = 0$</td>
+<td style="text-align: left;"><font color=deeppink>全部主子式</font> $\ge 0$</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>半负定</strong> ($A \le 0$)</td>
+<td style="text-align: left;">$x^T A x \le 0$</td>
+<td style="text-align: left;">全部 $\lambda_i \le 0$</td>
+<td style="text-align: left;">$p = 0, q \le n$</td>
+<td style="text-align: left;">奇数阶主子式 $\le 0$，偶数阶 $\ge 0$</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>不定</strong></td>
+<td style="text-align: left;">可正可负</td>
+<td style="text-align: left;">既有正又有负</td>
+<td style="text-align: left;">$p > 0, q > 0$</td>
+<td style="text-align: left;">顺序主子式有负且不符合负定规律</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

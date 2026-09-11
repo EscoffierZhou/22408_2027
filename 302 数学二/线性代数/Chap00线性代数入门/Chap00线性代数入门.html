@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chap00线性代数入门</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h1>Chap00 线性代数入门</h1>
+<p>目的[1]:建立考研线性代数宏观知识全景，深刻理解“向量空间为基石、矩阵为算子、线性方程组为核心”的现代代数结构</p>
+<p>目的[2]:掌握向量的定义、维数、实际信息载体功能以及线性运算（向量加法、数乘向量）的代数与几何意义</p>
+<p>目的[3]:融会贯通向量点积（内积）运算规则，掌握一行乘一列、一行乘多列、多行乘一列及多行乘多列的矩阵乘法演进阶梯</p>
+<p>目的[4]:深刻理解矩阵的语义锁定特性与“算子映射观”，掌握二维平面五大基础几何变换（对称、伸缩、剪切、旋转）的矩阵表达与作用机理</p>
+<p>目的[5]:掌握线性方程组的矩阵表达 $Ax=b$，对比高斯消元法与大学逆矩阵算子解法的深层哲学，树立线性系统逆映射解法思维</p>
+<h2>1.考研线性代数知识体系大观</h2>
+<p>全国硕士研究生招生考试数学二大纲中，线性代数部分占卷面总分的关键比重。线性代数并非零散孤立的计算技巧堆叠，而是一套高度抽象且逻辑极其严密的现代化代数结构。</p>
+<h6><strong>模型[1]:线性代数三大核心知识版块</strong></h6>
+<p>[1]基础版块（代数运算工具与语言基石）：</p>
+<blockquote>
+<p>行列式、矩阵、矩阵运算与初等变换。</p>
+<p>提供全书的基础运算法则与运算载体，是后续一切代数分析的基本功。</p>
+</blockquote>
+<p>[2]主题版块（代数结构核心骨架）：</p>
+<blockquote>
+<p>向量组、线性相关性、线性方程组的解空间。</p>
+<p>深入研究向量空间的基、维数、线性表出与齐次/非齐次方程组解的结构定理。</p>
+</blockquote>
+<p>[3]应用版块（几何主轴化与坐标变换）：</p>
+<blockquote>
+<p>特征值与特征向量、相似对角化、二次型。</p>
+<p>通过正交变换化二次型为标准形，解决代数与几何空间中的主轴化与极值判定。</p>
+</blockquote>
+<h6><strong>概念[1]:线性代数研究的代数本质</strong></h6>
+<p>[1]代数结构：</p>
+<blockquote>
+<p>线性代数是一种以<font color=deeppink>向量空间（Vector Space）</font>为基石的代数结构。</p>
+<p>通俗而言，我们在向量空间这一统一步骤中，深入探究<font color=red>向量与向量之间的关系</font>、<font color=deeppink>空间到空间的映射法则</font>，以及<font color=red>方程系统的代数解集结构</font>。</p>
+</blockquote>
+<h2>2.向量的基本概念与信息载体功能</h2>
+<h6><strong>概念[1]:向量的数学定义与维数</strong></h6>
+<p>[1]向量的数学定义：</p>
+<blockquote>
+<p>拼在一起的一组有序数组称为<strong>向量</strong>。</p>
+<p>通常表示为行向量形式 $\alpha = [a_1, a_2, \dots, a_n]$ 或列向量形式 $\beta = \begin{bmatrix} b_1 \\ b_2 \\ \vdots \\ b_n \end{bmatrix}$。</p>
+</blockquote>
+<p>[2]向量的维数：</p>
+<blockquote>
+<p>向量中所包含的实数（或复数）的个数，称为向量的<strong>维数</strong>。</p>
+<p>例如：$[-1, 1]$ 包含 2 个实数，称为 2 维向量；$[x_1, x_2, \dots, x_n]^\mathrm{T}$ 包含 $n$ 个数，称为 $n$ 维向量。</p>
+</blockquote>
+<h6><strong>概念[2]:向量的现实载体功能与信息系统</strong></h6>
+<p>[1]信息载体功能：</p>
+<blockquote>
+<p>在现代计算机科学与工程技术中，纯粹的一维标量只能描述单一物理量，而向量通过有序组织多个数值分量，能够精准承载多维度的现实系统信息。</p>
+</blockquote>
+<p>[2]现实案例解析：</p>
+<blockquote>
+<p>假设一个人对于“运动”和“音乐”的兴趣程度分别划分为三种状态：</p>
+<p>(1) 不喜欢：记为 $-1$；</p>
+<p>(2) 无所谓：记为 $0$；</p>
+<p>(3) 喜欢：记为 $1$。</p>
+<p>此时即可构建表征某人兴趣偏好的 2 维特征向量：$[\text{运动兴趣程度}, \text{音乐兴趣程度}]$。</p>
+<p>(1) 向量 $[-1, 1]$ 精准代表：该个体“不喜欢运动，喜欢音乐”；</p>
+<p>(2) 向量 $[0, 1]$ 精准代表：该个体“对运动无所谓，喜欢音乐”；</p>
+<p>(3) 向量 $[1, -1]$ 精准代表：该个体“喜欢运动，不喜欢音乐”。</p>
+<p>由此可见，向量是数学抽象与真实世界信息之间的第一道坚固桥梁。</p>
+</blockquote>
+<h2>3.向量的运算体系与矩阵乘法演进</h2>
+<p>向量空间中的核心运算由三大层次依次递进：<strong>线性运算</strong>、<strong>点积运算</strong>与<strong>线性变换</strong>。</p>
+<h6><strong>方法[1]:向量的线性运算与几何图景</strong></h6>
+<p>[1]向量加法：</p>
+<blockquote>
+<p>同维数向量对应分量分别相加。设 $\alpha = [a_1, a_2]^\mathrm{T}$，$\beta = [b_1, b_2]^\mathrm{T}$，则：</p>
+<p>$$\alpha + \beta = \begin{bmatrix} a_1 + b_1 \\ a_2 + b_2 \end{bmatrix}$$</p>
+<p>在二维与三维欧几里得空间中，向量加法服从<strong>平行四边形法则</strong>或<strong>三角形连加法则</strong>。</p>
+</blockquote>
+<p>[2]数乘向量：</p>
+<blockquote>
+<p>实数 $k$ 与向量 $\alpha$ 的数乘为将实数乘到向量的每一个分量：</p>
+<p>$$k\alpha = \begin{bmatrix} ka_1 \\ ka_2 \end{bmatrix}$$</p>
+<p>数乘运算在几何上对应于向量沿其所在直线的伸长、缩短以及反向（当 $k < 0$ 时）。</p>
+</blockquote>
+<h6><strong>方法[2]:点积运算与内积定义</strong></h6>
+<p>[1]点积与内积定义：</p>
+<blockquote>
+<p>$(\alpha, \beta)$ 称为向量 $\alpha$ 与向量 $\beta$ 的点积（内积）运算。</p>
+<p>其代数本质是将两个向量的所有对应分量相乘后再求和：</p>
+<p>$$(\alpha, \beta) = \alpha^\mathrm{T} \beta = a_1 b_1 + a_2 b_2 + \dots + a_n b_n = \sum_{i=1}^n a_i b_i$$</p>
+<p>例如：设 $\alpha = [-1, 1]^\mathrm{T}, \beta = [0, -1]^\mathrm{T}$，则：</p>
+<p>$$(\alpha, \beta) = (-1) \times 0 + 1 \times (-1) = -1$$</p>
+</blockquote>
+<h6><strong>模型[1]:点积维度的递进结构与矩阵乘法</strong></h6>
+<p>[1]一行乘一列：</p>
+<blockquote>
+<p>$$[a_1, a_2] \begin{bmatrix} b_1 \\ b_2 \end{bmatrix} = a_1 b_1 + a_2 b_2$$</p>
+<p>计算结果为一个纯数（标量）。</p>
+</blockquote>
+<p>[2]一行乘多列：</p>
+<blockquote>
+<p>$$[a_1, a_2] \begin{bmatrix} b_1 & c_1 \\ b_2 & c_2 \end{bmatrix} = [a_1 b_1 + a_2 b_2,\ a_1 c_1 + a_2 c_2]$$</p>
+<p>每一项内部为乘积再求和，本质依然是由数乘与加法组合而成的线性运算。计算结果为一个行向量。</p>
+</blockquote>
+<p>[3]多行乘一列：</p>
+<blockquote>
+<p>$$\begin{bmatrix} a_1 & a_2 \\ b_1 & b_2 \end{bmatrix} \begin{bmatrix} c_1 \\ c_2 \end{bmatrix} = \begin{bmatrix} a_1 c_1 + a_2 c_2 \\ b_1 c_1 + b_2 c_2 \end{bmatrix}$$</p>
+<p>左侧矩阵每一行分别与右侧列向量作点积，构成结果列向量的各个分量。这是后续线性方程组左端的核心形式。</p>
+</blockquote>
+<p>[4]多行乘多列（矩阵乘法）：</p>
+<blockquote>
+<p>$$\begin{bmatrix} a_1 & a_2 \\ b_1 & b_2 \end{bmatrix} \begin{bmatrix} c_1 & d_1 \\ c_2 & d_2 \end{bmatrix} = \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix}$$</p>
+<p>其中乘积矩阵的第 $i$ 行第 $j$ 列元素满足：</p>
+<p>$$a_{ij} = (\text{左矩阵第 } i \text{ 行}) \cdot (\text{右矩阵第 } j \text{ 列})$$</p>
+<p>具体分量展开为：</p>
+<p>$$a_{11} = a_1 c_1 + a_2 c_2,\quad a_{12} = a_1 d_1 + a_2 d_2$$</p>
+<p>$$a_{21} = b_1 c_1 + b_2 c_2,\quad a_{22} = b_1 d_1 + b_2 d_2$$</p>
+</blockquote>
+<p>[5]一列乘一行（外积与秩1矩阵）：</p>
+<blockquote>
+<p>$$\begin{bmatrix} a_1 \\ a_2 \end{bmatrix} [b_1, b_2] = \begin{bmatrix} a_1 b_1 & a_1 b_2 \\ a_2 b_1 & a_2 b_2 \end{bmatrix}$$</p>
+<p>两向量的外积产生一个方阵，且该矩阵的每一行（列）均成比例，其秩必然不超过 1。</p>
+</blockquote>
+<h2>4.矩阵的初识与线性变换映射观</h2>
+<h6><strong>概念[1]:矩阵的本质与语义位置锁定</strong></h6>
+<p>[1]矩阵表达系统信息：</p>
+<blockquote>
+<p>考查矩阵 $\begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix}$：</p>
+<p>(1) 角度一（个体喜好信息系统）：若横向解读，$[1, 0]$ 代表个体喜欢运动、对音乐无所谓；$[0, -1]$ 代表个体对运动无所谓、且不喜欢音乐。</p>
+<p>(2) 角度二（投篮结果状态系统）：假设一个人投篮两次，投中记为 1，未投中记为 0，卡在篮筐上记为 $-1$。则 $[1, 0]$ 代表第一次投中、第二次未投中；$[0, -1]$ 代表第一次未投中、第二次卡在篮筐上。</p>
+</blockquote>
+<p>[2]矩阵中位置不可随意改动的铁律：</p>
+<blockquote>
+<p>若矩阵 $\begin{bmatrix} 40 & 15 \\ 12 & 8 \end{bmatrix}$ 的第一行表示商品价格（40与15），第二行表示卡路里含量（12与8）；</p>
+<p>一旦随意将数字调换为 $\begin{bmatrix} 40 & 12 \\ 15 & 8 \end{bmatrix}$，则语义彻底变为商品价格为 40 与 12，卡路里为 15 与 8。</p>
+<p><font color=red>结论：矩阵中元素的位置是语义的绝对约束，不可任意调换。</font></p>
+</blockquote>
+<h6><strong>概念[2]:线性变换映射观与算子理论</strong></h6>
+<p>[1]高数与线代的映射对齐结构：</p>
+<blockquote>
+<p>在高等数学中，核心研究工具是单变量或多变量函数映射：</p>
+<p>$$y = f(x)$$</p>
+<p>而在高等代数中，核心工具全面升级为矩阵与向量的线性作用：</p>
+<p>$$A\alpha = \beta$$</p>
+<p>两者具有高度对齐的映射结构：</p>
+<p>$$\begin{aligned} \text{高等数学} &\quad\longleftrightarrow\quad \text{线性代数} \\ x \text{ (标量自变量)} &\quad\longleftrightarrow\quad \alpha \text{ (输入向量)} \\ f \text{ (函数映射法则)} &\quad\longleftrightarrow\quad A \text{ (变换矩阵算子)} \\ y \text{ (标量因变量)} &\quad\longleftrightarrow\quad \beta \text{ (输出向量)} \end{aligned}$$</p>
+</blockquote>
+<p>[2]映射的几何直观：</p>
+<blockquote>
+<p>矩阵 $A$ 作用在输入空间中的向量 $\alpha$ 上，通过矩阵乘法法则输出目标空间中的新向量 $\beta$。</p>
+</blockquote>
+<h6><strong>模型[1]:对称变换矩阵与几何翻转</strong></h6>
+<p>[1]关于 $x$ 轴对称矩阵：</p>
+<blockquote>
+<p>$$A_1 = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix}$$</p>
+<p>作用验证：</p>
+<p>$$\begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \begin{bmatrix} 0 & 1 & 1 & 0 \\ 1 & 1 & 0 & 0 \end{bmatrix} = \begin{bmatrix} 0 & 1 & 1 & 0 \\ -1 & -1 & 0 & 0 \end{bmatrix}$$</p>
+<p>几何效果：图形沿 $x$ 轴发生翻转对称，落在第四象限。</p>
+</blockquote>
+<p>[2]关于 $y$ 轴对称矩阵：</p>
+<blockquote>
+<p>$$A_2 = \begin{bmatrix} -1 & 0 \\ 0 & 1 \end{bmatrix}$$</p>
+<p>作用验证：</p>
+<p>$$\begin{bmatrix} -1 & 0 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 0 & 1 & 1 & 0 \\ 1 & 1 & 0 & 0 \end{bmatrix} = \begin{bmatrix} 0 & -1 & -1 & 0 \\ 1 & 1 & 0 & 0 \end{bmatrix}$$</p>
+<p>几何效果：图形沿 $y$ 轴发生翻转对称，落在第二象限。</p>
+</blockquote>
+<p>[3]关于坐标原点中心对称矩阵：</p>
+<blockquote>
+<p>$$A_3 = \begin{bmatrix} -1 & 0 \\ 0 & -1 \end{bmatrix}$$</p>
+<p>几何效果：图形沿原点作中心对称，落在第三象限。</p>
+</blockquote>
+<p>[4]关于直线 $y = x$ 对称矩阵：</p>
+<blockquote>
+<p>$$A_4 = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$$</p>
+<p>作用验证：</p>
+<p>$$\begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} \begin{bmatrix} 0 & 1 & 1 & 0 \\ 1 & 1 & 0 & 0 \end{bmatrix} = \begin{bmatrix} 1 & 1 & 0 & 0 \\ 0 & 1 & 1 & 0 \end{bmatrix}$$</p>
+<p>几何效果：$x$ 与 $y$ 坐标互换，图形关于主对角线 $y=x$ 翻转。</p>
+</blockquote>
+<p>[5]关于直线 $y = -x$ 对称矩阵：</p>
+<blockquote>
+<p>$$A_5 = \begin{bmatrix} 0 & -1 \\ -1 & 0 \end{bmatrix}$$</p>
+<p>几何效果：图形关于副对角线 $y = -x$ 发生翻转。</p>
+</blockquote>
+<h6><strong>模型[2]:伸缩与压缩变换矩阵</strong></h6>
+<p>[1]横向伸长与压缩矩阵：</p>
+<blockquote>
+<p>$$S_x(k_x) = \begin{bmatrix} k_x & 0 \\ 0 & 1 \end{bmatrix}$$</p>
+<p>(1) 当 $k_x = 2$ 时，图形沿 $x$ 轴拉伸为原宽度的 2 倍：</p>
+<p>$$\begin{bmatrix} 2 & 0 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 0 & 1 & 1 & 0 \\ 1 & 1 & 0 & 0 \end{bmatrix} = \begin{bmatrix} 0 & 2 & 2 & 0 \\ 1 & 1 & 0 & 0 \end{bmatrix}$$</p>
+<p>(2) 当 $k_x = \frac{1}{2}$ 时，图形沿 $x$ 轴压缩为原宽度的 $\frac{1}{2}$：</p>
+<p>$$\begin{bmatrix} \frac{1}{2} & 0 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 0 & 1 & 1 & 0 \\ 1 & 1 & 0 & 0 \end{bmatrix} = \begin{bmatrix} 0 & \frac{1}{2} & \frac{1}{2} & 0 \\ 1 & 1 & 0 & 0 \end{bmatrix}$$</p>
+</blockquote>
+<p>[2]纵向伸长与压缩矩阵：</p>
+<blockquote>
+<p>$$S_y(k_y) = \begin{bmatrix} 1 & 0 \\ 0 & k_y \end{bmatrix}$$</p>
+<p>(1) 当 $k_y = 2$ 时，纵坐标翻倍，纵向拉伸；</p>
+<p>(2) 当 $k_y = \frac{1}{2}$ 时，纵坐标减半，纵向压缩。</p>
+</blockquote>
+<h6><strong>模型[3]:剪切变换矩阵与滑动形变</strong></h6>
+<p>[1]水平剪切矩阵：</p>
+<blockquote>
+<p>$$K_x = \begin{bmatrix} 1 & -1 \\ 0 & 1 \end{bmatrix}$$</p>
+<p>作用验证：</p>
+<p>$$\begin{bmatrix} 1 & -1 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 0 & 1 & 1 & 0 \\ 1 & 1 & 0 & 0 \end{bmatrix} = \begin{bmatrix} -1 & 0 & 1 & 0 \\ 1 & 1 & 0 & 0 \end{bmatrix}$$</p>
+<p>几何效果：图形顶端保持在 $y=1$，底端保持在 $y=0$，但各点沿横向发生偏移，使正方形变形为水平倾斜的平行四边形。</p>
+</blockquote>
+<p>[2]垂直剪切矩阵：</p>
+<blockquote>
+<p>$$K_y = \begin{bmatrix} 1 & 0 \\ -1 & 1 \end{bmatrix}$$</p>
+<p>几何效果：图形沿竖直方向产生倾斜滑移。</p>
+</blockquote>
+<h6><strong>模型[4]:旋转变换矩阵与刚体转动</strong></h6>
+<p>[1]二维平面标准旋转矩阵：</p>
+<blockquote>
+<p>平面内绕原点逆时针旋转 $\theta$ 角的标准变换矩阵为：</p>
+<p>$$R(\theta) = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix}$$</p>
+</blockquote>
+<p>[2]旋转 $\theta = \frac{\pi}{4}\ (45^\circ)$ 实例验证：</p>
+<blockquote>
+<p>$$R\left(\frac{\pi}{4}\right) = \begin{bmatrix} \frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \end{bmatrix}$$</p>
+<p>作用于顶点坐标矩阵：</p>
+<p>$$\begin{bmatrix} \frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \end{bmatrix} \begin{bmatrix} 0 & 1 & 1 & 0 \\ 1 & 1 & 0 & 0 \end{bmatrix} = \begin{bmatrix} -\frac{\sqrt{2}}{2} & 0 & \frac{\sqrt{2}}{2} & 0 \\ \frac{\sqrt{2}}{2} & \sqrt{2} & \frac{\sqrt{2}}{2} & 0 \end{bmatrix}$$</p>
+<p>几何效果：整个图形以原点为轴心，严格逆时针旋转 $45^\circ$，图形的面积与各边长度完美保持不变（正交刚体旋转）。</p>
+</blockquote>
+<h2>5.线性方程组的表达与逆矩阵解法</h2>
+<h6><strong>模型[1]:线性方程组的三种等价表达与矩阵方程</strong></h6>
+<p>[1]一般线性方程组：</p>
+<blockquote>
+<p>考查一般的二元非齐次线性方程组：</p>
+<p>$$\begin{cases} x_1 + 2x_2 = 3 \\ 4x_1 + 7x_2 = 10 \end{cases}$$</p>
+<p>利用向量的点积形式，该系统可等价写为：</p>
+<p>$$\begin{bmatrix} 1 & 2 \\ 4 & 7 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 3 \\ 10 \end{bmatrix}$$</p>
+<p>即抽象的矩阵方程：</p>
+<p>$$Ax = b$$</p>
+</blockquote>
+<p>[2]矩阵方程核心要素：</p>
+<blockquote>
+<p>(1) $A = \begin{bmatrix} 1 & 2 \\ 4 & 7 \end{bmatrix}$ 为系数矩阵；</p>
+<p>(2) $x = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}$ 为未知解向量；</p>
+<p>(3) $b = \begin{bmatrix} 3 \\ 10 \end{bmatrix}$ 为常数项向量。</p>
+</blockquote>
+<h6><strong>方法[1]:初等消元法与阶梯回代</strong></h6>
+<p>[1]核心机制：</p>
+<blockquote>
+<p>通过方程之间的倍加相消，逐个消除未知数，得到阶梯形方程组，再由底向上逐层回代。</p>
+</blockquote>
+<p>[2]方法优劣分析：</p>
+<blockquote>
+<p>在未知数较少时非常直观，容易手工完成；但在大型复杂系统或需要反复对不同常数向量 $b$ 求解时，消元过程高度依赖具体数值，缺乏全局结构解。</p>
+</blockquote>
+<h6><strong>方法[2]:逆矩阵解法与算子逆映射</strong></h6>
+<p>[1]思想来源：</p>
+<blockquote>
+<p>类比中学标量一次方程：</p>
+<p>$$2x = 3 \implies 2^{-1} \cdot 2x = 2^{-1} \cdot 3 \implies x = \frac{3}{2}$$</p>
+<p>在矩阵代数中，寻找一个特殊矩阵 $A^{-1}$（称为 $A$ 的逆矩阵），满足：</p>
+<p>$$A^{-1} A = A A^{-1} = E$$</p>
+<p>其中 $E$ 为单位矩阵。</p>
+</blockquote>
+<p>[2]求解步骤：</p>
+<blockquote>
+<p>在矩阵方程 $Ax = b$ 两端<strong>同时从左侧乘以</strong> $A^{-1}$（前提是 $A$ 可逆）：</p>
+<p>$$A^{-1}(Ax) = A^{-1}b \implies (A^{-1}A)x = A^{-1}b \implies Ex = A^{-1}b \implies x = A^{-1}b$$</p>
+</blockquote>
+<p>[3]单位矩阵定义：</p>
+<blockquote>
+<p>主对角线全为 1，其余元素全为 0 的方阵称为单位矩阵：</p>
+<p>$$E_1 = 1,\quad E_2 = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix},\quad E_3 = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}$$</p>
+</blockquote>
+<p>[4]逆矩阵验证与求解实例：</p>
+<blockquote>
+<p>对于系数矩阵 $A = \begin{bmatrix} 1 & 2 \\ 4 & 7 \end{bmatrix}$，其逆矩阵为 $A^{-1} = \begin{bmatrix} -7 & 2 \\ 4 & -1 \end{bmatrix}$。</p>
+<p>直接相乘验证：</p>
+<p>$$\begin{bmatrix} 1 & 2 \\ 4 & 7 \end{bmatrix} \begin{bmatrix} -7 & 2 \\ 4 & -1 \end{bmatrix} = \begin{bmatrix} -7+8 & 2-2 \\ -28+28 & 8-7 \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} = E_2$$</p>
+<p>于是解向量直接通过一次矩阵乘法产出：</p>
+<p>$$\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = A^{-1}b = \begin{bmatrix} -7 & 2 \\ 4 & -1 \end{bmatrix} \begin{bmatrix} 3 \\ 10 \end{bmatrix} = \begin{bmatrix} -21 + 20 \\ 12 - 10 \end{bmatrix} = \begin{bmatrix} -1 \\ 2 \end{bmatrix}$$</p>
+</blockquote>
+<h6><strong>辨析[1]:高等消元法与算子逆映射的考研启示</strong></h6>
+<p>[1]算子逆映射的全局优势：</p>
+<blockquote>
+<p>逆矩阵将复杂的方程求解转化为<strong>算子逆映射</strong>。一旦算子求出逆 $A^{-1}$，无论常数向量 $b$ 如何改变，只需做一次乘法即可瞬间得到解向量，构成了现代计算数学与考研高分复习的根基框架。</p>
+</blockquote>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

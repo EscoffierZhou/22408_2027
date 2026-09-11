@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>[强化]微分方程</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h1>[强化]微分方程</h1>
+<p>目的[1]:熟练掌握微分算子法（Differential Operator $D$-method）及逆算子 $\frac{1}{F(D)}$ 在常系数非齐次线性微分方程特解中的秒杀法则（指数移位、三角共振代换、有理分式展开法）</p>
+<p>目的[2]:深入掌握朗斯基行列式（Wronskian Determinant）与阿贝尔-刘维尔公式（Abel-Liouville Formula），精通由单特解降阶求二阶变系数微分方程通解的技巧</p>
+<p>目的[3]:融会贯通常数变易法（Variation of Parameters）在一般非齐次线性方程中的矩阵形式与积分通式</p>
+<p>目的[4]:攻克伯努利方程（Bernoulli）与里卡蒂方程（Riccati Equation）的降阶线性化与已知特解变换模型</p>
+<p>目的[5]:掌握全微分方程积分因子寻找的经典模式与对称代换技巧</p>
+<p>目的[6]:精通高难度物理动力学与几何动态追踪模型（变质量运动、阻尼衰减振动、几何包络与反射镜面反问题）</p>
+<h2>1.微分算子法 (Differential Operator D-Method) 深度强化与秒杀法则</h2>
+<p>在考研数学中，二阶或高阶常系数线性微分方程的特解计算常规采用待定系数法，但待定系数法计算量大、极易在多项式乘积项导数展开时代数符号出错。微分算子法将微分运算转化为多项式代数运算，能实现复杂特解的秒杀。</p>
+<h6><strong>模型[1]:微分算子 D 的基本代数运算与多项式因式分解</strong></h6>
+<p>[1]算子定义：</p>
+<blockquote>
+<p>记微分算子 $D = \frac{\mathrm{d}}{\mathrm{d}x}$，则 $D^k y = \frac{\mathrm{d}^k y}{\mathrm{d}x^k}$。</p>
+<p>常系数线性微分方程：</p>
+<p>$$y^{(n)} + a_1 y^{(n-1)} + \dots + a_{n-1} y' + a_n y = f(x)$$</p>
+<p>可紧凑地记为：</p>
+<p>$$F(D) y = f(x)$$</p>
+<p>其中 $F(D) = D^n + a_1 D^{n-1} + \dots + a_{n-1} D + a_n$ 为特征多项式算子。</p>
+</blockquote>
+<p>[2]逆算子定义与特解表示：</p>
+<blockquote>
+<p>特解可形式地表示为：</p>
+<p>$$y^* = \frac{1}{F(D)} f(x)$$</p>
+<p>其中 $\frac{1}{F(D)}$ 为逆算子，代表对自由项 $f(x)$ 实施反向积分操作。</p>
+</blockquote>
+<h6><strong>公式[1]:指数位移定理 (Exponential Shift Theorem)</strong></h6>
+<p>[1]正向指数位移法则：</p>
+<blockquote>
+<p>对于任意充分光滑的函数 $v(x)$ 与常数 $\lambda$：</p>
+<p>$$F(D) [ \mathrm{e}^{\lambda x} v(x) ] = \mathrm{e}^{\lambda x} F(D + \lambda) v(x)$$</p>
+</blockquote>
+<p>[2]逆算子指数位移法则：</p>
+<blockquote>
+<p>同理，对于逆算子：</p>
+<p>$$\frac{1}{F(D)} [ \mathrm{e}^{\lambda x} v(x) ] = \mathrm{e}^{\lambda x} \frac{1}{F(D + \lambda)} v(x)$$</p>
+<p>当 $v(x) \equiv 1$ 且 $F(\lambda) \neq 0$ 时，特解可直接秒杀：</p>
+<p>$$\frac{1}{F(D)} \mathrm{e}^{\lambda x} = \frac{\mathrm{e}^{\lambda x}}{F(\lambda)}$$</p>
+<p>当 $\lambda$ 为 $F(D)$ 的 $k$ 重特征根时，即 $F(D) = (D - \lambda)^k G(D)$ 且 $G(\lambda) \neq 0$：</p>
+<p>$$\frac{1}{F(D)} \mathrm{e}^{\lambda x} = \mathrm{e}^{\lambda x} \frac{1}{(D + \lambda - \lambda)^k G(D + \lambda)} \cdot 1 = \mathrm{e}^{\lambda x} \frac{1}{D^k} \left[ \frac{1}{G(\lambda)} \right] = \frac{x^k}{k! \, G(\lambda)} \mathrm{e}^{\lambda x}$$</p>
+<p>这严格证明了教材中待定系数法“乘 $x^k$”的本质来源于逆算子 $\frac{1}{D^k}$ 对常数 1 的 $k$ 次连续积分！</p>
+</blockquote>
+<h6><strong>方法[1]:算子法处理三角函数激励 (D^2 替换法则)</strong></h6>
+<p>对于正余弦激励项 $\cos(\omega x)$ 或 $\sin(\omega x)$，利用 $D^2 \cos(\omega x) = -\omega^2 \cos(\omega x)$：</p>
+<p>[1]非共振情形：</p>
+<blockquote>
+<p>若 $F(-\omega^2) \neq 0$，则算子中的所有偶次项直接用 $-\omega^2$ 替换：</p>
+<p>$$\frac{1}{F(D^2)} \cos(\omega x) = \frac{\cos(\omega x)}{F(-\omega^2)}, \quad \frac{1}{F(D^2)} \sin(\omega x) = \frac{\sin(\omega x)}{F(-\omega^2)}$$</p>
+<p>若分母含奇数阶 $D$（如 $a D^2 + b D + c$），则先代换 $D^2 \to -\omega^2$，得 $\frac{1}{b D + (c - a\omega^2)}$，再分子分母同乘以共轭算子 $b D - (c - a\omega^2)$，将分母化为 $D^2$ 进而完成代换。</p>
+</blockquote>
+<p>[2]共振情形（欧拉复指数虚实部提取）：</p>
+<blockquote>
+<p>利用欧拉公式 $\cos(\omega x) = \operatorname{Re}(\mathrm{e}^{\mathrm{i}\omega x}), \; \sin(\omega x) = \operatorname{Im}(\mathrm{e}^{\mathrm{i}\omega x})$：</p>
+<p>$$y^* = \operatorname{Re}\left[ \frac{1}{F(D)} \mathrm{e}^{\mathrm{i}\omega x} \right]$$</p>
+<p>结合指数位移法则，一阶微商即可完全避开复杂的联立待定系数计算。</p>
+</blockquote>
+<h6><strong>方法[2]:逆算子多项式泰勒展开处理多项式激励</strong></h6>
+<p>当非齐次项为 $P_m(x)$（$m$ 次多项式）时，将逆算子 $\frac{1}{F(D)}$ 视作关于算子 $D$ 的分式，在 $D = 0$ 处展开为麦克劳林级数：</p>
+<p>[1]算子级数展开准则：</p>
+<blockquote>
+<p>因为对 $m$ 次多项式，当阶数 $k > m$ 时 $D^k P_m(x) \equiv 0$，故展开式只需截断到 $D^m$ 项：</p>
+<p>$$\frac{1}{F(D)} = c_0 + c_1 D + c_2 D^2 + \dots + c_m D^m + O(D^{m+1})$$</p>
+</blockquote>
+<p>[2]秒杀示范：</p>
+<blockquote>
+<p>求 $y'' - y' - 2y = 4x^2$ 的特解：</p>
+<p>$$F(D) = D^2 - D - 2 = -2\left( 1 + \frac{D - D^2}{2} \right)$$</p>
+<p>$$\frac{1}{F(D)} = -\frac{1}{2} \left( 1 - \frac{D - D^2}{2} + \left(\frac{D - D^2}{2}\right)^2 - \dots \right) = -\frac{1}{2} \left( 1 - \frac{D}{2} + \frac{3}{4}D^2 + \dots \right)$$</p>
+<p>作用于 $4x^2$：</p>
+<p>$$y^* = -\frac{1}{2} \left[ 4x^2 - \frac{1}{2}D(4x^2) + \frac{3}{4}D^2(4x^2) \right] = -\frac{1}{2} \left[ 4x^2 - \frac{1}{2}(8x) + \frac{3}{4}(8) \right] = -2x^2 + 2x - 3$$</p>
+<p>全程无需联立三个未知数的线性方程组，三行内得出特解。</p>
+</blockquote>
+<h2>2.朗斯基行列式 (Wronskian) 与阿贝尔-刘维尔公式</h2>
+<h6><strong>定理[1]:朗斯基行列式与解的线性无关性充要条件</strong></h6>
+<p>[1]朗斯基行列式定义：</p>
+<blockquote>
+<p>设 $y_1(x), y_2(x), \dots, y_n(x)$ 为区间 $I$ 上的 $n$ 个充分光滑函数，其朗斯基行列式定义为：</p>
+<p>$$W(y_1, y_2, \dots, y_n)(x) = \begin{vmatrix} y_1(x) & y_2(x) & \dots & y_n(x) \\ \\ y_1'(x) & y_2'(x) & \dots & y_n'(x) \\ \\ \vdots & \vdots & \ddots & \vdots \\ \\ y_1^{(n-1)}(x) & y_2^{(n-1)}(x) & \dots & y_n^{(n-1)}(x) \end{vmatrix}$$</p>
+</blockquote>
+<p>[2]微分方程解的等价性定理：</p>
+<blockquote>
+<p>若 $y_1(x), \dots, y_n(x)$ 是齐次线性微分方程 $y^{(n)} + p_1(x)y^{(n-1)} + \dots + p_n(x)y = 0$ 在区间 $I$ 上的特解，则：</p>
+<p>它们在 $I$ 上<strong>线性无关</strong>的充要条件是：在区间 $I$ 上的<strong>任意一点 $x_0$ 处</strong>，朗斯基行列式 $W(x_0) \neq 0$。</p>
+<p>此时在区间 $I$ 上必恒有 $W(x) \neq 0$。反之，若在某一点 $W(x_0) = 0$，则在全区间 $I$ 上恒有 $W(x) \equiv 0$。</p>
+</blockquote>
+<h6><strong>公式[2]:阿贝尔-刘维尔公式 (Abel-Liouville Formula)</strong></h6>
+<p>[1]行列式微商恒等式：</p>
+<blockquote>
+<p>对于二阶齐次线性微分方程 $y'' + P(x) y' + Q(x) y = 0$：</p>
+<p>朗斯基行列式 $W(x) = y_1 y_2' - y_1' y_2$ 满足一阶微分方程：</p>
+<p>$$\frac{\mathrm{d}W}{\mathrm{d}x} = y_1 y_2'' - y_1'' y_2 = y_1(-P y_2' - Q y_2) - (-P y_1' - Q y_1)y_2 = -P(x)(y_1 y_2' - y_1' y_2) = -P(x)W(x)$$</p>
+</blockquote>
+<p>[2]Abel-Liouville 公式：</p>
+<blockquote>
+<p>直接积分得：</p>
+<p>$$W(x) = W(x_0) \exp\left( -\int_{x_0}^x P(t)\,\mathrm{d}t \right)$$</p>
+<p>此公式建立了微分方程一次项系数 $P(x)$ 与解的几何体积变化率之间的守恒关系。</p>
+</blockquote>
+<h6><strong>方法[3]:变系数二阶线性齐次方程由一特解降阶法</strong></h6>
+<p>[1]降阶公式推导：</p>
+<blockquote>
+<p>已知二阶齐次线性微分方程 $y'' + P(x)y' + Q(x)y = 0$ 的一个非零特解 $y_1(x)$。</p>
+<p>设第二特解为 $y_2(x) = u(x) y_1(x)$，则朗斯基行列式为：</p>
+<p>$$W(x) = y_1 y_2' - y_1' y_2 = y_1(u' y_1 + u y_1') - y_1'(u y_1) = y_1^2 u'$$</p>
+<p>由 Abel-Liouville 公式：</p>
+<p>$$y_1^2 u' = C \mathrm{e}^{-\int P(x)\,\mathrm{d}x} \implies u'(x) = \frac{C}{y_1^2(x)} \mathrm{e}^{-\int P(x)\,\mathrm{d}x}$$</p>
+</blockquote>
+<p>[2]第二线性无关解显式公式：</p>
+<blockquote>
+<p>积分得第二特解：</p>
+<p>$$y_2(x) = y_1(x) \int \frac{\mathrm{e}^{-\int P(x)\,\mathrm{d}x}}{y_1^2(x)}\,\mathrm{d}x$$</p>
+<p>此公式能够在仅知单特解的前提下，彻底化解变系数二阶微分方程的通解难题。</p>
+</blockquote>
+<h2>3.常数变易法 (Variation of Parameters) 高阶统一通式</h2>
+<h6><strong>模型[2]:二阶非齐次线性微分方程常数变易法的朗斯基积分表示</strong></h6>
+<p>[1]变易假设与约束条件：</p>
+<blockquote>
+<p>设方程为 $y'' + P(x) y' + Q(x) y = f(x)$，对应齐次基解系为 $y_1(x), y_2(x)$。</p>
+<p>设非齐次特解为 $y^* = c_1(x) y_1(x) + c_2(x) y_2(x)$。</p>
+<p>施加拉格朗日变易约束条件：</p>
+<p>$$c_1'(x) y_1(x) + c_2'(x) y_2(x) = 0$$</p>
+<p>求二阶导代入原方程后，自动得到第二个代数方程：</p>
+<p>$$c_1'(x) y_1'(x) + c_2'(x) y_2'(x) = f(x)$$</p>
+</blockquote>
+<p>[2]克拉默法则解常数导数：</p>
+<blockquote>
+<p>写成矩阵方程：</p>
+<p>$$\begin{pmatrix} y_1(x) & y_2(x) \\ \\ y_1'(x) & y_2'(x) \end{pmatrix} \begin{pmatrix} c_1'(x) \\ \\ c_2'(x) \end{pmatrix} = \begin{pmatrix} 0 \\ \\ f(x) \end{pmatrix}$$</p>
+<p>系数矩阵的行列式恰为朗斯基行列式 $W(x)$。根据克拉默法则：</p>
+<p>$$c_1'(x) = \frac{\begin{vmatrix} 0 & y_2(x) \\ \\ f(x) & y_2'(x) \end{vmatrix}}{W(x)} = -\frac{y_2(x) f(x)}{W(x)}$$</p>
+<p>$$c_2'(x) = \frac{\begin{vmatrix} y_1(x) & 0 \\ \\ y_1'(x) & f(x) \end{vmatrix}}{W(x)} = \frac{y_1(x) f(x)}{W(x)}$$</p>
+</blockquote>
+<p>[3]非齐次特解积分统一表达：</p>
+<blockquote>
+<p>积分回代得到非齐次特解：</p>
+<p>$$y^*(x) = -y_1(x) \int \frac{y_2(x) f(x)}{W(x)}\,\mathrm{d}x + y_2(x) \int \frac{y_1(x) f(x)}{W(x)}\,\mathrm{d}x = \int_{x_0}^x \frac{y_1(t) y_2(x) - y_2(t) y_1(x)}{W(t)} f(t)\,\mathrm{d}t$$</p>
+<p>此即格林函数（Green's Function）核积分表示形式。</p>
+</blockquote>
+<h6><strong>辨析[1]:待定系数法与常数变易法的适用边界与算力权衡</strong></h6>
+<p>[1]自由项类型：</p>
+<blockquote>
+<p>待定系数法仅适用于自由项为 $P_m(x)\mathrm{e}^{\lambda x}\cos\omega x$ 或 $P_m(x)\mathrm{e}^{\lambda x}\sin\omega x$ 形式。</p>
+<p>当自由项含 $\tan x, \sec x, \frac{1}{1+x^2}, \ln x$ 等非拟多项式时，待定系数法彻底失效，必须且只能使用常数变易法。</p>
+</blockquote>
+<p>[2]二阶导最高项系数规范化：</p>
+<blockquote>
+<p>使用常数变易法公式时，原方程必须首先化为最高阶导数系数为 1 的标准型：</p>
+<p>$$y'' + P(x) y' + Q(x) y = f(x)$$</p>
+<p>若方程带有前导系数 $a(x) y'' + \dots$，必须先将右端除以 $a(x)$ 得到 $f(x) = \frac{g(x)}{a(x)}$，否则公式中计入的 $f(x)$ 必然相差常数倍而全盘皆输！</p>
+</blockquote>
+<h2>4.非线性微分方程高阶代换技巧 (Bernoulli &amp; Riccati)</h2>
+<h6><strong>模型[3]:里卡蒂方程 (Riccati Equation) 与已知特解代换</strong></h6>
+<p>[1]标准形式：</p>
+<blockquote>
+<p>形如：</p>
+<p>$$y' = P(x) y^2 + Q(x) y + R(x)$$</p>
+<p>当 $P(x) \equiv 0$ 时退化为一阶线性方程；当 $R(x) \equiv 0$ 时退化为伯努利方程。一般里卡蒂方程不能用初等积分法求出通解。</p>
+</blockquote>
+<p>[2]已知一个特解的线性化代换：</p>
+<blockquote>
+<p>若能通过观察法或物理边界猜出一个特解 $y = y_1(x)$，则作代换：</p>
+<p>$$y = y_1(x) + \frac{1}{u(x)}$$</p>
+<p>求导代入原方程，平方项与一次项中的 $y_1$ 相互抵消，方程将严格转化为关于 $u(x)$ 的<strong>一阶线性非齐次微分方程</strong>：</p>
+<p>$$u' + [2 P(x) y_1(x) + Q(x)] u = -P(x)$$</p>
+<p>从而一键求得通解。</p>
+</blockquote>
+<h6><strong>模型[4]:全微分方程积分因子寻找六大经典模式</strong></h6>
+<p>对于非全微分方程 $P(x, y)\,\mathrm{d}x + Q(x, y)\,\mathrm{d}y = 0$（即 $\frac{\partial P}{\partial y} \neq \frac{\partial Q}{\partial x}$），需寻找积分因子 $\mu(x, y)$ 使得 $\mu P\,\mathrm{d}x + \mu Q\,\mathrm{d}y = 0$ 为全微分方程。</p>
+<p>[1]单变量积分因子判据：</p>
+<blockquote>
+<p>若 $\frac{1}{Q}\left( \frac{\partial P}{\partial y} - \frac{\partial Q}{\partial x} \right) = \varphi(x)$ 仅依赖于 $x$：</p>
+<p>$$\mu(x) = \exp\left( \int \varphi(x)\,\mathrm{d}x \right)$$</p>
+<p>若 $\frac{1}{P}\left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) = \psi(y)$ 仅依赖于 $y$：</p>
+<p>$$\mu(y) = \exp\left( \int \psi(y)\,\mathrm{d}y \right)$$</p>
+</blockquote>
+<p>[2]复合变量积分因子判据：</p>
+<blockquote>
+<p>若引入对称组合 $\omega = x^2 + y^2$ 或 $\omega = xy$：</p>
+<p>当 $\frac{\frac{\partial P}{\partial y} - \frac{\partial Q}{\partial x}}{Q \frac{\partial \omega}{\partial x} - P \frac{\partial \omega}{\partial y}} = g(\omega)$ 时：</p>
+<p>$$\mu(\omega) = \exp\left( \int g(\omega)\,\mathrm{d}\omega \right)$$</p>
+</blockquote>
+<h2>5.高难度几何轨迹追踪与物理动力学建模</h2>
+<h6><strong>模型[5]:变质量运动模型 (齐奥尔科夫斯基火箭方程)</strong></h6>
+<p>[1]变质量动力学微元推导：</p>
+<blockquote>
+<p>在考研物理应用压轴题中，考虑质量随时间喷射减少的飞行体（如火箭、漏沙小车）。</p>
+<p>设 $t$ 时刻火箭质量为 $m(t)$，速度为 $v(t)$。在微元时间 $\mathrm{d}t$ 内，喷出质量为 $-\mathrm{d}m$（$\mathrm{d}m < 0$），相对于火箭的喷气反冲速度为恒定常数 $u$。</p>
+<p>由动量守恒微元分析：</p>
+<p>$$m \frac{\mathrm{d}v}{\mathrm{d}t} = -u \frac{\mathrm{d}m}{\mathrm{d}t} - m g - F_{\text{阻}}$$</p>
+<p>若在真空无重力环境中：</p>
+<p>$$\mathrm{d}v = -u \frac{\mathrm{d}m}{m}$$</p>
+</blockquote>
+<p>[2]齐奥尔科夫斯基公式：</p>
+<blockquote>
+<p>积分得终速度：</p>
+<p>$$v - v_0 = -u \ln\frac{m}{m_0} = u \ln\frac{m_0}{m}$$</p>
+<p>此方程阐明了多级火箭质量比与极限速度的本质对数关系。</p>
+</blockquote>
+<h6><strong>模型[6]:旋转曲面与光学镜面反射反演模型</strong></h6>
+<p>[1]光学反射性质建模：</p>
+<blockquote>
+<p>设曲线 $y = y(x)$ 位于第一象限，从原点发出的所有光线经该曲线镜面反射后，反射光线均平行于 $x$ 轴正方向。</p>
+<p>由几何光学入射角等于反射角原理：</p>
+<p>法线倾角与径向光线夹角等于法线倾角与平行光线夹角。</p>
+<p>设曲线上点为 $P(x, y)$，由等腰三角形几何关系或倾角关系：</p>
+<p>$$\tan 2\alpha = \frac{y}{x}$$</p>
+<p>其中 $\alpha$ 为反射切线法向相关角。由二倍角公式展开：</p>
+<p>$$\frac{2\tan\alpha}{1 - \tan^2\alpha} = \frac{y}{x} \implies \frac{2 y'}{1 - (y')^2} = -\frac{x}{y} \text{ 或类似关系}$$</p>
+<p>整理化简得：</p>
+<p>$$x(y')^2 + 2y y' - x = 0$$</p>
+</blockquote>
+<p>[2]求解解出抛物面：</p>
+<blockquote>
+<p>解二次方程求根：</p>
+<p>$$y' = \frac{-y \pm \sqrt{y^2 + x^2}}{x}$$</p>
+<p>令 $y = ux$ 转化为一阶齐次方程：</p>
+<p>$$x \frac{\mathrm{d}u}{\mathrm{d}x} + u = -u \pm \sqrt{1 + u^2} \implies \frac{\mathrm{d}u}{\sqrt{1 + u^2} - 2u} = \frac{\mathrm{d}x}{x}$$</p>
+<p>最终积分可精确解得 <font color=deeppink>$y^2 = 2px + p^2$</font>（旋转抛物面）。</p>
+<p>这正是探照灯、卫星反射天线均采用抛物面镜的核心数学依据！</p>
+</blockquote>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>[强化]向量组</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h1>第3讲 向量组：考研高阶冲刺与思维模型</h1>
+<pre><code class="language-mermaid">graph TD
+    A[&quot;向量组高阶强化专题&quot;] --&gt; B[&quot;专题一：等价概念全景辨析&quot;]
+    A --&gt; C[&quot;专题二：矩阵秩的八大核心不等式&quot;]
+    A --&gt; D[&quot;专题三：满秩分解 A=BC 与消去律&quot;]
+    A --&gt; E[&quot;专题四：含参向量组压轴题型策略&quot;]
+    A --&gt; F[&quot;专题五：正交变换与空间正交分解&quot;]
+
+    B --&gt; B1[&quot;矩阵等价 vs 向量组等价&quot;]
+    B --&gt; B2[&quot;核心反例库与判定矩阵方程&quot;]
+
+    C --&gt; C1[&quot;Sylvester 与 Frobenius 秩不等式证明&quot;]
+    C --&gt; C2[&quot;Gram 矩阵齐次内积证法&quot;]
+    C --&gt; C3[&quot;伴随矩阵秩阶梯定理深度推导&quot;]
+
+    D --&gt; D1[&quot;列满秩消去律与左逆/右逆&quot;]
+    D --&gt; D2[&quot;满秩分解在特征值与迹中的妙用&quot;]
+
+    E --&gt; E1[&quot;行列式因子法与阶梯矩阵法&quot;]
+    E --&gt; E2[&quot;参数跳跃点与极大组多分支讨论&quot;]
+
+    F --&gt; F1[&quot;正交矩阵与刚体旋转反射&quot;]
+    F --&gt; F2[&quot;施密特正交化与投影算子分解&quot;]
+</code></pre>
+<hr />
+<h2>1. 专题一：矩阵等价、向量组等价与线性表出的全景辨析</h2>
+<h3>1.1 核心概念内涵对比表</h3>
+<blockquote>
+<p>[1] <strong>概念对比与判定条件</strong></p>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">概念类型</th>
+<th style="text-align: left;">对象与前提</th>
+<th style="text-align: left;">充分必要条件</th>
+<th style="text-align: left;">几何本质</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>矩阵等价</strong> ($A \cong B$)</td>
+<td style="text-align: left;">$A, B$ 必须为<strong>同型矩阵</strong> ($m \times n$)</td>
+<td style="text-align: left;"><font color=deeppink>$r(A) = r(B)$</font>（存在可逆阵 $P, Q$ 使 $PAQ = B$）</td>
+<td style="text-align: left;">两矩阵为同一个线性映射在不同基下的表示</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>向量组等价</strong> ($(I) \cong (II)$)</td>
+<td style="text-align: left;">向量维数相同（同属 $\mathbb{R}^n$），个数可不同</td>
+<td style="text-align: left;"><font color=deeppink>$r(I) = r(II) = r(I, II)$</font>（能相互线性表出）</td>
+<td style="text-align: left;">两向量组生成的子空间完全重合：$\text{span}(I) = \text{span}(II)$</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>线性表出</strong> ($(II)$ 可由 $(I)$ 表出)</td>
+<td style="text-align: left;">向量维数相同</td>
+<td style="text-align: left;"><font color=deeppink>$r(I) = r(I, II)$</font>（或 $\text{span}(II) \subseteq \text{span}(I)$）</td>
+<td style="text-align: left;">向量组 $(II)$ 落在向量组 $(I)$ 的生成子空间内部</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>[2] <strong>三大核心误区与反例库</strong></p>
+<blockquote>
+<p>(1) <strong>误区一：$r(A) = r(B) \implies$ 列向量组等价？【错误！】</strong></p>
+<p>反例：设 $A = \begin{bmatrix} 1 & 0 \\ \\ 0 & 1 \\ \\ 0 & 0 \end{bmatrix}, B = \begin{bmatrix} 0 & 0 \\ \\ 1 & 0 \\ \\ 0 & 1 \end{bmatrix}$。</p>
+<p>此时 $r(A) = r(B) = 2$，作为矩阵满足 $A \cong B$（矩阵等价）。</p>
+<p>但 $A$ 的列生成 $xy$ 平面，$B$ 的列生成 $yz$ 平面，二者显然不能相互线性表出，列向量组不等价！</p>
+<p>(2) <strong>误区二：向量组等价 $\implies$ 矩阵等价？【错误！】</strong></p>
+<p>反例：设 $\alpha_1 = [1, 0]^T, \alpha_2 = [0, 1]^T$（对应矩阵 $A_{2 \times 2}$）；$\beta_1 = [1, 0]^T, \beta_2 = [0, 1]^T, \beta_3 = [1, 1]^T$（对应矩阵 $B_{2 \times 3}$）。</p>
+<p>两向量组生成的空间均为 $\mathbb{R}^2$，向量组等价；但 $A$ 为 $2 \times 2$ 方阵，$B$ 为 $2 \times 3$ 矩阵，型号不同，根本不存在矩阵等价的前提！</p>
+<p>(3) <strong>误区三：单向线性表出 $\implies$ 向量组等价？【错误！】</strong></p>
+<p>反例：$\alpha_1 = [1, 0]^T, \alpha_2 = [0, 1]^T$ 与 $\beta = [1, 0]^T$。$\beta$ 可由 $\alpha_1, \alpha_2$ 线性表出，但 $\alpha_2$ 无法由 $\beta$ 表出，单向包含不等于等价。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>2. 专题二：矩阵秩的八大核心不等式及其代数与几何深度证明</h2>
+<h3>2.1 乘积秩不等式与西尔维斯特（Sylvester）秩不等式</h3>
+<blockquote>
+<p>[1] <strong>乘积秩不等式</strong></p>
+<blockquote>
+<p>$$
+r(AB) \le \min\{r(A), r(B)\}
+$$</p>
+<p>几何证明思想：$AB$ 对应线性变换的复合映射。</p>
+<p>像空间包含关系：$\text{Im}(AB) \subseteq \text{Im}(A) \implies \dim\text{Im}(AB) \le \dim\text{Im}(A) \implies r(AB) \le r(A)$。</p>
+<p>类似地，由核空间包含关系或转置性质立即可得 $r(AB) \le r(B)$。</p>
+</blockquote>
+<p>[2] <strong>西尔维斯特（Sylvester）秩不等式</strong></p>
+<blockquote>
+<p>设 $A_{m \times n}, B_{n \times s}$，证明：</p>
+<p>$$
+r(AB) \ge r(A) + r(B) - n
+$$</p>
+<p><strong>代数证明（分块矩阵初等变换法）</strong>：</p>
+<p>(1) 构造 $(m+n) \times (n+s)$ 分块矩阵：</p>
+<p>$$
+M = \begin{bmatrix} E_n & O \\ \\ A & AB \end{bmatrix}
+$$</p>
+<p>(2) 对 $M$ 实施初等行变换：用第 1 行块的 $A$ 倍减去第 2 行块：</p>
+<p>$$
+\begin{bmatrix} E_n & O \\ \\ -A & E_m \end{bmatrix} \begin{bmatrix} E_n & O \\ \\ A & AB \end{bmatrix} = \begin{bmatrix} E_n & O \\ \\ O & AB \end{bmatrix}
+$$</p>
+<p>从而得到：$r(M) = r(E_n) + r(AB) = n + r(AB)$。</p>
+<p>(3) 另一方面，对 $M$ 实施初等列变换：用第 1 列块的 $B$ 倍加到第 2 列块：</p>
+<p>$$
+\begin{bmatrix} E_n & O \\ \\ A & AB \end{bmatrix} \begin{bmatrix} E_n & B \\ \\ O & E_s \end{bmatrix} = \begin{bmatrix} E_n & B \\ \\ A & AB + AB \end{bmatrix}
+$$</p>
+<p>更直观地，直接构造分块初等变换矩阵：</p>
+<p>$$
+\begin{bmatrix} E_n & O \\ \\ -A & E_m \end{bmatrix} \begin{bmatrix} E_n & B \\ \\ A & O \end{bmatrix} = \begin{bmatrix} E_n & B \\ \\ O & -AB \end{bmatrix}
+$$</p>
+<p>两边计算秩：</p>
+<p>$$
+r\left(\begin{bmatrix} E_n & B \\ \\ A & O \end{bmatrix}\right) = r\left(\begin{bmatrix} E_n & B \\ \\ O & -AB \end{bmatrix}\right) = n + r(AB)
+$$</p>
+<p>而对左侧矩阵作分块行变换：</p>
+<p>$$
+r\left(\begin{bmatrix} E_n & B \\ \\ A & O \end{bmatrix}\right) \ge r(A) + r(B)
+$$</p>
+<p>整理即得：<font color=deeppink>$r(AB) \ge r(A) + r(B) - n$</font>。</p>
+</blockquote>
+<p>[3] <strong>零乘积特例与基础解系推论</strong></p>
+<blockquote>
+<p>若 $AB = O$，则 $r(AB) = 0$。代入西尔维斯特不等式得：</p>
+<p>$$
+0 \ge r(A) + r(B) - n \implies <font color=red>r(A) + r(B) \le n</font>
+$$</p>
+<p>这一推论在考研中是判定矩阵乘积为零的核心工具（$B$ 的列向量全为 $Ax = \mathbf{0}$ 的解）。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h3>2.2 弗罗贝尼乌斯（Frobenius）秩不等式</h3>
+<blockquote>
+<p>[1] <strong>不等式表述</strong></p>
+<blockquote>
+<p>设 $A, B, C$ 为可乘相容矩阵，则：</p>
+<p>$$
+r(ABC) \ge r(AB) + r(BC) - r(B)
+$$</p>
+</blockquote>
+<p>[2] <strong>分块构造法证明</strong></p>
+<blockquote>
+<p>设 $B$ 的秩为 $r$，由满秩分解定理，存在列满秩矩阵 $B_1$ 和行满秩矩阵 $B_2$ 使得 $B = B_1 B_2$。</p>
+<p>结合西尔维斯特不等式应用于 $(AB_1)(B_2C)$，即可严格推出弗罗贝尼乌斯不等式。</p>
+<p>当取 $B = E_n$ 时，弗罗贝尼乌斯不等式即退化为经典的西尔维斯特不等式。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h3>2.3 格拉姆（Gram）矩阵内积秩恒等式</h3>
+<blockquote>
+<p>[1] <strong>定理表述</strong></p>
+<blockquote>
+<p>设 $A$ 为实数域上的任意 $m \times n$ 矩阵，则：</p>
+<p>$$
+<font color=deeppink>r(A^T A) = r(A A^T) = r(A) = r(A^T)</font>
+$$</p>
+</blockquote>
+<p>[2] <strong>基于齐次方程同解性的严谨证明</strong></p>
+<blockquote>
+<p>证明 $Ax = \mathbf{0}$ 与 $A^TA x = \mathbf{0}$ 为<strong>同解方程组</strong>：</p>
+<p>(1) 若 $Ax = \mathbf{0}$，两边左乘 $A^T$ 得 $A^T A x = A^T \mathbf{0} = \mathbf{0}$，故 $Ax = \mathbf{0}$ 的解必为 $A^TAx = \mathbf{0}$ 的解。</p>
+<p>(2) 反之，若 $A^TA x = \mathbf{0}$，两边左乘 $x^T$：</p>
+<p>$$
+x^T (A^T A x) = 0 \implies (Ax)^T (Ax) = 0
+$$</p>
+<p>记向量 $y = Ax \in \mathbb{R}^m$，则 $y^T y = \sum_{i=1}^m y_i^2 = 0$。</p>
+<p>在实数域上，平方和为零必有每一分量为零，即：</p>
+<p>$$
+y = Ax = \mathbf{0}
+$$</p>
+<p>这表明 $A^TAx = \mathbf{0}$ 的解亦必为 $Ax = \mathbf{0}$ 的解。</p>
+<p>(3) 综上，$Ax = \mathbf{0}$ 与 $A^TAx = \mathbf{0}$ 是同解方程组，它们的基础解系所含向量个数完全相同：</p>
+<p>$$
+n - r(A) = n - r(A^TA) \implies <font color=deeppink>r(A^TA) = r(A)</font>
+$$</p>
+<p>对 $A^T$ 代替 $A$ 重复上述步骤，立即可得 $r(AA^T) = r(A^T) = r(A)$。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>3. 专题三：满秩分解 $A = BC$ 与列满秩/行满秩消去律</h2>
+<h3>3.1 满秩分解的理论构造与性质</h3>
+<blockquote>
+<p>[1] <strong>构造定理</strong></p>
+<blockquote>
+<p>设 $A_{m \times n}$ 且 $r(A) = r > 0$。</p>
+<p>(1) 对 $A$ 施以初等行变换化为行最简阶梯形矩阵 $R$。</p>
+<p>(2) 取 $A$ 中对应 $R$ 中主元所在的 $r$ 个列向量构成 $m \times r$ 矩阵 $B$（$B$ 为列满秩矩阵，即 $r(B) = r$）。</p>
+<p>(3) 取 $R$ 中的 $r$ 个非零行构成 $r \times n$ 矩阵 $C$（$C$ 为行满秩矩阵，即 $r(C) = r$）。</p>
+<p>则矩阵分解式 <font color=deeppink>$A = BC$</font> 恒成立。</p>
+</blockquote>
+<p>[2] <strong>列满秩消去律与左可逆性</strong></p>
+<blockquote>
+<p>若 $B_{m \times r}$ 为列满秩矩阵（$r(B) = r \le m$）：</p>
+<p>(1) 格拉姆矩阵 $B^TB$ 为 $r$ 阶实对称方阵，且 $r(B^TB) = r(B) = r$，故 $B^TB$ 严格可逆。</p>
+<p>(2) 构造左逆矩阵 $B_L^+ = (B^TB)^{-1}B^T$，满足：</p>
+<p>$$
+B_L^+ B = (B^TB)^{-1}(B^TB) = E_r
+$$</p>
+<p>(3) <strong>列满秩消去律</strong>：若 $BX = BY$，两边左乘 $B_L^+$ 即得：</p>
+<p>$$
+<font color=deeppink>BX = BY \implies X = Y</font>
+$$</p>
+</blockquote>
+<p>[3] <strong>行满秩消去律与右可逆性</strong></p>
+<blockquote>
+<p>若 $C_{r \times n}$ 为行满秩矩阵（$r(C) = r \le n$）：</p>
+<p>类似地，$C C^T$ 可逆，存在右逆 $C_R^+ = C^T (CC^T)^{-1}$，满足 $C C_R^+ = E_r$。</p>
+<p><strong>行满秩消去律</strong>：若 $XC = YC$，两边右乘 $C_R^+$ 即得：</p>
+<p>$$
+<font color=deeppink>XC = YC \implies X = Y</font>
+$$</p>
+</blockquote>
+</blockquote>
+<hr />
+<h3>3.2 满秩分解在特征值与迹中的强力妙用</h3>
+<blockquote>
+<p>[1] <strong>非零特征值恒等定理</strong></p>
+<blockquote>
+<p>对于任意相容矩阵 $B_{m \times r}$ 与 $C_{r \times n}$，乘积矩阵 $BC$ 与 $CB$ 具有完全相同的非零特征值及其重数：</p>
+<p>$$
+\lambda^{r} \det(\lambda E_m - BC) = \lambda^{m} \det(\lambda E_r - CB)
+$$</p>
+<p>特别地，对于秩为 1 的矩阵（$A = \alpha \beta^T$），满秩分解为列向量 $\alpha$ 与行向量 $\beta^T$：</p>
+<p>$A$ 的特征值极为明了：一个非零特征值为 $\text{tr}(A) = \beta^T \alpha$，其余 $n-1$ 个特征值全为 0！</p>
+</blockquote>
+<p>[2] <strong>迹的轮换不变性</strong></p>
+<blockquote>
+<p>$$
+\text{tr}(BC) = \text{tr}(CB)
+$$</p>
+<p>当计算高阶低秩矩阵的特征多项式或迹时，通过将 $A$ 转化为低阶方阵 $CB$，能够实现维度的极大化简。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h2>4. 专题四：含参向量组压轴题型的分类突破模型</h2>
+<h3>4.1 含参向量组判定的思维流</h3>
+<blockquote>
+<p>[1] <strong>第一步：维度与个数校验</strong></p>
+<blockquote>
+<p>(1) 若向量个数 $s >$ 维数 $n$：无需任何计算，直接秒杀判定向量组线性相关！</p>
+<p>(2) 若向量个数 $s = n$：构造方阵行列式 $|A|$。令 $|A| = 0$ 解出所有临界参数点 $\lambda_1, \dots, \lambda_k$。</p>
+<p>在非临界点（$|A| \ne 0$）直接判定线性无关；在临界点代入做初等行变换。</p>
+<p>(3) 若向量个数 $s < n$：矩阵为窄长矩阵，直接运用初等行变换化为阶梯形，根据非零行数是否等于 $s$ 讨论参数。</p>
+</blockquote>
+<p>[2] <strong>第二步：增广矩阵阶梯化分类讨论三步法</strong></p>
+<blockquote>
+<p>对于线性表出方程组 $[A \mid \beta]$：</p>
+<p>(1) 通过初等行变换将参数尽量汇聚到对角线与最末一行。</p>
+<p>(2) 区分主元系数为零的奇异点：代入具体数值，直观对比 $r(A)$ 与 $r(A, \beta)$。</p>
+<p>(3) 结论判定口诀：</p>
+<ul>
+<li>
+<p>$r(A) < r(A, \beta)$：无解，不能线性表出；</p>
+</li>
+<li>
+<p>$r(A) = r(A, \beta) = s$：唯一解，能唯一线性表出；</p>
+</li>
+<li>
+<p>$r(A) = r(A, \beta) < s$：无穷多解，线性表出不唯一。</p>
+</li>
+</ul>
+</blockquote>
+</blockquote>
+<hr />
+<h2>5. 专题五：正交变换与空间正交分解的高观点透视</h2>
+<h3>5.1 正交矩阵的刚体运动几何本质</h3>
+<blockquote>
+<p>[1] <strong>二维正交变换的分类定理</strong></p>
+<blockquote>
+<p>任意 2 阶实正交矩阵 $Q$ 必属于以下两类之一：</p>
+<p>(1) <strong>旋转矩阵（刚体旋转）</strong>：$|Q| = 1$</p>
+<p>$$
+Q = \begin{bmatrix} \cos\theta & -\sin\theta \\ \\ \sin\theta & \cos\theta \end{bmatrix}
+$$</p>
+<p>(2) <strong>镜像反射矩阵（翻转反射）</strong>：$|Q| = -1$</p>
+<p>$$
+Q = \begin{bmatrix} \cos\theta & \sin\theta \\ \\ \sin\theta & -\cos\theta \end{bmatrix}
+$$</p>
+<p>反射变换具有轴对称几何意义，其平方等于单位阵 $Q^2 = E$。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h3>5.2 施密特正交化的投影矩阵（算子）视角</h3>
+<blockquote>
+<p>[1] <strong>正交投影算子</strong></p>
+<blockquote>
+<p>设 $\beta$ 为非零向量，任意向量 $\alpha$ 在 $\beta$ 方向上的正交投影分量为：</p>
+<p>$$
+P_\beta \alpha = \frac{(\alpha, \beta)}{(\beta, \beta)}\beta = \frac{\beta^T\alpha}{\beta^T\beta}\beta = \left(\frac{\beta\beta^T}{\beta^T\beta}\right)\alpha
+$$</p>
+<p>矩阵 $P = \frac{\beta\beta^T}{\beta^T\beta}$ 称为 <strong>投影矩阵</strong>，它具有对称性（$P^T = P$）与幂等性（$P^2 = P$）。</p>
+<p>施密特正交化第 2 步实质为：$\beta_2 = (E - P_{\beta_1})\alpha_2$。</p>
+<p>其中 $E - P_{\beta_1}$ 为向 $\beta_1$ 的正交补空间投影的投影算子。</p>
+</blockquote>
+<p>[2] <strong>空间正交分解定理（直和分解）</strong></p>
+<blockquote>
+<p>设 $W$ 是 $\mathbb{R}^n$ 的一个子空间，$W^\perp$ 为 $W$ 的正交补空间（即所有与 $W$ 中每个向量均正交的向量集合）：</p>
+<p>则全空间可正交直和分解为：</p>
+<p>$$
+\mathbb{R}^n = W \oplus W^\perp
+$$</p>
+<p>且有维数恒等式：</p>
+<p>$$
+\dim W + \dim W^\perp = n
+$$</p>
+<p>考研实对称矩阵不同特征值对应的特征子空间天然相互正交，正是这一深刻空间正交结构的集中体现。</p>
+</blockquote>
+</blockquote>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

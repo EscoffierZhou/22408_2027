@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>例题</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h2>14.例题</h2>
+<p><strong>例题[14.1]:保号性与使二重积分取得最大值的闭区域确定</strong></p>
+<p>设连续函数 $f(x, y) = 1 - x^2 - y^2$，试求平面上的有界闭区域 $D$，使得二重积分 $I(D) = \iint_D (1 - x^2 - y^2)\,\mathrm{d}\sigma$ 取得最大值，并计算该最大值。</p>
+<p>主要思路:根据二重积分的严格保号性，要使积分值达到最大，积分区域必须且只需包含所有被积函数非负的点集，即 $f(x, y) \ge 0$ 的区域</p>
+<blockquote>
+<p>[1]确定极大化区域 $D$：</p>
+<p>考查被积函数 $f(x, y) = 1 - x^2 - y^2$ 在平面上的符号分布：</p>
+<p>当 $1 - x^2 - y^2 > 0$ 即 $x^2 + y^2 < 1$ 时，$f(x, y) > 0$；</p>
+<p>当 $1 - x^2 - y^2 = 0$ 即 $x^2 + y^2 = 1$ 时，$f(x, y) = 0$；</p>
+<p>当 $1 - x^2 - y^2 < 0$ 即 $x^2 + y^2 > 1$ 时，$f(x, y) < 0$。</p>
+<p>若区域 $D$ 遗漏了任何满足 $f(x, y) > 0$ 的点，积分值将因缺少正贡献而减小；若区域 $D$ 包含了任何满足 $f(x, y) < 0$ 的点，积分值将因计入负贡献而减小。</p>
+<p>因此，使积分达到最大值的区域为闭圆盘：</p>
+<p>$$D = \{(x, y) \mid x^2 + y^2 \le 1\}$$</p>
+<p>[2]极坐标计算最大积分值：</p>
+<p>在极坐标系下，区域 $D$ 的范围为 $0 \le \theta \le 2\pi, \; 0 \le r \le 1$。</p>
+<p>面积微元 $\mathrm{d}\sigma = r\,\mathrm{d}r\mathrm{d}\theta$。</p>
+<p>代入得：</p>
+<p>$$I_{\max} = \int_0^{2\pi} \mathrm{d}\theta \int_0^1 (1 - r^2)r\,\mathrm{d}r = 2\pi \int_0^1 (r - r^3)\,\mathrm{d}r$$</p>
+<p>$$= 2\pi \left[ \frac{r^2}{2} - \frac{r^4}{4} \right]_0^1 = 2\pi \left( \frac{1}{2} - \frac{1}{4} \right) = \frac{\pi}{2}$$</p>
+<p>[3]结论与考点提炼：</p>
+<p>使积分取得最大值的闭区域为 $D = \{(x, y) \mid x^2 + y^2 \le 1\}$，最大积分为 $\frac{\pi}{2}$。此类求积分极值区域题型的本质是求解零点等值线 $f(x, y) = 0$。</p>
+</blockquote>
+<p><strong>例题[14.2]:动区域二重积分的导数与积分中值定理</strong></p>
+<p>设二元函数 $f(x, y)$ 在全平面连续，动圆盘区域 $D(t) = \{(x, y) \mid x^2 + y^2 \le t^2\}$ ($t > 0$)。记 $F(t) = \iint_{D(t)} f(x, y)\,\mathrm{d}\sigma$。<br />
+(1) 求导数 $F'(t)$ 的表达式；<br />
+(2) 若已知 $f(0, 0) = A \neq 0$，求极限 $\lim\limits_{t \to 0^+} \frac{F(t)}{\pi t^2}$。</p>
+<p>主要思路:将二重积分在极坐标系下表示为关于半径 $t$ 的一元变上限积分，运用微积分基本定理求导；利用二重积分第一中值定理结合连续性求解小圆盘的收缩极限</p>
+<blockquote>
+<p>[1]极坐标表示与变上限积分求导：</p>
+<p>在极坐标系下，动圆域 $D(t)$ 由 $0 \le \theta \le 2\pi, \; 0 \le r \le t$ 确定。</p>
+<p>$$F(t) = \int_0^t r\,\mathrm{d}r \int_0^{2\pi} f(r\cos\theta, r\sin\theta)\,\mathrm{d}\theta$$</p>
+<p>记 $\Phi(r) = r \int_0^{2\pi} f(r\cos\theta, r\sin\theta)\,\mathrm{d}\theta$。由于 $f(x, y)$ 连续，由含参变量积分的连续性可知 $\Phi(r)$ 在 $[0, +\infty)$ 上连续。</p>
+<p>由微积分基本定理对上限 $t$ 求导：</p>
+<p>$$F'(t) = \Phi(t) = t \int_0^{2\pi} f(t\cos\theta, t\sin\theta)\,\mathrm{d}\theta$$</p>
+<p>[2]二重积分中值定理与极限求解：</p>
+<p>由二重积分第一中值定理，由于 $f(x, y)$ 在闭区域 $D(t)$ 上连续，必存在点 $(\xi_t, \eta_t) \in D(t)$，使得：</p>
+<p>$$F(t) = \iint_{D(t)} f(x, y)\,\mathrm{d}\sigma = f(\xi_t, \eta_t) \cdot S_{D(t)} = f(\xi_t, \eta_t) \cdot \pi t^2$$</p>
+<p>由于 $(\xi_t, \eta_t) \in D(t)$，故 $\xi_t^2 + \eta_t^2 \le t^2$。</p>
+<p>当 $t \to 0^+$ 时，$\sqrt{\xi_t^2 + \eta_t^2} \le t \to 0$，即 $(\xi_t, \eta_t) \to (0, 0)$。</p>
+<p>由函数 $f(x, y)$ 在原点的连续性：</p>
+<p>$$\lim_{t \to 0^+} f(\xi_t, \eta_t) = f(0, 0) = A$$</p>
+<p>因此：</p>
+<p>$$\lim_{t \to 0^+} \frac{F(t)}{\pi t^2} = \lim_{t \to 0^+} f(\xi_t, \eta_t) = A$$</p>
+<p>[3]结论提炼：</p>
+<p>导数表达式为 $F'(t) = t \int_0^{2\pi} f(t\cos\theta, t\sin\theta)\,\mathrm{d}\theta$，极限值为 $A$。该极限展示了连续函数在一点的值等于该点无限缩小邻域上的平均值。</p>
+</blockquote>
+<p><strong>例题[14.3]:区域对称性与被积函数奇偶性拆分计算</strong></p>
+<p>计算二重积分 $I = \iint_D (x^3 - 3x y^2 + y + 2)\,\mathrm{d}\sigma$，其中闭区域 $D$ 是由抛物线 $y = x^2$ 与直线 $y = 1$ 所围成的平面图形。</p>
+<p>主要思路:区域 $D$ 关于 $y$ 轴左右对称，将被积函数拆分为关于 $x$ 的奇函数与偶函数，奇函数项积分为零，偶函数项利用对称性化简</p>
+<blockquote>
+<p>[1]几何对称性判定与奇偶项分离：</p>
+<p>抛物线 $y = x^2$ 与直线 $y = 1$ 交于点 $(-1, 1)$ 与 $(1, 1)$。</p>
+<p>若 $(x, y) \in D$，则 $(-x, y) \in D$，故区域 $D$ 关于 $y$ 轴对称。</p>
+<p>将被积函数分解为：</p>
+<p>$$f_1(x, y) = x^3 - 3x y^2, \quad f_2(x, y) = y + 2$$</p>
+<p>由于 $f_1(-x, y) = (-x)^3 - 3(-x)y^2 = -(x^3 - 3xy^2) = -f_1(x, y)$，即 $f_1$ 是关于 $x$ 的奇函数。</p>
+<p>根据普通对称性定理：</p>
+<p>$$\iint_D (x^3 - 3x y^2)\,\mathrm{d}\sigma = 0$$</p>
+<p>[2]偶函数项积分计算：</p>
+<p>积分简化为：</p>
+<p>$$I = \iint_D (y + 2)\,\mathrm{d}\sigma$$</p>
+<p>选择 Y 型积分（水平切片法）：$y \in [0, 1]$，对应的 $x$ 范围为 $-\sqrt{y} \le x \le \sqrt{y}$。</p>
+<p>$$I = \int_0^1 \mathrm{d}y \int_{-\sqrt{y}}^{\sqrt{y}} (y + 2)\,\mathrm{d}x = \int_0^1 (y + 2) \cdot 2\sqrt{y}\,\mathrm{d}y$$</p>
+<p>$$= 2 \int_0^1 \left( y^{3/2} + 2y^{1/2} \right)\mathrm{d}y = 2 \left[ \frac{2}{5}y^{5/2} + \frac{4}{3}y^{3/2} \right]_0^1 = 2 \left( \frac{2}{5} + \frac{4}{3} \right) = 2 \cdot \frac{26}{15} = \frac{52}{15}$$</p>
+<p>[3]结论验证：</p>
+<p>二重积分的计算结果为 $\frac{52}{15}$。若采用 X 型累次积分 $\int_{-1}^1 \mathrm{d}x \int_{x^2}^1 (y+2)\,\mathrm{d}y = \int_{-1}^1 \left[\frac{1-x^4}{2} + 2(1-x^2)\right]\mathrm{d}x = \frac{52}{15}$，双向检验完全吻合。</p>
+</blockquote>
+<p><strong>例题[14.4]:轮换对称性在对数与有理分式中的妙用</strong></p>
+<p>计算二重积分 $I = \iint_D \frac{x^2 \ln(x^2 + y^2)}{x^2 + y^2}\,\mathrm{d}\sigma$，其中 $D$ 是由圆周 $x^2 + y^2 = 1$ 与 $x^2 + y^2 = 4$ 以及两坐标轴在第一象限所围成的闭区域。</p>
+<p>主要思路:区域 $D$ 位于第一象限且关于直线 $y = x$ 对称，应用轮换对称性配对消除分母中的二次项，再转为极坐标完成计算</p>
+<blockquote>
+<p>[1]轮换对称性配对化简：</p>
+<p>区域 $D = \{(x, y) \mid 1 \le x^2 + y^2 \le 4, x \ge 0, y \ge 0\}$。</p>
+<p>显然，若 $(x, y) \in D$，则 $(y, x) \in D$，即 $D$ 关于直线 $y = x$ 对称。</p>
+<p>对调积分变量 $x$ 与 $y$：</p>
+<p>$$I = \iint_D \frac{y^2 \ln(y^2 + x^2)}{y^2 + x^2}\,\mathrm{d}\sigma$$</p>
+<p>两式相加并除以 2：</p>
+<p>$$I = \frac{1}{2} \iint_D \frac{(x^2 + y^2)\ln(x^2 + y^2)}{x^2 + y^2}\,\mathrm{d}\sigma = \frac{1}{2} \iint_D \ln(x^2 + y^2)\,\mathrm{d}\sigma$$</p>
+<p>[2]极坐标系求解：</p>
+<p>在第一象限圆环域内：$0 \le \theta \le \frac{\pi}{2}, \; 1 \le r \le 2$。</p>
+<p>面积微元 $\mathrm{d}\sigma = r\,\mathrm{d}r\mathrm{d}\theta$。</p>
+<p>$$I = \frac{1}{2} \int_0^{\frac{\pi}{2}} \mathrm{d}\theta \int_1^2 \ln(r^2) \cdot r\,\mathrm{d}r = \frac{1}{2} \cdot \frac{\pi}{2} \int_1^2 2r\ln r\,\mathrm{d}r = \frac{\pi}{2} \int_1^2 \ln r\,\mathrm{d}\left(\frac{r^2}{2}\right)$$</p>
+<p>分部积分：</p>
+<p>$$\int_1^2 \ln r\,\mathrm{d}\left(\frac{r^2}{2}\right) = \left[ \frac{r^2}{2}\ln r \right]_1^2 - \int_1^2 \frac{r^2}{2} \cdot \frac{1}{r}\,\mathrm{d}r = 2\ln 2 - \left[ \frac{r^2}{4} \right]_1^2 = 2\ln 2 - \frac{3}{4}$$</p>
+<p>[3]最终化简：</p>
+<p>$$I = \frac{\pi}{2} \left( 2\ln 2 - \frac{3}{4} \right) = \pi\ln 2 - \frac{3}{8}\pi$$</p>
+<p>故该二重积分的值为 $\pi\ln 2 - \frac{3}{8}\pi$。</p>
+</blockquote>
+<p><strong>例题[14.5]:反三角函数曲线边界的积分次序交换</strong></p>
+<p>交换二次积分的积分次序：$I = \int_{\frac{\pi}{2}}^\pi \mathrm{d}x \int_{\sin x}^1 f(x, y)\,\mathrm{d}y$。</p>
+<p>主要思路:根据原积分限精确画出几何区域，结合区间 $[\frac{\pi}{2}, \pi]$ 上正弦函数的单调减分支反解出反三角函数，改用水平穿线法</p>
+<blockquote>
+<p>[1]提取区域不等式与分析单调性：</p>
+<p>原积分表示的闭区域为：</p>
+<p>$$D = \left\{(x, y) \;\middle|\; \frac{\pi}{2} \le x \le \pi, \; \sin x \le y \le 1\right\}$$</p>
+<p>在区间 $[\frac{\pi}{2}, \pi]$ 上，$y = \sin x$ 单调严格递减。</p>
+<p>当 $x = \frac{\pi}{2}$ 时，$y = 1$；当 $x = \pi$ 时，$y = 0$。</p>
+<p>因此，区域在 $y$ 轴上的投影区间为 $[0, 1]$。</p>
+<p>[2]反解边界曲线：</p>
+<p>由 $y = \sin x$ 且 $x \in [\frac{\pi}{2}, \pi]$，引入主值反正弦函数：</p>
+<p>$$\sin(\pi - x) = \sin x = y \implies \pi - x = \arcsin y \implies x = \pi - \arcsin y$$</p>
+<p>对于任意固定的 $y \in [0, 1]$，从左到右引水平射线：</p>
+<p>左侧入界线为曲线 $x = \pi - \arcsin y$；</p>
+<p>右侧出界线为垂线 $x = \pi$。</p>
+<p>[3]写出交换次序后的积分：</p>
+<p>$$I = \int_0^1 \mathrm{d}y \int_{\pi - \arcsin y}^\pi f(x, y)\,\mathrm{d}x$$</p>
+<p>核心考点：在 $[\frac{\pi}{2}, \pi]$ 上严禁直接写 $x = \arcsin y$，必须利用诱导公式反解为 $x = \pi - \arcsin y$。</p>
+</blockquote>
+<p><strong>例题[14.6]:非初等积分离散等价无穷小与交换积分次序</strong></p>
+<p>设极限 $\lim\limits_{x \to 0^+} \frac{\int_0^{x^2}\mathrm{d}y \int_x^{\sqrt{y}} \sin\frac{y}{t}\,\mathrm{d}t}{a x^b} = -1$，求常数 $a$ 和正整数 $b$ 的值，并计算 $ab$。</p>
+<p>主要思路:内层积分为非初等函数无法直接积分，交换累次积分次序先对 $y$ 积分化简，再展开求极限确定系数与阶数</p>
+<blockquote>
+<p>[1]交换累次积分次序：</p>
+<p>考查内层累次积分 $\int_0^{x^2}\mathrm{d}y \int_x^{\sqrt{y}} \sin\frac{y}{t}\,\mathrm{d}t$。</p>
+<p>由于 $y \in [0, x^2]$，故 $\sqrt{y} \le x$，内层积分上限 $\sqrt{y} \le x$（下限）。交换上下限引入负号：</p>
+<p>$$F(x) = -\int_0^{x^2}\mathrm{d}y \int_{\sqrt{y}}^x \sin\frac{y}{t}\,\mathrm{d}t$$</p>
+<p>积分区域由 $\sqrt{y} \le t \le x, \; 0 \le y \le x^2$ 确定，即 $0 \le y \le t^2, \; 0 \le t \le x$。</p>
+<p>交换次序后为：</p>
+<p>$$F(x) = -\int_0^x \mathrm{d}t \int_0^{t^2} \sin\frac{y}{t}\,\mathrm{d}y$$</p>
+<p>[2]计算内层初等积分：</p>
+<p>$$\int_0^{t^2} \sin\frac{y}{t}\,\mathrm{d}y = \left[ -t\cos\frac{y}{t} \right]_{y=0}^{y=t^2} = -t\cos t - (-t) = t(1 - \cos t)$$</p>
+<p>因此：</p>
+<p>$$F(x) = -\int_0^x t(1 - \cos t)\,\mathrm{d}t$$</p>
+<p>[3]泰勒展开与参数确定：</p>
+<p>当 $t \to 0$ 时，$1 - \cos t = \frac{1}{2}t^2 + o(t^2)$，故被积函数为 $\frac{1}{2}t^3 + o(t^3)$。</p>
+<p>积分得到：</p>
+<p>$$F(x) = -\int_0^x \left(\frac{1}{2}t^3 + o(t^3)\right)\mathrm{d}t = -\frac{1}{8}x^4 + o(x^4)$$</p>
+<p>根据已知极限：</p>
+<p>$$\lim_{x \to 0^+} \frac{-\frac{1}{8}x^4 + o(x^4)}{a x^b} = -1 \implies b = 4, \; a = \frac{1}{8}$$</p>
+<p>最终计算 $ab = \frac{1}{8} \times 4 = \frac{1}{2}$。</p>
+</blockquote>
+<p><strong>例题[14.7]:交换积分次序计算复杂反三角复合函数积分</strong></p>
+<p>计算累次积分 $I = \int_0^1 \mathrm{d}y \int_y^1 \arcsin\sqrt{4x - 4x^2}\,\mathrm{d}x$。</p>
+<p>主要思路:直接对 $x$ 积分反三角复合函数不可行，交换积分次序先对 $y$ 积分产生外层因子 $x$，再利用三角换元积分</p>
+<blockquote>
+<p>[1]交换积分次序：</p>
+<p>原积分限为 $0 \le y \le 1, \; y \le x \le 1$。</p>
+<p>该区域为由 $x = 1, y = 0, y = x$ 所围成的直角三角形。</p>
+<p>交换次序后先对 $y$ 积分，投影区间为 $0 \le x \le 1, \; 0 \le y \le x$：</p>
+<p>$$I = \int_0^1 \mathrm{d}x \int_0^x \arcsin\sqrt{4x - 4x^2}\,\mathrm{d}y = \int_0^1 x \arcsin\sqrt{4x(1 - x)}\,\mathrm{d}x$$</p>
+<p>[2]三角换元化简：</p>
+<p>令 $x = \sin^2\theta$ ($\theta \in [0, \frac{\pi}{2}]$)，则 $\mathrm{d}x = 2\sin\theta\cos\theta\,\mathrm{d}\theta = \sin 2\theta\,\mathrm{d}\theta$。</p>
+<p>根式部分：$\sqrt{4x(1 - x)} = \sqrt{4\sin^2\theta\cos^2\theta} = 2\sin\theta\cos\theta = \sin 2\theta$。</p>
+<p>因此被积反三角项为 $\arcsin(\sin 2\theta)$。</p>
+<p>注意反正弦主值分支：</p>
+<p>当 $\theta \in [0, \frac{\pi}{4}]$ 时，$2\theta \in [0, \frac{\pi}{2}]$，$\arcsin(\sin 2\theta) = 2\theta$；</p>
+<p>当 $\theta \in [\frac{\pi}{4}, \frac{\pi}{2}]$ 时，$2\theta \in [\frac{\pi}{2}, \pi]$，$\arcsin(\sin 2\theta) = \pi - 2\theta$。</p>
+<p>[3]分段定积分计算：</p>
+<p>$$I = \int_0^{\frac{\pi}{4}} \sin^2\theta \cdot (2\theta) \sin 2\theta\,\mathrm{d}\theta + \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \sin^2\theta \cdot (\pi - 2\theta)\sin 2\theta\,\mathrm{d}\theta$$</p>
+<p>令 $u = 2\theta$，对称性展开化简得：</p>
+<p>$$I = \frac{1}{2}$$</p>
+<p>结论：累次积分的值为 $\frac{1}{2}$。</p>
+</blockquote>
+<p><strong>例题[14.8]:轮换对称性与极坐标系联合求解圆域积分</strong></p>
+<p>计算二重积分 $I = \iint_D \frac{x^2}{x^2 + y^2 + \sqrt{2 - x^2 - y^2}}\,\mathrm{d}\sigma$，其中闭区域 $D = \{(x, y) \mid x^2 + y^2 \le 2\}$。</p>
+<p>主要思路:区域关于 $y = x$ 轮换对称，将分子 $x^2$ 转化为 $\frac{1}{2}(x^2+y^2)$，转为极坐标并作变量代换有理化积分</p>
+<blockquote>
+<p>[1]利用轮换对称性化简分子：</p>
+<p>区域 $D$ 为中心在原点的圆盘，完全关于直线 $y = x$ 对称。</p>
+<p>由轮换对称性：</p>
+<p>$$I = \frac{1}{2} \iint_D \frac{x^2 + y^2}{x^2 + y^2 + \sqrt{2 - x^2 - y^2}}\,\mathrm{d}\sigma$$</p>
+<p>[2]引入极坐标与变量代换：</p>
+<p>在极坐标系下，$0 \le \theta \le 2\pi, \; 0 \le r \le \sqrt{2}$。</p>
+<p>$$I = \frac{1}{2} \int_0^{2\pi} \mathrm{d}\theta \int_0^{\sqrt{2}} \frac{r^2}{r^2 + \sqrt{2 - r^2}} \cdot r\,\mathrm{d}r = \pi \int_0^{\sqrt{2}} \frac{r^3}{r^2 + \sqrt{2 - r^2}}\,\mathrm{d}r$$</p>
+<p>令 $u = \sqrt{2 - r^2}$，则 $r^2 = 2 - u^2, \; r\,\mathrm{d}r = -u\,\mathrm{d}u$。当 $r = 0$ 时 $u = \sqrt{2}$；当 $r = \sqrt{2}$ 时 $u = 0$。</p>
+<p>$$I = \pi \int_0^{\sqrt{2}} \frac{(2 - u^2)u}{2 - u^2 + u}\,\mathrm{d}u = \pi \int_0^{\sqrt{2}} \frac{u(u^2 - 2)}{u^2 - u - 2}\,\mathrm{d}u$$</p>
+<p>[3]有理分式分解与积分求解：</p>
+<p>因式分解分母：$u^2 - u - 2 = (u - 2)(u + 1)$。</p>
+<p>多项式带余除法：</p>
+<p>$$\frac{u^3 - 2u}{u^2 - u - 2} = u + 1 + \frac{u + 2}{(u - 2)(u + 1)} = u + 1 + \frac{4/3}{u - 2} - \frac{1/3}{u + 1}$$</p>
+<p>代入积分：</p>
+<p>$$I = \pi \left[ \frac{u^2}{2} + u + \frac{4}{3}\ln|u - 2| - \frac{1}{3}\ln(u + 1) \right]_0^{\sqrt{2}}$$</p>
+<p>$$= \pi \left( 1 + \sqrt{2} + \frac{4}{3}\ln(2 - \sqrt{2}) - \frac{1}{3}\ln(\sqrt{2} + 1) - \frac{4}{3}\ln 2 \right)$$</p>
+</blockquote>
+<p><strong>例题[14.9]:倾斜旋转椭圆区域的极坐标切角法</strong></p>
+<p>计算二重积分 $I = \iint_D \frac{1}{(x^2 + y^2 - xy)^2}\,\mathrm{d}\sigma$，其中区域 $D$ 是由曲线 $x^2 + y^2 - xy = 1$、$x^2 + y^2 - xy = 2$ 及射线 $y = 0$、$y = \sqrt{3}x$ ($x \ge 0$) 所围成的平面闭区域。</p>
+<p>主要思路:被积函数与边界均含有旋转二次齐次项 $x^2+y^2-xy$，在极坐标下将 $r$ 与 $\theta$ 完全分离积分</p>
+<blockquote>
+<p>[1]极坐标表示边界与被积函数：</p>
+<p>在极坐标系下，$x = r\cos\theta, y = r\sin\theta$。</p>
+<p>$$x^2 + y^2 - xy = r^2(1 - \sin\theta\cos\theta) = r^2\left(1 - \frac{1}{2}\sin 2\theta\right)$$</p>
+<p>边界射线 $y = 0 \implies \theta = 0$；$y = \sqrt{3}x \implies \tan\theta = \sqrt{3} \implies \theta = \frac{\pi}{3}$。</p>
+<p>边界曲线 $x^2 + y^2 - xy = 1 \implies r_1^2 = \frac{1}{1 - \frac{1}{2}\sin 2\theta}$；</p>
+<p>$x^2 + y^2 - xy = 2 \implies r_2^2 = \frac{2}{1 - \frac{1}{2}\sin 2\theta}$。</p>
+<p>[2]分离变量积分：</p>
+<p>$$I = \int_0^{\frac{\pi}{3}} \mathrm{d}\theta \int_{r_1}^{r_2} \frac{1}{r^4 \left(1 - \frac{1}{2}\sin 2\theta\right)^2} \cdot r\,\mathrm{d}r = \int_0^{\frac{\pi}{3}} \frac{\mathrm{d}\theta}{\left(1 - \frac{1}{2}\sin 2\theta\right)^2} \left[ -\frac{1}{2r^2} \right]_{r_1}^{r_2}$$</p>
+<p>其中：</p>
+<p>$$\left[ -\frac{1}{2r^2} \right]_{r_1}^{r_2} = \frac{1}{2}\left(\frac{1}{r_1^2} - \frac{1}{r_2^2}\right) = \frac{1}{2}\left(1 - \frac{1}{2}\right)\left(1 - \frac{1}{2}\sin 2\theta\right) = \frac{1}{4}\left(1 - \frac{1}{2}\sin 2\theta\right)$$</p>
+<p>代入消去一次方：</p>
+<p>$$I = \frac{1}{4} \int_0^{\frac{\pi}{3}} \frac{\mathrm{d}\theta}{1 - \frac{1}{2}\sin 2\theta} = \frac{1}{2} \int_0^{\frac{\pi}{3}} \frac{\mathrm{d}\theta}{2 - \sin 2\theta}$$</p>
+<p>[3]万能代换计算三角积分：</p>
+<p>令 $u = \tan\theta$，则 $\sin 2\theta = \frac{2u}{1 + u^2}, \; \mathrm{d}\theta = \frac{\mathrm{d}u}{1 + u^2}$。</p>
+<p>积分限：当 $\theta = 0$ 时 $u = 0$；当 $\theta = \frac{\pi}{3}$ 时 $u = \sqrt{3}$。</p>
+<p>$$I = \frac{1}{2} \int_0^{\sqrt{3}} \frac{\frac{\mathrm{d}u}{1 + u^2}}{2 - \frac{2u}{1 + u^2}} = \frac{1}{4} \int_0^{\sqrt{3}} \frac{\mathrm{d}u}{u^2 - u + 1} = \frac{1}{4} \int_0^{\sqrt{3}} \frac{\mathrm{d}u}{\left(u - \frac{1}{2}\right)^2 + \frac{3}{4}}$$</p>
+<p>$$= \frac{1}{4} \cdot \frac{2}{\sqrt{3}} \left[ \arctan\frac{2u - 1}{\sqrt{3}} \right]_0^{\sqrt{3}} = \frac{\sqrt{3}}{6} \left( \arctan\frac{2\sqrt{3} - 1}{\sqrt{3}} - \arctan\left(-\frac{1}{\sqrt{3}}\right) \right)$$</p>
+</blockquote>
+<p><strong>例题[14.10]:动区域二重积分的拐点分析与导数应用</strong></p>
+<p>设函数 $f(x) = \iint_{D(x)} \frac{v\ln\sqrt{u^2 + v^2}}{u + v}\,\mathrm{d}u\mathrm{d}v$，其中平面区域 $D(x) = \{(u, v) \mid 1 \le u^2 + v^2 \le x^2, u \ge 0, v \ge 0\}$ ($x \ge 1$)。试求曲线 $y = f(x)$ 的拐点坐标。</p>
+<p>主要思路:利用第一象限轮换对称性消去分母 $u+v$，求出 $f(x)$ 的解析式，对上限求二阶导数并分析拐点</p>
+<blockquote>
+<p>[1]轮换对称性消去分母：</p>
+<p>区域 $D(x)$ 位于第一象限且关于直线 $v = u$ 对称。</p>
+<p>由轮换对称性对调 $u$ 与 $v$：</p>
+<p>$$f(x) = \iint_{D(x)} \frac{u\ln\sqrt{u^2 + v^2}}{u + v}\,\mathrm{d}u\mathrm{d}v$$</p>
+<p>两式相加：</p>
+<p>$$f(x) = \frac{1}{2} \iint_{D(x)} \ln\sqrt{u^2 + v^2}\,\mathrm{d}u\mathrm{d}v = \frac{1}{4} \iint_{D(x)} \ln(u^2 + v^2)\,\mathrm{d}u\mathrm{d}v$$</p>
+<p>[2]极坐标计算 $f(x)$ 及其导数：</p>
+<p>在极坐标系下，$0 \le \theta \le \frac{\pi}{2}, \; 1 \le r \le x$。</p>
+<p>$$f(x) = \frac{1}{4} \int_0^{\frac{\pi}{2}} \mathrm{d}\theta \int_1^x 2r\ln r\,\mathrm{d}r = \frac{\pi}{8} \int_1^x 2r\ln r\,\mathrm{d}r = \frac{\pi}{8} \left[ r^2\ln r - \frac{r^2}{2} \right]_1^x$$</p>
+<p>$$f(x) = \frac{\pi}{8} \left( x^2\ln x - \frac{x^2}{2} + \frac{1}{2} \right)$$</p>
+<p>[3]求二阶导数并确定拐点：</p>
+<p>一阶导数：$f'(x) = \frac{\pi}{8}(2x\ln x + x - x) = \frac{\pi}{4}x\ln x$。</p>
+<p>二阶导数：$f''(x) = \frac{\pi}{4}(\ln x + 1)$。</p>
+<p>令 $f''(x) = 0 \implies \ln x = -1 \implies x = \mathrm{e}^{-1} = \frac{1}{\mathrm{e}}$。</p>
+<p>但在定义域 $x \ge 1$ 上，$f''(x) > 0$，函数严格下凸无拐点；若将定义域自然延拓至 $x > 0$，则拐点为 $\left(\frac{1}{\mathrm{e}}, \frac{\pi}{16}(1 - 3\mathrm{e}^{-2})\right)$。端点 $x = 1$ 处 $f(1) = 0$。</p>
+</blockquote>
+<p><strong>例题[14.11]:高斯积分（泊松积分）的二重积分严密证明</strong></p>
+<p>严格证明高斯反常积分公式：$\int_0^{+\infty} \mathrm{e}^{-x^2}\,\mathrm{d}x = \frac{\sqrt{\pi}}{2}$。</p>
+<p>主要思路:构造第一象限正方形闭区域与内外相切的两个四分之一同心圆盘，利用二重积分保序单调性建立夹逼不等式，极坐标求积后取极限</p>
+<blockquote>
+<p>[1]构造区域与夹逼不等式：</p>
+<p>记 $I(R) = \int_0^R \mathrm{e}^{-x^2}\,\mathrm{d}x$。</p>
+<p>考查正方形区域 $Q_R = [0, R] \times [0, R]$ 上的二重积分：</p>
+<p>$$\iint_{Q_R} \mathrm{e}^{-(x^2 + y^2)}\,\mathrm{d}x\mathrm{d}y = \left( \int_0^R \mathrm{e}^{-x^2}\,\mathrm{d}x \right) \left( \int_0^R \mathrm{e}^{-y^2}\,\mathrm{d}y \right) = I^2(R)$$</p>
+<p>构造第一象限内的两个四分之一圆盘区域：</p>
+<p>内切圆域 $C_R = \{(x, y) \mid x^2 + y^2 \le R^2, x \ge 0, y \ge 0\}$；</p>
+<p>外接圆域 $C_{\sqrt{2}R} = \{(x, y) \mid x^2 + y^2 \le 2R^2, x \ge 0, y \ge 0\}$。</p>
+<p>显然有区域包含关系：$C_R \subset Q_R \subset C_{\sqrt{2}R}$。</p>
+<p>由于被积函数 $\mathrm{e}^{-(x^2 + y^2)} > 0$，根据二重积分的单调保序性：</p>
+<p>$$\iint_{C_R} \mathrm{e}^{-(x^2 + y^2)}\,\mathrm{d}\sigma \le I^2(R) \le \iint_{C_{\sqrt{2}R}} \mathrm{e}^{-(x^2 + y^2)}\,\mathrm{d}\sigma$$</p>
+<p>[2]极坐标计算圆域积分：</p>
+<p>$$\iint_{C_R} \mathrm{e}^{-(x^2 + y^2)}\,\mathrm{d}\sigma = \int_0^{\frac{\pi}{2}} \mathrm{d}\theta \int_0^R \mathrm{e}^{-r^2} r\,\mathrm{d}r = \frac{\pi}{2} \left[ -\frac{1}{2}\mathrm{e}^{-r^2} \right]_0^R = \frac{\pi}{4}(1 - \mathrm{e}^{-R^2})$$</p>
+<p>同理对于外接圆域：</p>
+<p>$$\iint_{C_{\sqrt{2}R}} \mathrm{e}^{-(x^2 + y^2)}\,\mathrm{d}\sigma = \frac{\pi}{4}(1 - \mathrm{e}^{-2R^2})$$</p>
+<p>[3]两端夹逼取极限：</p>
+<p>令 $R \to +\infty$，两侧极限均为：</p>
+<p>$$\lim_{R \to +\infty} \frac{\pi}{4}(1 - \mathrm{e}^{-R^2}) = \frac{\pi}{4}, \quad \lim_{R \to +\infty} \frac{\pi}{4}(1 - \mathrm{e}^{-2R^2}) = \frac{\pi}{4}$$</p>
+<p>由两边夹准则（Squeeze Theorem）：</p>
+<p>$$\lim_{R \to +\infty} I^2(R) = \frac{\pi}{4}$$</p>
+<p>由于被积函数非负，积分值 $I(R) > 0$，两边开平方得证：</p>
+<p>$$\int_0^{+\infty} \mathrm{e}^{-x^2}\,\mathrm{d}x = \frac{\sqrt{\pi}}{2}$$</p>
+</blockquote>
+<p><strong>例题[14.12]:利用高斯积分与二重积分计算二阶矩反常积分</strong></p>
+<p>计算反常积分 $I = \int_{-\infty}^{+\infty} x^2 \mathrm{e}^{-x^2}\,\mathrm{d}x$。</p>
+<p>主要思路:利用偶函数对称性化为非负半轴积分，分部积分降阶转化为高斯积分直接求解</p>
+<blockquote>
+<p>[1]偶函数对称性化简：</p>
+<p>被积函数 $f(x) = x^2 \mathrm{e}^{-x^2}$ 满足 $f(-x) = f(x)$，为偶函数。</p>
+<p>因此全实轴上的反常积分化简为半轴积分的 2 倍：</p>
+<p>$$I = 2 \int_0^{+\infty} x^2 \mathrm{e}^{-x^2}\,\mathrm{d}x$$</p>
+<p>[2]分部积分转化：</p>
+<p>将因子 $x\mathrm{e}^{-x^2}$ 凑微分：$x\mathrm{e}^{-x^2}\,\mathrm{d}x = \mathrm{d}\left(-\frac{1}{2}\mathrm{e}^{-x^2}\right)$。</p>
+<p>$$I = 2 \int_0^{+\infty} x\,\mathrm{d}\left(-\frac{1}{2}\mathrm{e}^{-x^2}\right) = 2 \left( \left[ -\frac{1}{2}x\mathrm{e}^{-x^2} \right]_0^{+\infty} + \frac{1}{2} \int_0^{+\infty} \mathrm{e}^{-x^2}\,\mathrm{d}x \right)$$</p>
+<p>由洛必达法则，$\lim\limits_{x \to +\infty} x\mathrm{e}^{-x^2} = \lim\limits_{x \to +\infty} \frac{x}{\mathrm{e}^{x^2}} = 0$。</p>
+<p>故第一项代入上下限为 $0$。</p>
+<p>[3]代入高斯积分得出结果：</p>
+<p>$$I = \int_0^{+\infty} \mathrm{e}^{-x^2}\,\mathrm{d}x = \frac{\sqrt{\pi}}{2}$$</p>
+<p>结论：反常积分的值为 $\frac{\sqrt{\pi}}{2}$。</p>
+</blockquote>
+<p><strong>例题[14.13]:含二重积分与指数因子的无穷远极限与参数反求</strong></p>
+<p>设极限 $\lim\limits_{x \to +\infty} \frac{\int_0^x t^2 \mathrm{e}^{x^2 - t^2}\,\mathrm{d}t + a\mathrm{e}^{x^2}}{x^b} = -\frac{1}{2}$，求常数 $a$ 与正整数 $b$。</p>
+<p>主要思路:提取公因子 $\mathrm{e}^{x^2}$，分部积分展开内层积分项，根据无穷大渐近阶数匹配确定参数 $a$ 与幂次 $b$</p>
+<blockquote>
+<p>[1]提取公因子与分部积分展开：</p>
+<p>分子表达式为：</p>
+<p>$$\int_0^x t^2 \mathrm{e}^{x^2 - t^2}\,\mathrm{d}t + a\mathrm{e}^{x^2} = \mathrm{e}^{x^2} \left[ \int_0^x t^2 \mathrm{e}^{-t^2}\,\mathrm{d}t + a \right]$$</p>
+<p>对括号内积分分部积分：</p>
+<p>$$\int_0^x t^2 \mathrm{e}^{-t^2}\,\mathrm{d}t = \left[ -\frac{1}{2}t\mathrm{e}^{-t^2} \right]_0^x + \frac{1}{2}\int_0^x \mathrm{e}^{-t^2}\,\mathrm{d}t = -\frac{1}{2}x\mathrm{e}^{-x^2} + \frac{1}{2}\int_0^x \mathrm{e}^{-t^2}\,\mathrm{d}t$$</p>
+<p>当 $x \to +\infty$ 时，$\frac{1}{2}\int_0^x \mathrm{e}^{-t^2}\,\mathrm{d}t \to \frac{\sqrt{\pi}}{4}$。</p>
+<p>[2]确定待定常数 $a$：</p>
+<p>若方括号内极限 $\frac{\sqrt{\pi}}{4} + a \neq 0$，则分子主部为 $\left(\frac{\sqrt{\pi}}{4} + a\right)\mathrm{e}^{x^2}$，以指数级发散，无论多项式分母 $x^b$ 取何值均不可能收敛至有限非零值 $-\frac{1}{2}$。</p>
+<p>因此必须使常数项精确抵消：</p>
+<p>$$\frac{\sqrt{\pi}}{4} + a = 0 \implies a = -\frac{\sqrt{\pi}}{4}$$</p>
+<p>[3]确定幂次 $b$ 与极限验证：</p>
+<p>当 $a = -\frac{\sqrt{\pi}}{4}$ 时，方括号内变为：</p>
+<p>$$-\frac{1}{2}x\mathrm{e}^{-x^2} - \frac{1}{2}\int_x^{+\infty} \mathrm{e}^{-t^2}\,\mathrm{d}t$$</p>
+<p>乘回 $\mathrm{e}^{x^2}$ 后，分子为：</p>
+<p>$$-\frac{1}{2}x - \frac{1}{2}\mathrm{e}^{x^2} \int_x^{+\infty} \mathrm{e}^{-t^2}\,\mathrm{d}t$$</p>
+<p>由洛必达法则，$\lim\limits_{x \to +\infty} \frac{\int_x^{+\infty} \mathrm{e}^{-t^2}\mathrm{d}t}{\mathrm{e}^{-x^2}} = \lim\limits_{x \to +\infty} \frac{-\mathrm{e}^{-x^2}}{-2x\mathrm{e}^{-x^2}} = \lim\limits_{x \to +\infty} \frac{1}{2x} = 0$。</p>
+<p>故分子的最高阶非零主部为 $-\frac{1}{2}x$。</p>
+<p>为使分式极限为 $-\frac{1}{2}$，分母必须为 $x^1$，即 $b = 1$。</p>
+<p>综上，$a = -\frac{\sqrt{\pi}}{4}, \; b = 1$。</p>
+</blockquote>
+<p><strong>例题[14.14]:直角坐标转化为极坐标的高难度分界积分</strong></p>
+<p>计算累次积分 $I = \int_0^1 \mathrm{d}x \int_{1-x}^{\sqrt{1-x^2}} \frac{x + y}{x^2 + y^2}\,\mathrm{d}y$。</p>
+<p>主要思路:绘制第一象限积分区域，分析下边界弦线与上边界圆弧的极坐标方程，转化为极坐标计算</p>
+<blockquote>
+<p>[1]分析几何区域与边界方程：</p>
+<p>原积分区域为第一象限内的弓形区域：</p>
+<p>$$D = \left\{(x, y) \;\middle|\; 0 \le x \le 1, \; 1 - x \le y \le \sqrt{1 - x^2}\right\}$$</p>
+<p>下边界为连接 $(1, 0)$ 与 $(0, 1)$ 的直线段：$x + y = 1$；</p>
+<p>上边界为单位圆弧：$x^2 + y^2 = 1$。</p>
+<p>在极坐标系下：</p>
+<p>角度范围为 $0 \le \theta \le \frac{\pi}{2}$；</p>
+<p>直线方程为 $r(\cos\theta + \sin\theta) = 1 \implies r_1(\theta) = \frac{1}{\cos\theta + \sin\theta}$；</p>
+<p>圆弧方程为 $r_2(\theta) = 1$。</p>
+<p>[2]化为极坐标累次积分：</p>
+<p>被积函数转化为：$\frac{x + y}{x^2 + y^2} = \frac{r(\cos\theta + \sin\theta)}{r^2} = \frac{\cos\theta + \sin\theta}{r}$。</p>
+<p>面积微元 $\mathrm{d}\sigma = r\,\mathrm{d}r\mathrm{d}\theta$。乘积项为：</p>
+<p>$$\frac{\cos\theta + \sin\theta}{r} \cdot r = \cos\theta + \sin\theta$$</p>
+<p>关于 $r$ 的被积函数变为与 $r$ 无关的量：</p>
+<p>$$I = \int_0^{\frac{\pi}{2}} (\cos\theta + \sin\theta)\,\mathrm{d}\theta \int_{\frac{1}{\cos\theta+\sin\theta}}^1 \mathrm{d}r = \int_0^{\frac{\pi}{2}} (\cos\theta + \sin\theta) \left( 1 - \frac{1}{\cos\theta+\sin\theta} \right)\mathrm{d}\theta$$</p>
+<p>[3]定积分求解：</p>
+<p>$$I = \int_0^{\frac{\pi}{2}} (\cos\theta + \sin\theta - 1)\,\mathrm{d}\theta = \left[ \sin\theta - \cos\theta - \theta \right]_0^{\frac{\pi}{2}}$$</p>
+<p>$$= \left( 1 - 0 - \frac{\pi}{2} \right) - (0 - 1 - 0) = 2 - \frac{\pi}{2}$$</p>
+<p>结论：累次积分的值为 $2 - \frac{\pi}{2}$。</p>
+</blockquote>
+<p><strong>例题[14.15]:雅可比行列式换元法化简非对称分式积分</strong></p>
+<p>计算二重积分 $I = \iint_D \mathrm{e}^{\frac{y}{x+y}}\,\mathrm{d}\sigma$，其中 $D$ 是由直线 $x = 0, y = 0$ 与 $x + y = 1$ 所围成的闭三角形区域。</p>
+<p>主要思路:被积函数含有复合分式 $\frac{y}{x+y}$，作变量代换 $u = x + y, v = \frac{y}{x+y}$，通过雅可比行列式将区域解耦为矩形域</p>
+<blockquote>
+<p>[1]构造坐标变换与计算雅可比行列式：</p>
+<p>令新变量为：$u = x + y, \; v = \frac{y}{x+y}$。</p>
+<p>反解 $x, y$：</p>
+<p>$$y = uv, \quad x = u - y = u(1 - v)$$</p>
+<p>计算雅可比行列式 $J(u, v)$：</p>
+<p>$$J = \frac{\partial(x, y)}{\partial(u, v)} = \begin{vmatrix} \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\ \\ \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v} \end{vmatrix} = \begin{vmatrix} 1 - v & -u \\ \\ v & u \end{vmatrix} = u(1 - v) - (-uv) = u$$</p>
+<p>[2]确定新积分区域 $D'$：</p>
+<p>由原区域边界：</p>
+<p>$x \ge 0 \implies u(1 - v) \ge 0 \implies v \le 1$；</p>
+<p>$y \ge 0 \implies uv \ge 0 \implies v \ge 0$；</p>
+<p>$x + y \le 1 \implies u \le 1$（且 $u \ge 0$）。</p>
+<p>因此在 $uOv$ 平面上，新区域 $D'$ 是一个单位矩形：</p>
+<p>$$D' = \{(u, v) \mid 0 \le u \le 1, \; 0 \le v \le 1\}$$</p>
+<p>[3]计算换元后的二重积分：</p>
+<p>$$I = \iint_{D'} \mathrm{e}^v \cdot |J|\,\mathrm{d}u\mathrm{d}v = \int_0^1 u\,\mathrm{d}u \int_0^1 \mathrm{e}^v\,\mathrm{d}v$$</p>
+<p>$$= \left[ \frac{u^2}{2} \right]_0^1 \cdot \left[ \mathrm{e}^v \right]_0^1 = \frac{1}{2}(\mathrm{e} - 1)$$</p>
+<p>结论：二重积分的值为 $\frac{1}{2}(\mathrm{e} - 1)$。</p>
+</blockquote>
+<p><strong>例题[14.16]:古鲁金第二定理求解任意倾斜轴的旋转体体积</strong></p>
+<p>设闭区域 $D$ 是由正弦曲线 $y = \sin x$ ($0 \le x \le 2\pi$) 与 $x$ 轴所围成的平面图形。求区域 $D$ 绕倾斜直线 $L: y = -x$ 旋转一周所形成的旋转体体积 $V$。</p>
+<p>主要思路:运用古鲁金第二定理的二重积分形式，分别对第一拱与第二拱计算点到直线 $x + y = 0$ 的距离积分</p>
+<blockquote>
+<p>[1]区域剖分与点到直线的距离表达式：</p>
+<p>区域 $D$ 由两个正弦拱组成：</p>
+<p>$D_1: 0 \le x \le \pi, \; 0 \le y \le \sin x$；</p>
+<p>$D_2: \pi \le x \le 2\pi, \; \sin x \le y \le 0$。</p>
+<p>旋转轴直线方程为 $x + y = 0$。点 $(x, y)$ 到直线的垂直距离为 $d(x, y) = \frac{|x + y|}{\sqrt{2}}$。</p>
+<p>在 $D_1$ 内，$x \ge 0, y \ge 0$ 且不同时为零，故 $x + y > 0$；</p>
+<p>在 $D_2$ 内，$x \in [\pi, 2\pi], y \in [-1, 0]$，由于 $x + y \ge \pi - 1 > 0$，故亦恒有 $x + y > 0$。</p>
+<p>因此在整个区域 $D$ 上，绝对值直接展开：$d(x, y) = \frac{x + y}{\sqrt{2}}$。</p>
+<p>[2]积分计算各部分贡献：</p>
+<p>由古鲁金第二定理：</p>
+<p>$$V = 2\pi \iint_D d(x, y)\,\mathrm{d}\sigma = \sqrt{2}\pi \iint_D (x + y)\,\mathrm{d}\sigma$$</p>
+<p>计算 $D_1$ 上的积分：</p>
+<p>$$\iint_{D_1} x\,\mathrm{d}\sigma = \int_0^\pi x\sin x\,\mathrm{d}x = [-x\cos x]_0^\pi + \int_0^\pi \cos x\,\mathrm{d}x = \pi$$</p>
+<p>$$\iint_{D_1} y\,\mathrm{d}\sigma = \int_0^\pi \mathrm{d}x \int_0^{\sin x} y\,\mathrm{d}y = \frac{1}{2}\int_0^\pi \sin^2 x\,\mathrm{d}x = \frac{\pi}{4}$$</p>
+<p>计算 $D_2$ 上的积分：令 $x = u + \pi, \; y = -v$，对应 $0 \le u \le \pi, \; 0 \le v \le \sin u$：</p>
+<p>$$\iint_{D_2} x\,\mathrm{d}\sigma = \int_\pi^{2\pi} x(-\sin x)\,\mathrm{d}x = 3\pi, \quad \iint_{D_2} y\,\mathrm{d}\sigma = -\frac{\pi}{4}$$</p>
+<p>[3]汇总得出旋转体体积：</p>
+<p>$$\iint_D (x + y)\,\mathrm{d}\sigma = \left(\pi + \frac{\pi}{4}\right) + \left(3\pi - \frac{\pi}{4}\right) = 4\pi$$</p>
+<p>代入体积公式：</p>
+<p>$$V = \sqrt{2}\pi \cdot 4\pi = 4\sqrt{2}\pi^2$$</p>
+<p>结论：旋转体体积为 $4\sqrt{2}\pi^2$。</p>
+</blockquote>
+<p><strong>例题[14.17]:逆用古鲁金定理求解非对称几何区域质心坐标</strong></p>
+<p>求由圆周 $(x - 1)^2 + y^2 = 1$ 与 $(x - 2)^2 + y^2 = 4$ 以及两坐标轴在第一象限围成的闭区域 $D$ 的质心坐标 $(\bar{x}, \bar{y})$。</p>
+<p>主要思路:将目标区域看作大半圆盘与小半圆盘的组合差集，利用静态矩的可加性与形心公式求解</p>
+<blockquote>
+<p>[1]几何区域分解与面积计算：</p>
+<p>大圆盘为 $(x - 2)^2 + y^2 \le 4$，其上半部分为以 $(2, 0)$ 为圆心、半径 $R_1 = 2$ 的半圆盘 $D_{\text{大}}$，面积为：</p>
+<p>$$S_{\text{大}} = \frac{1}{2}\pi R_1^2 = 2\pi$$</p>
+<p>小圆盘为 $(x - 1)^2 + y^2 \le 1$，其上半部分为以 $(1, 0)$ 为圆心、半径 $R_2 = 1$ 的半圆盘 $D_{\text{小}}$，面积为：</p>
+<p>$$S_{\text{小}} = \frac{1}{2}\pi R_2^2 = \frac{\pi}{2}$$</p>
+<p>区域 $D$ 的几何面积为两者之差：</p>
+<p>$$S_D = S_{\text{大}} - S_{\text{小}} = 2\pi - \frac{\pi}{2} = \frac{3\pi}{2}$$</p>
+<p>[2]计算形心横坐标 $\bar{x}$：</p>
+<p>由半圆的几何对称性，大半圆形心横坐标在其对称轴上：$\bar{x}_{\text{大}} = 2$；</p>
+<p>小半圆形心横坐标在其对称轴上：$\bar{x}_{\text{小}} = 1$。</p>
+<p>由静态矩可加性：</p>
+<p>$$M_y = S_{\text{大}}\bar{x}_{\text{大}} - S_{\text{小}}\bar{x}_{\text{小}} = 2\pi \cdot 2 - \frac{\pi}{2} \cdot 1 = 4\pi - \frac{\pi}{2} = \frac{7\pi}{2}$$</p>
+<p>因此质心横坐标为：</p>
+<p>$$\bar{x} = \frac{M_y}{S_D} = \frac{7\pi/2}{3\pi/2} = \frac{7}{3}$$</p>
+<p>[3]计算形心纵坐标 $\bar{y}$：</p>
+<p>半径为 $R$ 的半圆盘绕其底边对称轴的形心高度公式为 $\bar{y} = \frac{4R}{3\pi}$。</p>
+<p>大半圆：$\bar{y}_{\text{大}} = \frac{4 \times 2}{3\pi} = \frac{8}{3\pi}$，静态矩 $M_{x,\text{大}} = 2\pi \cdot \frac{8}{3\pi} = \frac{16}{3}$；</p>
+<p>小半圆：$\bar{y}_{\text{小}} = \frac{4 \times 1}{3\pi} = \frac{4}{3\pi}$，静态矩 $M_{x,\text{小}} = \frac{\pi}{2} \cdot \frac{4}{3\pi} = \frac{2}{3}$。</p>
+<p>差值静态矩：</p>
+<p>$$M_x = M_{x,\text{大}} - M_{x,\text{小}} = \frac{16}{3} - \frac{2}{3} = \frac{14}{3}$$</p>
+<p>因此质心纵坐标为：</p>
+<p>$$\bar{y} = \frac{M_x}{S_D} = \frac{14/3}{3\pi/2} = \frac{28}{9\pi}$$</p>
+<p>结论：区域的质心坐标为 $(\bar{x}, \bar{y}) = \left(\frac{7}{3}, \frac{28}{9\pi}\right)$。</p>
+</blockquote>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

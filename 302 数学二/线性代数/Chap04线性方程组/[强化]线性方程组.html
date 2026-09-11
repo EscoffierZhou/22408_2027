@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>[强化]线性方程组</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h1>第四章 线性方程组 · 考研高阶冲刺与深水区强化</h1>
+<h2>1. 公共解与同解的高阶判准与四大求解模型</h2>
+<h3>1.1 两方程组解空间的交集几何本质</h3>
+<blockquote>
+<p>设齐次线性方程组 (I) 为 $A_{m \times n}x = 0$，其解空间为 $V_1 = N(A)$；方程组 (II) 为 $B_{s \times n}x = 0$，其解空间为 $V_2 = N(B)$。</p>
+<p>两方程组的公共解集即为解空间的交集：<br />
+$$V_{\text{common}} = V_1 \cap V_2 = N(A) \cap N(B) = N\left(\begin{bmatrix} A \\ B \end{bmatrix}\right)$$</p>
+<p>由解空间维数公式及子空间交维数定理：<br />
+$$\dim(V_1 \cap V_2) = n - r\begin{bmatrix} A \\ B \end{bmatrix}$$</p>
+<p>当且仅当 $r\begin{bmatrix} A \\ B \end{bmatrix} < n$ 时，两方程组存在<font color=deeppink>非零公共解</font>。</p>
+</blockquote>
+<h3>1.2 四大求解模型全景对比</h3>
+<h6><strong>模型[1]:联立矩阵行阶梯形法 (通用硬算首选)</strong></h6>
+<blockquote>
+<p>适用场景：两方程组均为具体数值方程组，且方程个数较少。</p>
+<p>求解流程：<br />
+(1) 将两组系数矩阵纵向拼接为大矩阵 $C = \begin{bmatrix} A \\ B \end{bmatrix}$；</p>
+<p>(2) 仅用初等行变换将 $C$ 化为行最简阶梯形；</p>
+<p>(3) 确定主元未知量与自由未知量，写出交空间 $V_1 \cap V_2$ 的基础解系与通解。</p>
+</blockquote>
+<h6><strong>模型[2]:解代入法 (含参问题最高效)</strong></h6>
+<blockquote>
+<p>适用场景：方程组 (I) 或 (II) 其中一方容易求出通解，且方程中含有未知待定参数。</p>
+<p>求解流程：<br />
+(1) 先求出方程简单一侧 (I) 的通解 $x = k_1\xi_1 + \dots + k_p\xi_p$；</p>
+<p>(2) 将该通解的各未知量分量整体代入方程组 (II) 的各方程中；</p>
+<p>(3) 得到关于自由常数 $k_1, \dots, k_p$ 的齐次线性方程组，求解系数 $k_i$ 之间的依赖关系，回代求出公共解。</p>
+</blockquote>
+<h6><strong>模型[3]:并行通解参数配对法 (双抽象解系相遇)</strong></h6>
+<blockquote>
+<p>适用场景：已知两方程组各自的基础解系 $\{\xi_1, \dots, \xi_p\}$ 与 $\{\eta_1, \dots, \eta_q\}$。</p>
+<p>求解流程：<br />
+(1) 设公共解 $x$ 分别在两组基下展开：<br />
+$$x = k_1\xi_1 + \cdots + k_p\xi_p = l_1\eta_1 + \cdots + l_q\eta_q$$</p>
+<p>(2) 移项整理为：<br />
+$$k_1\xi_1 + \cdots + k_p\xi_p - l_1\eta_1 - \cdots - l_q\eta_q = 0$$</p>
+<p>(3) 构成关于待定常数 $[k_1, \dots, k_p, l_1, \dots, l_q]^T$ 的齐次线性方程组，求出非零解，代入任意一侧得到公共解。</p>
+</blockquote>
+<h6><strong>模型[4]:交并空间维数公式法 (抽象证明与选择题秒杀)</strong></h6>
+<blockquote>
+<p>适用场景：考研真题中关于解空间维数、公共解向量个数的抽象判断题。</p>
+<p>核心定理：<br />
+$$\dim(V_1 + V_2) = \dim V_1 + \dim V_2 - \dim(V_1 \cap V_2)$$<br />
+代入维数公式：<br />
+$$n - r(A \cap B) = [n - r(A)] + [n - r(B)] - \dim(V_1 + V_2)$$<br />
+整理即得公共解空间维数极值不等式：<br />
+$$n - r\begin{bmatrix} A \\ B \end{bmatrix} \ge [n - r(A)] + [n - r(B)] - n = n - [r(A) + r(B)]$$<br />
+故必有：<br />
+$$\dim(V_1 \cap V_2) \ge n - r(A) - r(B)$$</p>
+</blockquote>
+<hr />
+<h2>2. 矩阵方程 $AB=0$ 的几何本质与解空间包含定理</h2>
+<h3>2.1 列向量视角与解空间包含</h3>
+<h6><strong>定理[1]:乘积为零与解空间的等价刻画</strong></h6>
+<blockquote>
+<p>设 $A$ 为 $m \times n$ 矩阵，$B$ 为 $n \times s$ 矩阵：<br />
+记 $B = [\beta_1, \beta_2, \dots, \beta_s]$，则：<br />
+$$AB = 0 \iff A[\beta_1, \beta_2, \dots, \beta_s] = [A\beta_1, A\beta_2, \dots, A\beta_s] = [0, 0, \dots, 0]$$<br />
+几何本质：</p>
+<p>(1) 矩阵 $B$ 的每一个列向量 $\beta_j$ ($j=1,\dots,s$) 都是齐次线性方程组 $Ax = 0$ 的解；</p>
+<p>(2) 矩阵 $B$ 的列空间（值域 $R(B)$）完全包含于矩阵 $A$ 的零空间（解空间 $N(A)$）：<br />
+$$<font color=deeppink>R(B) \subseteq N(A)</font>$$</p>
+</blockquote>
+<h3>2.2 秩不等式与极限充要条件</h3>
+<h6><strong>定理[2]:$AB=0$ 的秩不等式推导</strong></h6>
+<blockquote>
+<p>由 $R(B) \subseteq N(A)$，子空间维数必满足包含不等式：<br />
+$$\dim R(B) \le \dim N(A)$$<br />
+根据矩阵的秩的几何定义 $\dim R(B) = r(B)$，以及解空间维数公式 $\dim N(A) = n - r(A)$：<br />
+$$r(B) \le n - r(A) \iff <font color=red>r(A) + r(B) \le n</font>$$<br />
+此即著名的 <strong>Sylvester 零乘积秩不等式</strong>。</p>
+</blockquote>
+<h6><strong>定理[3]:基础解系充要匹配定理</strong></h6>
+<blockquote>
+<p>若 $AB = 0$，且满足等号极值条件：<br />
+$$r(A) + r(B) = n$$<br />
+则：</p>
+<p>(1) 矩阵 $B$ 的列空间维数恰好饱和填满矩阵 $A$ 的解空间：$R(B) = N(A)$；</p>
+<p>(2) 矩阵 $B$ 的列向量组的任意极大线性无关组，都是齐次线性方程组 $Ax = 0$ 的一个<font color=deeppink>基础解系</font>！</p>
+</blockquote>
+<h3>2.3 幂零矩阵与幂等矩阵的方程组解构</h3>
+<h6><strong>模型[5]:$A^2 = 0$ 的空间退化模型</strong></h6>
+<blockquote>
+<p>若 $A_{n \times n}$ 满足 $A^2 = 0$：</p>
+<p>(1) 令 $B = A$，立即由 $r(A) + r(A) \le n$ 得到：<br />
+$$r(A) \le \frac{n}{2}$$</p>
+<p>(2) 方程组 $Ax = 0$ 的基础解系至少含有 $n - r(A) \ge n/2$ 个线性无关解向量。</p>
+</blockquote>
+<h6><strong>模型[6]:$A^2 = A$ (幂等投影矩阵) 的空间直和分解</strong></h6>
+<blockquote>
+<p>若 $A_{n \times n}$ 满足 $A^2 = A$：</p>
+<p>(1) 方程改写为 $A(A - I) = 0$，根据秩不等式：<br />
+$$r(A) + r(A - I) \le n$$</p>
+<p>(2) 又由秩的次可加性：<br />
+$$r(A) + r(I - A) \ge r(A + I - A) = r(I) = n$$</p>
+<p>(3) 夹逼必有 $r(A) + r(I - A) = n$。全空间 $\mathbb{R}^n$ 实现保真直和分解：<br />
+$$\mathbb{R}^n = N(A) \oplus R(A)$$<br />
+任何向量 $x \in \mathbb{R}^n$ 均可唯一正交分解为 $x = (x - Ax) + Ax$，其中 $(x - Ax) \in N(A)$, $Ax \in R(A)$。</p>
+</blockquote>
+<hr />
+<h2>3. 伴随矩阵方程 $A^*x=0$ 的全景解构与秩准则</h2>
+<h3>3.1 伴随矩阵的秩三大定理</h3>
+<h6><strong>定理[4]:伴随矩阵的秩与原矩阵秩的完备映射</strong></h6>
+<blockquote>
+<p>设 $A$ 为 $n$ 阶方阵（$n \ge 2$）：<br />
+$$r(A^*) = \begin{cases} n, & r(A) = n \\ 1, & r(A) = n - 1 \\ 0, & r(A) < n - 1 \end{cases}$$</p>
+<p>严格推导：</p>
+<p>(1) 当 $r(A) = n$ 时，$|A| \ne 0$。由 $A^* = |A|A^{-1}$ 知 $A^*$ 亦可逆，故 $r(A^*) = n$；</p>
+<p>(2) 当 $r(A) = n - 1$ 时，矩阵 $A$ 至少存在一个 $(n-1)$ 阶代数余子式非零，故 $A^* \ne O \implies r(A^*) \ge 1$。<br />
+另由矩阵恒等式 $A A^* = |A| I = 0$，套用 Sylvester 秩不等式：<br />
+$$r(A) + r(A^*) \le n \implies (n - 1) + r(A^*) \le n \implies r(A^*) \le 1$$<br />
+夹逼必得 $r(A^*) = 1$；</p>
+<p>(3) 当 $r(A) < n - 1$ 时，矩阵 $A$ 的所有 $(n-1)$ 阶子式全部为 0，伴随矩阵全为零元素：$A^* = O \implies r(A^*) = 0$。</p>
+</blockquote>
+<h3>3.2 伴随齐次方程 $A^*x=0$ 的解空间与基础解系构造</h3>
+<h6><strong>定理[5]:伴随齐次方程组解空间全貌</strong></h6>
+<blockquote>
+<p>考察方程组 $A^*x = 0$ 的解空间维数 $\dim N(A^*) = n - r(A^*)$：</p>
+<p>(1) 若 $r(A) = n$，则 $r(A^*) = n$，方程组 $A^*x = 0$ <font color=deeppink>只有零解</font>；</p>
+<p>(2) 若 $r(A) = n - 1$，则 $r(A^*) = 1$，解空间维数为：<br />
+$$\dim N(A^*) = n - 1$$<br />
+基础解系构造绝技：由 $A A^* = 0$ 转置得 $(A^*)^T A^T = 0$。$A$ 的行满秩极大无关组经转置后即为 $A^*x = 0$ 的基础解系！</p>
+<p>(3) 若 $r(A) < n - 1$，则 $A^* = O$，方程组退化为 $Ox = 0$，解空间为整个 $\mathbb{R}^n$，维数为 $n$，任意 $n$ 个线性无关向量（如标准基）均构成其基础解系。</p>
+</blockquote>
+<hr />
+<h2>4. 正规方程组 $A^TAx=A^Tb$ 与最小二乘几何投影</h2>
+<h3>4.1 最小二乘法 (Least Squares) 的代数背景</h3>
+<blockquote>
+<p>在工程与科研实践中，当超定线性方程组 $Ax = b$（方程数 $m >$ 未知量数 $n$）不相容（即无精确解）时：<br />
+残差向量 $r(x) = Ax - b \ne 0$。</p>
+<p>目标：寻找一个最佳逼近解 $\hat{x} \in \mathbb{R}^n$，使得残差向量的欧氏范数（二范数平方）达到全局最小值：<br />
+$$\min_{x \in \mathbb{R}^n} f(x) = \|Ax - b\|^2 = (Ax - b)^T(Ax - b)$$</p>
+</blockquote>
+<h3>4.2 几何投影正交性与正规方程推导</h3>
+<h6><strong>模型[7]:最小二乘投影几何模型</strong></h6>
+<blockquote>
+<p>向量 $Ax$ 属于矩阵 $A$ 的列空间 $R(A) = \operatorname{span}\{\alpha_1, \dots, \alpha_n\}$。</p>
+<p>几何极值原理：从点 $b$ 到子空间 $R(A)$ 的最短距离垂线段，必与子空间 $R(A)$ 内的任意向量正交！</p>
+<p>即残差向量 $\hat{r} = b - A\hat{x}$ 必须垂直于 $A$ 的每一个列向量 $\alpha_j$：<br />
+$$\alpha_j^T (b - A\hat{x}) = 0 \quad (j = 1, 2, \dots, n)$$<br />
+写成矩阵形式：<br />
+$$A^T (b - A\hat{x}) = 0 \implies <font color=red>A^TA\hat{x} = A^Tb</font>$$<br />
+这一经典方程组即称为<strong>正规方程组</strong>（Normal Equations，又称法方程组）。</p>
+</blockquote>
+<h3>4.3 正规方程组的相容性与正交投影算子</h3>
+<h6><strong>定理[6]:正规方程组永恒相容定理</strong></h6>
+<blockquote>
+<p>对任意实矩阵 $A_{m \times n}$ 与常数项列向量 $b \in \mathbb{R}^m$：</p>
+<p>(1) 正规方程组 $A^TAx = A^Tb$ 恒有解，无解概率为 0。</p>
+<p>(2) 当且仅当矩阵 $A$ <font color=deeppink>列满秩</font>（$r(A) = n$）时，$n$ 阶实对称矩阵 $A^TA$ 严格正定可逆，最小二乘解具有唯一显式闭式解：<br />
+$$\hat{x} = (A^TA)^{-1}A^Tb$$</p>
+<p>(3) 正交投影矩阵与空间投影：<br />
+向量 $b$ 在列空间 $R(A)$ 上的唯一正交投影为：<br />
+$$p = A\hat{x} = A(A^TA)^{-1}A^T b$$<br />
+称矩阵 $P = A(A^TA)^{-1}A^T$ 为<strong>正交投影矩阵</strong>（Projection Matrix）。<br />
+满足两大优美代数性质：</p>
+<blockquote>
+<p>对称性：$P^T = P$；</p>
+<p>幂等性：$P^2 = P$。</p>
+</blockquote>
+</blockquote>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

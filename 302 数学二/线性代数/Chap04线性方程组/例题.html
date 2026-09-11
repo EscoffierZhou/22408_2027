@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>例题</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h1>第四章 线性方程组 · 核心精讲大例题集</h1>
+<p><strong>例题[4.1]: 齐次线性方程组初等行变换与基础解系求解</strong></p>
+<p>求解下列齐次线性方程组：<br />
+$$\begin{cases} x_1 + 2x_2 + 2x_3 + x_4 + 2x_5 = 0 \\ 2x_1 + 3x_2 + 4x_3 + 2x_4 + 3x_5 = 0 \\ 3x_1 + 5x_2 + 6x_3 + 3x_4 + 5x_5 = 0 \end{cases}$$</p>
+<p>主要思路: 对系数矩阵施行初等行变换化为行最简阶梯形，根据秩确定自由未知量，用标准单位基赋值法写出基础解系与通解。</p>
+<blockquote>
+<p>[1] 初等行变换化为行最简阶梯形：</p>
+<p>系数矩阵为：<br />
+$$A = \begin{bmatrix} 1 & 2 & 2 & 1 & 2 \\ 2 & 3 & 4 & 2 & 3 \\ 3 & 5 & 6 & 3 & 5 \end{bmatrix} \xrightarrow[r_3 - 3r_1]{r_2 - 2r_1} \begin{bmatrix} 1 & 2 & 2 & 1 & 2 \\ 0 & -1 & 0 & 0 & -1 \\ 0 & -1 & 0 & 0 & -1 \end{bmatrix} \xrightarrow{r_3 - r_2} \begin{bmatrix} 1 & 2 & 2 & 1 & 2 \\ 0 & 1 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0 & 0 \end{bmatrix} \xrightarrow{r_1 - 2r_2} \begin{bmatrix} 1 & 0 & 2 & 1 & 0 \\ 0 & 1 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0 & 0 \end{bmatrix}$$<br />
+由此可见 $r(A) = 2 < 5$，基础解系所含解向量个数为 $n - r(A) = 5 - 2 = 3$。</p>
+<p>[2] 确定同解方程组与自由未知量：</p>
+<p>行最简形对应的同解方程组为：<br />
+$$\begin{cases} x_1 = -2x_3 - x_4 \\ x_2 = -x_5 \end{cases}$$<br />
+选取 $x_3, x_4, x_5$ 为自由未知量。</p>
+<p>[3] 单位基赋值构造基础解系并写出通解：</p>
+<p>令自由变量 $\begin{bmatrix} x_3 \\ x_4 \\ x_5 \end{bmatrix}$ 依次取标准单位基 $\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}$，对应求得基础解系：<br />
+$$\xi_1 = \begin{bmatrix} -2 \\ 0 \\ 1 \\ 0 \\ 0 \end{bmatrix}, \quad \xi_2 = \begin{bmatrix} -1 \\ 0 \\ 0 \\ 1 \\ 0 \end{bmatrix}, \quad \xi_3 = \begin{bmatrix} 0 \\ -1 \\ 0 \\ 0 \\ 1 \end{bmatrix}$$<br />
+故方程组的通解为：<br />
+$$x = k_1 \begin{bmatrix} -2 \\ 0 \\ 1 \\ 0 \\ 0 \end{bmatrix} + k_2 \begin{bmatrix} -1 \\ 0 \\ 0 \\ 1 \\ 0 \end{bmatrix} + k_3 \begin{bmatrix} 0 \\ -1 \\ 0 \\ 0 \\ 1 \end{bmatrix} \quad (k_1, k_2, k_3 \text{ 为任意常数})$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[4.2]: 几何正交性约束下的齐次线性方程组</strong></p>
+<p>已知向量 $\alpha_1 = (1, 1, 1)^T$, $\alpha_2 = (1, 2, 3)^T$，求与 $\alpha_1, \alpha_2$ 均正交的单位向量 $\alpha$。</p>
+<p>主要思路: 向量正交等价于内积为 0，建立齐次线性方程组，求出基础解系后再执行模长正负单位化。</p>
+<blockquote>
+<p>[1] 建立正交约束方程组：</p>
+<p>设所求向量为 $\alpha = (x_1, x_2, x_3)^T$。由 $\alpha \perp \alpha_1$ 且 $\alpha \perp \alpha_2$ 得：<br />
+$$\begin{cases} \alpha_1^T \alpha = x_1 + x_2 + x_3 = 0 \\ \alpha_2^T \alpha = x_1 + 2x_2 + 3x_3 = 0 \end{cases}$$</p>
+<p>[2] 初等行变换求基础解系：</p>
+<p>系数矩阵初等行变换：<br />
+$$A = \begin{bmatrix} 1 & 1 & 1 \\ 1 & 2 & 3 \end{bmatrix} \xrightarrow{r_2 - r_1} \begin{bmatrix} 1 & 1 & 1 \\ 0 & 1 & 2 \end{bmatrix} \xrightarrow{r_1 - r_2} \begin{bmatrix} 1 & 0 & -1 \\ 0 & 1 & 2 \end{bmatrix}$$<br />
+同解方程为 $\begin{cases} x_1 = x_3 \\ x_2 = -2x_3 \end{cases}$。<br />
+取自由变量 $x_3 = 1$，得到基础解系：<br />
+$$\xi = \begin{bmatrix} 1 \\ -2 \\ 1 \end{bmatrix}$$</p>
+<p>[3] 计算模长并完成单位化：</p>
+<p>计算解向量的欧氏模长：<br />
+$$\|\xi\| = \sqrt{1^2 + (-2)^2 + 1^2} = \sqrt{6}$$<br />
+故所求的单位向量为：<br />
+$$\alpha = \pm \frac{\xi}{\|\xi\|} = \pm \frac{1}{\sqrt{6}} \begin{bmatrix} 1 \\ -2 \\ 1 \end{bmatrix}$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[4.3]: 乘积矩阵与 Sylvester 秩不等式综合判定</strong></p>
+<p>设 $A$ 为 $m \times n$ 矩阵，$B$ 为 $n \times 2$ 矩阵，且乘积矩阵满足 $AB = \begin{bmatrix} 1 & 0 \\ 2 & 1 \end{bmatrix}$。分析齐次方程组 $By = 0$ 的解，并证明 $r(A) + r(B) \le n + 2$。</p>
+<p>主要思路: 利用矩阵乘积秩不等式 $r(AB) \le \min(r(A), r(B))$ 与 Sylvester 秩不等式 $r(A) + r(B) \le n + r(AB)$ 进行双向夹逼。</p>
+<blockquote>
+<p>[1] 计算乘积矩阵的秩与因子秩下界：</p>
+<p>乘积矩阵 $AB = \begin{bmatrix} 1 & 0 \\ 2 & 1 \end{bmatrix}$ 的行列式为 $|AB| = 1 \ne 0$，因此：<br />
+$$r(AB) = 2$$<br />
+由乘积矩阵秩的基本性质 $r(AB) \le \min(r(A), r(B))$ 可得：<br />
+$$r(A) \ge 2, \quad r(B) \ge 2$$<br />
+而 $B$ 为 $n \times 2$ 矩阵，列数仅为 2，故恒有 $r(B) \le 2$。<br />
+两向夹逼必有：<br />
+$$r(B) = 2$$</p>
+<p>[2] 判定方程组 $By = 0$ 的解空间：</p>
+<p>对于齐次线性方程组 $By = 0$，未知量个数为 2。<br />
+其解空间维数为：<br />
+$$\dim N(B) = 2 - r(B) = 2 - 2 = 0$$<br />
+故齐次线性方程组 $By = 0$ 只有零解。</p>
+<p>[3] 运用 Sylvester 秩不等式证明上界：</p>
+<p>由 Sylvester 秩不等式：<br />
+$$r(A) + r(B) - n \le r(AB)$$<br />
+将 $r(AB) = 2$ 代入不等式右端：<br />
+$$r(A) + r(B) - n \le 2 \implies r(A) + r(B) \le n + 2$$<br />
+命题完全获证。</p>
+</blockquote>
+<hr />
+<p><strong>例题[4.4]: 伴随矩阵方程 $A^*x=0$ 的全解分析</strong></p>
+<p>设 $3$ 阶矩阵 $A = \begin{bmatrix} 1 & 1 & 1 \\ 1 & 1 & 1 \\ 1 & 1 & 1 \end{bmatrix}$，求其伴随矩阵对应的齐次线性方程组 $A^*x = 0$ 的基础解系与通解。</p>
+<p>主要思路: 分析 $A$ 的秩，运用伴随矩阵秩准则确定 $r(A^*)$，从而确定解空间维数并给出基础解系。</p>
+<blockquote>
+<p>[1] 计算矩阵 $A$ 的秩：</p>
+<p>矩阵 $A$ 的三行完全一致且非零，经初等行变换：<br />
+$$A \to \begin{bmatrix} 1 & 1 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix} \implies r(A) = 1$$</p>
+<p>[2] 运用伴随矩阵秩准则求 $A^*$：</p>
+<p>对于 $n$ 阶方阵 $A$（本题 $n = 3$），其伴随矩阵的秩满足：<br />
+$$r(A^*) = \begin{cases} n, & r(A) = n \\ 1, & r(A) = n - 1 \\ 0, & r(A) < n - 1 \end{cases}$$<br />
+因 $r(A) = 1 < 3 - 1 = 2$，故矩阵 $A$ 的所有 2 阶子式全部为 0，必有：<br />
+$$r(A^*) = 0 \implies A^* = O$$</p>
+<p>[3] 确定解空间维数与通解：</p>
+<p>方程组退化为 $Ox = 0$，对任意 $x \in \mathbb{R}^3$ 恒成立。<br />
+解空间维数为：<br />
+$$\dim N(A^*) = 3 - r(A^*) = 3 - 0 = 3$$<br />
+可取 3 维标准正交基作为基础解系：<br />
+$$\xi_1 = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \quad \xi_2 = \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}, \quad \xi_3 = \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}$$<br />
+通解为：<br />
+$$x = k_1 \xi_1 + k_2 \xi_2 + k_3 \xi_3 \quad (k_1, k_2, k_3 \text{ 为任意常数})$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[4.5]: 基础解系的等价替换判定定理</strong></p>
+<p>设 $\xi_1, \xi_2, \xi_3$ 是齐次线性方程组 $Ax = 0$ 的一个基础解系，向量组定义为 $\eta_1 = \xi_1 + \xi_2$, $\eta_2 = \xi_2 + \xi_3$, $\eta_3 = \xi_3 + k\xi_1$。求参数 $k$ 满足何种条件时，$\eta_1, \eta_2, \eta_3$ 仍是 $Ax = 0$ 的基础解系。</p>
+<p>主要思路: 构造过渡矩阵 $C$，利用基础解系线性替换定理，其充要条件为过渡矩阵非奇异（$|C| \ne 0$）。</p>
+<blockquote>
+<p>[1] 验证解的封闭性：</p>
+<p>因为 $\xi_1, \xi_2, \xi_3$ 均为 $Ax = 0$ 的解向量，由齐次方程组解的线性叠加性质，作为其线性组合的 $\eta_1, \eta_2, \eta_3$ 也必然都是 $Ax = 0$ 的解向量。</p>
+<p>[2] 构造过渡矩阵并计算行列式：</p>
+<p>由已知线性组合关系可写出矩阵形式：<br />
+$$[\eta_1, \eta_2, \eta_3] = [\xi_1, \xi_2, \xi_3] \begin{bmatrix} 1 & 0 & k \\ 1 & 1 & 0 \\ 0 & 1 & 1 \end{bmatrix}$$<br />
+记过渡矩阵为 $C = \begin{bmatrix} 1 & 0 & k \\ 1 & 1 & 0 \\ 0 & 1 & 1 \end{bmatrix}$。计算其行列式：<br />
+$$|C| = 1 \cdot \begin{vmatrix} 1 & 0 \\ 1 & 1 \end{vmatrix} + k \cdot \begin{vmatrix} 1 & 1 \\ 0 & 1 \end{vmatrix} = 1 + k$$</p>
+<p>[3] 判定线性无关性得出结论：</p>
+<p>由基础解系替换定理，$\eta_1, \eta_2, \eta_3$ 成为基础解系 $\iff \eta_1, \eta_2, \eta_3$ 线性无关 $\iff |C| \ne 0$。<br />
+$$1 + k \ne 0 \implies k \ne -1$$<br />
+结论：当且仅当 $k \ne -1$ 时，$\eta_1, \eta_2, \eta_3$ 仍是 $Ax = 0$ 的基础解系。</p>
+</blockquote>
+<hr />
+<p><strong>例题[4.6]: 行满秩矩阵非齐次方程组恒有解定理</strong></p>
+<p>设 $A$ 为 $m \times n$ 矩阵，且 $r(A) = m$（行满秩）。证明：对任意常数项向量 $b \in \mathbb{R}^m$，非齐次线性方程组 $Ax = b$ 恒有解。</p>
+<p>主要思路: 利用增广矩阵行数约束确定 $r(A \mid b) \le m$，再通过 $r(A \mid b) \ge r(A) = m$ 夹逼判定两矩阵秩恒相等。</p>
+<blockquote>
+<p>[1] 分析增广矩阵秩的上下界：</p>
+<p>增广矩阵 $[A \mid b]$ 的行数为 $m$，列数为 $n+1$。<br />
+矩阵的秩不超过其行数，因此恒有：<br />
+$$r(A \mid b) \le m$$</p>
+<p>[2] 利用增广矩阵与系数矩阵秩的包含关系夹逼：</p>
+<p>增广矩阵是由系数矩阵追加一列所得，增添列不改变或增加秩，故恒有：<br />
+$$r(A \mid b) \ge r(A)$$<br />
+结合已知条件 $r(A) = m$，得到双向不等式：<br />
+$$m = r(A) \le r(A \mid b) \le m$$<br />
+由此必有 $r(A \mid b) = m$。</p>
+<p>[3] 应用相容性判定定理获证：</p>
+<p>综上所述，对任意向量 $b \in \mathbb{R}^m$，恒有：<br />
+$$r(A) = r(A \mid b) = m$$<br />
+根据非齐次线性方程组解的判定定理，$Ax = b$ 必有解。证毕。</p>
+</blockquote>
+<hr />
+<p><strong>例题[4.7]: 正规方程组 $A^TAx=A^Tb$ 相容可解性证明</strong></p>
+<p>设 $A$ 为任意 $m \times n$ 实矩阵，$b \in \mathbb{R}^m$ 为任意常数项列向量。证明：正规方程组（法方程）$A^TAx = A^Tb$ 恒相容有解。</p>
+<p>主要思路: 将正规方程增广矩阵写为乘积形式 $A^T[A \mid b]$，结合实矩阵四大秩恒等式 $r(A^TA) = r(A^T)$ 进行两向夹逼。</p>
+<blockquote>
+<p>[1] 表示正规方程组增广矩阵：</p>
+<p>正规方程组的系数矩阵为 $A^TA$，增广矩阵为 $[A^TA \mid A^Tb] = A^T [A \mid b]$。<br />
+根据乘积矩阵秩的性质，矩阵乘积的秩不超过各因子矩阵的秩：<br />
+$$r(A^TA \mid A^Tb) = r(A^T [A \mid b]) \le r(A^T)$$</p>
+<p>[2] 利用实矩阵秩恒等式构建不等式链：</p>
+<p>增广矩阵包含系数矩阵的所有列，故秩不小于系数矩阵秩：<br />
+$$r(A^TA) \le r(A^TA \mid A^Tb)$$<br />
+对实矩阵 $A$ 成立四大秩恒等式 $r(A^TA) = r(A^T)$，故串联得：<br />
+$$r(A^TA) \le r(A^TA \mid A^Tb) \le r(A^T) = r(A^TA)$$</p>
+<p>[3] 夹逼确定秩相等并得出结论：</p>
+<p>由夹逼准则直接得出：<br />
+$$r(A^TA) = r(A^TA \mid A^Tb)$$<br />
+根据非齐次线性方程组解的判定定理，正规方程组 $A^TAx = A^Tb$ 恒有解。</p>
+</blockquote>
+<hr />
+<p><strong>例题[4.8]: 含双参数线性方程组解的完备讨论</strong></p>
+<p>讨论参数 $\lambda, a$ 的取值，判断下列非齐次线性方程组解的情况，并在有无穷多解时求其通解：<br />
+$$\begin{cases} \lambda x_1 + x_2 + x_3 = 1 \\ x_1 + \lambda x_2 + x_3 = a \\ x_1 + x_2 + \lambda x_3 = a^2 \end{cases}$$</p>
+<p>主要思路: 先算系数行列式 $|A|$ 确定唯一解条件，再针对行列式为 0 的临界点实施增广矩阵初等行变换分类讨论。</p>
+<blockquote>
+<p>[1] 计算系数行列式并确定唯一解条件：</p>
+<p>$$|A| = \begin{vmatrix} \lambda & 1 & 1 \\ 1 & \lambda & 1 \\ 1 & 1 & \lambda \end{vmatrix} = (\lambda + 2) \begin{vmatrix} 1 & 1 & 1 \\ 1 & \lambda & 1 \\ 1 & 1 & \lambda \end{vmatrix} = (\lambda + 2)(\lambda - 1)^2$$<br />
+当 $\lambda \ne 1$ 且 $\lambda \ne -2$ 时，$|A| \ne 0$，方程组有唯一解。</p>
+<p>[2] 讨论 $\lambda = 1$ 与 $\lambda = -2$ 时的解态：</p>
+<p>(1) 当 $\lambda = 1$ 时，增广矩阵初等行变换：<br />
+$$[A \mid b] = \begin{bmatrix} 1 & 1 & 1 & 1 \\ 1 & 1 & 1 & a \\ 1 & 1 & 1 & a^2 \end{bmatrix} \to \begin{bmatrix} 1 & 1 & 1 & 1 \\ 0 & 0 & 0 & a - 1 \\ 0 & 0 & 0 & a^2 - 1 \end{bmatrix}$$<br />
+若 $a = 1$，则 $r(A) = r(A \mid b) = 1 < 3$，有无穷多解；<br />
+若 $a \ne 1$，则 $r(A) = 1 < r(A \mid b) = 2$，无解。</p>
+<p>(2) 当 $\lambda = -2$ 时，增广矩阵行变换：<br />
+$$[A \mid b] = \begin{bmatrix} -2 & 1 & 1 & 1 \\ 1 & -2 & 1 & a \\ 1 & 1 & -2 & a^2 \end{bmatrix} \to \begin{bmatrix} 1 & 1 & -2 & a^2 \\ 0 & -3 & 3 & a - a^2 \\ 0 & 0 & 0 & a^2 + a + 1 \end{bmatrix}$$<br />
+对任意实数 $a$，$a^2 + a + 1 = (a + 1/2)^2 + 3/4 > 0$，末行始终出现矛盾方程 $0 = a^2 + a + 1 \ne 0$。<br />
+故 $r(A) = 2 < r(A \mid b) = 3$，恒无解。</p>
+<p>[3] 求解 $\lambda = 1, a = 1$ 时的通解：</p>
+<p>此时同解方程仅有一个：$x_1 + x_2 + x_3 = 1$。<br />
+取自由未知量 $x_2, x_3$，令 $x_2 = 1, x_3 = 0$ 得齐次解 $\xi_1 = [-1, 1, 0]^T$；令 $x_2 = 0, x_3 = 1$ 得齐次解 $\xi_2 = [-1, 0, 1]^T$。<br />
+特解令 $x_2 = x_3 = 0$，得 $\eta^* = [1, 0, 0]^T$。<br />
+通解为：<br />
+$$x = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} + k_1 \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix} + k_2 \begin{bmatrix} -1 \\ 0 \\ 1 \end{bmatrix} \quad (k_1, k_2 \text{ 为任意常数})$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[4.9]: 抽象解向量线性组合与特解/基础解系构造</strong></p>
+<p>设 3 阶矩阵 $A$ 的秩 $r(A) = 2$，向量 $\eta_1, \eta_2, \eta_3$ 是非齐次线性方程组 $Ax = b$ 的三个两两不同的解向量，且满足 $\eta_1 + \eta_2 = [2, 3, 4]^T, \eta_2 + \eta_3 = [4, 5, 6]^T$。求方程组 $Ax = b$ 的通解。</p>
+<p>主要思路: 解空间维数为 $n - r(A) = 3 - 2 = 1$，作差构造齐次基础解系，加权平均构造非齐次特解。</p>
+<blockquote>
+<p>[1] 确定导出齐次方程组的基础解系维数：</p>
+<p>未知量个数 $n = 3$，矩阵秩 $r(A) = 2$。<br />
+导出组 $Ax = 0$ 的解空间维数为：<br />
+$$\dim N(A) = n - r(A) = 3 - 2 = 1$$<br />
+因此基础解系仅由 1 个非零解向量构成。</p>
+<p>[2] 构造导出组基础解系：</p>
+<p>由非齐次解之差必为齐次解的性质：<br />
+$$\xi = \eta_3 - \eta_1 = (\eta_2 + \eta_3) - (\eta_1 + \eta_2) = \begin{bmatrix} 4 \\ 5 \\ 6 \end{bmatrix} - \begin{bmatrix} 2 \\ 3 \\ 4 \end{bmatrix} = \begin{bmatrix} 2 \\ 2 \\ 2 \end{bmatrix}$$<br />
+取最简方向向量：<br />
+$$\xi_0 = \begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}$$</p>
+<p>[3] 构造特解并写出通解：</p>
+<p>取 $\eta_1, \eta_2$ 的等权算术平均（系数和 $1/2 + 1/2 = 1$），必为非齐次方程组的特解：<br />
+$$\eta^* = \frac{1}{2}(\eta_1 + \eta_2) = \frac{1}{2} \begin{bmatrix} 2 \\ 3 \\ 4 \end{bmatrix} = \begin{bmatrix} 1 \\ 1.5 \\ 2 \end{bmatrix}$$<br />
+由此写出方程组的通解为：<br />
+$$x = \begin{bmatrix} 1 \\ 1.5 \\ 2 \end{bmatrix} + k \begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix} \quad (k \text{ 为任意常数})$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[4.10]: 列向量组线性相关关系与齐次通解</strong></p>
+<p>设矩阵 $A = [\alpha_1, \alpha_2, \alpha_3, \alpha_4]$，已知其列向量满足关系式 $2\alpha_1 - \alpha_2 + 3\alpha_3 = 0$ 且 $\alpha_2 + 2\alpha_3 - \alpha_4 = 0$。若已知 $r(A) = 2$，求齐次线性方程组 $Ax = 0$ 的通解。</p>
+<p>主要思路: 将列向量线性关系直接读出为解向量分量，验证无关性并由维数公式确定基础解系。</p>
+<blockquote>
+<p>[1] 读取列向量关系转化为解向量：</p>
+<p>由 $2\alpha_1 - \alpha_2 + 3\alpha_3 + 0\alpha_4 = 0$，可知：<br />
+$$\xi_1 = [2, -1, 3, 0]^T \text{ 满足 } A\xi_1 = 0$$<br />
+由 $0\alpha_1 + \alpha_2 + 2\alpha_3 - \alpha_4 = 0$，可知：<br />
+$$\xi_2 = [0, 1, 2, -1]^T \text{ 满足 } A\xi_2 = 0$$</p>
+<p>[2] 验证线性无关性与解空间维数：</p>
+<p>考察由两向量构成的矩阵：<br />
+$$[\xi_1, \xi_2] = \begin{bmatrix} 2 & 0 \\ -1 & 1 \\ 3 & 2 \\ 0 & -1 \end{bmatrix}$$<br />
+显然两向量不成比例，必线性无关。<br />
+未知量个数 $n = 4$，矩阵秩 $r(A) = 2$，解空间维数为：<br />
+$$\dim N(A) = n - r(A) = 4 - 2 = 2$$</p>
+<p>[3] 写出齐次通解：</p>
+<p>因为 $\xi_1, \xi_2$ 为 2 个线性无关解向量，恰构成 $Ax = 0$ 的基础解系。<br />
+通解为：<br />
+$$x = k_1 \begin{bmatrix} 2 \\ -1 \\ 3 \\ 0 \end{bmatrix} + k_2 \begin{bmatrix} 0 \\ 1 \\ 2 \\ -1 \end{bmatrix} \quad (k_1, k_2 \text{ 为任意常数})$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[4.11]: 逆向思维：由通解结构反演系数矩阵性质</strong></p>
+<p>设非齐次线性方程组 $Ax = b$ 的通解为 $x = [2, 0, 0, 1]^T + k[1, -1, 2, 0]^T$，其中 $A = [\alpha_1, \alpha_2, \alpha_3, \alpha_4]$。<br />
+(1) 证明 $\alpha_1, \alpha_2, \alpha_4$ 线性无关；<br />
+(2) 用 $\alpha_1, \alpha_2, \alpha_4$ 线性表出 $\alpha_3$ 及常数项向量 $b$。</p>
+<p>主要思路: 提取基础解系与特解对应方程，构造线性组合转化为解向量判定其是否属于导出组解空间。</p>
+<blockquote>
+<p>[1] 提取基础解系与特解方程信息：</p>
+<p>由题设通解表达式可知：<br />
+$$\xi = [1, -1, 2, 0]^T \text{ 满足 } A\xi = 0 \implies \alpha_1 - \alpha_2 + 2\alpha_3 = 0$$<br />
+$$\eta^* = [2, 0, 0, 1]^T \text{ 满足 } A\eta^* = b \implies 2\alpha_1 + \alpha_4 = b$$<br />
+且自由变量仅有 1 个，故 $n - r(A) = 1 \implies r(A) = 4 - 1 = 3$。</p>
+<p>[2] 反证/定义法证明 $\alpha_1, \alpha_2, \alpha_4$ 线性无关：</p>
+<p>设存在常数 $c_1, c_2, c_4$ 使得：<br />
+$$c_1\alpha_1 + c_2\alpha_2 + c_4\alpha_4 = 0$$<br />
+该式等价于向量 $X = [c_1, c_2, 0, c_4]^T$ 是齐次方程组 $Ax = 0$ 的解。<br />
+而 $Ax = 0$ 的全部解均可表示为 $k \xi = k [1, -1, 2, 0]^T$。<br />
+对照第 3 个分量：$X$ 的第 3 分量为 0，而 $k\xi$ 的第 3 分量为 $2k$。<br />
+故必有 $2k = 0 \implies k = 0 \implies X = 0$。<br />
+从而 $c_1 = c_2 = c_4 = 0$。<br />
+因此，向量组 $\alpha_1, \alpha_2, \alpha_4$ 线性无关。</p>
+<p>[3] 求解线性表出式：</p>
+<p>由 $\alpha_1 - \alpha_2 + 2\alpha_3 = 0$，移项整理直接解得：<br />
+$$\alpha_3 = -\frac{1}{2}\alpha_1 + \frac{1}{2}\alpha_2$$<br />
+由 $A\eta^* = b$，直接得到：<br />
+$$b = 2\alpha_1 + \alpha_4$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[4.12]: 两线性方程组公共解的三种解法详解</strong></p>
+<p>设方程组 (I) 为 $\begin{cases} x_1 + 2x_2 - x_3 = 0 \\ 2x_1 + x_2 + x_3 = 0 \end{cases}$，方程组 (II) 为 $\begin{cases} x_1 - x_2 + 2x_3 = 0 \\ 3x_1 + 3x_2 = 0 \end{cases}$。求方程组 (I) 与 (II) 的全部公共解。</p>
+<p>主要思路: 系统演示方法一（联立矩阵法）、方法二（解代入法）、方法三（通解参数配对法）。</p>
+<blockquote>
+<p>[1] 方法一：联立矩阵增广消元法：</p>
+<p>将两方程组联立，写出整体系数矩阵并施行初等行变换：<br />
+$$\begin{bmatrix} A \\ B \end{bmatrix} = \begin{bmatrix} 1 & 2 & -1 \\ 2 & 1 & 1 \\ 1 & -1 & 2 \\ 3 & 3 & 0 \end{bmatrix} \xrightarrow[r_4 - 3r_1]{r_2 - 2r_1, r_3 - r_1} \begin{bmatrix} 1 & 2 & -1 \\ 0 & -3 & 3 \\ 0 & -3 & 3 \\ 0 & -3 & 3 \end{bmatrix} \to \begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & -1 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}$$<br />
+同解方程为 $\begin{cases} x_1 = -x_3 \\ x_2 = x_3 \end{cases}$。<br />
+令 $x_3 = 1$，即得公共解基础解系 $\xi = [-1, 1, 1]^T$。</p>
+<p>[2] 方法二：解代入验证法：</p>
+<p>先求解方程组 (I)：<br />
+$$A = \begin{bmatrix} 1 & 2 & -1 \\ 2 & 1 & 1 \end{bmatrix} \to \begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & -1 \end{bmatrix} \implies x = c \begin{bmatrix} -1 \\ 1 \\ 1 \end{bmatrix}$$<br />
+将 (I) 的通解 $x_1 = -c, x_2 = c, x_3 = c$ 代入方程组 (II) 中检验：<br />
+方程一：$(-c) - c + 2c = 0$，恒成立；<br />
+方程二：$3(-c) + 3c = 0$，恒成立。<br />
+说明方程组 (I) 的每一个解都满足方程组 (II)。</p>
+<p>[3] 综合给出全部公共解结论：</p>
+<p>综上所述，方程组 (I) 与 (II) 的全部公共解为：<br />
+$$x = k \begin{bmatrix} -1 \\ 1 \\ 1 \end{bmatrix} \quad (k \text{ 为任意常数})$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[4.13]: 两齐次线性方程组同解的参数确定</strong></p>
+<p>设方程组 (I) 为 $\begin{cases} x_1 + x_2 + x_3 = 0 \\ x_1 + 2x_2 + a x_3 = 0 \end{cases}$，方程组 (II) 为 $\begin{cases} x_1 + 3x_2 + b x_3 = 0 \\ 2x_1 + 3x_2 + 3x_3 = 0 \end{cases}$。已知方程组 (I) 与 (II) 同解，求参数 $a, b$ 的值。</p>
+<p>主要思路: 两方程组同解充要条件为 $r(A) = r(B) = r\begin{bmatrix} A \\ B \end{bmatrix} = 2$，对联立矩阵进行行化简确定参数。</p>
+<blockquote>
+<p>[1] 分析各方程组系数矩阵的秩：</p>
+<p>方程组 (I) 的两行不成比例，必有 $r(A) = 2$；方程组 (II) 的两行亦不成比例，必有 $r(B) = 2$。<br />
+因此，(I) 与 (II) 同解的充要条件为联立矩阵的秩保持为 2：<br />
+$$r\begin{bmatrix} A \\ B \end{bmatrix} = 2$$</p>
+<p>[2] 联立矩阵初等行变换消元：</p>
+<p>$$\begin{bmatrix} 1 & 1 & 1 \\ 1 & 2 & a \\ 2 & 3 & 3 \\ 1 & 3 & b \end{bmatrix} \xrightarrow[r_4 - r_1]{r_2 - r_1, r_3 - 2r_1} \begin{bmatrix} 1 & 1 & 1 \\ 0 & 1 & a - 1 \\ 0 & 1 & 1 \\ 0 & 2 & b - 1 \end{bmatrix} \xrightarrow[r_4 - 2r_3]{r_2 - r_3} \begin{bmatrix} 1 & 1 & 1 \\ 0 & 0 & a - 2 \\ 0 & 1 & 1 \\ 0 & 0 & b - 3 \end{bmatrix}$$<br />
+调整行次序：<br />
+$$\to \begin{bmatrix} 1 & 1 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & a - 2 \\ 0 & 0 & b - 3 \end{bmatrix}$$</p>
+<p>[3] 解出参数值：</p>
+<p>要使联立矩阵的秩等于 2，第 3 行与第 4 行必须全为零行：<br />
+$$\begin{cases} a - 2 = 0 \\ b - 3 = 0 \end{cases} \implies \begin{cases} a = 2 \\ b = 3 \end{cases}$$<br />
+故所求参数为 $a = 2, b = 3$。</p>
+</blockquote>
+<hr />
+<p><strong>例题[4.14]: 经典证明：方程组相容可解与同解方程组</strong></p>
+<p>设非齐次线性方程组 $Ax = b$ 有解。证明：齐次线性方程组 $A^T y = 0$ 与 $\begin{bmatrix} A^T \\ b^T \end{bmatrix} y = 0$ 同解。</p>
+<p>主要思路: 由 $Ax = b$ 有解可知 $b$ 可由 $A$ 的列线性表出，转置得 $b^T$ 可由 $A^T$ 的行线性表出，从而两方程组解集双向包含。</p>
+<blockquote>
+<p>[1] 提取向量线性表出关系：</p>
+<p>因为 $Ax = b$ 有解，设某一特解为 $x_0 = [c_1, c_2, \dots, c_n]^T$。<br />
+则常数项向量可表示为列向量线性组合：<br />
+$$b = Ax_0 = c_1\alpha_1 + c_2\alpha_2 + \cdots + c_n\alpha_n$$<br />
+两端同时转置，得：<br />
+$$b^T = (Ax_0)^T = x_0^T A^T$$<br />
+这表明行向量 $b^T$ 可以由矩阵 $A^T$ 的行向量组线性表出。</p>
+<p>[2] 证明解集的双向包含：</p>
+<p>(1) 显然，若 $\begin{bmatrix} A^T \\ b^T \end{bmatrix} y = 0$，拆分即得 $A^T y = 0$ 与 $b^T y = 0$，自然满足 $A^T y = 0$；</p>
+<p>(2) 反之，若 $y$ 满足 $A^T y = 0$，两端左乘 $x_0^T$：<br />
+$$x_0^T (A^T y) = x_0^T 0 = 0$$<br />
+结合第一步的表出关系：<br />
+$$b^T y = (x_0^T A^T) y = x_0^T (A^T y) = 0$$<br />
+即 $y$ 也必定满足 $b^T y = 0$。</p>
+<p>[3] 综合得出同解结论：</p>
+<p>因此，满足 $A^T y = 0$ 的向量 $y$ 必同时满足 $\begin{bmatrix} A^T \\ b^T \end{bmatrix} y = \begin{bmatrix} A^Ty \\ b^Ty \end{bmatrix} = 0$。<br />
+两方程组解集完全一致，故 $A^T y = 0$ 与 $\begin{bmatrix} A^T \\ b^T \end{bmatrix} y = 0$ 是同解方程组。</p>
+</blockquote>
+<hr />
+<p><strong>例题[4.15]: 实矩阵四大秩恒等式严格证明</strong></p>
+<p>设 $A$ 为任意 $m \times n$ 实矩阵。证明：<br />
+(1) 齐次线性方程组 $Ax = 0$ 与 $A^TAx = 0$ 同解；<br />
+(2) 四大秩恒等式 $r(A) = r(A^T) = r(A^TA) = r(AA^T)$ 成立。</p>
+<p>主要思路: 结合实数欧氏模长的正定性证明 $A^TAx = 0 \implies Ax = 0$，由同解维数相等及转置对称性获证。</p>
+<blockquote>
+<p>[1] 证明两齐次方程组解集相等：</p>
+<p>(1) 若 $x$ 满足 $Ax = 0$，两端左乘 $A^T$ 得 $A^T(Ax) = A^T 0 = 0$，故 $Ax = 0$ 的解均是 $A^TAx = 0$ 的解；</p>
+<p>(2) 反之，若 $x$ 满足 $A^TAx = 0$，两端左乘行向量 $x^T$：<br />
+$$x^T A^T A x = 0 \implies (Ax)^T (Ax) = \|Ax\|^2 = 0$$<br />
+由于 $A$ 与 $x$ 均为实矩阵和实向量，实向量的欧氏模长平方为 0 当且仅当该向量为零向量：<br />
+$$<font color=deeppink>Ax = 0</font>$$<br />
+因此 $A^TAx = 0$ 的解必然是 $Ax = 0$ 的解。<br />
+两方程组拥有完全相同的解集，即 $Ax = 0$ 与 $A^TAx = 0$ 同解。</p>
+<p>[2] 由解空间维数推出秩相等：</p>
+<p>因为两方程组未知量个数均为 $n$，且同解方程组的解空间维数必然相等：<br />
+$$n - r(A) = n - r(A^TA) \implies r(A) = r(A^TA)$$</p>
+<p>[3] 推广到转置矩阵并得出四大秩恒等式：</p>
+<p>将该结论应用于实矩阵 $A^T$，同样成立：<br />
+$$r(A^T) = r((A^T)^T A^T) = r(AA^T)$$<br />
+再由初等变换与矩阵秩的基本性质知 $r(A) = r(A^T)$。<br />
+联立上述全部等式，最终证得四大秩恒等式：<br />
+$$r(A) = r(A^T) = r(A^TA) = r(AA^T)$$</p>
+</blockquote>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>
