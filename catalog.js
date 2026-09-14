@@ -25,11 +25,11 @@ window.CATALOG_DATA = {
       "badge": "重点核心",
       "color": "#8b5cf6",
       "stats": {
-        "totalDocs": 74,
+        "totalDocs": 73,
         "formats": {
-          "html": 72,
-          "pdf": 60,
-          "md": 74
+          "html": 71,
+          "pdf": 59,
+          "md": 73
         }
       },
       "children": [
@@ -412,17 +412,6 @@ window.CATALOG_DATA = {
                     "html": "302 数学二/高等数学/Chap01函数极限与连续/Chap01 函数极限的概念和性质.html",
                     "md": "302 数学二/高等数学/Chap01函数极限与连续/Chap01 函数极限的概念和性质.md",
                     "pdf": "302 数学二/高等数学/Chap01函数极限与连续/Chap01 函数极限的概念和性质.pdf"
-                  }
-                },
-                {
-                  "type": "doc",
-                  "name": "Chap02.1 函数极限的概念和性质",
-                  "defaultType": "html",
-                  "defaultPath": "302 数学二/高等数学/Chap01函数极限与连续/Chap02.1 函数极限的概念和性质.html",
-                  "formats": {
-                    "html": "302 数学二/高等数学/Chap01函数极限与连续/Chap02.1 函数极限的概念和性质.html",
-                    "md": "302 数学二/高等数学/Chap01函数极限与连续/Chap02.1 函数极限的概念和性质.md",
-                    "pdf": "302 数学二/高等数学/Chap01函数极限与连续/Chap02.1 函数极限的概念和性质.pdf"
                   }
                 }
               ]
@@ -2145,11 +2134,11 @@ window.CATALOG_DATA = {
       "badge": "英语二",
       "color": "#10b981",
       "stats": {
-        "totalDocs": 17,
+        "totalDocs": 2,
         "formats": {
           "html": 0,
-          "pdf": 1,
-          "md": 16
+          "pdf": 0,
+          "md": 2
         }
       },
       "children": [
@@ -2182,155 +2171,6 @@ window.CATALOG_DATA = {
               "formats": {
                 "md": "204 英语二/CET6/Readme.md"
               }
-            }
-          ]
-        },
-        {
-          "type": "folder",
-          "name": "研究生英语",
-          "path": "204 英语二/研究生英语",
-          "children": [
-            {
-              "type": "folder",
-              "name": "语法",
-              "path": "204 英语二/研究生英语/语法",
-              "children": [
-                {
-                  "type": "doc",
-                  "name": "27田静《句句真研》（英一）",
-                  "defaultType": "pdf",
-                  "defaultPath": "204 英语二/研究生英语/语法/27田静《句句真研》（英一）.pdf",
-                  "formats": {
-                    "pdf": "204 英语二/研究生英语/语法/27田静《句句真研》（英一）.pdf"
-                  }
-                },
-                {
-                  "type": "doc",
-                  "name": "Chap1.1 简单句的核心",
-                  "defaultType": "md",
-                  "defaultPath": "204 英语二/研究生英语/语法/Chap1.1 简单句的核心.md",
-                  "formats": {
-                    "md": "204 英语二/研究生英语/语法/Chap1.1 简单句的核心.md"
-                  }
-                },
-                {
-                  "type": "doc",
-                  "name": "Chap1.2 简单句和谓语动词",
-                  "defaultType": "md",
-                  "defaultPath": "204 英语二/研究生英语/语法/Chap1.2 简单句和谓语动词.md",
-                  "formats": {
-                    "md": "204 英语二/研究生英语/语法/Chap1.2 简单句和谓语动词.md"
-                  }
-                },
-                {
-                  "type": "doc",
-                  "name": "Chap2.1 简单句的词性角度拓展",
-                  "defaultType": "md",
-                  "defaultPath": "204 英语二/研究生英语/语法/Chap2.1 简单句的词性角度拓展.md",
-                  "formats": {
-                    "md": "204 英语二/研究生英语/语法/Chap2.1 简单句的词性角度拓展.md"
-                  }
-                },
-                {
-                  "type": "doc",
-                  "name": "Chap2.2 简单句的成分角度拓展",
-                  "defaultType": "md",
-                  "defaultPath": "204 英语二/研究生英语/语法/Chap2.2 简单句的成分角度拓展.md",
-                  "formats": {
-                    "md": "204 英语二/研究生英语/语法/Chap2.2 简单句的成分角度拓展.md"
-                  }
-                },
-                {
-                  "type": "doc",
-                  "name": "Chap3.1 简单句的非谓语动词",
-                  "defaultType": "md",
-                  "defaultPath": "204 英语二/研究生英语/语法/Chap3.1 简单句的非谓语动词.md",
-                  "formats": {
-                    "md": "204 英语二/研究生英语/语法/Chap3.1 简单句的非谓语动词.md"
-                  }
-                },
-                {
-                  "type": "doc",
-                  "name": "Chap4.1 并列句",
-                  "defaultType": "md",
-                  "defaultPath": "204 英语二/研究生英语/语法/Chap4.1 并列句.md",
-                  "formats": {
-                    "md": "204 英语二/研究生英语/语法/Chap4.1 并列句.md"
-                  }
-                },
-                {
-                  "type": "doc",
-                  "name": "Chap4.2 (主从复合句)名词性从句",
-                  "defaultType": "md",
-                  "defaultPath": "204 英语二/研究生英语/语法/Chap4.2 (主从复合句)名词性从句.md",
-                  "formats": {
-                    "md": "204 英语二/研究生英语/语法/Chap4.2 (主从复合句)名词性从句.md"
-                  }
-                },
-                {
-                  "type": "doc",
-                  "name": "Chap4.3 (主从复合句)定语从句",
-                  "defaultType": "md",
-                  "defaultPath": "204 英语二/研究生英语/语法/Chap4.3 (主从复合句)定语从句.md",
-                  "formats": {
-                    "md": "204 英语二/研究生英语/语法/Chap4.3 (主从复合句)定语从句.md"
-                  }
-                },
-                {
-                  "type": "doc",
-                  "name": "Chap4.4 (主从复合句)状语从句",
-                  "defaultType": "md",
-                  "defaultPath": "204 英语二/研究生英语/语法/Chap4.4 (主从复合句)状语从句.md",
-                  "formats": {
-                    "md": "204 英语二/研究生英语/语法/Chap4.4 (主从复合句)状语从句.md"
-                  }
-                },
-                {
-                  "type": "doc",
-                  "name": "Chap5.1 (特殊句式)虚拟语气",
-                  "defaultType": "md",
-                  "defaultPath": "204 英语二/研究生英语/语法/Chap5.1 (特殊句式)虚拟语气.md",
-                  "formats": {
-                    "md": "204 英语二/研究生英语/语法/Chap5.1 (特殊句式)虚拟语气.md"
-                  }
-                },
-                {
-                  "type": "doc",
-                  "name": "Chap5.2 (特殊句式)倒装语气",
-                  "defaultType": "md",
-                  "defaultPath": "204 英语二/研究生英语/语法/Chap5.2 (特殊句式)倒装语气.md",
-                  "formats": {
-                    "md": "204 英语二/研究生英语/语法/Chap5.2 (特殊句式)倒装语气.md"
-                  }
-                },
-                {
-                  "type": "doc",
-                  "name": "Chap5.3 (特殊句式)强调语气",
-                  "defaultType": "md",
-                  "defaultPath": "204 英语二/研究生英语/语法/Chap5.3 (特殊句式)强调语气.md",
-                  "formats": {
-                    "md": "204 英语二/研究生英语/语法/Chap5.3 (特殊句式)强调语气.md"
-                  }
-                },
-                {
-                  "type": "doc",
-                  "name": "Chap6.1 长难句分析",
-                  "defaultType": "md",
-                  "defaultPath": "204 英语二/研究生英语/语法/Chap6.1 长难句分析.md",
-                  "formats": {
-                    "md": "204 英语二/研究生英语/语法/Chap6.1 长难句分析.md"
-                  }
-                },
-                {
-                  "type": "doc",
-                  "name": "Chap6.2 特殊长难句分析",
-                  "defaultType": "md",
-                  "defaultPath": "204 英语二/研究生英语/语法/Chap6.2 特殊长难句分析.md",
-                  "formats": {
-                    "md": "204 英语二/研究生英语/语法/Chap6.2 特殊长难句分析.md"
-                  }
-                }
-              ]
             }
           ]
         }
