@@ -25,11 +25,11 @@ window.CATALOG_DATA = {
       "badge": "重点核心",
       "color": "#8b5cf6",
       "stats": {
-        "totalDocs": 110,
+        "totalDocs": 116,
         "formats": {
           "html": 72,
           "pdf": 59,
-          "md": 110
+          "md": 116
         }
       },
       "children": [
@@ -145,6 +145,15 @@ window.CATALOG_DATA = {
                   "formats": {
                     "md": "302 数学二/线性代数/Chap01行列式/线性代数1000a基础篇.md"
                   }
+                },
+                {
+                  "type": "doc",
+                  "name": "线性代数1000b强化篇",
+                  "defaultType": "md",
+                  "defaultPath": "302 数学二/线性代数/Chap01行列式/线性代数1000b强化篇.md",
+                  "formats": {
+                    "md": "302 数学二/线性代数/Chap01行列式/线性代数1000b强化篇.md"
+                  }
                 }
               ]
             },
@@ -204,6 +213,15 @@ window.CATALOG_DATA = {
                   "defaultPath": "302 数学二/线性代数/Chap02矩阵/线性代数1000a基础篇.md",
                   "formats": {
                     "md": "302 数学二/线性代数/Chap02矩阵/线性代数1000a基础篇.md"
+                  }
+                },
+                {
+                  "type": "doc",
+                  "name": "线性代数1000b强化篇",
+                  "defaultType": "md",
+                  "defaultPath": "302 数学二/线性代数/Chap02矩阵/线性代数1000b强化篇.md",
+                  "formats": {
+                    "md": "302 数学二/线性代数/Chap02矩阵/线性代数1000b强化篇.md"
                   }
                 }
               ]
@@ -265,6 +283,15 @@ window.CATALOG_DATA = {
                   "formats": {
                     "md": "302 数学二/线性代数/Chap03向量组/线性代数1000a基础篇.md"
                   }
+                },
+                {
+                  "type": "doc",
+                  "name": "线性代数1000b强化篇",
+                  "defaultType": "md",
+                  "defaultPath": "302 数学二/线性代数/Chap03向量组/线性代数1000b强化篇.md",
+                  "formats": {
+                    "md": "302 数学二/线性代数/Chap03向量组/线性代数1000b强化篇.md"
+                  }
                 }
               ]
             },
@@ -324,6 +351,15 @@ window.CATALOG_DATA = {
                   "defaultPath": "302 数学二/线性代数/Chap04线性方程组/线性代数1000a基础篇.md",
                   "formats": {
                     "md": "302 数学二/线性代数/Chap04线性方程组/线性代数1000a基础篇.md"
+                  }
+                },
+                {
+                  "type": "doc",
+                  "name": "线性代数1000b强化篇",
+                  "defaultType": "md",
+                  "defaultPath": "302 数学二/线性代数/Chap04线性方程组/线性代数1000b强化篇.md",
+                  "formats": {
+                    "md": "302 数学二/线性代数/Chap04线性方程组/线性代数1000b强化篇.md"
                   }
                 }
               ]
@@ -385,6 +421,15 @@ window.CATALOG_DATA = {
                   "formats": {
                     "md": "302 数学二/线性代数/Chap05特征值与特征向量/线性代数1000a基础篇.md"
                   }
+                },
+                {
+                  "type": "doc",
+                  "name": "线性代数1000b强化篇",
+                  "defaultType": "md",
+                  "defaultPath": "302 数学二/线性代数/Chap05特征值与特征向量/线性代数1000b强化篇.md",
+                  "formats": {
+                    "md": "302 数学二/线性代数/Chap05特征值与特征向量/线性代数1000b强化篇.md"
+                  }
                 }
               ]
             },
@@ -441,6 +486,15 @@ window.CATALOG_DATA = {
                   "defaultPath": "302 数学二/线性代数/Chap06二次型/线性代数1000a基础篇.md",
                   "formats": {
                     "md": "302 数学二/线性代数/Chap06二次型/线性代数1000a基础篇.md"
+                  }
+                },
+                {
+                  "type": "doc",
+                  "name": "线性代数1000b强化篇",
+                  "defaultType": "md",
+                  "defaultPath": "302 数学二/线性代数/Chap06二次型/线性代数1000b强化篇.md",
+                  "formats": {
+                    "md": "302 数学二/线性代数/Chap06二次型/线性代数1000b强化篇.md"
                   }
                 }
               ]
