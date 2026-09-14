@@ -1129,8 +1129,8 @@
             header.querySelector('.node-chevron').classList.toggle('expanded', isExpanded);
           });
 
-          // 默认展开第一个科目 (数学二)
-          if (subjIdx === 0) {
+          // 默认展开 DailyPlan 以及核心重点科目 (数学二)
+          if (subj.name === 'DailyPlan' || subj.name.includes('数学') || subjIdx === 0) {
             childrenContainer.classList.add('expanded');
             header.querySelector('.node-chevron').classList.add('expanded', true);
           }
