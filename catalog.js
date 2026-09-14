@@ -20,6 +20,40 @@ window.CATALOG_DATA = {
   ],
   "subjects": [
     {
+      "name": "DailyPlan",
+      "icon": "fa-calendar-check",
+      "badge": "每日计划与复盘",
+      "color": "#ec4899",
+      "stats": {
+        "totalDocs": 2,
+        "formats": {
+          "html": 0,
+          "pdf": 0,
+          "md": 2
+        }
+      },
+      "children": [
+        {
+          "type": "doc",
+          "name": "2026-09-15",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-09-15.md",
+          "formats": {
+            "md": "DailyPlan/2026-09-15.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "README",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/README.md",
+          "formats": {
+            "md": "DailyPlan/README.md"
+          }
+        }
+      ]
+    },
+    {
       "name": "302 数学二",
       "icon": "fa-square-root-variable",
       "badge": "重点核心",

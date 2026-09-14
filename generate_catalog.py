@@ -27,6 +27,11 @@ ROOT_DOCS = [
 
 # 科目配置及图标/主题色
 SUBJECT_CONFIG = {
+    "DailyPlan": {
+        "icon": "fa-calendar-check",
+        "badge": "每日计划与复盘",
+        "color": "#ec4899"
+    },
     "302 数学二": {
         "icon": "fa-square-root-variable",
         "badge": "重点核心",
