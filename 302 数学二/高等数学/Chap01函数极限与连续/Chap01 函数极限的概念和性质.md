@@ -363,10 +363,9 @@ $\arctan x < \sin x < x < \arcsin x < \tan x$
 
 主要内容:设$f(x)$在$x=0$处$n$阶可导,则存在$x=0$的一个邻域,对该邻域内任一点$x$,有:
 
-```math
+$$
 f(x) = f(0) + f'(0)x + \frac{f''(0)}{2!}x^2 + \frac{f ({(3)}(0)}{3!}x)3 + \frac{f ({(4)}(0)}{4!}x)4 + \frac{f ({(5)}(0)}{5!}x)5 + o(x^5)
-```
-
+$$
 注意事项[1]:[在0处展开]$x \to a$时严禁现场手推,而是令$t = x - a$,在麦克劳林处用
 
 注意事项[2]:[抽象函数]:$f(x) = f(x_0) + f'(x_0)(x - x_0) + \frac{f''(x_0)}{2!}(x - x_0)^2 + \frac{f^{(3)}(x_0)}{3!}(x - x_0)^3 + \dots + \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n + o((x - x_0)^n)$
@@ -397,10 +396,9 @@ f(x) = f(0) + f'(0)x + \frac{f''(0)}{2!}x^2 + \frac{f ({(3)}(0)}{3!}x)3 + \frac{
 
 **泰勒公式[1]:麦克劳林公式+皮亚诺余项**
 
-```math
+$$
 f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(0)}{k!} x^k + o(x^n)
-```
-
+$$
 [1]$e^x = e^0 + \frac{e^0}{1!}x + \frac{e^0}{2!}x^2 + \frac{e^0}{3!}x^3 + \frac{e^0}{4!}x^4 + \frac{e^0}{5!}x^5 + o(x^5)$		$\Rightarrow e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \frac{x^4}{24} + \frac{x^5}{120} + o(x^5)$
 
 [2]$\sin x = \sin 0 + \frac{\cos 0}{1!}x + \frac{-\sin 0}{2!}x^2 + \frac{-\cos 0}{3!}x^3 + \frac{\sin 0}{4!}x^4 + \frac{\cos 0}{5!}x^5 + o(x^5)$$\Rightarrow \sin x = x - \frac{x^3}{6} + \frac{x^5}{120} + o(x^5)$
