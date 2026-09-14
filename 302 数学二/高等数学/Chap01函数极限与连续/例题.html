@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chap01 1000题核心例题精解</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h2>1. 1000题精选例题</h2>
+<p><strong>例题[1]: 抽象函数对称平移与区间代换</strong></p>
+<p>题目: 设函数$f(x)$在$(-\infty, +\infty)$上有定义，在区间$[0, 2]$上，$f(x) = x(x^2-4)$，若对任意$x$都满足$f(x) = -\frac{1}{2}f(x+2)$，写出$f(x)$在$[-2, 0]$上的表达式。</p>
+<p>主要思路: 利用自变量平移变换，由$x \in [-2, 0]$锁定$x+2 \in [0, 2]$，直接代入已知区间解析式完成求解。</p>
+<blockquote>
+<p>[1]自变量区间转换：</p>
+<p>要求$f(x)$在区间$[-2, 0]$上的表达式，令$x \in [-2, 0)$，则自变量加上$2$后满足：</p>
+<p>$$0 \le x + 2 \le 2$$</p>
+<p>[2]代入已知表达式：</p>
+<p>因为当$t \in [0, 2]$时，$f(t) = t(t^2-4)$。</p>
+<p>将$t = x + 2$代入得：</p>
+<p>$$f(x+2) = (x+2)[(x+2)^2 - 4] = (x+2)(x^2 + 4x) = x(x+2)(x+4)$$</p>
+<p>[3]反解目标函数：</p>
+<p>根据题设递推关系$f(x) = -\frac{1}{2}f(x+2)$，代入整理得：</p>
+<p>$$f(x) = -\frac{1}{2}(x+2)[(x+2)^2 - 4] = -\frac{1}{2}x(x+2)(x+4)$$</p>
+</blockquote>
+<p><font color=red>错因剖析与避坑要点：</font></p>
+<blockquote>
+<p>此处极易混淆“原函数自变量平移”与“反解自变量”。误将关系写成代入$f(x) = -\frac{1}{2}f(x+2)$时自变量倒推错误。切记：求哪个区间的表达式，就让该区间的$x$通过平移落入已知定义区间，再整体代回递推关系。</p>
+</blockquote>
+<hr />
+<p><strong>例题[2]: 递推函数分段消项与直接代入</strong></p>
+<p>题目: 设$f(x)$在$(-\infty, +\infty)$上满足$f(x) = f(x-\pi) + \sin x$，且当$x \in [0, \pi)$时$f(x) = x$，求$f(x)$在$[\pi, 3\pi]$上的表达式。</p>
+<p>主要思路: 避免复杂抽象的周期性解构，针对$[\pi, 2\pi)$和$[2\pi, 3\pi]$两个区间直接进行步长为$\pi$的递推代入展开。</p>
+<blockquote>
+<p>[1]区间$x \in [\pi, 2\pi)$的表达式计算：</p>
+<p>当$x \in [\pi, 2\pi)$时，$x - \pi \in [0, \pi)$。直接代入递推式：</p>
+<p>$$f(x) = f(x-\pi) + \sin x = (x - \pi) + \sin x = x - \pi + \sin x$$</p>
+<p>[2]区间$x \in [2\pi, 3\pi]$的表达式计算：</p>
+<p>当$x \in [2\pi, 3\pi]$时，两次应用递推式：</p>
+<p>$$f(x) = f(x-\pi) + \sin x = [f(x-2\pi) + \sin(x-\pi)] + \sin x$$</p>
+<p>因为$x - 2\pi \in [0, \pi]$，且$\sin(x-\pi) = -\sin x$，故代入得：</p>
+<p>$$f(x) = (x - 2\pi) - \sin x + \sin x = x - 2\pi$$</p>
+<p>[3]写出最终分段形式：</p>
+<p>$$f(x) = \begin{cases} x - \pi + \sin x, & x \in [\pi, 2\pi) \\ \\ x - 2\pi, & x \in [2\pi, 3\pi] \end{cases}$$</p>
+</blockquote>
+<p><font color=red>错因剖析与避坑要点：</font></p>
+<blockquote>
+<p><font color=deeppink>审题避坑：</font>不要试图强行寻找宏观整体周期，考研分段推进题目中，步长平移区间逐段代入消去三角波动项最为稳妥高效。</p>
+</blockquote>
+<hr />
+<p><strong>例题[3]: 指数差提公因式与同阶非等价无穷小</strong></p>
+<p>题目: 当$x \to 0$时，$e - e^{\cos x}$是$\sqrt[3]{1+x^2} - 1$的什么无穷小？</p>
+<p>主要思路: 指数差极限遵循“提指数因子”原则，分子提出常数$e$后利用标准等价无穷小$e^u - 1 \sim u$化简，分母利用广义二项式展开$(1+u)^\alpha - 1 \sim \alpha u$确定同阶比值。</p>
+<blockquote>
+<p>[1]分子提出公因式并等价代换：</p>
+<p>$$e - e^{\cos x} = e\left(1 - e^{\cos x - 1}\right) = -e\left(e^{\cos x - 1} - 1\right)$$</p>
+<p>当$x \to 0$时，$\cos x - 1 \to 0$，由等价无穷小$e^u - 1 \sim u$及$1 - \cos x \sim \frac{1}{2}x^2$得：</p>
+<p>$$e - e^{\cos x} \sim -e(\cos x - 1) = e(1 - \cos x) \sim \frac{e}{2}x^2$$</p>
+<p>[2]分母利用有理化等价公式：</p>
+<p>$$\sqrt[3]{1+x^2} - 1 = (1+x^2)^{\frac{1}{3}} - 1 \sim \frac{1}{3}x^2$$</p>
+<p>[3]作商求极限确定无穷小阶数：</p>
+<p>$$I = \lim_{x \to 0} \frac{e - e^{\cos x}}{\sqrt[3]{1+x^2} - 1} = \lim_{x \to 0} \frac{\frac{e}{2}x^2}{\frac{1}{3}x^2} = \frac{3}{2}e \neq 0$$</p>
+<p>由于比值为非零常数$\frac{3}{2}e \neq 1$，故两者为<font color=deeppink>同阶但非等价无穷小</font>。</p>
+</blockquote>
+<p><font color=red>错因剖析与避坑要点：</font></p>
+<blockquote>
+<p>严禁对复合指数函数在减法中进行错误局部泰勒展开。面对$e^a - e^b$型结构，标准破题策略是“先提因子”：$e^a - e^b = e^b(e^{a-b} - 1)$，瞬间转化为基础等价无穷小。</p>
+</blockquote>
+<hr />
+<p><strong>例题[4]: 绝对值与反切函数极限存在性辨析</strong></p>
+<p>题目: 下列极限中，极限存在的是：<br />
+(A) $\lim\limits_{x \to 0} \frac{\sin x}{|x|} \arctan \frac{1}{|x|}$<br />
+(B) $\lim\limits_{x \to 0} \frac{\sin x}{x} \arctan \frac{1}{x}$<br />
+(C) $\lim\limits_{x \to 0} \frac{|\sin x|}{|x|} \arctan \frac{1}{x}$<br />
+(D) $\lim\limits_{x \to 0} \frac{|\sin x|}{x} \arctan \frac{1}{x}$</p>
+<p>主要思路: 结合符号函数$\mathrm{sgn}(x)$拆分左右极限，注意$\arctan(+\infty) = \frac{\pi}{2}$与$\arctan(-\infty) = -\frac{\pi}{2}$的跳跃变号，通过负负得正实现左右极限定向吻合。</p>
+<blockquote>
+<p>[1]分析选项(A)：</p>
+<p>当$x \to 0^+$时，原式$= 1 \cdot \frac{\pi}{2} = \frac{\pi}{2}$；当$x \to 0^-$时，$\frac{\sin x}{|x|} = -1$，$\arctan\frac{1}{|x|} = \frac{\pi}{2}$，极限为$-\frac{\pi}{2}$。左右不相等，不存在。</p>
+<p>[2]分析选项(B)：</p>
+<p>当$x \to 0^+$时，$1 \cdot \frac{\pi}{2} = \frac{\pi}{2}$；当$x \to 0^-$时，$1 \cdot \left(-\frac{\pi}{2}\right) = -\frac{\pi}{2}$。左右不相等，不存在。</p>
+<p>[3]分析选项(C)：</p>
+<p>因为$\lim\limits_{x \to 0} \frac{|\sin x|}{|x|} = 1$。当$x \to 0^+$时结果为$\frac{\pi}{2}$，当$x \to 0^-$时结果为$-\frac{\pi}{2}$。左右不相等，不存在。</p>
+<p>[4]分析选项(D)：</p>
+<p>当$x \to 0^+$时，$x > 0$，$|\sin x| = \sin x$，$\arctan\frac{1}{x} \to \frac{\pi}{2}$：</p>
+<p>$$\lim_{x \to 0^+} \frac{|\sin x|}{x} \arctan \frac{1}{x} = 1 \cdot \frac{\pi}{2} = \frac{\pi}{2}$$</p>
+<p>当$x \to 0^-$时，$x < 0$，$|\sin x| = -\sin x$，$\frac{|\sin x|}{x} = \frac{-\sin x}{x} \to -1$，且$\arctan\frac{1}{x} \to -\frac{\pi}{2}$：</p>
+<p>$$\lim_{x \to 0^-} \frac{|\sin x|}{x} \arctan \frac{1}{x} = (-1) \cdot \left(-\frac{\pi}{2}\right) = \frac{\pi}{2}$$</p>
+<p>左右极限均存在且相等，故极限存在，值为$\frac{\pi}{2}$。正确选项为(D)。</p>
+</blockquote>
+<p><font color=red>错因剖析与避坑要点：</font></p>
+<blockquote>
+<p>注意反三角函数极限概念：$\arctan(+\infty) = \frac{\pi}{2}$，$\arctan(-\infty) = -\frac{\pi}{2}$。符号函数在分母与反切函数的负号相乘时构成“双负变正”，这是考研选择题高频考点。</p>
+</blockquote>
+<hr />
+<p><strong>例题[5]: 对数差构造与等价无穷小阶数判定</strong></p>
+<p>题目: 当$x \to 0$时，$\ln \frac{2+x}{2+\sin x}$与$x^n$为同阶无穷小，则$n =$______。</p>
+<p>主要思路: 将真数恒等变形为$1 + u$型，利用$\ln(1+u) \sim u$，再结合分子差量泰勒展开$x - \sin x \sim \frac{1}{6}x^3$确定阶数。</p>
+<blockquote>
+<p>[1]真数凑配标准对数形式：</p>
+<p>$$\ln \frac{2+x}{2+\sin x} = \ln \left(1 + \frac{x - \sin x}{2 + \sin x}\right)$$</p>
+<p>[2]利用等价无穷小展开：</p>
+<p>因为当$x \to 0$时，$\frac{x - \sin x}{2 + \sin x} \to 0$，故：</p>
+<p>$$\ln \left(1 + \frac{x - \sin x}{2 + \sin x}\right) \sim \frac{x - \sin x}{2 + \sin x}$$</p>
+<p>[3]带入正弦泰勒展开求最低阶次：</p>
+<p>已知$x - \sin x = x - \left(x - \frac{1}{6}x^3 + o(x^3)\right) = \frac{1}{6}x^3 + o(x^3)$，且分母$2 + \sin x \to 2$：</p>
+<p>$$\frac{x - \sin x}{2 + \sin x} \sim \frac{\frac{1}{6}x^3}{2} = \frac{1}{12}x^3$$</p>
+<p>因此，该无穷小为$3$阶无穷小，$n = 3$。</p>
+</blockquote>
+<p><font color=red>错因剖析与避坑要点：</font></p>
+<blockquote>
+<p>严禁直接“瞪眼”将分母拆开近似为$\frac{2+x}{2+x-\frac{1}{6}x^3}$，虽然幂次凑巧一致，但非严谨数学逻辑。规范做法必须统一构造$\ln(1 + \Delta)$结构。</p>
+</blockquote>
+<hr />
+<p><strong>例题[6]: 根式差泰勒展开与二阶系数相消</strong></p>
+<p>题目: 计算极限$\lim\limits_{x \to 0} \frac{\sqrt{1+2x} - \sqrt[3]{1+3x}}{\ln(1+x^2)}$。</p>
+<p>主要思路: 分母$\ln(1+x^2) \sim x^2$为二阶无穷小，因此分子必须且仅需用牛顿二项式展开到$x^2$阶。</p>
+<blockquote>
+<p>[1]分母等价无穷小代换：</p>
+<p>当$x \to 0$时，$\ln(1+x^2) \sim x^2$。</p>
+<p>[2]分子利用$(1+u)^\alpha = 1 + \alpha u + \frac{\alpha(\alpha-1)}{2!}u^2 + o(u^2)$展开：</p>
+<p>对于$\sqrt{1+2x} = (1+2x)^{\frac{1}{2}}$：</p>
+<p>$$\sqrt{1+2x} = 1 + \frac{1}{2}(2x) + \frac{\frac{1}{2}\left(-\frac{1}{2}\right)}{2}(2x)^2 + o(x^2) = 1 + x - \frac{1}{2}x^2 + o(x^2)$$</p>
+<p>对于$\sqrt[3]{1+3x} = (1+3x)^{\frac{1}{3}}$：</p>
+<p>$$\sqrt[3]{1+3x} = 1 + \frac{1}{3}(3x) + \frac{\frac{1}{3}\left(-\frac{2}{3}\right)}{2}(3x)^2 + o(x^2) = 1 + x - x^2 + o(x^2)$$</p>
+<p>[3]分子作差并求极限：</p>
+<p>$$\sqrt{1+2x} - \sqrt[3]{1+3x} = \left(1 + x - \frac{1}{2}x^2\right) - (1 + x - x^2) + o(x^2) = \frac{1}{2}x^2 + o(x^2)$$</p>
+<p>代入原式求得：</p>
+<p>$$I = \lim_{x \to 0} \frac{\frac{1}{2}x^2 + o(x^2)}{x^2} = \frac{1}{2}$$</p>
+</blockquote>
+<p><font color=red>错因剖析与避坑要点：</font></p>
+<blockquote>
+<p>泰勒展开必须展开到首个非零系数阶数（此处一次项$x - x = 0$抵消，决定性项为二次项$x^2$）。二阶导数系数$\frac{\alpha(\alpha-1)}{2}$中的$2!$不要漏除。</p>
+</blockquote>
+<hr />
+<p><strong>例题[7]: 幂指函数极限与反切泰勒展开</strong></p>
+<p>题目: 计算极限$\lim\limits_{x \to 0} \left(\frac{\arctan x}{x}\right)^{\frac{1}{\tan^2 x}}$。</p>
+<p>主要思路: 标准$1^\infty$型极限，化为底数对数指数形式$I = e^{\lim [f(x)-1]g(x)}$，结合$\arctan x = x - \frac{1}{3}x^3 + o(x^3)$求解。</p>
+<blockquote>
+<p>[1]转化为标准$1^\infty$型指数模型：</p>
+<p>$$I = \lim_{x \to 0} \left(\frac{\arctan x}{x}\right)^{\frac{1}{\tan^2 x}} = e^{\lim\limits_{x \to 0} \frac{1}{\tan^2 x}\left(\frac{\arctan x}{x} - 1\right)}$$</p>
+<p>[2]分母等价无穷小代换：</p>
+<p>因为当$x \to 0$时，$\tan x \sim x$，所以$\tan^2 x \sim x^2$。指数部分化为：</p>
+<p>$$\lim_{x \to 0} \frac{\arctan x - x}{x \cdot x^2} = \lim_{x \to 0} \frac{\arctan x - x}{x^3}$$</p>
+<p>[3]带入反切函数三阶泰勒展开式：</p>
+<p>已知$\arctan x = x - \frac{1}{3}x^3 + o(x^3)$，故$\arctan x - x = -\frac{1}{3}x^3 + o(x^3)$。代入得：</p>
+<p>$$\lim_{x \to 0} \frac{-\frac{1}{3}x^3}{x^3} = -\frac{1}{3}$$</p>
+<p>最终极限为：$$I = e^{-\frac{1}{3}} = \frac{1}{\sqrt[3]{e}}$$</p>
+</blockquote>
+<p><font color=red>错因剖析与避坑要点：</font></p>
+<blockquote>
+<p>牢记核心展开式：$\arctan x = x - \frac{1}{3}x^3 + \frac{1}{5}x^5 + o(x^5)$（无偶次项且交错变号）。切勿害怕反三角函数的泰勒展开。</p>
+</blockquote>
+<hr />
+<p><strong>例题[8]: 待定常数极限与洛必达逆向运用</strong></p>
+<p>题目: 已知$\lim\limits_{x \to -2} \frac{2x^3 + ax^2 - 3x + 6}{x + 2} = b$，求常数$a$与$b$的值。</p>
+<p>主要思路: 分母极限为零且极限为有限常数，则分子在点$x = -2$处的极限必为零；随后使用洛必达法则计算极限值$b$。</p>
+<blockquote>
+<p>[1]确定分子零点求常数$a$：</p>
+<p>当$x \to -2$时，分母$x + 2 \to 0$。由极限局部性质，分子极限必为零：</p>
+<p>$$\lim_{x \to -2} (2x^3 + ax^2 - 3x + 6) = 0$$</p>
+<p>代入$x = -2$得：</p>
+<p>$$2(-2)^3 + a(-2)^2 - 3(-2) + 6 = -16 + 4a + 6 + 6 = 4a - 4 = 0 \implies a = 1$$</p>
+<p>[2]代入$a=1$使用洛必达法则求$b$：</p>
+<p>原极限为$\frac{0}{0}$型，应用洛必达法则：</p>
+<p>$$b = \lim_{x \to -2} \frac{2x^3 + x^2 - 3x + 6}{x + 2} = \lim_{x \to -2} \frac{6x^2 + 2x - 3}{1}$$</p>
+<p>代入$x = -2$得：</p>
+<p>$$b = 6(-2)^2 + 2(-2) - 3 = 24 - 4 - 3 = 17$$</p>
+<p>故所求常数为$a = 1, b = 17$。</p>
+</blockquote>
+<hr />
+<p><strong>例题[9]: 复合函数多项泰勒高阶展开与精度控制</strong></p>
+<p>题目: 计算极限$\lim\limits_{x \to 0} \frac{\sqrt{1+\tan x} - \sqrt{1+\sin x}}{x^2 - x\ln(1+x)}$。</p>
+<p>主要思路: 观察分母展开最低阶次：$x^2 - x(x - \frac{1}{2}x^2) = \frac{1}{2}x^3$，分母为三阶无穷小，因此分子正切与正弦复合根式必须统一展开至$x^3$项。</p>
+<blockquote>
+<p>[1]分析分母的三阶主部：</p>
+<p>$$x^2 - x\ln(1+x) = x^2 - x\left(x - \frac{1}{2}x^2 + o(x^2)\right) = \frac{1}{2}x^3 + o(x^3)$$</p>
+<p>[2]分子各项泰勒展开至三阶精度：</p>
+<p>根据$\sqrt{1+u} = 1 + \frac{1}{2}u - \frac{1}{8}u^2 + \frac{1}{16}u^3 + o(u^3)$：</p>
+<p>代入$\tan x = x + \frac{1}{3}x^3 + o(x^3)$（其平方$\tan^2 x = x^2 + o(x^3)$）：</p>
+<p>$$\sqrt{1+\tan x} = 1 + \frac{1}{2}\left(x + \frac{1}{3}x^3\right) - \frac{1}{8}x^2 + \frac{1}{16}x^3 + o(x^3) = 1 + \frac{1}{2}x - \frac{1}{8}x^2 + \frac{1}{6}x^3 + o(x^3)$$</p>
+<p>代入$\sin x = x - \frac{1}{6}x^3 + o(x^3)$（其平方$\sin^2 x = x^2 + o(x^3)$）：</p>
+<p>$$\sqrt{1+\sin x} = 1 + \frac{1}{2}\left(x - \frac{1}{6}x^3\right) - \frac{1}{8}x^2 + \frac{1}{16}x^3 + o(x^3) = 1 + \frac{1}{2}x - \frac{1}{8}x^2 - \frac{1}{12}x^3 + o(x^3)$$</p>
+<p>[3]分子作差并求极限：</p>
+<p>$$\sqrt{1+\tan x} - \sqrt{1+\sin x} = \left(\frac{1}{6} - \left(-\frac{1}{12}\right)\right)x^3 + o(x^3) = \frac{1}{4}x^3 + o(x^3)$$</p>
+<p>故原极限为：</p>
+<p>$$I = \lim_{x \to 0} \frac{\frac{1}{4}x^3}{\frac{1}{2}x^3} = \frac{1}{2}$$</p>
+</blockquote>
+<p><font color=red>错因剖析与避坑要点：</font></p>
+<blockquote>
+<p>考研真题高频核心考点：必须牢记常用公式的三阶展开：
+$\sin x = x - \frac{1}{6}x^3 + o(x^3)$，$\tan x = x + \frac{1}{3}x^3 + o(x^3)$，$\ln(1+x) = x - \frac{1}{2}x^2 + \frac{1}{3}x^3 + o(x^3)$。先定分母阶数，再反推分子所需截断阶数。</p>
+</blockquote>
+<hr />
+<p><strong>例题[10]: 对数乘积抓大头与正负无穷分槽讨论</strong></p>
+<p>题目: 计算极限$\lim\limits_{x \to \infty} \ln(1+2^x)\ln\left(1+\frac{2}{x}\right)$。</p>
+<p>主要思路: 指数项在$x \to +\infty$与$x \to -\infty$具有截然相反的渐近性，必须严格分槽讨论，正无穷时使用“抓大头提取公因式”。</p>
+<blockquote>
+<p>[1]当$x \to -\infty$时的极限：</p>
+<p>此时$2^x \to 0$，则$\ln(1+2^x) \to \ln 1 = 0$；且$\frac{2}{x} \to 0$，$\ln(1+\frac{2}{x}) \to \ln 1 = 0$。</p>
+<p>$$I_{-\infty} = 0 \cdot 0 = 0$$</p>
+<p>[2]当$x \to +\infty$时的极限：</p>
+<p>此时$2^x \to +\infty$，对$\ln(1+2^x)$抓大头变形：</p>
+<p>$$\ln(1+2^x) = \ln[2^x(1+2^{-x})] = \ln(2^x) + \ln(1+2^{-x}) = x\ln 2 + \ln(1+2^{-x})$$</p>
+<p>而当$x \to +\infty$时，$\ln\left(1+\frac{2}{x}\right) \sim \frac{2}{x}$。带入乘积：</p>
+<p>$$I_{+\infty} = \lim_{x \to +\infty} \left[x\ln 2 + \ln(1+2^{-x})\right] \cdot \frac{2}{x} = \lim_{x \to +\infty} \left(2\ln 2 + \frac{2\ln(1+2^{-x})}{x}\right) = 2\ln 2$$</p>
+<p>[3]结论综合：</p>
+<p>原极限在$x \to +\infty$时为$2\ln 2$，在$x \to -\infty$时为$0$（若题设未特指符号，双侧极限不相等，总体极限不存在）。</p>
+</blockquote>
+<p><font color=red>错因剖析与避坑要点：</font></p>
+<blockquote>
+<p>严禁出现$\ln(a+b) = \ln a + \ln b$等低级对数运算法则错误；遇$\ln(1+A)$且$A \to \infty$时，标准抓大头解法为$\ln A + \ln(1+\frac{1}{A})$。</p>
+</blockquote>
+<hr />
+<p><strong>例题[11]: 三角换元与幂指重要极限转化</strong></p>
+<p>题目: 计算极限$\lim\limits_{x \to \infty} \left(\cos\frac{1}{x} + \sin\frac{1}{x}\right)^{\frac{x}{2}}$。</p>
+<p>主要思路: 倒数换元令$t = \frac{1}{x} \to 0$，转化为标准$1^\infty$型极限。</p>
+<blockquote>
+<p>[1]倒数换元：</p>
+<p>令$t = \frac{1}{x}$，当$x \to \infty$时$t \to 0$，指数部分变为$\frac{1}{2t}$：</p>
+<p>$$I = \lim_{t \to 0} (\cos t + \sin t)^{\frac{1}{2t}}$$</p>
+<p>[2]应用$1^\infty$极限标准转化公式：</p>
+<p>$$I = e^{\lim\limits_{t \to 0} \frac{1}{2t}(\cos t + \sin t - 1)}$$</p>
+<p>[3]等价无穷小代换计算指数极限：</p>
+<p>分子$\sin t + (\cos t - 1) = t - \frac{1}{2}t^2 + o(t^2) \sim t$：</p>
+<p>$$\lim_{t \to 0} \frac{t}{2t} = \frac{1}{2}$$</p>
+<p>故最终极限为：$$I = e^{\frac{1}{2}} = \sqrt{e}$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[12]: 有理分式泰勒展开与除法展开法</strong></p>
+<p>题目: 求$f(x) = \frac{\tan x}{1+x^2}$在$x=0$处的$3$次泰勒多项式。</p>
+<p>主要思路: 避免复杂多次求导，采用几何级数展开$(1+u)^{-1} = 1 - u + u^2 + \dots$与正切展开式相乘截断。</p>
+<blockquote>
+<p>[1]展开各项因子至三阶精度：</p>
+<p>$$\tan x = x + \frac{1}{3}x^3 + o(x^3)$$</p>
+<p>$$\frac{1}{1+x^2} = (1+x^2)^{-1} = 1 - x^2 + o(x^2)$$</p>
+<p>[2]多项式相乘并截断高阶项：</p>
+<p>$$f(x) = \left(x + \frac{1}{3}x^3 + o(x^3)\right)(1 - x^2 + o(x^2)) = x - x^3 + \frac{1}{3}x^3 + o(x^3) = x - \frac{2}{3}x^3 + o(x^3)$$</p>
+<p>故$3$次泰勒多项式为：$$P_3(x) = x - \frac{2}{3}x^3$$</p>
+</blockquote>
+<p><font color=red>错因剖析与避坑要点：</font></p>
+<blockquote>
+<p>很多同学做此类题目死板求三阶导数$f'''(0)$导致计算量极大崩溃，使用已知展开式多项式乘法合并同类项，只需两行即可秒杀。</p>
+</blockquote>
+<hr />
+<p><strong>例题[13]: 常数型极限自洽方程求解</strong></p>
+<p>题目: 已知$\lim\limits_{x \to 1} f(x)$存在，且$f(x) = x^2 + e^x \lim\limits_{x \to 1} f(x)$，求$f(x)$的解析式。</p>
+<p>主要思路: 极限存在即为一个确定常数，设常数并反代两边取极限建立代数方程。</p>
+<blockquote>
+<p>[1]设常数并代入原式：</p>
+<p>因为$\lim\limits_{x \to 1} f(x)$存在，设$\lim\limits_{x \to 1} f(x) = A$（$A$为有限常数）。原式变为：</p>
+<p>$$f(x) = x^2 + A e^x$$</p>
+<p>[2]两边同取$x \to 1$的极限：</p>
+<p>$$A = \lim_{x \to 1} f(x) = \lim_{x \to 1} (x^2 + A e^x) = 1 + A e$$</p>
+<p>[3]解线性方程求得常数$A$：</p>
+<p>$$A - A e = 1 \implies A(1 - e) = 1 \implies A = \frac{1}{1-e}$$</p>
+<p>将$A$代回解析式得：</p>
+<p>$$f(x) = x^2 + \frac{e^x}{1 - e}$$</p>
+</blockquote>
+<hr />
+<p><strong>例题[14]: 闭区间连续性与端点连续极限计算</strong></p>
+<p>题目: 设$f(x) = \frac{1 - x \cdot 2^{1-x}}{(2-x)(1-x)}\ (x \neq 1, 2)$，若$f(x)$在$[0, 2]$上连续，求$f(1) + f(2)$的值。</p>
+<p>主要思路: 由区间连续性可知，$f(1) = \lim\limits_{x \to 1} f(x)$，$f(2) = \lim\limits_{x \to 2} f(x)$，将求函数值转化为求两处$\frac{0}{0}$型极限。</p>
+<blockquote>
+<p>[1]利用洛必达法则计算$f(1)$：</p>
+<p>当$x \to 1$时，分母因子$2 - x \to 1$（非零因子先提取）：</p>
+<p>$$f(1) = \lim_{x \to 1} \frac{1 - x \cdot 2^{1-x}}{1-x} \stackrel{\frac{0}{0}}{=} \lim_{x \to 1} \frac{-(2^{1-x} + x \cdot 2^{1-x}(-\ln 2))}{-1} = 2^0 - 1 \cdot 2^0 \ln 2 = 1 - \ln 2$$</p>
+<p>[2]利用洛必达法则计算$f(2)$：</p>
+<p>当$x \to 2$时，分母因子$1 - x \to -1$（非零因子先提取）：</p>
+<p>$$f(2) = \lim_{x \to 2} \frac{1 - x \cdot 2^{1-x}}{-(2-x)} = \lim_{x \to 2} \frac{1 - x \cdot 2^{1-x}}{x-2} \stackrel{\frac{0}{0}}{=} \lim_{x \to 2} \frac{-(2^{1-x} - x \cdot 2^{1-x}\ln 2)}{1}$$</p>
+<p>代入$x = 2$得：</p>
+<p>$$f(2) = -\left(2^{-1} - 2 \cdot 2^{-1}\ln 2\right) = -\frac{1}{2} + \ln 2$$</p>
+<p>[3]求和抵消对数项：</p>
+<p>$$f(1) + f(2) = (1 - \ln 2) + \left(-\frac{1}{2} + \ln 2\right) = \frac{1}{2}$$</p>
+</blockquote>
+<p><font color=red>错因剖析与避坑要点：</font></p>
+<blockquote>
+<p>对导数乘积求导公式$(u v)' = u'v + uv'$要细心，$x \cdot 2^{1-x}$对$x$求导时，负号与$\ln 2$容易因漏符号导致计算失误。</p>
+</blockquote>
+<hr />
+<p><strong>例题[15]: 变底数幂函数可去间断点判定</strong></p>
+<p>题目: 求函数$f(x) = \frac{|x|^x - 1}{x(x+1)\ln x}$的可去间断点个数。</p>
+<p>主要思路: 先依据定义域限制排除无效间断点（因含$\ln x$要求$x > 0$），对分母零点$x=0$与$x=1$使用等价无穷小计算极限，验证其极限是否存在且有限。</p>
+<blockquote>
+<p>[1]确定函数定义域与可疑点：</p>
+<p>因含有对数函数$\ln x$，要求真数$x > 0$（此时$|x| = x$）。</p>
+<p>分母零点为$x = 0$和$\ln x = 0 \implies x = 1$（$x = -1$不在定义域内舍去）。故候选可疑间断点为$x = 0$和$x = 1$。</p>
+<p>[2]检验$x = 0$处的极限（$x \to 0^+$）：</p>
+<p>分子利用变底数指数展开：$x^x - 1 = e^{x\ln x} - 1 \sim x\ln x$。代入原式：</p>
+<p>$$\lim_{x \to 0^+} \frac{x^x - 1}{x(x+1)\ln x} = \lim_{x \to 0^+} \frac{x\ln x}{x(x+1)\ln x} = \lim_{x \to 0^+} \frac{1}{x+1} = \frac{1}{0+1} = 1$$</p>
+<p>极限存在且为有限常数，故$x = 0$是可去间断点。</p>
+<p>[3]检验$x = 1$处的极限（$x \to 1$）：</p>
+<p>令$x = 1 + t$（$t \to 0$）：</p>
+<p>分子：$x^x - 1 = (1+t)^{1+t} - 1 = e^{(1+t)\ln(1+t)} - 1 \sim (1+t)\ln(1+t) \sim 1 \cdot t = t$</p>
+<p>分母：$x(x+1)\ln x = (1+t)(2+t)\ln(1+t) \sim 1 \cdot 2 \cdot t = 2t$</p>
+<p>$$\lim_{x \to 1} f(x) = \lim_{t \to 0} \frac{t}{2t} = \frac{1}{2}$$</p>
+<p>极限存在且为有限常数，故$x = 1$也是可去间断点。</p>
+<p>[4]结论：</p>
+<p>可去间断点共有$2$个（分别为$x = 0$和$x = 1$）。</p>
+</blockquote>
+<hr />
+<p><strong>例题[16]: 对数有界域第二类无穷间断点分析</strong></p>
+<p>题目: 求函数$f(x) = \frac{\ln(1-|x|)}{(e^x - 1)(x+2)}$的第二类间断点个数。</p>
+<p>主要思路: 结合真数条件$1-|x| > 0$锁定定义域为$(-1, 1)$，排除不在定义域内的孤立点，重点考察定义域边界点的无穷性。</p>
+<blockquote>
+<p>[1]确定函数有效定义域：</p>
+<p>真数大于零：$1 - |x| > 0 \implies |x| < 1 \implies x \in (-1, 1)$。</p>
+<p>分母为零的点：$e^x - 1 = 0 \implies x = 0$；$x + 2 = 0 \implies x = -2 \notin (-1, 1)$（不属于间断点）。</p>
+<p>[2]分析点$x = 0$的间断点类型：</p>
+<p>当$x \to 0$时，$\ln(1-|x|) \sim -|x|$，$e^x - 1 \sim x$，$x+2 \to 2$：</p>
+<p>$$\lim_{x \to 0^+} f(x) = \lim_{x \to 0^+} \frac{-x}{x \cdot 2} = -\frac{1}{2}$$</p>
+<p>$$\lim_{x \to 0^-} f(x) = \lim_{x \to 0^-} \frac{-(-x)}{x \cdot 2} = \frac{x}{2x} = \frac{1}{2}$$</p>
+<p>左右极限均存在但不相等，故$x = 0$为<font color=deeppink>第一类跳跃间断点</font>。</p>
+<p>[3]分析定义域边界点$x \to 1^-$与$x \to -1^+$：</p>
+<p>当$x \to 1^-$时，分子$\ln(1-|x|) \to \ln(0^+) = -\infty$，分母趋于有限非零常数$(e-1)\cdot 3 \neq 0$：</p>
+<p>$$\lim_{x \to 1^-} f(x) = -\infty$$</p>
+<p>同理，当$x \to -1^+$时，分子$\ln(1-|x|) \to -\infty$，分母趋于有限非零常数$(e^{-1}-1)\cdot 1 \neq 0$：</p>
+<p>$$\lim_{x \to -1^+} f(x) = \infty$$</p>
+<p>两个边界点处的极限均为无穷大，属于第二类无穷间断点。</p>
+<p>[4]结论：</p>
+<p>第二类间断点共有$2$个（分别为$x = 1$和$x = -1$）。</p>
+</blockquote>
+<hr />
+<p><strong>例题[17]: 参数极限分段函数与跳跃间断点类型判断</strong></p>
+<p>题目: 设$f(x) = \lim\limits_{t \to +\infty} \frac{x + e^{tx}}{1 + e^{tx}}$，判断$x=0$是否为$f(x)$的间断点及其具体类型。</p>
+<p>主要思路: 指数项$e^{tx}$当$t \to +\infty$时的渐近行为严重依赖于底数指数$x$的正负性，分类讨论求出$f(x)$的分段解析式后再判断连续性。</p>
+<blockquote>
+<p>[1]分类讨论求分段函数解析式：</p>
+<p>情况(1): 当$x > 0$时，$tx \to +\infty$，故$e^{tx} \to +\infty$。分子分母同除以$e^{tx}$：</p>
+<p>$$f(x) = \lim_{t \to +\infty} \frac{x e^{-tx} + 1}{e^{-tx} + 1} = \frac{0 + 1}{0 + 1} = 1$$</p>
+<p>情况(2): 当$x = 0$时，直接代入$x = 0$：</p>
+<p>$$f(0) = \lim_{t \to +\infty} \frac{0 + e^0}{1 + e^0} = \frac{1}{1 + 1} = \frac{1}{2}$$</p>
+<p>情况(3): 当$x < 0$时，$tx \to -\infty$，故$e^{tx} \to 0$：</p>
+<p>$$f(x) = \lim_{t \to +\infty} \frac{x + 0}{1 + 0} = x$$</p>
+<p>综合得解析式为：</p>
+<p>$$f(x) = \begin{cases} 1, & x > 0 \\ \\ \frac{1}{2}, & x = 0 \\ \\ x, & x < 0 \end{cases}$$</p>
+<p>[2]计算$x=0$处左右极限并判断类型：</p>
+<p>$$f(0^+) = \lim_{x \to 0^+} 1 = 1$$</p>
+<p>$$f(0^-) = \lim_{x \to 0^-} x = 0$$</p>
+<p>由于左右极限均存在但$f(0^+) \neq f(0^-)$，且均不等于$f(0)=\frac{1}{2}$，故$x = 0$为$f(x)$的<font color=deeppink>第一类跳跃间断点</font>。</p>
+</blockquote>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

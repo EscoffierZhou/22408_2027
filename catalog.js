@@ -25,11 +25,11 @@ window.CATALOG_DATA = {
       "badge": "重点核心",
       "color": "#8b5cf6",
       "stats": {
-        "totalDocs": 73,
+        "totalDocs": 74,
         "formats": {
-          "html": 71,
+          "html": 72,
           "pdf": 59,
-          "md": 73
+          "md": 74
         }
       },
       "children": [
@@ -412,6 +412,16 @@ window.CATALOG_DATA = {
                     "html": "302 数学二/高等数学/Chap01函数极限与连续/Chap01 函数极限的概念和性质.html",
                     "md": "302 数学二/高等数学/Chap01函数极限与连续/Chap01 函数极限的概念和性质.md",
                     "pdf": "302 数学二/高等数学/Chap01函数极限与连续/Chap01 函数极限的概念和性质.pdf"
+                  }
+                },
+                {
+                  "type": "doc",
+                  "name": "例题",
+                  "defaultType": "html",
+                  "defaultPath": "302 数学二/高等数学/Chap01函数极限与连续/例题.html",
+                  "formats": {
+                    "html": "302 数学二/高等数学/Chap01函数极限与连续/例题.html",
+                    "md": "302 数学二/高等数学/Chap01函数极限与连续/例题.md"
                   }
                 }
               ]
