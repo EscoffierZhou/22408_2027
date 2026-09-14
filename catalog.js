@@ -25,11 +25,11 @@ window.CATALOG_DATA = {
       "badge": "重点核心",
       "color": "#8b5cf6",
       "stats": {
-        "totalDocs": 104,
+        "totalDocs": 110,
         "formats": {
           "html": 72,
           "pdf": 59,
-          "md": 104
+          "md": 110
         }
       },
       "children": [
@@ -136,6 +136,15 @@ window.CATALOG_DATA = {
                     "md": "302 数学二/线性代数/Chap01行列式/例题.md",
                     "pdf": "302 数学二/线性代数/Chap01行列式/例题.pdf"
                   }
+                },
+                {
+                  "type": "doc",
+                  "name": "线性代数1000a基础篇",
+                  "defaultType": "md",
+                  "defaultPath": "302 数学二/线性代数/Chap01行列式/线性代数1000a基础篇.md",
+                  "formats": {
+                    "md": "302 数学二/线性代数/Chap01行列式/线性代数1000a基础篇.md"
+                  }
                 }
               ]
             },
@@ -186,6 +195,15 @@ window.CATALOG_DATA = {
                     "html": "302 数学二/线性代数/Chap02矩阵/例题.html",
                     "md": "302 数学二/线性代数/Chap02矩阵/例题.md",
                     "pdf": "302 数学二/线性代数/Chap02矩阵/例题.pdf"
+                  }
+                },
+                {
+                  "type": "doc",
+                  "name": "线性代数1000a基础篇",
+                  "defaultType": "md",
+                  "defaultPath": "302 数学二/线性代数/Chap02矩阵/线性代数1000a基础篇.md",
+                  "formats": {
+                    "md": "302 数学二/线性代数/Chap02矩阵/线性代数1000a基础篇.md"
                   }
                 }
               ]
@@ -238,6 +256,15 @@ window.CATALOG_DATA = {
                     "md": "302 数学二/线性代数/Chap03向量组/例题.md",
                     "pdf": "302 数学二/线性代数/Chap03向量组/例题.pdf"
                   }
+                },
+                {
+                  "type": "doc",
+                  "name": "线性代数1000a基础篇",
+                  "defaultType": "md",
+                  "defaultPath": "302 数学二/线性代数/Chap03向量组/线性代数1000a基础篇.md",
+                  "formats": {
+                    "md": "302 数学二/线性代数/Chap03向量组/线性代数1000a基础篇.md"
+                  }
                 }
               ]
             },
@@ -288,6 +315,15 @@ window.CATALOG_DATA = {
                     "html": "302 数学二/线性代数/Chap04线性方程组/例题.html",
                     "md": "302 数学二/线性代数/Chap04线性方程组/例题.md",
                     "pdf": "302 数学二/线性代数/Chap04线性方程组/例题.pdf"
+                  }
+                },
+                {
+                  "type": "doc",
+                  "name": "线性代数1000a基础篇",
+                  "defaultType": "md",
+                  "defaultPath": "302 数学二/线性代数/Chap04线性方程组/线性代数1000a基础篇.md",
+                  "formats": {
+                    "md": "302 数学二/线性代数/Chap04线性方程组/线性代数1000a基础篇.md"
                   }
                 }
               ]
@@ -340,6 +376,15 @@ window.CATALOG_DATA = {
                     "md": "302 数学二/线性代数/Chap05特征值与特征向量/例题.md",
                     "pdf": "302 数学二/线性代数/Chap05特征值与特征向量/例题.pdf"
                   }
+                },
+                {
+                  "type": "doc",
+                  "name": "线性代数1000a基础篇",
+                  "defaultType": "md",
+                  "defaultPath": "302 数学二/线性代数/Chap05特征值与特征向量/线性代数1000a基础篇.md",
+                  "formats": {
+                    "md": "302 数学二/线性代数/Chap05特征值与特征向量/线性代数1000a基础篇.md"
+                  }
                 }
               ]
             },
@@ -387,6 +432,15 @@ window.CATALOG_DATA = {
                   "formats": {
                     "html": "302 数学二/线性代数/Chap06二次型/例题.html",
                     "md": "302 数学二/线性代数/Chap06二次型/例题.md"
+                  }
+                },
+                {
+                  "type": "doc",
+                  "name": "线性代数1000a基础篇",
+                  "defaultType": "md",
+                  "defaultPath": "302 数学二/线性代数/Chap06二次型/线性代数1000a基础篇.md",
+                  "formats": {
+                    "md": "302 数学二/线性代数/Chap06二次型/线性代数1000a基础篇.md"
                   }
                 }
               ]
