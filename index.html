@@ -1120,6 +1120,214 @@
       color: var(--primary);
     }
 
+    /* 4. 1000 题核心考点与全题解大纲速查看板 */
+    .exam-outline-section {
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .outline-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .outline-chapter-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .outline-tab-btn {
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-card);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .outline-tab-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .outline-tab-btn.active {
+      background-color: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+    }
+
+    .outline-content-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px 22px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s;
+    }
+
+    .outline-card-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 14px;
+    }
+
+    .outline-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .outline-main-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .outline-guide-text {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .outline-action-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .outline-act-btn {
+      padding: 6px 13px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.18s;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+
+    .outline-act-btn.btn-md {
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+      border-color: var(--primary-border);
+    }
+    .outline-act-btn.btn-md:hover {
+      background-color: var(--primary);
+      color: #fff;
+    }
+
+    .outline-act-btn.btn-html {
+      background-color: #ede9fe;
+      color: #6b21a8;
+      border-color: #ddd6fe;
+    }
+    .outline-act-btn.btn-html:hover {
+      background-color: #8b5cf6;
+      color: #fff;
+    }
+
+    .outline-act-btn.btn-pdf {
+      background-color: #fee2e2;
+      color: #991b1b;
+      border-color: #fecaca;
+    }
+    .outline-act-btn.btn-pdf:hover {
+      background-color: #ef4444;
+      color: #fff;
+    }
+
+    .outline-table-scroll {
+      max-height: 540px;
+      overflow-y: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+
+    .outline-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+      text-align: left;
+    }
+
+    .outline-table th {
+      background-color: var(--bg-body);
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    .outline-table td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+      vertical-align: middle;
+      line-height: 1.55;
+    }
+
+    .outline-table tbody tr:hover {
+      background-color: var(--primary-light);
+      cursor: pointer;
+    }
+
+    .q-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, #8b5cf6, #ec4899);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.76rem;
+    }
+
+    .q-point {
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .q-ans {
+      font-weight: 700;
+      color: #ec4899;
+      background-color: rgba(236, 72, 153, 0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .q-tip {
+      font-size: 0.79rem;
+      color: #ef4444;
+    }
+
     /* Mobile Responsive */
     @media (max-width: 768px) {
       .exam-status-card {
@@ -1355,6 +1563,46 @@
 
           </div>
 
+          <!-- ================= 1000 题核心考点与全题解大纲速查看板 ================= -->
+          <div class="exam-outline-section" id="examOutlineSection">
+            <div class="outline-header-row">
+              <h3 class="section-title" style="margin-bottom: 0;">
+                <i class="fa-solid fa-graduation-cap" style="color: #8b5cf6;"></i>
+                高数 1000 题核心考点与全题解大纲速查
+              </h3>
+              <div class="outline-chapter-tabs" id="outlineChapterTabs">
+                <button class="outline-tab-btn active" data-chap="chap03">
+                  <i class="fa-solid fa-shapes"></i> Chap03 一元微分概念 (15题)
+                </button>
+                <button class="outline-tab-btn" data-chap="chap04">
+                  <i class="fa-solid fa-calculator"></i> Chap04 一元微分计算 (18题)
+                </button>
+              </div>
+            </div>
+
+            <div class="outline-content-card">
+              <div class="outline-card-topbar" id="outlineCardTopBar">
+                <!-- 动态由 JS 渲染当前章节标题、复习导引及直达按钮 (MD/HTML/PDF) -->
+              </div>
+              <div class="outline-table-scroll">
+                <table class="outline-table" id="outlineTable">
+                  <thead>
+                    <tr>
+                      <th style="width: 60px; text-align: center;">题号</th>
+                      <th style="width: 210px;">核心考点与命题类型</th>
+                      <th>关键解法与思维模型</th>
+                      <th style="width: 140px; text-align: center;">核心结论 / 答案</th>
+                      <th style="width: 240px;">易错陷阱与反思提示</th>
+                    </tr>
+                  </thead>
+                  <tbody id="outlineTableBody">
+                    <!-- 动态由 JS 渲染各题要点 -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
           <h3 class="section-title"><i class="fa-solid fa-compass"></i> 核心备考总纲</h3>
           <div class="quick-links-grid" id="quickLinksGrid">
             <!-- 根目录总纲卡片 -->
@@ -1492,7 +1740,11 @@
         openWeeklyOverviewBtn: document.getElementById('openWeeklyOverviewBtn'),
         openLifeScheduleBtn: document.getElementById('openLifeScheduleBtn'),
         missionBulletsGrid: document.getElementById('missionBulletsGrid'),
-        scheduleTableBody: document.getElementById('scheduleTableBody')
+        scheduleTableBody: document.getElementById('scheduleTableBody'),
+        examOutlineSection: document.getElementById('examOutlineSection'),
+        outlineChapterTabs: document.getElementById('outlineChapterTabs'),
+        outlineCardTopBar: document.getElementById('outlineCardTopBar'),
+        outlineTableBody: document.getElementById('outlineTableBody')
       };
 
       // 初始化主题
@@ -1665,6 +1917,9 @@
 
         // 渲染考研倒计时看板与今日作战时间安排表
         initExamCountdownAndSchedule();
+
+        // 渲染 1000 题核心考点与全题解大纲速查看板
+        initExamOutlineSection();
 
         // 渲染根目录总纲
         els.quickLinksGrid.innerHTML = '';
@@ -1872,6 +2127,161 @@
             } else {
               els.currentTaskDesc.innerHTML = `<strong style="color: #10b981;">【夜间养精蓄锐】</strong>今日作战已收兵，早睡早起保持充沛体能！`;
             }
+          }
+        }
+      }
+
+      // ================= 1000 题核心考点与全题解大纲速查看板数据与渲染 =================
+      const EXAM_OUTLINE_DATA = {
+        chap03: {
+          title: "Chap03 一元函数微分学的概念 · 高等数学 1000 题基础篇",
+          path: "302 数学二/高等数学/Chap03一元函数微分学的概念/高等数学1000a基础篇.md",
+          badge: "15 题全解 · 基础~中等",
+          guide: "命题焦点：导数微商极限本质、可导/连续/极值逻辑充要关系、绝对值穿轴尖点模型、微分几何主部逼近、含参分段函数可微性判定。",
+          questions: [
+            { q: "Q1", point: "微商极限与等价无穷小代换", method: "剥离分母 $\\ln(1-x\\sin x)\\sim -x^2$ 与分子 $1-\\cos x \\sim \\frac{1}{2}x^2$，凑配导数定义", ans: "$-\\frac{1}{2}f'(0)$", tip: "未知 $f'$ 连续性切勿乱用洛必达法则" },
+            { q: "Q2", point: "连续不可导函数乘积可导模型", method: "反证法结合导数定义拆分；牢记“可导乘不可导”可导的充要零点条件", ans: "(A) $g(a)=0$", tip: "必须注意 $g(a)=0$ 是使得极限存在的必要消除项" },
+            { q: "Q3", point: "导数定义的换元与系数配平", method: "令 $t=3-x \\to 1$，反转差商符号 $\\frac{f(1)-f(t)}{1-t}$ 并提取系数", ans: "(D) $-\\frac{1}{2}$", tip: "变量趋近方向及差商正负号极易颠倒" },
+            { q: "Q4", point: "平方差因式分解拆分复合微商", method: "拆分 $\\frac{f(x^2)-f(1)}{x^2-1}\\cdot(x+1)$，极限存在时四则运算法则分别求极限", ans: "$4$", tip: "避免未验证极限存在直接拆分" },
+            { q: "Q5", point: "阶梯函数取整夹逼微商", method: "取整不等式 $x-1 < [x] \\le x$；$x\\to 0$ 时结合极限单侧夹逼准则", ans: "$1$", tip: "区分单侧导数与趋于零时常数因子的退化" },
+            { q: "Q6", point: "对数导数极限的逆向构造", method: "构造差商 $\\frac{\\ln f(x)-\\ln f(0)}{x-0} = (\\ln f(x))'_{x=0} = \\frac{f'(0)}{f(0)}$", ans: "$\\frac{f'(0)}{f(0)}$", tip: "识别对数复合函数在原点导数的定义形式" },
+            { q: "Q7", point: "绝对值穿轴零点可导性充要模型", method: "形如 $|x-a|\\varphi(x)$ 在 $x=a$ 处可导 $\\iff \\varphi(a)=0$；因 $\\sin 0 = 0$ 消除尖点", ans: "(B) $|x-1|\\sin(x-1)$", tip: "奇数次零点带绝对值产生尖点不可导，偶数次可导" },
+            { q: "Q8", point: "导数几何意义与曲线切线方程", method: "切点坐标 $(1, 1)$，求导求斜率 $k = y'(1) = 2$，点斜式写出切线", ans: "$y = 2x - 1$", tip: "注意切线与法线的斜率垂直互逆关系" },
+            { q: "Q9", point: "微分几何与解析定义（增量与主部）", method: "微分即函数增量的线性主部，高阶无穷小差值 $\\Delta y - \\mathrm{d}y = o(\\Delta x)$", ans: "(D)", tip: "辨析 $\\mathrm{d}y$、$\\Delta y$ 与增量差的无穷小阶数" },
+            { q: "Q10", point: "振荡因子分段函数 $x^\\alpha \\sin(1/x^\\beta)$", method: "$\\alpha=3, \\beta=1$，导数定义求 $f'(0)=0$，原点外求导验证 $\\lim_{x\\to 0}f'(x)=0$", ans: "(D) 导函数连续", tip: "熟记：$\\alpha>1$ 可导，$\\alpha>1+\\beta$ 导函数才连续" },
+            { q: "Q11", point: "极值点与不可导点判别", method: "$f(x)=|x|\\varphi(x)$ 极值与可微性判定；左右微商相等必须 $\\varphi(0)=0$", ans: "(A) $\\varphi(0)=0$", tip: "费马引理的前提是该点可导，尖点极值不可用费马引理" },
+            { q: "Q12", point: "非对称双侧步长微商极限拆分", method: "经典拆项加减 $f(x_0)$，配凑两个标准单侧步长微商：$2f'(x_0) - (-f'(x_0)) = 3f'(x_0)$", ans: "$2f'(x_0)$", tip: "双侧步长非对称时不能直接当成对称微商" },
+            { q: "Q13", point: "奇偶函数的导数特征与线性展开", method: "可导奇函数必有 $f(0)=0$ 且导函数为偶函数；因式提取后凑微商", ans: "$(t-5)f'(0)$", tip: "奇函数的原点函数值 $f(0)=0$ 是常考的隐蔽条件" },
+            { q: "Q14", point: "最大值函数的可微性分界尖点", method: "$f(x)=\\max\\{x, a-x^2\\}$，不可导点只可能在曲线相交的穿轴交点处", ans: "$a=2$", tip: "相交但切线重合时依然可导，穿轴相交产生尖点不可导" },
+            { q: "Q15", point: "含参数极限函数显式化与全域可导", method: "按 $|x|<1, |x|=1, |x|>1$ 分段化简；利用连续性 $a+b=5$ 与可导性解得", ans: "$a=10, b=-5$", tip: "分段点必须同时检验“极限连续”与“左右导数相等”" }
+          ]
+        },
+        chap04: {
+          title: "Chap04 一元函数微分学的计算 · 高等数学 1000 题基础篇",
+          path: "302 数学二/高等数学/Chap04一元函数微分学的计算/高等数学1000a基础篇.md",
+          badge: "18 题全解 · 基础~中等",
+          guide: "命题焦点：复合函数链式法则、反函数导数公式转换、隐函数与参数方程一二阶导数、麦克劳林展开系数法求高阶导、莱布尼茨多项式截断求导。",
+          questions: [
+            { q: "Q1", point: "复合抽象函数方程求值", method: "由 $f(u)=u^2$ 得到 $h(x)=[1+g(x)]^2$，链式求导后代入已知导数值求解", ans: "(B) $g(1)=-\\frac{1}{2}$", tip: "复合函数的内层求导 $g'(x)$ 容易遗漏" },
+            { q: "Q2", point: "零点求导极速拆分法", method: "$x=e$ 为函数单重零点，高阶求导在单零点处直接求单项导数代入", ans: "$\\frac{(-1)^{n-1}(n-1)!}{e}$", tip: "避免对整式反复使用乘积求导法则，零点直接剥离" },
+            { q: "Q3", point: "局部保号性去除绝对值求导", method: "$f(0)=-1<0 \\implies$ 在 $x\\to 1$ 邻域内 $f(x-1)<0$，脱绝对值后求导", ans: "$-1$", tip: "绝对值必须先通过局部正负性去模，不能直接强行求导" },
+            { q: "Q4", point: "复合链式求导与对数运算法则", method: "运用标准复合链式法则依次对外层、内层逐级求导后代入 $x=1$", ans: "(C) $\\frac{1}{2}\\sqrt{e}$", tip: "复合指数与根式复合时的层次结构梳理" },
+            { q: "Q5", point: "反函数导数公式转换", method: "利用公式 $\\frac{\\mathrm{d}x}{\\mathrm{d}y} = \\frac{1}{\\mathrm{d}y/\\mathrm{d}x}$，结合已知微分关系代入计算", ans: "$-1$", tip: "反函数的一阶导是原函数一阶导的倒数，二阶导则不是" },
+            { q: "Q6", point: "对数拆分先化简后求导法则", method: "利用 $\\ln\\sqrt{\\frac{1-x}{1+x}} = \\frac{1}{2}[\\ln(1-x)-\\ln(1+x)]$ 拆成对数加减再求导", ans: "$-\\frac{1}{2}$", tip: "遇到根式商形式的对数，直接求导计算量剧增，必须先拆分" },
+            { q: "Q7", point: "参数方程与隐函数联立求导", method: "结合参数方程链式法则 $\\frac{\\mathrm{d}y}{\\mathrm{d}x} = \\frac{y'(t)}{x'(t)}$，在对应参数点代值", ans: "$-\\frac{1}{e}$", tip: "确定 $x$ 的对应值必须代入解出参数 $t$" },
+            { q: "Q8", point: "绝对值参数方程一阶二阶导数辨析", method: "参数方程中带绝对值；左右侧导数分析一阶导连续，二阶导左右极限不等", ans: "(C) 一阶导存在，二阶导不存在", tip: "绝对值分段点的二阶导数必须用单侧极限严格验证" },
+            { q: "Q9", point: "导数幂次微分方程递推高阶导数", method: "由 $f'(x)=f^2(x)$ 连续两边求导：$f''(x)=2f(x)f'(x)=2f^3(x)$，$f'''(x)=6f^4(x)$", ans: "$6$", tip: "逐阶求导后及时把已知的 $f'(x)$ 用 $f^2(x)$ 代回化简" },
+            { q: "Q10", point: "幂次微分关系式的三阶导数求值", method: "结构同 Q9，利用关系式 $f'(x)=f^2(x)$ 反复代换，确定 $f'''(x)$ 的系数项", ans: "$6$", tip: "同构命题强化，牢记 $f'''=6f^4$ 递推规律" },
+            { q: "Q11", point: "麦克劳林展开系数法反求高阶导数", method: "将 $\\frac{1}{1-x^2}$ 展成幂级数，对照 $a_n = \\frac{f^{(n)}(0)}{n!}$ 快速抓取特定项系数", ans: "$-\\frac{n!}{n-2}$", tip: "高阶导在零点的值优先考虑泰勒/麦克劳林级数对照法" },
+            { q: "Q12", point: "$1^\\infty$ 型数列极限函数显式化后求导", method: "先求极限 $f(t) = \\lim_{n\\to\\infty}(1+\\frac{2t}{n})^n\\cos\\frac{t}{n} = e^{2t}$，再求导代值", ans: "$2$", tip: "变量 $n$ 与 $t$ 角色分清，先对 $n$ 求极限，再对 $t$ 求导" },
+            { q: "Q13", point: "第二重要极限复合函数求导", method: "显式化极限函数 $f(x) = \\lim_{n\\to\\infty}(1+\\frac{\\sin x}{n})^n = e^{\\sin x}$，求导得 $e^{\\sin x}\\cos x$", ans: "$e^{\\sin x}\\cos x$", tip: "识别 $(1+\\frac{u}{n})^n \\to e^u$ 结构" },
+            { q: "Q14", point: "最值分段函数分段点求导", method: "写出分段函数表达式，在衔接点 $x=1$ 处分别考察左右单侧导数极限", ans: "不存在", tip: "衔接点处左右导数不相等，导数不存在" },
+            { q: "Q15", point: "参数方程切线与法线方程", method: "确定对应参数 $t=0$，求点 $(0, 1)$ 及切线斜率 $k = \\left.\\frac{y'(t)}{x'(t)}\\right|_{t=0} = \\frac{1}{2}$", ans: "$y = \\frac{1}{2}x + 1$", tip: "区分切线方程与法线方程的斜率负倒数关系" },
+            { q: "Q16", point: "参数方程二阶导数标准公式", method: "应用 $\\frac{\\mathrm{d}^2y}{\\mathrm{d}x^2} = \\frac{\\frac{\\mathrm{d}}{\\mathrm{d}t}(\\frac{\\mathrm{d}y}{\\mathrm{d}x})}{x'(t)}$，严格分母除以 $x'(t)$", ans: "$\\frac{8}{e^2}$", tip: "最易错：忘记二阶导要再除以一次 $x'(t)$" },
+            { q: "Q17", point: "莱布尼茨高阶求导公式与多项式截断", method: "$(uv)^{(n)} = \\sum \\mathrm{C}_n^k u^{(k)}v^{(n-k)}$；二次多项式三阶及以上导数为 $0$ 自动截断", ans: "$31e$", tip: "多项式乘指数函数求高阶导，首选莱布尼茨公式截断法" },
+            { q: "Q18", point: "莱布尼茨公式零点展开的保留项", method: "$f(x)=(x^2-1)\\sin(x+1)$ 在 $x=-1$ 处 $x^2-1=0$，仅 $k=1$ 时的二阶导乘项保留", ans: "(B) $11!\\cos 1$", tip: "在特定点代入时，由于零点性质绝大部分展开项为 0，极大化简计算" }
+          ]
+        }
+      };
+
+      let currentOutlineChap = 'chap03';
+
+      function initExamOutlineSection() {
+        if (!els.examOutlineSection) return;
+
+        // 绑定章节选项卡切换
+        if (els.outlineChapterTabs && !els.outlineChapterTabs._hasBound) {
+          els.outlineChapterTabs._hasBound = true;
+          els.outlineChapterTabs.querySelectorAll('.outline-tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              els.outlineChapterTabs.querySelectorAll('.outline-tab-btn').forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              currentOutlineChap = btn.dataset.chap;
+              renderExamOutline(currentOutlineChap);
+            });
+          });
+        }
+
+        renderExamOutline(currentOutlineChap);
+      }
+
+      function renderExamOutline(chapKey) {
+        const data = EXAM_OUTLINE_DATA[chapKey];
+        if (!data || !els.outlineCardTopBar || !els.outlineTableBody) return;
+
+        // 查找对应文档对象
+        const docObj = findDocByPath(state.catalog, data.path);
+
+        // 1. 顶部操作栏与导引
+        els.outlineCardTopBar.innerHTML = `
+          <div class="outline-title-wrap">
+            <div class="outline-main-title">
+              <i class="fa-solid fa-bookmark" style="color: var(--primary);"></i>
+              <span>${data.title}</span>
+              <span class="status-badge ongoing" style="margin-left: 8px;">${data.badge}</span>
+            </div>
+            <div class="outline-guide-text">${data.guide}</div>
+          </div>
+          <div class="outline-action-group">
+            <button class="outline-act-btn btn-md" id="outlineOpenMdBtn" title="打开 Markdown 原文笔记">
+              <i class="fa-brands fa-markdown"></i> Markdown 笔记
+            </button>
+            <button class="outline-act-btn btn-html" id="outlineOpenHtmlBtn" title="以独立网页版阅读">
+              <i class="fa-solid fa-globe"></i> 网页版精读
+            </button>
+            <button class="outline-act-btn btn-pdf" id="outlineOpenPdfBtn" title="打开出版级高清 PDF">
+              <i class="fa-solid fa-file-pdf"></i> 高清 PDF
+            </button>
+          </div>
+        `;
+
+        // 绑定顶部按钮点击
+        const openFormat = (fmt) => {
+          if (docObj) {
+            loadDocument(docObj, fmt);
+          } else {
+            console.warn('Doc not found for path:', data.path);
+          }
+        };
+
+        const mdBtn = document.getElementById('outlineOpenMdBtn');
+        const htmlBtn = document.getElementById('outlineOpenHtmlBtn');
+        const pdfBtn = document.getElementById('outlineOpenPdfBtn');
+
+        if (mdBtn) mdBtn.addEventListener('click', () => openFormat('md'));
+        if (htmlBtn) htmlBtn.addEventListener('click', () => openFormat('html'));
+        if (pdfBtn) pdfBtn.addEventListener('click', () => openFormat('pdf'));
+
+        // 2. 渲染题目速查表格
+        els.outlineTableBody.innerHTML = '';
+        data.questions.forEach(q => {
+          const tr = document.createElement('tr');
+          tr.title = `点击打开 ${data.title} 并在阅读器中查看详细解析推导`;
+          tr.innerHTML = `
+            <td style="text-align: center;"><span class="q-badge">${q.q}</span></td>
+            <td><div class="q-point">${q.point}</div></td>
+            <td>${q.method}</td>
+            <td style="text-align: center;"><span class="q-ans">${q.ans}</span></td>
+            <td><span class="q-tip"><i class="fa-solid fa-triangle-exclamation" style="margin-right: 4px;"></i>${q.tip}</span></td>
+          `;
+          tr.addEventListener('click', () => {
+            if (docObj) loadDocument(docObj, docObj.defaultType);
+          });
+          els.outlineTableBody.appendChild(tr);
+        });
+
+        // 3. 用 KaTeX 渲染数学公式
+        if (typeof renderMathInElement !== 'undefined') {
+          try {
+            renderMathInElement(els.outlineTableBody, {
+              delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+              ],
+              throwOnError: false
+            });
+          } catch (e) {
+            console.warn('KaTeX outline render error:', e);
           }
         }
       }
