@@ -187,7 +187,7 @@ def get_browser_path():
             return c
     return None
 
-def convert_md_to_pdf(md_path, pdf_path):
+def convert_md_to_pdf(md_path, pdf_path, save_html=False):
     with open(md_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
@@ -254,8 +254,8 @@ def convert_md_to_pdf(md_path, pdf_path):
 </body>
 </html>'''
 
-    temp_html = md_path + ".temp.html"
-    with open(temp_html, "w", encoding="utf-8") as f:
+    target_html = os.path.splitext(md_path)[0] + ".html" if save_html else md_path + ".temp.html"
+    with open(target_html, "w", encoding="utf-8") as f:
         f.write(full_html)
 
     browser = get_browser_path()
@@ -273,11 +273,11 @@ def convert_md_to_pdf(md_path, pdf_path):
         "--run-all-compositor-stages-before-draw",
         "--virtual-time-budget=6000",
         f"--print-to-pdf={abs_pdf}",
-        os.path.abspath(temp_html)
+        os.path.abspath(target_html)
     ]
     subprocess.run(cmd, capture_output=True)
-    if os.path.exists(temp_html):
-        os.remove(temp_html)
+    if not save_html and os.path.exists(target_html):
+        os.remove(target_html)
 
     # Sync to copy dir if applicable
     if "11408_2027" in abs_pdf and "11408_2027 - 副本" not in abs_pdf:
@@ -287,10 +287,10 @@ def convert_md_to_pdf(md_path, pdf_path):
 
     return os.path.exists(abs_pdf)
 
-def process_file(md_path):
+def process_file(md_path, save_html=False):
     pdf_path = os.path.splitext(md_path)[0] + ".pdf"
     print(f"Exporting: {os.path.basename(md_path)} -> {os.path.basename(pdf_path)}...", end=" ", flush=True)
-    ok = convert_md_to_pdf(md_path, pdf_path)
+    ok = convert_md_to_pdf(md_path, pdf_path, save_html=save_html)
     if ok:
         print(f"[DONE] ({os.path.getsize(pdf_path)} bytes)")
     else:
@@ -300,6 +300,7 @@ def main():
     parser = argparse.ArgumentParser(description="Export math markdown notes to PDF")
     parser.add_argument("target", nargs="*", default=["."], help="Markdown files or directories to process")
     parser.add_argument("--all", action="store_true", help="Recursively process all markdown notes")
+    parser.add_argument("--html", action="store_true", help="Also generate HTML version alongside PDF")
     args = parser.parse_args()
 
     ignore_files = {"Readme.md", "skill.md", "file_list.txt"}
@@ -307,13 +308,13 @@ def main():
 
     for tgt in targets:
         if os.path.isfile(tgt):
-            process_file(os.path.abspath(tgt))
+            process_file(os.path.abspath(tgt), save_html=args.html)
         else:
             search_dir = os.path.abspath(tgt)
             for root, _, files in os.walk(search_dir):
                 for f in files:
                     if f.endswith(".md") and f not in ignore_files:
-                        process_file(os.path.join(root, f))
+                        process_file(os.path.join(root, f), save_html=args.html)
 
 if __name__ == "__main__":
     main()

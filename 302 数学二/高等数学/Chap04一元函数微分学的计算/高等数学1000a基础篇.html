@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>高等数学1000a基础篇</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style>
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 13.8px;
+    line-height: 1.68;
+    color: #1f2937;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+}
+
+/* Purple Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #9333ea;
+    padding-bottom: 6px;
+    margin-top: 16px;
+    margin-bottom: 12px;
+    color: #581c87;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 16px;
+    margin-bottom: 10px;
+    color: #6b21a8;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #7e22ce;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #6b21a8;
+    page-break-after: avoid;
+}
+
+p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: justify;
+}
+
+/* DeepPink Formula Blocks / Blockquotes */
+blockquote {
+    margin: 8px 0;
+    padding: 6px 14px;
+    color: #1f2937;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 5px 5px 0;
+    page-break-inside: avoid;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left-color: #f43f5e;
+    margin: 4px 0;
+}
+
+blockquote p {
+    margin: 4px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0;
+    page-break-inside: avoid;
+    font-size: 13px;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code & Pre */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 10px;
+    overflow-x: auto;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* Display Math: Formula text is crisp BLACK, formula block is styled */
+.katex-display {
+    margin: 8px 0 !important;
+    overflow-x: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 14px 0;
+}
+
+    </style>
+</head>
+<body>
+<h1>第4章 一元函数微分学的计算</h1>
+<hr />
+<p><strong>(简单)<font color=green>题目[1]:复合抽象函数求导与方程求解</font></strong></p>
+<p>设 $f(x)=x^2$，$h(x)=f\left[1+g(x)\right]$，其中 $g(x)$ 可导，且 $g'(1)=h'(1)=2$，则 $g(1)=(\quad)$。</p>
+<p>(A) $-2$  </p>
+<p>(B) $-\frac{1}{2}$  </p>
+<p>(C) $0$  </p>
+<p>(D) $2$</p>
+<p>答案: (B)</p>
+<p>主要思路:[先写出复合函数表达式，链式求导代入已知导数值建立代数方程]</p>
+<blockquote>
+<p>[1] 写出 $h(x)$ 显式表达式：</p>
+<p>由 $f(u) = u^2$，得：</p>
+<p>$$h(x) = [1+g(x)]^2$$</p>
+<p>[2] 链式求导法：</p>
+<p>$$h'(x) = 2[1+g(x)] \cdot [1+g(x)]' = 2[1+g(x)]g'(x)$$</p>
+<p>[3] 代入 $x=1$ 列方程求解：</p>
+<p>$$h'(1) = 2[1+g(1)]g'(1)$$</p>
+<p>将 $h'(1)=2$，$g'(1)=2$ 代入：</p>
+<p>$$2 = 2[1+g(1)] \cdot 2 \implies 2 = 4[1+g(1)] \implies 1+g(1) = \frac{1}{2} \implies g(1) = -\frac{1}{2}$$</p>
+</blockquote>
+<hr />
+<p><strong>(高频技巧)<font color=red>题目[2]:多项连乘积单点导数的零点拆分法则</font></strong></p>
+<p>设 $f(x)=(\ln x - 1)(\ln^2 x - 2)\cdots(\ln^n x - n)$，$n \ge 2$，则 $f'(e) =$ ______。</p>
+<p>答案: $\frac{(-1)^{n-1}(n-1)!}{e}$</p>
+<p>主要思路:[识别 $x=e$ 仅为第一因式的简单单重零点，利用零点求导极速拆分公式]</p>
+<blockquote>
+<p>[1] 观察因式在 $x=e$ 处的取值：</p>
+<p>由于 $\ln e = 1$，各项因式取值为：</p>
+<p>$$\ln e - 1 = 0, \quad \ln^2 e - 2 = -1, \quad \ln^3 e - 3 = -2, \quad \dots, \quad \ln^n e - n = -(n-1)$$</p>
+<p>可见 $x=e$ 仅为首项因式的一重零点，其余因式在该点均不为零。</p>
+<p>[2] 零点导数拆分公式：</p>
+<p>设 $u(x) = \ln x - 1$，$v(x) = (\ln^2 x - 2)(\ln^3 x - 3)\cdots(\ln^n x - n)$。</p>
+<p>则 $f(x) = u(x)v(x)$，由乘积求导法则：</p>
+<p>$$f'(e) = u'(e)v(e) + u(e)v'(e)$$</p>
+<p>因为 $u(e) = \ln e - 1 = 0$，第二项恒为零！故直接化简为：</p>
+<p>$$f'(e) = u'(e)v(e)$$</p>
+<p>[3] 分步代入计算：</p>
+<p>(1) $u'(x) = (\ln x - 1)' = \frac{1}{x} \implies u'(e) = \frac{1}{e}$；</p>
+<p>(2) $v(e) = (1-2)(1-3)\cdots(1-n) = (-1)(-2)\cdots(-(n-1)) = (-1)^{n-1}(n-1)!$。</p>
+<p>两者相乘得：</p>
+<p>$$f'(e) = \frac{1}{e} \cdot (-1)^{n-1}(n-1)! = \frac{(-1)^{n-1}(n-1)!}{e}$$</p>
+</blockquote>
+<p><font color=deeppink>[极速技巧]:对于连乘积在单点处的导数，只要该点是其中某因式的单零点，求导时只需“对零点项求导，其余各项直接代入常数值”，无需对数求导硬算！</font></p>
+<hr />
+<p><strong>(简单?再看一眼)<font color=deeppink>题目[3]:绝对值复合函数的局部保号去绝对值求导</font></strong></p>
+<p>设函数 $f(x)$ 可导，$f(0)=-1$，$f'(0)=1$，若 $y(x)=|f(x-1)|$，则 $y'(1) =$ ______。</p>
+<p>答案: $-1$</p>
+<p>主要思路:[由连续函数局部保号性判定去绝对值后的符号，直接求导]</p>
+<blockquote>
+<p>[1] 考察目标点处的函数值：</p>
+<p>当 $x = 1$ 时，内层函数取值为 $f(1-1) = f(0) = -1 < 0$。</p>
+<p>[2] 利用连续性局部保号去绝对值：</p>
+<p>因为 $f(x)$ 可导必连续，根据极限保号性，存在 $x=1$ 的某个去心邻域，在此邻域内恒有 $f(x-1) < 0$。</p>
+<p>因此，在此邻域内绝对值可直接脱去：</p>
+<p>$$y(x) = -f(x-1)$$</p>
+<p>[3] 直接求导并代入：</p>
+<p>$$y'(x) = -f'(x-1) \cdot (x-1)' = -f'(x-1)$$</p>
+<p>代入 $x=1$：</p>
+<p>$$y'(1) = -f'(0) = -(1) = -1$$</p>
+</blockquote>
+<hr />
+<p><strong>(简单)<font color=green>题目[4]:指数与根式多层复合函数求导</font></strong></p>
+<p>设函数 $f(x)$ 可导，$f(1)=f'(1)=\frac{1}{4}$，若 $y(x)=e^{\sqrt{f(2x-1)}}$，则 $y'(1)=(\quad)$。</p>
+<p>(A) $\sqrt{e}$  </p>
+<p>(B) $\frac{1}{4}\sqrt{e}$  </p>
+<p>(C) $\frac{1}{2}\sqrt{e}$  </p>
+<p>(D) $2\sqrt{e}$</p>
+<p>答案: (C)</p>
+<p>主要思路:[由外向内链式求导，逐层剥离]</p>
+<blockquote>
+<p>[1] 链式法则求导：</p>
+<p>$$\begin{aligned} y'(x) &= e^{\sqrt{f(2x-1)}} \cdot [\sqrt{f(2x-1)}]' \\ \\ &= e^{\sqrt{f(2x-1)}} \cdot \frac{1}{2\sqrt{f(2x-1)}} \cdot [f(2x-1)]' \\ \\ &= e^{\sqrt{f(2x-1)}} \cdot \frac{1}{2\sqrt{f(2x-1)}} \cdot f'(2x-1) \cdot 2 \\ \\ &= \frac{f'(2x-1)}{\sqrt{f(2x-1)}} e^{\sqrt{f(2x-1)}} \end{aligned}$$</p>
+<p>[2] 代入 $x=1$ 计算：</p>
+<p>此时内层自变量为 $2(1)-1 = 1$。已知 $f(1)=\frac{1}{4}$，$\sqrt{f(1)} = \frac{1}{2}$，$f'(1) = \frac{1}{4}$。</p>
+<p>代入得：</p>
+<p>$$y'(1) = \frac{\frac{1}{4}}{\frac{1}{2}} e^{\frac{1}{2}} = \frac{1}{2}\sqrt{e}$$</p>
+</blockquote>
+<hr />
+<p><strong>(反函数核心)<font color=deeppink>题目[5]:反函数一阶导数转化求值</font></strong></p>
+<p>已知函数 $y=y(x)$ 满足 $(x+y^2)y'=1$，$y(-1)=0$，则 $\left.\frac{\mathrm{d}x}{\mathrm{d}y}\right|_{y=0} =$ ______。</p>
+<p>答案: $-1$</p>
+<p>主要思路:[运用反函数导数公式 $\frac{\mathrm{d}x}{\mathrm{d}y} = \frac{1}{\frac{\mathrm{d}y}{\mathrm{d}x}}$ 快速反解]</p>
+<blockquote>
+<p>[1] 依据反函数求导法则：</p>
+<p>$$\frac{\mathrm{d}x}{\mathrm{d}y} = \frac{1}{y'}$$</p>
+<p>[2] 代入已知微分方程：</p>
+<p>由 $(x+y^2)y'=1 \implies \frac{1}{y'} = x + y^2$。</p>
+<p>故反函数导数为：</p>
+<p>$$\frac{\mathrm{d}x}{\mathrm{d}y} = x + y^2$$</p>
+<p>[3] 定位对应点坐标并代入：</p>
+<p>已知 $y(-1)=0$，说明当自变量 $y=0$ 时，对应的 $x = -1$。</p>
+<p>因此：</p>
+<p>$$\left.\frac{\mathrm{d}x}{\mathrm{d}y}\right|_{y=0} = (-1) + 0^2 = -1$$</p>
+</blockquote>
+<hr />
+<p><strong>(技巧型)<font color=green>题目[6]:对数运算法则拆分化简后求导</font></strong></p>
+<p>设 $y=\ln\sqrt{\frac{1-x}{1+x^2}}$，则 $\left.y'\right|_{x=0} =$ ______。</p>
+<p>答案: $-\frac{1}{2}$</p>
+<p>主要思路:[先化简再求导：利用对数真数商变差、根号提为前置系数 $\frac{1}{2}$]</p>
+<blockquote>
+<p>[1] 对数恒等变形：</p>
+<p>$$y = \ln\left(\frac{1-x}{1+x^2}\right)^{\frac{1}{2}} = \frac{1}{2}\left[ \ln(1-x) - \ln(1+x^2) \right]$$</p>
+<p>[2] 逐项求导：</p>
+<p>$$y' = \frac{1}{2}\left[ \frac{-1}{1-x} - \frac{2x}{1+x^2} \right]$$</p>
+<p>[3] 代入 $x=0$：</p>
+<p>$$\left.y'\right|_{x=0} = \frac{1}{2}\left[ \frac{-1}{1-0} - \frac{0}{1+0} \right] = \frac{1}{2}(-1) = -\frac{1}{2}$$</p>
+</blockquote>
+<hr />
+<p><strong>(中等难度)<font color=red>题目[7]:参数方程与隐函数联立的一阶导数计算</font></strong></p>
+<p>设 $\begin{cases} x=t-t^2, \\ \\ te^y+y+1=0, \end{cases}$ 则 $\left.\frac{\mathrm{d}y}{\mathrm{d}x}\right|_{t=0} =$ ______。</p>
+<p>答案: $-\frac{1}{e}$ (或 $-e^{-1}$)</p>
+<p>主要思路:[利用参数方程导数公式 $\frac{\mathrm{d}y}{\mathrm{d}x} = \frac{y'_t}{x'_t}$，其中 $y'_t$ 由隐函数求导确定]</p>
+<blockquote>
+<p>[1] 确定当 $t=0$ 时的 $x$ 与 $y$：</p>
+<p>由 $x = t-t^2$ 知 $t=0 \implies x = 0$。</p>
+<p>代入第二方程：$0 \cdot e^y + y + 1 = 0 \implies y = -1$。</p>
+<p>[2] 求 $x$ 对 $t$ 的导数：</p>
+<p>$$\frac{\mathrm{d}x}{\mathrm{d}t} = 1 - 2t \implies \left.\frac{\mathrm{d}x}{\mathrm{d}t}\right|_{t=0} = 1$$</p>
+<p>[3] 对隐函数方程两端关于 $t$ 求导以解出 $\frac{\mathrm{d}y}{\mathrm{d}t}$：</p>
+<p>$$[te^y + y + 1]' = 0 \implies 1 \cdot e^y + t \cdot e^y \frac{\mathrm{d}y}{\mathrm{d}t} + \frac{\mathrm{d}y}{\mathrm{d}t} = 0$$</p>
+<p>提取公因式：</p>
+<p>$$\frac{\mathrm{d}y}{\mathrm{d}t}(1 + te^y) = -e^y \implies \frac{\mathrm{d}y}{\mathrm{d}t} = \frac{-e^y}{1 + te^y}$$</p>
+<p>代入 $t=0, y=-1$：</p>
+<p>$$\left.\frac{\mathrm{d}y}{\mathrm{d}t}\right|_{t=0} = \frac{-e^{-1}}{1 + 0} = -\frac{1}{e}$$</p>
+<p>[4] 综合计算参数方程导数：</p>
+<p>$$\left.\frac{\mathrm{d}y}{\mathrm{d}x}\right|_{t=0} = \frac{\left.\frac{\mathrm{d}y}{\mathrm{d}t}\right|_{t=0}}{\left.\frac{\mathrm{d}x}{\mathrm{d}t}\right|_{t=0}} = \frac{-\frac{1}{e}}{1} = -\frac{1}{e}$$</p>
+</blockquote>
+<hr />
+<p><strong>(综合大题)<font color=red>题目[8]:含绝对值参数方程在原点处的一阶与二阶可导性大辨析</font></strong></p>
+<p>设函数 $y=f(x)$ 由 $\begin{cases} x=2t+|t|, \\ \\ y=|t|\tan t \end{cases}$ 所确定，则在 $\left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$ 内 $(\quad)$。</p>
+<p>(A) $f(x)$ 连续，$f'(0)$ 不存在  </p>
+<p>(B) $f'(0)$ 存在，$f'(x)$ 在 $x=0$ 处不连续  </p>
+<p>(C) $f'(x)$ 连续，$f''(0)$ 不存在  </p>
+<p>(D) $f''(0)$ 存在，$f''(x)$ 在 $x=0$ 处不连续</p>
+<p>答案: (C)</p>
+<p>主要思路:[按 $t>0$ 与 $t<0$ 消去参数反解显式，分别求出一阶、二阶导数的单侧极限与定义]</p>
+<blockquote>
+<p>[1] 分段化简参数方程：</p>
+<p>(1) 当 $t \ge 0$ 时，$|t| = t$：</p>
+<p>$$x = 2t + t = 3t \implies t = \frac{x}{3}$$</p>
+<p>$$y = t\tan t = \frac{x}{3}\tan\frac{x}{3}$$</p>
+<p>(2) 当 $t < 0$ 时，$|t| = -t$：</p>
+<p>$$x = 2t - t = t$$</p>
+<p>$$y = -t\tan t = -x\tan x$$</p>
+<p>[2] 审查一阶导数 $f'(x)$：</p>
+<p>当 $x > 0$ 时：</p>
+<p>$$f'(x) = \left(\frac{x}{3}\tan\frac{x}{3}\right)' = \frac{1}{3}\tan\frac{x}{3} + \frac{x}{9}\sec^2\frac{x}{3}$$</p>
+<p>当 $x < 0$ 时：</p>
+<p>$$f'(x) = (-x\tan x)' = -\tan x - x\sec^2 x$$</p>
+<p>在 $x=0$ 处验证左右导数：</p>
+<p>$$f'_+(0) = \lim\limits_{x \to 0^+}\frac{\frac{x}{3}\tan\frac{x}{3}}{x} = 0, \quad f'_-(0) = \lim\limits_{x \to 0^-}\frac{-x\tan x}{x} = 0$$</p>
+<p>故 $f'(0) = 0$。且 $\lim\limits_{x \to 0^+}f'(x) = 0$，$\lim\limits_{x \to 0^-}f'(x) = 0$。</p>
+<p>这证明导函数 $f'(x)$ 在 $x=0$ 处<strong>连续</strong>！排除 (A)、(B)。</p>
+<p>[3] 审查二阶导数 $f''(0)$：</p>
+<p>利用二阶导数定义分别考察左右二阶微商：</p>
+<p>$$\begin{aligned} f''_+(0) &= \lim\limits_{x \to 0^+}\frac{f'(x)-f'(0)}{x-0} = \lim\limits_{x \to 0^+}\left[ \frac{\frac{1}{3}\tan\frac{x}{3}}{x} + \frac{\frac{x}{9}\sec^2\frac{x}{3}}{x} \right] = \frac{1}{3} \cdot \frac{1}{3} + \frac{1}{9} \cdot 1 = \frac{2}{9} \\ \\ f''_-(0) &= \lim\limits_{x \to 0^-}\frac{f'(x)-f'(0)}{x-0} = \lim\limits_{x \to 0^-}\frac{-\tan x - x\sec^2 x}{x} = -1 - 1 = -2 \end{aligned}$$</p>
+<p>因为 $f''_+(0) = \frac{2}{9} \ne -2 = f''_-(0)$，左右二阶导数不相等，故二阶导数 $f''(0)$ <strong>不存在</strong>！</p>
+<p>因此：$f'(x)$ 连续，但 $f''(0)$ 不存在。选 (C)。</p>
+</blockquote>
+<hr />
+<p><strong>(中等)<font color=deeppink>题目[9]:微分关系式递推高阶导数与奇函数性质综合</font></strong></p>
+<p>设可导的奇函数 $f(x)$ 满足 $f'(x)=f^2(x)$，且 $f(-1)=1$，则 $f'''(1) =$ ______。</p>
+<p>答案: $6$</p>
+<p>主要思路:[奇函数定对称点函数值，由 $f'=f^2$ 链式法则连续递推高阶导数]</p>
+<blockquote>
+<p>[1] 利用奇函数性质定点：</p>
+<p>已知 $f(x)$ 为奇函数，则 $f(-x) = -f(x)$。</p>
+<p>故 $f(1) = -f(-1) = -1$。</p>
+<p>[2] 逐阶递推求高阶导数关系：</p>
+<p>(1) 一阶导数：$f'(x) = f^2(x)$；</p>
+<p>(2) 二阶导数：$f''(x) = [f^2(x)]' = 2f(x)f'(x) = 2f(x) \cdot f^2(x) = 2f^3(x)$；</p>
+<p>(3) 三阶导数：$f'''(x) = [2f^3(x)]' = 6f^2(x)f'(x) = 6f^2(x) \cdot f^2(x) = 6f^4(x)$。</p>
+<p>[3] 代入 $x=1$ 求值：</p>
+<p>$$f'''(1) = 6 [f(1)]^4 = 6 \cdot (-1)^4 = 6$$</p>
+</blockquote>
+<hr />
+<p><strong>(简单)<font color=green>题目[10]:导数幂次微分关系式的三阶导数求值</font></strong></p>
+<p>设可导函数 $f(x)$ 满足 $f'(x)=f^2(x)$，且 $f(0)=-1$，则在 $x=0$ 处的三阶导数 $f'''(0)=(\quad)$。</p>
+<p>(A) $-6$  </p>
+<p>(B) $-4$  </p>
+<p>(C) $4$  </p>
+<p>(D) $6$</p>
+<p>答案: (D)</p>
+<p>主要思路:[链式求导递推公式 $f'''(x) = 6f^4(x)$]</p>
+<blockquote>
+<p>[1] 递推高阶导数公式：</p>
+<p>$$f'(x) = f^2(x) \implies f''(x) = 2f(x)f'(x) = 2f^3(x) \implies f'''(x) = 6f^2(x)f'(x) = 6f^4(x)$$</p>
+<p>[2] 代入已知初值 $f(0) = -1$：</p>
+<p>$$f'''(0) = 6 [f(0)]^4 = 6 \cdot (-1)^4 = 6$$</p>
+</blockquote>
+<hr />
+<p><strong>(高阶导数核心)<font color=red>题目[11]:麦克劳林展开系数反求任意阶高阶导数</font></strong></p>
+<p>已知函数 $f(x)=x^2\ln(1-x)$，则当 $n \ge 3$ 时，$f^{(n)}(0) =$ ______。</p>
+<p>答案: $-\frac{n!}{n-2}$</p>
+<p>主要思路:[写出基础初等函数的麦克劳林级数，比对通项系数直接得出 $f^{(n)}(0)$]</p>
+<blockquote>
+<p>[1] 展开 $\ln(1-x)$ 的麦克劳林级数：</p>
+<p>由经典级数展开式：</p>
+<p>$$\ln(1-x) = -\sum\limits_{k=1}^\infty \frac{x^k}{k} = -x - \frac{x^2}{2} - \frac{x^3}{3} - \cdots - \frac{x^{n-2}}{n-2} - \cdots$$</p>
+<p>[2] 乘以 $x^2$ 得到 $f(x)$ 的展开式：</p>
+<p>$$f(x) = x^2 \ln(1-x) = -\sum\limits_{k=1}^\infty \frac{x^{k+2}}{k} = -\sum\limits_{m=3}^\infty \frac{x^m}{m-2}$$</p>
+<p>[3] 比对泰勒展开通式确定高阶导数值：</p>
+<p>根据麦克劳林级数的唯一性，函数展式中 $x^n$ 的系数为 $\frac{f^{(n)}(0)}{n!}$。</p>
+<p>当 $m = n \ge 3$ 时，$x^n$ 的系数为 $-\frac{1}{n-2}$。</p>
+<p>因此：</p>
+<p>$$\frac{f^{(n)}(0)}{n!} = -\frac{1}{n-2} \implies f^{(n)}(0) = -\frac{n!}{n-2}$$</p>
+</blockquote>
+<hr />
+<p><strong>(中等)<font color=deeppink>题目[12]:数列极限函数确定显式后的导数计算</font></strong></p>
+<p>设 $f(t)=\lim\limits_{n \to \infty}\cos t \cdot \left(\frac{n+t}{n-t}\right)^n$，则 $f'(0) =$ ______。</p>
+<p>答案: $2$</p>
+<p>主要思路:[先用 $1^\infty$ 型数列极限求出 $f(t)$ 的初等显式，再求导代入]</p>
+<blockquote>
+<p>[1] 计算底数极限项：</p>
+<p>$$\lim\limits_{n \to \infty}\left(\frac{n+t}{n-t}\right)^n = \lim\limits_{n \to \infty}\left(1 + \frac{2t}{n-t}\right)^n = e^{\lim\limits_{n \to \infty} n \cdot \frac{2t}{n-t}} = e^{2t}$$</p>
+<p>[2] 写出 $f(t)$ 的完整解析式：</p>
+<p>$$f(t) = e^{2t}\cos t$$</p>
+<p>[3] 乘积求导法则：</p>
+<p>$$f'(t) = 2e^{2t}\cos t - e^{2t}\sin t = e^{2t}(2\cos t - \sin t)$$</p>
+<p>[4] 代入 $t=0$：</p>
+<p>$$f'(0) = e^0(2\cos 0 - \sin 0) = 1 \cdot (2 - 0) = 2$$</p>
+</blockquote>
+<hr />
+<p><strong>(简单)<font color=green>题目[13]:重要极限复合函数求导</font></strong></p>
+<p>设 $f(x)=\lim\limits_{t \to \infty}\left(1+\frac{1}{t}\right)^{t\sin x}$，则 $f'(x) =$ ______。</p>
+<p>答案: $e^{\sin x}\cos x$</p>
+<p>主要思路:[由第二重要极限求出 $f(x) = e^{\sin x}$，再利用指数复合求导]</p>
+<blockquote>
+<p>[1] 化简极限表达式：</p>
+<p>由常用极限 $\lim\limits_{t \to \infty}\left(1+\frac{1}{t}\right)^t = e$，得：</p>
+<p>$$f(x) = \left[ \lim\limits_{t \to \infty}\left(1+\frac{1}{t}\right)^t \right]^{\sin x} = e^{\sin x}$$</p>
+<p>[2] 复合求导：</p>
+<p>$$f'(x) = (e^{\sin x})' = e^{\sin x} \cdot (\sin x)' = e^{\sin x}\cos x$$</p>
+</blockquote>
+<hr />
+<p><strong>(简单?再看一眼)<font color=deeppink>题目[14]:最值函数分段导函数的完整表达</font></strong></p>
+<p>设 $f(x)=\max\left\{x, x^2\right\},\ 0 < x < 2$，则 $f'(x) =$ ______。</p>
+<p>答案: $\begin{cases} 1, & 0 < x < 1 \\ \\ 2x, & 1 < x < 2 \end{cases}$ (且在 $x=1$ 处导数不存在)</p>
+<p>主要思路:[交点划分子区间，分段求导并判定连接点导数]</p>
+<blockquote>
+<p>[1] 划分函数区间：</p>
+<p>联立 $x = x^2 \implies x(x-1) = 0$。在 $(0, 2)$ 内分界点为 $x=1$。</p>
+<ul>
+<li>当 $0 < x < 1$ 时，$x > x^2$，故 $f(x) = x$；</li>
+<li>当 $1 \le x < 2$ 时，$x^2 \ge x$，故 $f(x) = x^2$。</li>
+</ul>
+<p>[2] 在分界点 $x=1$ 处的不可导性：</p>
+<p>$$f'_-(1) = (x)'|_{x=1} = 1, \quad f'_+(1) = (x^2)'|_{x=1} = 2(1) = 2$$</p>
+<p>因左右导数不相等，故 $f'(1)$ 不存在。</p>
+<p>[3] 写出导函数表达式：</p>
+<p>$$f'(x) = \begin{cases} 1, & 0 < x < 1 \\ \\ 2x, & 1 < x < 2 \end{cases}$$</p>
+</blockquote>
+<hr />
+<p><strong>(经典几何)<font color=green>题目[15]:参数方程曲线切线方程求解</font></strong></p>
+<p>曲线 $\begin{cases} x=e^t \sin 2t, \\ \\ y=e^t \cos t \end{cases}$ 在对应 $t=0$ 处的点的切线方程为 ______。</p>
+<p>答案: $y = \frac{1}{2}x + 1$ (或 $x - 2y + 2 = 0$)</p>
+<p>主要思路:[求出切点坐标 $(x(0), y(0))$，由参数导数计算切线斜率]</p>
+<blockquote>
+<p>[1] 确定切点坐标：</p>
+<p>代入 $t=0$：</p>
+<p>$$x(0) = e^0 \sin 0 = 0, \quad y(0) = e^0 \cos 0 = 1$$</p>
+<p>切点为 $(0, 1)$。</p>
+<p>[2] 计算导数求切线斜率 $k$：</p>
+<p>$$\begin{aligned} x'(t) &= e^t\sin 2t + 2e^t\cos 2t \implies x'(0) = 0 + 2 = 2 \\ \\ y'(t) &= e^t\cos t - e^t\sin t \implies y'(0) = 1 - 0 = 1 \end{aligned}$$</p>
+<p>故斜率为：</p>
+<p>$$k = \left.\frac{\mathrm{d}y}{\mathrm{d}x}\right|_{t=0} = \frac{y'(0)}{x'(0)} = \frac{1}{2}$$</p>
+<p>[3] 写出切线方程：</p>
+<p>$$y - 1 = \frac{1}{2}(x - 0) \implies y = \frac{1}{2}x + 1 \quad (\text{即 } x - 2y + 2 = 0)$$</p>
+</blockquote>
+<hr />
+<p><strong>(高频必考)<font color=red>题目[16]:二阶参数方程导数的标准分步公式计算</font></strong></p>
+<p>若 $\begin{cases} x=\ln|t|, \\ \\ y=e^{-t^2}, \end{cases}$ 则 $\left.\frac{\mathrm{d}^2y}{\mathrm{d}x^2}\right|_{t=\sqrt{2}} =$ ______。</p>
+<p>答案: $\frac{8}{e^2}$ (或 $8e^{-2}$)</p>
+<p>主要思路:[严格按照二阶参数导数公式 $\frac{\mathrm{d}^2y}{\mathrm{d}x^2} = \frac{\frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{\mathrm{d}y}{\mathrm{d}x}\right)}{x'_t}$ 展开运算]</p>
+<blockquote>
+<p>[1] 计算一阶导数 $\frac{\mathrm{d}y}{\mathrm{d}x}$：</p>
+<p>当 $t = \sqrt{2} > 0$ 附近，有 $x = \ln t$。</p>
+<p>$$x'_t = \frac{1}{t}, \quad y'_t = -2t e^{-t^2}$$</p>
+<p>因此：</p>
+<p>$$\frac{\mathrm{d}y}{\mathrm{d}x} = \frac{y'_t}{x'_t} = \frac{-2t e^{-t^2}}{\frac{1}{t}} = -2t^2 e^{-t^2}$$</p>
+<p>[2] 计算二阶导数 $\frac{\mathrm{d}^2y}{\mathrm{d}x^2}$：</p>
+<p>$$\frac{\mathrm{d}^2y}{\mathrm{d}x^2} = \frac{\frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{\mathrm{d}y}{\mathrm{d}x}\right)}{\frac{\mathrm{d}x}{\mathrm{d}t}} = \frac{\left(-2t^2 e^{-t^2}\right)'}{\frac{1}{t}} = t \cdot \left(-2t^2 e^{-t^2}\right)'$$</p>
+<p>对括号内复合乘积项求导：</p>
+<p>$$\left(-2t^2 e^{-t^2}\right)' = -4t e^{-t^2} - 2t^2(-2t) e^{-t^2} = (-4t + 4t^3)e^{-t^2} = 4t(t^2 - 1)e^{-t^2}$$</p>
+<p>代入得：</p>
+<p>$$\frac{\mathrm{d}^2y}{\mathrm{d}x^2} = t \cdot 4t(t^2 - 1)e^{-t^2} = 4t^2(t^2 - 1)e^{-t^2}$$</p>
+<p>[3] 代入 $t = \sqrt{2}$ 计算数值：</p>
+<p>此时 $t^2 = 2$：</p>
+<p>$$\left.\frac{\mathrm{d}^2y}{\mathrm{d}x^2}\right|_{t=\sqrt{2}} = 4(2)(2 - 1)e^{-2} = 8e^{-2} = \frac{8}{e^2}$$</p>
+</blockquote>
+<p><font color=red>[避坑警示]:千万不可将二阶导数误算为 $\frac{y''_t}{x''_t}$！那是严重的伪数学错误。二阶参数导数本质是对一阶导数关于 $x$ 再求导，必须除以 $\frac{\mathrm{d}x}{\mathrm{d}t}$！</font></p>
+<hr />
+<p><strong>(大题必杀)<font color=red>题目[17]:莱布尼茨高阶求导公式与多项式截断技巧</font></strong></p>
+<p>已知函数 $f(x)=x^2(e^x+5)$，则 $f^{(5)}(1) =$ ______。</p>
+<p>答案: $31e$</p>
+<p>主要思路:[拆开因式后利用 $5x^2$ 的高阶导数为零截断，对 $x^2 e^x$ 应用莱布尼茨公式]</p>
+<blockquote>
+<p>[1] 拆分函数：</p>
+<p>$$f(x) = x^2 e^x + 5x^2$$</p>
+<p>因为多项式 $5x^2$ 最多求导到二阶，其 5 阶导数恒为零：$(5x^2)^{(5)} = 0$。</p>
+<p>故只需计算 $g(x) = x^2 e^x$ 的 5 阶导数：$f^{(5)}(x) = (x^2 e^x)^{(5)}$。</p>
+<p>[2] 应用莱布尼茨高阶求导公式：</p>
+<p>设 $u(x) = e^x$，$v(x) = x^2$。</p>
+<p>对于 $u(x) = e^x$，各阶导数恒为 $u^{(k)}(x) = e^x$。</p>
+<p>对于 $v(x) = x^2$，各阶导数为：$v(x)=x^2$，$v'(x)=2x$，$v''(x)=2$，$v^{(k)}(x)=0\ (k \ge 3)$。</p>
+<p>由莱布尼茨公式展开，三阶及以上导数均为零，故仅存前三项：</p>
+<p>$$\begin{aligned} (x^2 e^x)^{(5)} &= \sum\limits_{k=0}^5 C_5^k u^{(5-k)} v^{(k)} \\ \\ &= C_5^0 e^x \cdot x^2 + C_5^1 e^x \cdot (2x) + C_5^2 e^x \cdot (2) \\ \\ &= e^x \left[ 1 \cdot x^2 + 5 \cdot (2x) + 10 \cdot 2 \right] \\ \\ &= e^x (x^2 + 10x + 20) \end{aligned}$$</p>
+<p>[3] 代入 $x=1$ 求值：</p>
+<p>$$f^{(5)}(1) = e^1 (1^2 + 10 \cdot 1 + 20) = e(1 + 10 + 20) = 31e$$</p>
+</blockquote>
+<hr />
+<p><strong>(压轴思维题)<font color=deeppink>题目[18]:莱布尼茨公式零点代入的高阶项唯一留存法则</font></strong></p>
+<p>设 $f(x)=(x-1)^{10}\sin x$，则 $f^{(11)}(1)=(\quad)$。</p>
+<p>(A) $10!\cos 1$  </p>
+<p>(B) $11!\cos 1$  </p>
+<p>(C) $10!\sin 1$  </p>
+<p>(D) $11!\sin 1$</p>
+<p>答案: (B)</p>
+<p>主要思路:[应用莱布尼茨公式展开，分析在 $x=1$ 处因包含 $(x-1)$ 因子而大量归零的项，锁定唯一有效项]</p>
+<blockquote>
+<p>[1] 设定莱布尼茨分解：</p>
+<p>令 $u(x) = (x-1)^{10}$，$v(x) = \sin x$。</p>
+<p>$$f^{(11)}(x) = \sum\limits_{k=0}^{11} C_{11}^k u^{(11-k)}(x) v^{(k)}(x)$$</p>
+<p>[2] 考察 $u(x) = (x-1)^{10}$ 在 $x=1$ 处的导数特性：</p>
+<p>(1) $11-k > 10$ 时，即 $k = 0$ 时：10 次多项式求 11 阶导数，恒为 $u^{(11)}(x) = 0$；</p>
+<p>(2) $11-k < 10$ 时，即 $k \ge 2$ 时：导数阶数低于 10，所得导函数中必残留因子 $(x-1)$，代入 $x=1$ 时全部为 $0$；</p>
+<p>(3) $11-k = 10$ 时，即 $k = 1$ 时：求恰好 10 阶导数，由常数微分法：</p>
+<p>$$u^{(10)}(x) = [(x-1)^{10}]^{(10)} = 10! \quad (\text{常数})$$</p>
+<p>[3] 代入 $x=1$ 锁定唯一非零项：</p>
+<p>在 $x=1$ 处，展开式的 12 项中仅有 $k=1$ 这一项非零：</p>
+<p>$$f^{(11)}(1) = C_{11}^1 \cdot u^{(10)}(1) \cdot v'(1)$$</p>
+<p>因为 $C_{11}^1 = 11$，$u^{(10)}(1) = 10!$，$v'(x) = (\sin x)' = \cos x \implies v'(1) = \cos 1$。</p>
+<p>故最终结果为：</p>
+<p>$$f^{(11)}(1) = 11 \cdot 10! \cdot \cos 1 = 11! \cos 1$$</p>
+</blockquote>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

@@ -1,28 +1,190 @@
-# 第3章 一元函数微分学的概念
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>高等数学1000a基础篇</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style>
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
 
-***
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 13.8px;
+    line-height: 1.68;
+    color: #1f2937;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+}
 
-**(简单?再看一眼)<font color=red>题目[1]:导数定义与等价无穷小综合代换</font>**
+/* Purple Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #9333ea;
+    padding-bottom: 6px;
+    margin-top: 16px;
+    margin-bottom: 12px;
+    color: #581c87;
+    page-break-after: avoid;
+}
 
-设 $f(x)$ 满足 $f(0)=0$，且 $f'(0)$ 存在，则 $\lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} =$ ______
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 16px;
+    margin-bottom: 10px;
+    color: #6b21a8;
+    page-break-after: avoid;
+}
 
-主要思路:[看到f(0)=0意味着可以放在任何地方]\[看到f'(0)就应该考虑导数]
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #7e22ce;
+    page-break-after: avoid;
+}
 
-[1]按照目的构造:$$\lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} =\lim\limits_{x \to 0}\frac{f(1-\cos x)-f(0)}{(1-cosx)-0}\frac{(1-cosx)-0}{\ln(1-x\sin x)} =\lim\limits_{x \to 0}f'(0)\frac{(1-cosx)-0}{\ln(1-x\sin x)}$$
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #6b21a8;
+    page-break-after: avoid;
+}
 
-[3]等价无穷小代换:
+p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: justify;
+}
 
-$\ln(1+u) \sim u$：$$\ln(1-x\sin x) \sim -x\sin x \sim -x^2$$
+/* DeepPink Formula Blocks / Blockquotes */
+blockquote {
+    margin: 8px 0;
+    padding: 6px 14px;
+    color: #1f2937;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 5px 5px 0;
+    page-break-inside: avoid;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left-color: #f43f5e;
+    margin: 4px 0;
+}
+
+blockquote p {
+    margin: 4px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0;
+    page-break-inside: avoid;
+    font-size: 13px;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code & Pre */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 10px;
+    overflow-x: auto;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* Display Math: Formula text is crisp BLACK, formula block is styled */
+.katex-display {
+    margin: 8px 0 !important;
+    overflow-x: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 14px 0;
+}
+
+    </style>
+</head>
+<body>
+<h1>第3章 一元函数微分学的概念</h1>
+<hr />
+<p><strong>(简单?再看一眼)<font color=red>题目[1]:导数定义与等价无穷小综合代换</font></strong></p>
+<p>设 $f(x)$ 满足 $f(0)=0$，且 $f'(0)$ 存在，则 $\lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} =$ ______</p>
+<p>主要思路:[看到f(0)=0意味着可以放在任何地方][看到f'(0)就应该考虑导数]</p>
+<p>[1]按照目的构造:$$\lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} =\lim\limits_{x \to 0}\frac{f(1-\cos x)-f(0)}{(1-cosx)-0}\frac{(1-cosx)-0}{\ln(1-x\sin x)} =\lim\limits_{x \to 0}f'(0)\frac{(1-cosx)-0}{\ln(1-x\sin x)}$$</p>
+<p>[3]等价无穷小化简：</p>
+<p>当 $常用等价无穷小 $\ln(1+u) \sim u$：
+
+XYZMATHBLOCK1XYZ
 
 [2]分子凑配导数定义结构：
 
 已知 $f(0)=0$ 且 $f'(0)$ 存在，当 $x \to 0$ 时，$1-\cos x \to 0$ 且 $1-\cos x \sim \frac{1}{2}x^2 \ne 0$。根据导数定义：
 
-$$\lim\limits_{x \to 0}\frac{f(1-\cos x) - f(0)}{(1-\cos x) - 0} = f'(0)$$
+XYZMATHBLOCK2XYZ
 
 [3]极限拆分与综合计算：
 
-$$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \lim\limits_{x \to 0}\left[ \frac{f(1-\cos x) - f(0)}{1-\cos x} \cdot \frac{1-\cos x}{-x^2} \right]\\ \\ &= f'(0) \cdot \lim\limits_{x \to 0}\frac{\frac{1}{2}x^2}{-x^2} \\ \\ &= -\frac{1}{2}f'(0) \end{aligned}$$
+XYZMATHBLOCK3XYZ
 
 <font color=red>[注]:切勿对抽象函数 $f(1-\cos x)$ 盲目使用洛必达法则，因为未指明 $f'(x)$ 在 $0$ 的邻域内连续，必须严格使用导数定义。</font>
 
@@ -46,21 +208,21 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 
 >[1]用导数定义展开 $F'(a)$：
 >
->$$F'(a) = \lim\limits_{x \to a}\frac{F(x)-F(a)}{x-a} = \lim\limits_{x \to a}\frac{g(x)\varphi(x) - g(a)\varphi(a)}{x-a}$$
+>XYZMATHBLOCK4XYZ
 >
 >采用加一项减一项经典裂项变形：
 >
->$$\begin{aligned} \frac{g(x)\varphi(x) - g(a)\varphi(a)}{x-a} &= \frac{[g(x)-g(a)]\varphi(x) + g(a)[\varphi(x)-\varphi(a)]}{x-a} \\ \\ &= \frac{g(x)-g(a)}{x-a}\varphi(x) + g(a)\frac{\varphi(x)-\varphi(a)}{x-a} \end{aligned}$$
+>XYZMATHBLOCK5XYZ
 >
 >[2]反证法分析：
 >
 >已知 $g(x)$ 在 $x=a$ 处可导且 $\varphi(x)$ 在 $x=a$ 处连续，故当 $x \to a$ 时，第一部分极限存在：
 >
->$$\lim\limits_{x \to a}\frac{g(x)-g(a)}{x-a}\varphi(x) = g'(a)\varphi(a)$$
+>XYZMATHBLOCK6XYZ
 >
 >若 $g(a) \ne 0$，由于总极限 $F'(a)$ 存在，移项除以 $g(a)$ 即得：
 >
->$$\lim\limits_{x \to a}\frac{\varphi(x)-\varphi(a)}{x-a} = \frac{F'(a) - g'(a)\varphi(a)}{g(a)}$$
+>XYZMATHBLOCK7XYZ
 >
 >这说明 $\varphi(x)$ 在 $x=a$ 处可导，与题设“$\varphi(x)$ 不可导”产生严重矛盾！因此必有 $g(a) = 0$。
 >
@@ -68,7 +230,7 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 >
 >若 $g(a)=0$，则 $F(a) = 0$，此时：
 >
->$$\lim\limits_{x \to a}\frac{F(x)-F(a)}{x-a} = \lim\limits_{x \to a}\frac{g(x)\varphi(x)}{x-a} = \lim\limits_{x \to a}\frac{g(x)-g(a)}{x-a} \cdot \varphi(x) = g'(a)\varphi(a)$$
+>XYZMATHBLOCK8XYZ
 >
 >导数必然存在，故一定有 $g(a)=0$。
 
@@ -102,15 +264,15 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 >
 >当 $t \to 1$ 时，$t-1 \to 0$，利用 $\ln(1+u) \sim u$ 得：
 >
->$$\ln(x-1) = \ln(1-(t-1)) \sim -(t-1)$$
+>XYZMATHBLOCK9XYZ
 >
 >[3]代入原极限并结合 $f(1)=0$ 转化：
 >
->$$\lim\limits_{x \to 2}\frac{\ln(x-1)}{f(3-x)} = \lim\limits_{t \to 1}\frac{-(t-1)}{f(t)} = \lim\limits_{t \to 1}\frac{-1}{\frac{f(t)-f(1)}{t-1}} = 2$$
+>XYZMATHBLOCK10XYZ
 >
 >由此直接解得：
 >
->$$f'(1) = \lim\limits_{t \to 1}\frac{f(t)-f(1)}{t-1} = -\frac{1}{2}$$
+>XYZMATHBLOCK11XYZ
 
 ---
 
@@ -126,23 +288,23 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 >
 >注意到 $f^2(0) = (\sqrt{2})^2 = 2$，故分子为平方差：
 >
->$$f^2(x) - 2 = f^2(x) - f^2(0) = [f(x)-f(0)][f(x)+f(0)]$$
+>XYZMATHBLOCK12XYZ
 >
 >[2]拆分极限求值：
 >
->$$\lim\limits_{x \to 0}\frac{f^2(x)-2}{x} = \lim\limits_{x \to 0}\left[ \frac{f(x)-f(0)}{x-0} \cdot [f(x)+f(0)]\right]$$
+>XYZMATHBLOCK13XYZ
 >
 >由 $f(x)$ 在 $x=0$ 处可导必连续，知 $\lim\limits_{x \to 0}f(x) = f(0) = \sqrt{2}$，且 $\lim\limits_{x \to 0}\frac{f(x)-f(0)}{x} = f'(0) = \sqrt{2}$。
 >
 >故原极限为：
 >
->$$\sqrt{2} \cdot [\sqrt{2} + \sqrt{2}]= \sqrt{2} \cdot 2\sqrt{2} = 4$$
+>XYZMATHBLOCK14XYZ
 
 ---
 
 **(中等难度)<font color=red>题目[5]:阶梯间断数列函数单侧导数夹逼计算</font>**
 
-设 $f(x) = \frac{1}{n^2},\ \frac{1}{(n+1)^2} < x \le \frac{1}{n^2},\ n=1, 2, \dots$，$f(0)=0$，则 $f'_+(0) =$ ______
+设 $f(x) = \frac{1}{n^2},\ \frac{1}{(n+1)^2} &lt; x \le \frac{1}{n^2},\ n=1, 2, \dots$，$f(0)=0$，则 $f'<em>+(0) =$ ______
 
 答案: $1$
 
@@ -150,7 +312,7 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 
 >[1]由右导数定义列出极限表达式：
 >
->$$f'_+(0) = \lim\limits_{x \to 0^+}\frac{f(x)-f(0)}{x-0} = \lim\limits_{x \to 0^+}\frac{f(x)}{x}$$
+>XYZMATHBLOCK15XYZ
 >
 >[2]建立双向不等式放缩：
 >
@@ -158,35 +320,35 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 >
 >由区间不等式：
 >
->$$\frac{1}{(n+1)^2} < x \le \frac{1}{n^2}$$
+>XYZMATHBLOCK16XYZ
 >
 >全式取倒数翻转符号：
 >
->$$n^2 \le \frac{1}{x} < (n+1)^2$$
+>XYZMATHBLOCK17XYZ
 >
 >两端同时乘以正数 $f(x) = \frac{1}{n^2}$：
 >
->$$\frac{1}{n^2} \cdot n^2 \le \frac{f(x)}{x} < \frac{1}{n^2} \cdot (n+1)^2$$
+>XYZMATHBLOCK18XYZ
 >
 >化简得：
 >
->$$1 \le \frac{f(x)}{x} < \left(1 + \frac{1}{n}\right)^2$$
+>XYZMATHBLOCK19XYZ
 >
 >[3]夹逼准则取极限：
 >
 >当 $x \to 0^+$ 时，$n \to \infty$。由于：
 >
->$$\lim\limits_{n \to \infty} 1 = 1, \quad \lim\limits_{n \to \infty}\left(1+\frac{1}{n}\right)^2 = 1$$
+>XYZMATHBLOCK20XYZ
 >
 >根据两边夹逼准则，必有：
 >
->$$f'_+(0) = \lim\limits_{x \to 0^+}\frac{f(x)}{x} = 1$$
+>XYZMATHBLOCK21XYZ
 
 ---
 
 **(简单?再看一眼)<font color=deeppink>题目[6]:对数复合导数定义的逆向构造</font>**
 
-设可导函数 $f(x) > 0$，则 $\lim\limits_{n \to \infty} n\ln\frac{f\left(\frac{1}{n}\right)}{f(0)} =$ ______
+设可导函数 $f(x) &gt; 0$，则 $\lim\limits</em>{n \to \infty} n\ln\frac{f\left(\frac{1}{n}\right)}{f(0)} =$ ______
 
 答案: $\frac{f'(0)}{f(0)}$
 
@@ -196,13 +358,13 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 >
 >令 $x = \frac{1}{n}$，当 $n \to \infty$ 时，$x \to 0^+$。原式变形为：
 >
->$$\lim\limits_{n \to \infty} n\left[ \ln f\left(\frac{1}{n}\right) - \ln f(0) \right]= \lim\limits_{x \to 0^+}\frac{\ln f(x) - \ln f(0)}{x-0}$$
+>XYZMATHBLOCK22XYZ
 >
 >[2]结合导数定义与复合求导：
 >
->设辅助函数 $g(x) = \ln f(x)$，因为 $f(x)>0$ 且可导，故 $g(x)$ 在 $x=0$ 处可导，且：
+>设辅助函数 $g(x) = \ln f(x)$，因为 $f(x)&gt;0$ 且可导，故 $g(x)$ 在 $x=0$ 处可导，且：
 >
->$$g'(0) = \lim\limits_{x \to 0^+}\frac{g(x)-g(0)}{x} = \left.[\ln f(x)]'\right|_{x=0} = \frac{f'(0)}{f(0)}$$
+>XYZMATHBLOCK23XYZ
 
 ---
 
@@ -226,14 +388,14 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 >
 >由于 $f(x)$ 可导必连续，根据局部保号性：
 >
->- 若 $f(0) > 0$，在 $x=0$ 充分小邻域内恒有 $f(x) > 0$，此时 $|f(x)| = f(x)$，显然可导；
->- 若 $f(0) < 0$，在 $x=0$ 充分小邻域内恒有 $f(x) < 0$，此时 $|f(x)| = -f(x)$，亦显然可导。
+>- 若 $f(0) &gt; 0$，在 $x=0$ 充分小邻域内恒有 $f(x) &gt; 0$，此时 $|f(x)| = f(x)$，显然可导；
+>- 若 $f(0) &lt; 0$，在 $x=0$ 充分小邻域内恒有 $f(x) &lt; 0$，此时 $|f(x)| = -f(x)$，亦显然可导。
 >
 >因此，“$|f(x)|$ 不可导”的前提条件**必然是** $f(0) = 0$。排除 (C)、(D)。
 >
 >[2]若 $f(0) = 0$，考察 $|f(x)|$ 在 $x=0$ 处的左右导数：
 >
->$$\begin{aligned} (|f(0)|)'_+ &= \lim\limits_{x \to 0^+}\frac{|f(x)|-|f(0)|}{x-0} = \lim\limits_{x \to 0^+}\left|\frac{f(x)-f(0)}{x}\right| = |f'(0)| \\ \\ (|f(0)|)'_- &= \lim\limits_{x \to 0^-}\frac{|f(x)|-|f(0)|}{x-0} = \lim\limits_{x \to 0^-}\frac{|f(x)|}{-(-x)} = -|f'(0)| \end{aligned}$$
+>XYZMATHBLOCK24XYZ
 >
 >[3]可导性等价条件：
 >
@@ -264,11 +426,11 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 >
 >当 $x \to 1$ 时，$\ln x = \ln(1+(x-1)) \sim x-1$。
 >
->$$k = f'(1) = \lim\limits_{x \to 1}\frac{f(x)-f(1)}{x-1} = \lim\limits_{x \to 1}\frac{f(x)-1}{\ln x} = 2$$
+>XYZMATHBLOCK25XYZ
 >
 >[3]点斜式写出切线方程：
 >
->$$y - 1 = 2(x - 1) \implies y = 2x - 1$$
+>XYZMATHBLOCK26XYZ
 
 ---
 
@@ -292,25 +454,25 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 >
 >由 $f(x)$ 在 $x=1$ 处可导，由可导与可微的等价性可知：
 >
->$$\Delta f(1) = f(1+\Delta x) - f(1) = f'(1)\Delta x + o(\Delta x)$$
+>XYZMATHBLOCK27XYZ
 >
 >其中微分的定义为线性主部：
 >
->$$\mathrm{d}f(1) = f'(1)\Delta x$$
+>XYZMATHBLOCK28XYZ
 >
 >[2]两者作差：
 >
->$$\Delta f(1) - \mathrm{d}f(1) = o(\Delta x)$$
+>XYZMATHBLOCK29XYZ
 >
 >代入极限求值：
 >
->$$\lim\limits_{\Delta x \to 0}\frac{\Delta f(1) - \mathrm{d}f(1)}{\Delta x} = \lim\limits_{\Delta x \to 0}\frac{o(\Delta x)}{\Delta x} = 0$$
+>XYZMATHBLOCK30XYZ
 
 ---
 
 **(经典必考)<font color=red>题目[10]:分段函数在分界点处的连续、可导与导函数连续性大辨析</font>**
 
-设 $f(x) = \begin{cases} x^3 \sin\frac{1}{x}, & x > 0 \\ \\ x^2, & x \le 0 \end{cases}$，则 $f(x)$ 在 $x=0$ 处 $(\quad)$
+设 $f(x) = \begin{cases} x^3 \sin\frac{1}{x}, &amp; x &gt; 0 \ \ x^2, &amp; x \le 0 \end{cases}$，则 $f(x)$ 在 $x=0$ 处 $(\quad)$
 
 (A) 不连续  
 
@@ -328,33 +490,33 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 >
 >$f(0) = 0^2 = 0$。
 >
->$$\lim\limits_{x \to 0^+} f(x) = \lim\limits_{x \to 0^+} x^3 \sin\frac{1}{x} = 0, \quad \lim\limits_{x \to 0^-} f(x) = \lim\limits_{x \to 0^-} x^2 = 0$$
+>XYZMATHBLOCK31XYZ
 >
 >因为 $\lim\limits_{x \to 0}f(x) = f(0) = 0$，故 $f(x)$ 在 $x=0$ 处连续。
 >
 >[2]导数存在性审查 (必须使用定义)：
 >
->$$\begin{aligned} f'_+(0) &= \lim\limits_{x \to 0^+}\frac{x^3\sin\frac{1}{x} - 0}{x} = \lim\limits_{x \to 0^+} x^2\sin\frac{1}{x} = 0 \\ \\ f'_-(0) &= \lim\limits_{x \to 0^-}\frac{x^2 - 0}{x} = \lim\limits_{x \to 0^-} x = 0 \end{aligned}$$
+>XYZMATHBLOCK32XYZ
 >
->因为 $f'_+(0) = f'_-(0) = 0$，所以 $f'(0)$ 存在且 $f'(0) = 0$。
+>因为 $f'<em>+(0) = f'</em>-(0) = 0$，所以 $f'(0)$ 存在且 $f'(0) = 0$。
 >
 >[3]导函数的连续性审查：
 >
->当 $x > 0$ 时，利用导数运算法则求导：
+>当 $x &gt; 0$ 时，利用导数运算法则求导：
 >
->$$f'(x) = 3x^2 \sin\frac{1}{x} + x^3 \cos\frac{1}{x} \cdot \left(-\frac{1}{x^2}\right) = 3x^2 \sin\frac{1}{x} - x \cos\frac{1}{x}$$
+>XYZMATHBLOCK33XYZ
 >
 >当 $x \to 0^+$ 时，由无穷小乘有界量：
 >
->$$\lim\limits_{x \to 0^+} f'(x) = \lim\limits_{x \to 0^+}\left(3x^2 \sin\frac{1}{x} - x \cos\frac{1}{x}\right) = 0$$
+>XYZMATHBLOCK34XYZ
 >
->当 $x < 0$ 时：
+>当 $x &lt; 0$ 时：
 >
->$$f'(x) = 2x \implies \lim\limits_{x \to 0^-} f'(x) = 0$$
+>XYZMATHBLOCK35XYZ
 >
 >因为 $\lim\limits_{x \to 0} f'(x) = 0 = f'(0)$，所以导函数 $f'(x)$ 在 $x=0$ 处亦连续！
 
-<font color=red>[考点升华]:$x^\alpha \sin\frac{1}{x^\beta}$ 的三大分水岭法则(在 $x=0$ 处)：$\alpha > 0$ 连续；$\alpha > 1$ 可导；$\alpha > 1+\beta$ 导函数连续！本题 $\alpha=3, \beta=1$，满足 $3 > 2$，导函数必定连续。</font>
+<font color=red>[考点升华]:$x^\alpha \sin\frac{1}{x^\beta}$ 的三大分水岭法则(在 $x=0$ 处)：$\alpha &gt; 0$ 连续；$\alpha &gt; 1$ 可导；$\alpha &gt; 1+\beta$ 导函数连续！本题 $\alpha=3, \beta=1$，满足 $3 &gt; 2$，导函数必定连续。</font>
 
 ---
 
@@ -380,7 +542,7 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 >
 >考察 $f'(0)$ 的定义极限：
 >
->$$\lim\limits_{x \to 0}\frac{f(x)-f(0)}{x-0} = \lim\limits_{x \to 0}\frac{\varphi(x)|\ln(1+x)|}{x} = \lim\limits_{x \to 0}\frac{\varphi(x)}{x} \cdot |\ln(1+x)| = \varphi'(0) \cdot 0 = 0$$
+>XYZMATHBLOCK36XYZ
 >
 >极限存在且为 $0$，即 $f'(0)$ 存在，充分性成立。
 >
@@ -388,9 +550,9 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 >
 >若 $f(x)$ 在 $x=0$ 处可导，则左、右导数必存在且相等。
 >
->$$\begin{aligned} f'_+(0) &= \lim\limits_{x \to 0^+}\frac{\varphi(x)\ln(1+x)}{x} = \varphi(0) \cdot 1 = \varphi(0) \\ \\ f'_-(0) &= \lim\limits_{x \to 0^-}\frac{-\varphi(x)\ln(1+x)}{x} = -\varphi(0) \cdot 1 = -\varphi(0) \end{aligned}$$
+>XYZMATHBLOCK37XYZ
 >
->因为可导要求 $f'_+(0) = f'_-(0)$，故 $\varphi(0) = -\varphi(0) \implies \varphi(0) = 0$。必要性成立。
+>因为可导要求 $f'<em>+(0) = f'</em>-(0)$，故 $\varphi(0) = -\varphi(0) \implies \varphi(0) = 0$。必要性成立。
 >
 >因此，$\varphi(0)=0$ 是 $f(x)$ 在 $x=0$ 处可导的充分必要条件。
 
@@ -406,27 +568,27 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 
 >[1]裂项变形：
 >
->$$\frac{f\left(x_0+\frac{1}{n}\right) - f(x_0-x_n)}{\sin\frac{1}{n}} = \frac{f\left(x_0+\frac{1}{n}\right) - f(x_0)}{\sin\frac{1}{n}} + \frac{f(x_0) - f(x_0-x_n)}{\sin\frac{1}{n}}$$
+>XYZMATHBLOCK38XYZ
 >
 >[2]计算第一部分极限：
 >
 >当 $n \to \infty$ 时，$\sin\frac{1}{n} \sim \frac{1}{n}$，且 $\frac{1}{n} \to 0$：
 >
->$$\lim\limits_{n \to \infty}\frac{f\left(x_0+\frac{1}{n}\right) - f(x_0)}{\sin\frac{1}{n}} = \lim\limits_{n \to \infty}\left[ \frac{f\left(x_0+\frac{1}{n}\right) - f(x_0)}{\frac{1}{n}} \cdot \frac{\frac{1}{n}}{\sin\frac{1}{n}} \right]= f'(x_0) \cdot 1 = f'(x_0)$$
+>XYZMATHBLOCK39XYZ
 >
 >[3]计算第二部分极限：
 >
 >注意到 $x_n = \sin\frac{1}{n} + \frac{1}{n^2} \ne 0$ 且 $x_n \to 0$。凑配自变量微商：
 >
->$$\frac{f(x_0) - f(x_0-x_n)}{\sin\frac{1}{n}} = \frac{f(x_0-x_n) - f(x_0)}{-x_n} \cdot \frac{x_n}{\sin\frac{1}{n}}$$
+>XYZMATHBLOCK40XYZ
 >
 >因为 $f(x)$ 在 $x_0$ 处可导，所以：
 >
->$$\lim\limits_{n \to \infty}\frac{f(x_0-x_n) - f(x_0)}{-x_n} = f'(x_0)$$
+>XYZMATHBLOCK41XYZ
 >
 >又：
 >
->$$\lim\limits_{n \to \infty}\frac{x_n}{\sin\frac{1}{n}} = \lim\limits_{n \to \infty}\frac{\sin\frac{1}{n} + \frac{1}{n^2}}{\sin\frac{1}{n}} = \lim\limits_{n \to \infty}\left(1 + \frac{\frac{1}{n^2}}{\sin\frac{1}{n}}\right) = 1 + \lim\limits_{n \to \infty}\frac{\frac{1}{n^2}}{\frac{1}{n}} = 1 + 0 = 1$$
+>XYZMATHBLOCK42XYZ
 >
 >故第二部分极限亦为 $f'(x_0) \cdot 1 = f'(x_0)$。
 >
@@ -448,13 +610,13 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 >
 >[2]拆分极限为两个微商形式：
 >
->$$\begin{aligned} \lim\limits_{x \to 0}\frac{f(tx) - 5f(x)}{x} &= \lim\limits_{x \to 0}\left[ \frac{f(tx) - f(0)}{x} - 5\frac{f(x)-f(0)}{x} \right]\\ \\ &= \lim\limits_{x \to 0}\left[ t \cdot \frac{f(tx)-f(0)}{tx} - 5 \cdot \frac{f(x)-f(0)}{x} \right]\\ \\ &= t f'(0) - 5 f'(0) = (t-5)f'(0) \end{aligned}$$
+>XYZMATHBLOCK43XYZ
 
 ---
 
 **(中等)<font color=deeppink>题目[14]:最值函数的分段分界点不可导性分析</font>**
 
-设 $f(x) = \max\{2x, x^2\},\ x \in (0, 4)$，且 $f'(a)$ 不存在，$a \in (0, 4)$，则 $a =$ ______
+设 $f(x) = \max{2x, x^2},\ x \in (0, 4)$，且 $f'(a)$ 不存在，$a \in (0, 4)$，则 $a =$ ______
 
 答案: $2$
 
@@ -466,18 +628,18 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 >
 >[2]确定分段解析式：
 >
->- 当 $0 < x < 2$ 时，$2x > x^2$，故 $f(x) = 2x$；
->- 当 $2 \le x < 4$ 时，$x^2 \ge 2x$，故 $f(x) = x^2$。
+>- 当 $0 &lt; x &lt; 2$ 时，$2x &gt; x^2$，故 $f(x) = 2x$；
+>- 当 $2 \le x &lt; 4$ 时，$x^2 \ge 2x$，故 $f(x) = x^2$。
 >
 >即：
 >
->$$f(x) = \begin{cases} 2x, & 0 < x < 2 \\ \\ x^2, & 2 \le x < 4 \end{cases}$$
+>XYZMATHBLOCK44XYZ
 >
 >[3]计算 $x=2$ 处的左右导数：
 >
->$$\begin{aligned} f'_-(2) &= \lim\limits_{x \to 2^-}\frac{2x - 4}{x-2} = 2 \\ \\ f'_+(2) &= \lim\limits_{x \to 2^+}\frac{x^2 - 4}{x-2} = \lim\limits_{x \to 2^+}(x+2) = 4 \end{aligned}$$
+>XYZMATHBLOCK45XYZ
 >
->因为 $f'_-(2) = 2 \ne 4 = f'_+(2)$，左右导数不相等，故 $f'(2)$ 不存在。
+>因为 $f'<em>-(2) = 2 \ne 4 = f'</em>+(2)$，左右导数不相等，故 $f'(2)$ 不存在。
 >
 >由此得唯一的不可导点 $a = 2$。
 
@@ -493,31 +655,31 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 >
 >核心取决于指数项 $e^{n(x-1)}$ 当 $n \to \infty$ 时的发散与收敛趋势：
 >
->(1) 当 $x > 1$ 时，$x-1 > 0$，$n(x-1) \to +\infty$，故 $e^{n(x-1)} \to +\infty$。分子分母同除以 $e^{n(x-1)}$：
+>(1) 当 $x &gt; 1$ 时，$x-1 &gt; 0$，$n(x-1) \to +\infty$，故 $e^{n(x-1)} \to +\infty$。分子分母同除以 $e^{n(x-1)}$：
 >
->$$f(x) = \lim\limits_{n \to \infty}\frac{x^2 + (ax+b)e^{-n(x-1)}}{5e^{-n(x-1)} + 1} = x^2$$
+>XYZMATHBLOCK46XYZ
 >
 >(2) 当 $x = 1$ 时，$x-1 = 0$，$e^{n(x-1)} = e^0 = 1$：
 >
->$$f(1) = \frac{1^2 \cdot 1 + a(1) + b}{5 + 1} = \frac{1+a+b}{6}$$
+>XYZMATHBLOCK47XYZ
 >
->(3) 当 $x < 1$ 时，$x-1 < 0$，$n(x-1) \to -\infty$，故 $e^{n(x-1)} \to 0$：
+>(3) 当 $x &lt; 1$ 时，$x-1 &lt; 0$，$n(x-1) \to -\infty$，故 $e^{n(x-1)} \to 0$：
 >
->$$f(x) = \frac{0 + ax+b}{5 + 0} = \frac{ax+b}{5}$$
+>XYZMATHBLOCK48XYZ
 >
 >综上，函数解析式为：
 >
->$$f(x) = \begin{cases} x^2, & x > 1 \\ \\ \frac{1+a+b}{6}, & x = 1 \\ \\ \frac{ax+b}{5}, & x < 1 \end{cases}$$
+>XYZMATHBLOCK49XYZ
 >
 >[2]讨论 $f(x)$ 的连续性：
 >
 >显然在 $x \ne 1$ 时，$f(x)$ 为初等函数必连续。在唯一分界点 $x=1$ 处：
 >
->$$\lim\limits_{x \to 1^+} f(x) = 1^2 = 1, \quad \lim\limits_{x \to 1^-} f(x) = \frac{a+b}{5}, \quad f(1) = \frac{1+a+b}{6}$$
+>XYZMATHBLOCK50XYZ
 >
 >$f(x)$ 在 $x=1$ 处连续 $\iff \lim\limits_{x \to 1^+} f(x) = \lim\limits_{x \to 1^-} f(x) = f(1)$：
 >
->$$1 = \frac{a+b}{5} = \frac{1+a+b}{6} \iff a+b = 5$$
+>XYZMATHBLOCK51XYZ
 >
 >因此：
 >- 当 $a+b = 5$ 时，$f(x)$ 在 $(-\infty, +\infty)$ 上处处连续；
@@ -529,11 +691,11 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 >
 >利用导数定义考察左右导数：
 >
->$$\begin{aligned} f'_+(1) &= \lim\limits_{x \to 1^+}\frac{x^2 - 1}{x-1} = \lim\limits_{x \to 1^+}(x+1) = 2 \\ \\ f'_-(1) &= \lim\limits_{x \to 1^-}\frac{\frac{ax+b}{5} - 1}{x-1} = \lim\limits_{x \to 1^-}\frac{ax+(5-a)-5}{5(x-1)} = \lim\limits_{x \to 1^-}\frac{a(x-1)}{5(x-1)} = \frac{a}{5} \end{aligned}$$
+>XYZMATHBLOCK52XYZ
 >
->$f(x)$ 在 $x=1$ 处可导 $\iff f'_+(1) = f'_-(1)$：
+>$f(x)$ 在 $x=1$ 处可导 $\iff f'<em>+(1) = f'</em>-(1)$：
 >
->$$2 = \frac{a}{5} \implies a = 10$$
+>XYZMATHBLOCK53XYZ
 >
 >再结合连续性条件 $a+b = 5$ 得 $b = 5 - 10 = -5$。
 >
@@ -541,5 +703,25 @@ $$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} &= \li
 >
 >- 当 $a = 10$ 且 $b = -5$ 时，$f(x)$ 在 $(-\infty, +\infty)$ 上处处可导；
 >- 当 $a+b = 5$ 且 $a \ne 10$ 时，$f(x)$ 在 $(-\infty, +\infty)$ 处处连续，但在 $x=1$ 处不可导；
->- 当 $a+b \ne 5$ 时，$f(x)$ 在 $x=1$ 处不连续，必不可导。
-
+>- 当 $a+b \ne 5$ 时，$f(x)$ 在 $x=1$ 处不连续，必不可导。</p>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>
