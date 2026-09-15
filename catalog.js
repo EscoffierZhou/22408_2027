@@ -107,20 +107,20 @@ window.CATALOG_DATA = {
         },
         {
           "type": "doc",
+          "name": "LIFE_ALIGNED_SCHEDULE_0915_TO_1015",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/LIFE_ALIGNED_SCHEDULE_0915_TO_1015.md",
+          "formats": {
+            "md": "DailyPlan/LIFE_ALIGNED_SCHEDULE_0915_TO_1015.md"
+          }
+        },
+        {
+          "type": "doc",
           "name": "README",
           "defaultType": "md",
           "defaultPath": "DailyPlan/README.md",
           "formats": {
             "md": "DailyPlan/README.md"
-          }
-        },
-        {
-          "type": "doc",
-          "name": "REAL_LIFE_TIMELINE_AND_MILESTONES",
-          "defaultType": "md",
-          "defaultPath": "DailyPlan/REAL_LIFE_TIMELINE_AND_MILESTONES.md",
-          "formats": {
-            "md": "DailyPlan/REAL_LIFE_TIMELINE_AND_MILESTONES.md"
           }
         },
         {
