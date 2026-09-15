@@ -25,11 +25,11 @@ window.CATALOG_DATA = {
       "badge": "每日计划与复盘",
       "color": "#ec4899",
       "stats": {
-        "totalDocs": 2,
+        "totalDocs": 10,
         "formats": {
           "html": 0,
           "pdf": 0,
-          "md": 2
+          "md": 10
         }
       },
       "children": [
@@ -44,11 +44,83 @@ window.CATALOG_DATA = {
         },
         {
           "type": "doc",
+          "name": "2026-09-16",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-09-16.md",
+          "formats": {
+            "md": "DailyPlan/2026-09-16.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-09-17",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-09-17.md",
+          "formats": {
+            "md": "DailyPlan/2026-09-17.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-09-18",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-09-18.md",
+          "formats": {
+            "md": "DailyPlan/2026-09-18.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-09-19",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-09-19.md",
+          "formats": {
+            "md": "DailyPlan/2026-09-19.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-09-20",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-09-20.md",
+          "formats": {
+            "md": "DailyPlan/2026-09-20.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-09-21",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-09-21.md",
+          "formats": {
+            "md": "DailyPlan/2026-09-21.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-09-22",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-09-22.md",
+          "formats": {
+            "md": "DailyPlan/2026-09-22.md"
+          }
+        },
+        {
+          "type": "doc",
           "name": "README",
           "defaultType": "md",
           "defaultPath": "DailyPlan/README.md",
           "formats": {
             "md": "DailyPlan/README.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "WEEKLY_OVERVIEW",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/WEEKLY_OVERVIEW.md",
+          "formats": {
+            "md": "DailyPlan/WEEKLY_OVERVIEW.md"
           }
         }
       ]
