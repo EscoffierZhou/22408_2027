@@ -25,11 +25,11 @@ window.CATALOG_DATA = {
       "badge": "每日计划与复盘",
       "color": "#ec4899",
       "stats": {
-        "totalDocs": 10,
+        "totalDocs": 11,
         "formats": {
           "html": 0,
           "pdf": 0,
-          "md": 10
+          "md": 11
         }
       },
       "children": [
@@ -112,6 +112,15 @@ window.CATALOG_DATA = {
           "defaultPath": "DailyPlan/README.md",
           "formats": {
             "md": "DailyPlan/README.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "REAL_LIFE_TIMELINE_AND_MILESTONES",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/REAL_LIFE_TIMELINE_AND_MILESTONES.md",
+          "formats": {
+            "md": "DailyPlan/REAL_LIFE_TIMELINE_AND_MILESTONES.md"
           }
         },
         {
