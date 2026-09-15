@@ -1375,6 +1375,75 @@
 
   <script>
     (function() {
+      // ================= 考研倒计时 & 作战时间表核心常量与数据 =================
+      const EXAM_TARGET_DATE = new Date('2026-12-19T08:30:00');
+      const WEEKDAY_NAMES = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+
+      const DEFAULT_SCHEDULE_SLOTS = [
+        { start: '07:30', end: '08:00', attr: '晨间起航', task: '英语核心词汇速记 60+ & 晨起热身灵魂一问深度思考' },
+        { start: '08:00', end: '10:00', attr: '核心攻坚', task: '高数 Chap02 数列极限手推复盘（12题闭卷白纸手推，消灭假懂）' },
+        { start: '10:15', end: '12:15', attr: '新章推进', task: '高数 Chap03 一元函数微分学的概念（导数定义/分段点可导/1000a题）' },
+        { start: '12:15', end: '14:00', attr: '午间休整', task: '营养午餐 + 散步放松 + 30分钟高质量午休充能' },
+        { start: '14:00', end: '16:00', attr: '新章推进', task: '高数 Chap04 微分计算（复合/反函数/隐函数/高阶导数，880极限研读）' },
+        { start: '16:15', end: '18:45', attr: '408 专项', task: '王道计算机网络 Chap1 体系结构（报文/分组交换对比、五层协议、指标计算刷题）' },
+        { start: '18:45', end: '19:30', attr: '晚间蓄能', task: '晚餐补给 + 户外拉伸 + 转换思维频道' },
+        { start: '19:30', end: '21:00', attr: '弹性加练', task: '【Buffer】线性代数 1000a 基础篇 Chap01 行列式精练 / 错题归纳' },
+        { start: '21:00', end: '22:00', attr: '闭环对账', task: '全天对账与反思记录（对照 NOTICE.md 检视假懂，预排次日目标）' }
+      ];
+
+      const DAILY_PLAN_KNOWLEDGE = {
+        '2026-09-15': {
+          badge: '极限终局与微分概念计算',
+          math: '高数 Chap02 数列极限闭卷白纸手推复盘 (12题) + Chap03 微分概念 + Chap04 微分计算 (配 880 极限研读)',
+          cs: '王道计算机网络 Chap1 计算机网络体系结构与性能指标题目全刷 + 计组浮点规格化巩固',
+          buffer: '【Buffer 弹性加练】线性代数 1000a 基础篇 Chap01 行列式精练 + 晨起热身灵魂一问思考'
+        },
+        '2026-09-16': {
+          badge: '微分几何应用与计组存储',
+          math: '高数 Chap04 计算收尾 + Chap05 微分几何应用 (切线/法线/渐近线/曲率) + 880 精选题',
+          cs: '计算机组成原理：存储系统 SRAM/DRAM/ROM + 计算机网络：Chap2 物理层 (香农奈氏定理/编码调制)',
+          buffer: '线性代数 Chap01 行列式收尾 + 英语真题阅读精读 1 篇 (长难句拆解剖析)'
+        },
+        '2026-09-17': {
+          badge: '中值定理破局与Cache大题',
+          math: '高数 Chap06 中值定理与微分等式/不等式证明 (上: 罗尔/拉格朗日构造辅助函数 SOP)',
+          cs: '计算机组成原理：Cache 三大映射与命中率计算 (必考大题攻坚) + 数据结构二叉树手撕',
+          buffer: '李林 880 微分强化题 3 道 + 晨起热身中值定理思考'
+        },
+        '2026-09-18': {
+          badge: '泰勒中值定理与周五放空',
+          math: '【上午攻坚】高数 Chap06 泰勒展开式应用与不等式证明 + 计网 Chap3 数据链路层开篇 (差错控制/CRC校验)',
+          cs: '【下午 & 晚间放假】学校上课 + 每周固定休假，全面放空充电，彻底放松蓄能！',
+          buffer: '放假期间零学习负罪感，散步、聚餐、好好睡个饱觉！'
+        },
+        '2026-09-19': {
+          badge: '虚存三级联动与周六回血',
+          math: '【下午回归】线性代数 Chap01 错题归纳 + 开启 Chap02 矩阵运算',
+          cs: '【下午 & 晚间】计算机组成原理：虚拟存储器 (TLB/Page/Cache 三级联动综合题) + 英语精读',
+          buffer: '【上午】学校上课 / 睡眠补充 / 状态全面回血'
+        },
+        '2026-09-20': {
+          badge: '中值定理合拢与OS破局首战',
+          math: '高数 Chap06 中值定理大合拢 (880 强化综合题攻坚，闭卷自推)',
+          cs: '【操作系统第一枪】OS Chap1 计算机系统概述 (内核态/系统调用/中断异常) + 计网滑动窗口利用率',
+          buffer: '数据结构图与树手撕 + 英语核心词汇滚动温习'
+        },
+        '2026-09-21': {
+          badge: '微分总图大成与OS进程调度',
+          math: '高数 Chap07 物理应用与微分学总思维脑图复盘 + 线性代数初等变换与逆矩阵',
+          cs: '操作系统 Chap2 进程状态转换与经典调度算法 (FCFS/SJF/HRRN/时间片轮转)',
+          buffer: '408 错题本归纳 + 晨起热身题思考'
+        },
+        '2026-09-22': {
+          badge: '一元积分学进阶与PV操作首战',
+          math: '高数开启 Chap08 一元积分学的概念与性质 + 反常积分收敛性判定',
+          cs: '操作系统 Chap2 经典同步互斥信号量机制建模 (PV操作首战) + 计网 CSMA/CD 协议与以太网交换机',
+          buffer: '全周作战大闭环对账 + 对照 NOTICE.md 进行防假懂大检视'
+        }
+      };
+
+      let countdownTimerId = null;
+
       // 状态管理
       const state = {
         catalog: window.CATALOG_DATA || null,
@@ -1487,8 +1556,17 @@
         return;
       }
 
-      renderDashboard();
+      // 1. 先渲染侧边栏树形（最高优先级，保证目录百分之百优先就绪）
       renderSidebarTree(state.catalog);
+
+      // 2. 渲染仪表盘与考研倒计时看板
+      try {
+        renderDashboard();
+      } catch (err) {
+        console.error('renderDashboard error:', err);
+      }
+
+      // 3. 处理 URL Hash 路由
       handleInitialUrlHash();
 
       // 展开/折叠全部
@@ -1609,99 +1687,33 @@
         });
       }
 
-      // ================= 考研倒计时 & 作战时间表逻辑 =================
-      const EXAM_TARGET_DATE = new Date('2026-12-19T08:30:00');
-      const WEEKDAY_NAMES = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-
-      const DEFAULT_SCHEDULE_SLOTS = [
-        { start: '07:30', end: '08:00', attr: '晨间起航', task: '英语核心词汇速记 60+ & 晨起热身灵魂一问深度思考' },
-        { start: '08:00', end: '10:00', attr: '核心攻坚', task: '高数 Chap02 数列极限手推复盘（12题闭卷白纸手推，消灭假懂）' },
-        { start: '10:15', end: '12:15', attr: '新章推进', task: '高数 Chap03 一元函数微分学的概念（导数定义/分段点可导/1000a题）' },
-        { start: '12:15', end: '14:00', attr: '午间休整', task: '营养午餐 + 散步放松 + 30分钟高质量午休充能' },
-        { start: '14:00', end: '16:00', attr: '新章推进', task: '高数 Chap04 微分计算（复合/反函数/隐函数/高阶导数，880极限研读）' },
-        { start: '16:15', end: '18:45', attr: '408 专项', task: '王道计算机网络 Chap1 体系结构（报文/分组交换对比、五层协议、指标计算刷题）' },
-        { start: '18:45', end: '19:30', attr: '晚间蓄能', task: '晚餐补给 + 户外拉伸 + 转换思维频道' },
-        { start: '19:30', end: '21:00', attr: '弹性加练', task: '【Buffer】线性代数 1000a 基础篇 Chap01 行列式精练 / 错题归纳' },
-        { start: '21:00', end: '22:00', attr: '闭环对账', task: '全天对账与反思记录（对照 NOTICE.md 检视假懂，预排次日目标）' }
-      ];
-
-      const DAILY_PLAN_KNOWLEDGE = {
-        '2026-09-15': {
-          badge: '极限终局与微分概念计算',
-          math: '高数 Chap02 数列极限闭卷白纸手推复盘 (12题) + Chap03 微分概念 + Chap04 微分计算 (配 880 极限研读)',
-          cs: '王道计算机网络 Chap1 计算机网络体系结构与性能指标题目全刷 + 计组浮点规格化巩固',
-          buffer: '【Buffer 弹性加练】线性代数 1000a 基础篇 Chap01 行列式精练 + 晨起热身灵魂一问思考'
-        },
-        '2026-09-16': {
-          badge: '微分几何应用与计组存储',
-          math: '高数 Chap04 计算收尾 + Chap05 微分几何应用 (切线/法线/渐近线/曲率) + 880 精选题',
-          cs: '计算机组成原理：存储系统 SRAM/DRAM/ROM + 计算机网络：Chap2 物理层 (香农奈氏定理/编码调制)',
-          buffer: '线性代数 Chap01 行列式收尾 + 英语真题阅读精读 1 篇 (长难句拆解剖析)'
-        },
-        '2026-09-17': {
-          badge: '中值定理破局与Cache大题',
-          math: '高数 Chap06 中值定理与微分等式/不等式证明 (上: 罗尔/拉格朗日构造辅助函数 SOP)',
-          cs: '计算机组成原理：Cache 三大映射与命中率计算 (必考大题攻坚) + 数据结构二叉树手撕',
-          buffer: '李林 880 微分强化题 3 道 + 晨起热身中值定理思考'
-        },
-        '2026-09-18': {
-          badge: '泰勒中值定理与周五放空',
-          math: '【上午攻坚】高数 Chap06 泰勒展开式应用与不等式证明 + 计网 Chap3 数据链路层开篇 (差错控制/CRC校验)',
-          cs: '【下午 & 晚间放假】学校上课 + 每周固定休假，全面放空充电，彻底放松蓄能！',
-          buffer: '放假期间零学习负罪感，散步、聚餐、好好睡个饱觉！'
-        },
-        '2026-09-19': {
-          badge: '虚存三级联动与周六回血',
-          math: '【下午回归】线性代数 Chap01 错题归纳 + 开启 Chap02 矩阵运算',
-          cs: '【下午 & 晚间】计算机组成原理：虚拟存储器 (TLB/Page/Cache 三级联动综合题) + 英语精读',
-          buffer: '【上午】学校上课 / 睡眠补充 / 状态全面回血'
-        },
-        '2026-09-20': {
-          badge: '中值定理合拢与OS破局首战',
-          math: '高数 Chap06 中值定理大合拢 (880 强化综合题攻坚，闭卷自推)',
-          cs: '【操作系统第一枪】OS Chap1 计算机系统概述 (内核态/系统调用/中断异常) + 计网滑动窗口利用率',
-          buffer: '数据结构图与树手撕 + 英语核心词汇滚动温习'
-        },
-        '2026-09-21': {
-          badge: '微分总图大成与OS进程调度',
-          math: '高数 Chap07 物理应用与微分学总思维脑图复盘 + 线性代数初等变换与逆矩阵',
-          cs: '操作系统 Chap2 进程状态转换与经典调度算法 (FCFS/SJF/HRRN/时间片轮转)',
-          buffer: '408 错题本归纳 + 晨起热身题思考'
-        },
-        '2026-09-22': {
-          badge: '一元积分学进阶与PV操作首战',
-          math: '高数开启 Chap08 一元积分学的概念与性质 + 反常积分收敛性判定',
-          cs: '操作系统 Chap2 经典同步互斥信号量机制建模 (PV操作首战) + 计网 CSMA/CD 协议与以太网交换机',
-          buffer: '全周作战大闭环对账 + 对照 NOTICE.md 进行防假懂大检视'
-        }
-      };
-
-      let countdownTimerId = null;
-
       function initExamCountdownAndSchedule() {
         if (!els.scheduleDashboard) return;
+        try {
+          const now = new Date();
+          const yyyy = now.getFullYear();
+          const mm = String(now.getMonth() + 1).padStart(2, '0');
+          const dd = String(now.getDate()).padStart(2, '0');
+          const todayStr = `${yyyy}-${mm}-${dd}`;
 
-        const now = new Date();
-        const yyyy = now.getFullYear();
-        const mm = String(now.getMonth() + 1).padStart(2, '0');
-        const dd = String(now.getDate()).padStart(2, '0');
-        const todayStr = `${yyyy}-${mm}-${dd}`;
+          // 渲染今日任务卡片
+          renderTodayMission(todayStr);
 
-        // 渲染今日任务卡片
-        renderTodayMission(todayStr);
+          // 渲染全天时间安排表
+          renderScheduleTimelineTable();
 
-        // 渲染全天时间安排表
-        renderScheduleTimelineTable();
+          // 绑定按钮事件 (仅绑定一次)
+          setupScheduleButtons();
 
-        // 绑定按钮事件 (仅绑定一次)
-        setupScheduleButtons();
+          // 立即执行一次时钟与倒计时计算
+          updateClockAndCountdown();
 
-        // 立即执行一次时钟与倒计时计算
-        updateClockAndCountdown();
-
-        // 启动每秒定时器
-        if (countdownTimerId) clearInterval(countdownTimerId);
-        countdownTimerId = setInterval(updateClockAndCountdown, 1000);
+          // 启动每秒定时器
+          if (countdownTimerId) clearInterval(countdownTimerId);
+          countdownTimerId = setInterval(updateClockAndCountdown, 1000);
+        } catch (err) {
+          console.error('initExamCountdownAndSchedule error:', err);
+        }
       }
 
       function setupScheduleButtons() {
