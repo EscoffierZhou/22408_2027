@@ -703,8 +703,443 @@
       line-height: 1.5;
     }
 
+    /* Schedule & Countdown Dashboard Section */
+    .schedule-dashboard-section {
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* 1. Exam Status & Countdown Card */
+    .exam-status-card {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.07) 0%, rgba(59, 130, 246, 0.07) 100%);
+      border: 1px solid var(--primary-border);
+      border-radius: 14px;
+      padding: 20px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 4px 18px rgba(139, 92, 246, 0.05);
+    }
+
+    .status-main-col {
+      flex: 1;
+      min-width: 290px;
+    }
+
+    .date-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .live-weekday-badge {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #7c3aed, #4f46e5);
+      padding: 4px 14px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
+    }
+
+    .live-date-text {
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .live-clock-badge {
+      font-size: 0.86rem;
+      font-family: Consolas, Monaco, monospace;
+      color: var(--text-muted);
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 3px 9px;
+      border-radius: 6px;
+    }
+
+    .phase-tag {
+      font-size: 0.78rem;
+      background-color: #fef2f2;
+      color: #ef4444;
+      border: 1px solid #fecaca;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    [data-theme="dark"] .phase-tag {
+      background-color: #450a0a;
+      color: #fca5a5;
+      border-color: #7f1d1d;
+    }
+
+    .current-task-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      border-radius: 8px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      font-size: 0.88rem;
+      color: var(--text-main);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
+
+    .pulse-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background-color: #10b981;
+      display: inline-block;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulse-green 2s infinite;
+    }
+
+    @keyframes pulse-green {
+      0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      }
+      70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+      }
+      100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+      }
+    }
+
+    .status-countdown-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .countdown-title {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .countdown-display {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .cd-box {
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+    }
+
+    .cd-num {
+      font-size: 1.85rem;
+      font-weight: 800;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1;
+      background: linear-gradient(135deg, #7c3aed, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cd-num.big-days {
+      font-size: 2.3rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #ef4444, #f97316);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cd-unit {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-right: 2px;
+    }
+
+    .cd-sep {
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin: 0 2px;
+      opacity: 0.45;
+    }
+
+    .countdown-subtext {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+
+    /* 2. Today Mission Panel */
+    .today-mission-panel {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 18px 20px;
+      transition: all 0.2s;
+    }
+
+    .mission-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 14px;
+    }
+
+    .mission-title {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mission-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .plan-btn {
+      padding: 6px 13px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+      text-decoration: none;
+    }
+
+    .plan-btn.primary {
+      background-color: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(139, 92, 246, 0.25);
+    }
+    .plan-btn.primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .plan-btn.secondary {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      border-color: var(--border-color);
+    }
+    .plan-btn.secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .mission-bullets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+    }
+
+    .mission-bullet-card {
+      background-color: var(--bg-body);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .bullet-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      margin-top: 1px;
+    }
+    .bullet-tag.math { background: rgba(139, 92, 246, 0.15); color: #8b5cf6; }
+    .bullet-tag.cs { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+    .bullet-tag.buffer { background: rgba(236, 72, 153, 0.15); color: #ec4899; }
+
+    .bullet-desc {
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: var(--text-main);
+    }
+
+    /* 3. Daily Schedule Timeline Table */
+    .daily-timeline-panel {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 18px 20px;
+      overflow: hidden;
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .timeline-header h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .timeline-note {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .timeline-table-wrapper {
+      overflow-x: auto;
+    }
+
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.83rem;
+    }
+
+    .schedule-table th {
+      background-color: var(--bg-body);
+      color: var(--text-muted);
+      font-weight: 600;
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .schedule-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+      vertical-align: middle;
+      transition: background-color 0.2s;
+    }
+
+    .schedule-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .schedule-table tr.active-time-row {
+      background-color: var(--primary-light);
+      font-weight: 600;
+    }
+
+    .schedule-table tr.active-time-row td:first-child {
+      border-left: 4px solid var(--primary);
+      padding-left: 8px;
+    }
+
+    .schedule-table tr.past-time-row {
+      opacity: 0.55;
+    }
+
+    .time-slot {
+      font-family: Consolas, Monaco, monospace;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .attr-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background-color: rgba(0,0,0,0.05);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    [data-theme="dark"] .attr-badge {
+      background-color: rgba(255,255,255,0.08);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .status-badge.ongoing {
+      background-color: #d1fae5;
+      color: #065f46;
+      font-weight: 600;
+    }
+    [data-theme="dark"] .status-badge.ongoing {
+      background-color: #064e3b;
+      color: #6ee7b7;
+    }
+    .status-badge.past {
+      background-color: var(--bg-body);
+      color: var(--text-muted);
+    }
+    .status-badge.future {
+      background-color: rgba(139, 92, 246, 0.1);
+      color: var(--primary);
+    }
+
     /* Mobile Responsive */
     @media (max-width: 768px) {
+      .exam-status-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .status-countdown-col {
+        align-items: flex-start;
+        text-align: left;
+        width: 100%;
+        border-top: 1px dashed var(--border-color);
+        padding-top: 14px;
+      }
+      .mission-actions {
+        width: 100%;
+      }
+      .plan-btn {
+        flex: 1;
+        justify-content: center;
+      }
       aside.sidebar {
         position: absolute;
         top: 0;
@@ -832,6 +1267,94 @@
             <!-- 由 JS 渲染学科卡片 -->
           </div>
 
+          <!-- ================= 考研作战仪表盘：倒计时 & 每日时间安排表 ================= -->
+          <div class="schedule-dashboard-section" id="scheduleDashboard">
+            
+            <!-- 1. 考研倒计时 & 实时日期星期看板 -->
+            <div class="exam-status-card">
+              <div class="status-main-col">
+                <div class="date-badge-row">
+                  <span class="live-weekday-badge" id="liveWeekdayBadge"><i class="fa-regular fa-calendar-check"></i> 星期二</span>
+                  <span class="live-date-text" id="liveDateDisplay">2026年09月15日</span>
+                  <span class="live-clock-badge" id="liveClockDisplay"><i class="fa-regular fa-clock"></i> 00:00:00</span>
+                  <span class="phase-tag"><i class="fa-solid fa-fire"></i> 基础强化攻坚期</span>
+                </div>
+                <div class="current-task-status" id="currentTaskStatus">
+                  <span class="pulse-dot"></span>
+                  <span style="font-weight: 600; color: var(--text-muted); font-size: 0.82rem;">当前时段作战：</span>
+                  <span id="currentTaskDesc">正在计算当前时段攻坚任务...</span>
+                </div>
+              </div>
+
+              <div class="status-countdown-col">
+                <div class="countdown-title">
+                  <i class="fa-solid fa-hourglass-half"></i> 距离 2027 考研初试仅剩
+                </div>
+                <div class="countdown-display">
+                  <div class="cd-box"><span class="cd-num big-days" id="cdDays">00</span><span class="cd-unit">天</span></div>
+                  <span class="cd-sep">:</span>
+                  <div class="cd-box"><span class="cd-num" id="cdHours">00</span><span class="cd-unit">时</span></div>
+                  <span class="cd-sep">:</span>
+                  <div class="cd-box"><span class="cd-num" id="cdMins">00</span><span class="cd-unit">分</span></div>
+                  <span class="cd-sep">:</span>
+                  <div class="cd-box"><span class="cd-num" id="cdSecs">00</span><span class="cd-unit">秒</span></div>
+                </div>
+                <div class="countdown-subtext">
+                  初试首场：2026-12-19 08:30 (中国科学院大学 UCAS)
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. 今日作战重心与交付目标卡片 -->
+            <div class="today-mission-panel">
+              <div class="mission-header">
+                <div class="mission-title">
+                  <i class="fa-solid fa-bullseye" style="color: #ec4899;"></i>
+                  <span>今日作战重心与攻坚任务 (<span id="missionDateBadge" style="color: var(--primary);">2026-09-15</span>)</span>
+                </div>
+                <div class="mission-actions">
+                  <button class="plan-btn primary" id="openTodayPlanBtn" title="打开今日学习计划与打卡清单">
+                    <i class="fa-solid fa-book-open-reader"></i> 打开今日作战计划 (<span id="btnPlanDate">09-15</span>)
+                  </button>
+                  <button class="plan-btn secondary" id="openWeeklyOverviewBtn" title="查看 30 天周度作战路线图">
+                    <i class="fa-solid fa-calendar-week"></i> 30天全景周表
+                  </button>
+                  <button class="plan-btn secondary" id="openLifeScheduleBtn" title="查看个人课表与休假对齐时间表">
+                    <i class="fa-solid fa-person-walking-luggage"></i> 现实作息总表
+                  </button>
+                </div>
+              </div>
+
+              <div class="mission-bullets-grid" id="missionBulletsGrid">
+                <!-- JS 动态渲染今日任务要点 -->
+              </div>
+            </div>
+
+            <!-- 3. 今日全天黄金时间安排表 -->
+            <div class="daily-timeline-panel">
+              <div class="timeline-header">
+                <h4><i class="fa-solid fa-clock-rotate-left" style="color: var(--primary);"></i> 考研高效作息时间表与执行看板</h4>
+                <span class="timeline-note"><i class="fa-solid fa-circle-dot" style="color: #10b981; font-size: 0.7rem;"></i> 随当前系统时刻动态高亮跟踪</span>
+              </div>
+              <div class="timeline-table-wrapper">
+                <table class="schedule-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 140px;">时段区间</th>
+                      <th style="width: 110px;">任务阶段</th>
+                      <th>今日作战任务与核心攻坚内容</th>
+                      <th style="width: 100px; text-align: center;">执行状态</th>
+                    </tr>
+                  </thead>
+                  <tbody id="scheduleTableBody">
+                    <!-- 由 JS 动态渲染时段行 -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+
           <h3 class="section-title"><i class="fa-solid fa-compass"></i> 核心备考总纲</h3>
           <div class="quick-links-grid" id="quickLinksGrid">
             <!-- 根目录总纲卡片 -->
@@ -884,7 +1407,23 @@
         statsGrid: document.getElementById('statsGrid'),
         quickLinksGrid: document.getElementById('quickLinksGrid'),
         readerFrame: document.getElementById('readerFrame'),
-        markdownContainer: document.getElementById('markdownContainer')
+        markdownContainer: document.getElementById('markdownContainer'),
+        scheduleDashboard: document.getElementById('scheduleDashboard'),
+        liveWeekdayBadge: document.getElementById('liveWeekdayBadge'),
+        liveDateDisplay: document.getElementById('liveDateDisplay'),
+        liveClockDisplay: document.getElementById('liveClockDisplay'),
+        currentTaskDesc: document.getElementById('currentTaskDesc'),
+        cdDays: document.getElementById('cdDays'),
+        cdHours: document.getElementById('cdHours'),
+        cdMins: document.getElementById('cdMins'),
+        cdSecs: document.getElementById('cdSecs'),
+        missionDateBadge: document.getElementById('missionDateBadge'),
+        btnPlanDate: document.getElementById('btnPlanDate'),
+        openTodayPlanBtn: document.getElementById('openTodayPlanBtn'),
+        openWeeklyOverviewBtn: document.getElementById('openWeeklyOverviewBtn'),
+        openLifeScheduleBtn: document.getElementById('openLifeScheduleBtn'),
+        missionBulletsGrid: document.getElementById('missionBulletsGrid'),
+        scheduleTableBody: document.getElementById('scheduleTableBody')
       };
 
       // 初始化主题
@@ -1046,6 +1585,9 @@
           els.statsGrid.appendChild(card);
         });
 
+        // 渲染考研倒计时看板与今日作战时间安排表
+        initExamCountdownAndSchedule();
+
         // 渲染根目录总纲
         els.quickLinksGrid.innerHTML = '';
         state.catalog.rootDocs.forEach(rd => {
@@ -1065,6 +1607,261 @@
           });
           els.quickLinksGrid.appendChild(qcard);
         });
+      }
+
+      // ================= 考研倒计时 & 作战时间表逻辑 =================
+      const EXAM_TARGET_DATE = new Date('2026-12-19T08:30:00');
+      const WEEKDAY_NAMES = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+
+      const DEFAULT_SCHEDULE_SLOTS = [
+        { start: '07:30', end: '08:00', attr: '晨间起航', task: '英语核心词汇速记 60+ & 晨起热身灵魂一问深度思考' },
+        { start: '08:00', end: '10:00', attr: '核心攻坚', task: '高数 Chap02 数列极限手推复盘（12题闭卷白纸手推，消灭假懂）' },
+        { start: '10:15', end: '12:15', attr: '新章推进', task: '高数 Chap03 一元函数微分学的概念（导数定义/分段点可导/1000a题）' },
+        { start: '12:15', end: '14:00', attr: '午间休整', task: '营养午餐 + 散步放松 + 30分钟高质量午休充能' },
+        { start: '14:00', end: '16:00', attr: '新章推进', task: '高数 Chap04 微分计算（复合/反函数/隐函数/高阶导数，880极限研读）' },
+        { start: '16:15', end: '18:45', attr: '408 专项', task: '王道计算机网络 Chap1 体系结构（报文/分组交换对比、五层协议、指标计算刷题）' },
+        { start: '18:45', end: '19:30', attr: '晚间蓄能', task: '晚餐补给 + 户外拉伸 + 转换思维频道' },
+        { start: '19:30', end: '21:00', attr: '弹性加练', task: '【Buffer】线性代数 1000a 基础篇 Chap01 行列式精练 / 错题归纳' },
+        { start: '21:00', end: '22:00', attr: '闭环对账', task: '全天对账与反思记录（对照 NOTICE.md 检视假懂，预排次日目标）' }
+      ];
+
+      const DAILY_PLAN_KNOWLEDGE = {
+        '2026-09-15': {
+          badge: '极限终局与微分概念计算',
+          math: '高数 Chap02 数列极限闭卷白纸手推复盘 (12题) + Chap03 微分概念 + Chap04 微分计算 (配 880 极限研读)',
+          cs: '王道计算机网络 Chap1 计算机网络体系结构与性能指标题目全刷 + 计组浮点规格化巩固',
+          buffer: '【Buffer 弹性加练】线性代数 1000a 基础篇 Chap01 行列式精练 + 晨起热身灵魂一问思考'
+        },
+        '2026-09-16': {
+          badge: '微分几何应用与计组存储',
+          math: '高数 Chap04 计算收尾 + Chap05 微分几何应用 (切线/法线/渐近线/曲率) + 880 精选题',
+          cs: '计算机组成原理：存储系统 SRAM/DRAM/ROM + 计算机网络：Chap2 物理层 (香农奈氏定理/编码调制)',
+          buffer: '线性代数 Chap01 行列式收尾 + 英语真题阅读精读 1 篇 (长难句拆解剖析)'
+        },
+        '2026-09-17': {
+          badge: '中值定理破局与Cache大题',
+          math: '高数 Chap06 中值定理与微分等式/不等式证明 (上: 罗尔/拉格朗日构造辅助函数 SOP)',
+          cs: '计算机组成原理：Cache 三大映射与命中率计算 (必考大题攻坚) + 数据结构二叉树手撕',
+          buffer: '李林 880 微分强化题 3 道 + 晨起热身中值定理思考'
+        },
+        '2026-09-18': {
+          badge: '泰勒中值定理与周五放空',
+          math: '【上午攻坚】高数 Chap06 泰勒展开式应用与不等式证明 + 计网 Chap3 数据链路层开篇 (差错控制/CRC校验)',
+          cs: '【下午 & 晚间放假】学校上课 + 每周固定休假，全面放空充电，彻底放松蓄能！',
+          buffer: '放假期间零学习负罪感，散步、聚餐、好好睡个饱觉！'
+        },
+        '2026-09-19': {
+          badge: '虚存三级联动与周六回血',
+          math: '【下午回归】线性代数 Chap01 错题归纳 + 开启 Chap02 矩阵运算',
+          cs: '【下午 & 晚间】计算机组成原理：虚拟存储器 (TLB/Page/Cache 三级联动综合题) + 英语精读',
+          buffer: '【上午】学校上课 / 睡眠补充 / 状态全面回血'
+        },
+        '2026-09-20': {
+          badge: '中值定理合拢与OS破局首战',
+          math: '高数 Chap06 中值定理大合拢 (880 强化综合题攻坚，闭卷自推)',
+          cs: '【操作系统第一枪】OS Chap1 计算机系统概述 (内核态/系统调用/中断异常) + 计网滑动窗口利用率',
+          buffer: '数据结构图与树手撕 + 英语核心词汇滚动温习'
+        },
+        '2026-09-21': {
+          badge: '微分总图大成与OS进程调度',
+          math: '高数 Chap07 物理应用与微分学总思维脑图复盘 + 线性代数初等变换与逆矩阵',
+          cs: '操作系统 Chap2 进程状态转换与经典调度算法 (FCFS/SJF/HRRN/时间片轮转)',
+          buffer: '408 错题本归纳 + 晨起热身题思考'
+        },
+        '2026-09-22': {
+          badge: '一元积分学进阶与PV操作首战',
+          math: '高数开启 Chap08 一元积分学的概念与性质 + 反常积分收敛性判定',
+          cs: '操作系统 Chap2 经典同步互斥信号量机制建模 (PV操作首战) + 计网 CSMA/CD 协议与以太网交换机',
+          buffer: '全周作战大闭环对账 + 对照 NOTICE.md 进行防假懂大检视'
+        }
+      };
+
+      let countdownTimerId = null;
+
+      function initExamCountdownAndSchedule() {
+        if (!els.scheduleDashboard) return;
+
+        const now = new Date();
+        const yyyy = now.getFullYear();
+        const mm = String(now.getMonth() + 1).padStart(2, '0');
+        const dd = String(now.getDate()).padStart(2, '0');
+        const todayStr = `${yyyy}-${mm}-${dd}`;
+
+        // 渲染今日任务卡片
+        renderTodayMission(todayStr);
+
+        // 渲染全天时间安排表
+        renderScheduleTimelineTable();
+
+        // 绑定按钮事件 (仅绑定一次)
+        setupScheduleButtons();
+
+        // 立即执行一次时钟与倒计时计算
+        updateClockAndCountdown();
+
+        // 启动每秒定时器
+        if (countdownTimerId) clearInterval(countdownTimerId);
+        countdownTimerId = setInterval(updateClockAndCountdown, 1000);
+      }
+
+      function setupScheduleButtons() {
+        if (els.openTodayPlanBtn && !els.openTodayPlanBtn._hasBound) {
+          els.openTodayPlanBtn._hasBound = true;
+          els.openTodayPlanBtn.addEventListener('click', () => {
+            const now = new Date();
+            const yyyy = now.getFullYear();
+            const mm = String(now.getMonth() + 1).padStart(2, '0');
+            const dd = String(now.getDate()).padStart(2, '0');
+            const todayStr = `${yyyy}-${mm}-${dd}`;
+            const targetPath = `DailyPlan/${todayStr}.md`;
+
+            const found = findDocByPath(state.catalog, targetPath);
+            if (found) {
+              loadDocument(found, 'md');
+            } else {
+              const fallback = findDocByPath(state.catalog, 'DailyPlan/2026-09-15.md') ||
+                               findDocByPath(state.catalog, 'DailyPlan/WEEKLY_OVERVIEW.md');
+              if (fallback) loadDocument(fallback, 'md');
+            }
+          });
+        }
+
+        if (els.openWeeklyOverviewBtn && !els.openWeeklyOverviewBtn._hasBound) {
+          els.openWeeklyOverviewBtn._hasBound = true;
+          els.openWeeklyOverviewBtn.addEventListener('click', () => {
+            const doc = findDocByPath(state.catalog, 'DailyPlan/WEEKLY_OVERVIEW.md');
+            if (doc) loadDocument(doc, 'md');
+          });
+        }
+
+        if (els.openLifeScheduleBtn && !els.openLifeScheduleBtn._hasBound) {
+          els.openLifeScheduleBtn._hasBound = true;
+          els.openLifeScheduleBtn.addEventListener('click', () => {
+            const doc = findDocByPath(state.catalog, 'DailyPlan/LIFE_ALIGNED_SCHEDULE_0915_TO_1015.md');
+            if (doc) loadDocument(doc, 'md');
+          });
+        }
+      }
+
+      function renderTodayMission(todayStr) {
+        if (els.missionDateBadge) els.missionDateBadge.textContent = todayStr;
+        if (els.btnPlanDate) els.btnPlanDate.textContent = todayStr.substring(5);
+
+        const missionInfo = DAILY_PLAN_KNOWLEDGE[todayStr] || {
+          badge: '常规作战日',
+          math: '高等数学 / 线性代数 重点考点深入研读与例题闭卷演练',
+          cs: '408 核心学科（计网 / 计组 / 操作系统 / 数据结构）突破与真题专项',
+          buffer: '英语核心词汇温习 + 晨起热身灵魂一问反思'
+        };
+
+        if (els.missionBulletsGrid) {
+          els.missionBulletsGrid.innerHTML = `
+            <div class="mission-bullet-card">
+              <span class="bullet-tag math"><i class="fa-solid fa-square-root-variable"></i> 数学二</span>
+              <div class="bullet-desc">${missionInfo.math}</div>
+            </div>
+            <div class="mission-bullet-card">
+              <span class="bullet-tag cs"><i class="fa-solid fa-microchip"></i> 408 统考</span>
+              <div class="bullet-desc">${missionInfo.cs}</div>
+            </div>
+            <div class="mission-bullet-card">
+              <span class="bullet-tag buffer"><i class="fa-solid fa-bolt"></i> 弹性机动</span>
+              <div class="bullet-desc">${missionInfo.buffer}</div>
+            </div>
+          `;
+        }
+      }
+
+      function renderScheduleTimelineTable() {
+        if (!els.scheduleTableBody) return;
+        els.scheduleTableBody.innerHTML = '';
+
+        DEFAULT_SCHEDULE_SLOTS.forEach((slot, index) => {
+          const tr = document.createElement('tr');
+          tr.id = `timeSlotRow_${index}`;
+          tr.innerHTML = `
+            <td class="time-slot"><i class="fa-regular fa-clock" style="margin-right: 6px; color: var(--text-muted);"></i>${slot.start} ~ ${slot.end}</td>
+            <td><span class="attr-badge">${slot.attr}</span></td>
+            <td>${slot.task}</td>
+            <td id="timeSlotStatus_${index}" style="text-align: center;">
+              <span class="status-badge future">待进行</span>
+            </td>
+          `;
+          els.scheduleTableBody.appendChild(tr);
+        });
+      }
+
+      function updateClockAndCountdown() {
+        const now = new Date();
+
+        // 1. 星期与当前公历日期更新
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const weekDayStr = WEEKDAY_NAMES[now.getDay()];
+
+        if (els.liveDateDisplay) els.liveDateDisplay.textContent = `${year}年${month}月${day}日`;
+        if (els.liveWeekdayBadge) els.liveWeekdayBadge.innerHTML = `<i class="fa-regular fa-calendar-check"></i> ${weekDayStr}`;
+
+        // 2. 实时跳动时钟更新
+        const hh = String(now.getHours()).padStart(2, '0');
+        const mm = String(now.getMinutes()).padStart(2, '0');
+        const ss = String(now.getSeconds()).padStart(2, '0');
+        if (els.liveClockDisplay) els.liveClockDisplay.innerHTML = `<i class="fa-regular fa-clock"></i> ${hh}:${mm}:${ss}`;
+
+        // 3. 考研倒计时精密计算
+        const diffMs = EXAM_TARGET_DATE - now;
+        if (diffMs > 0) {
+          const totalSecs = Math.floor(diffMs / 1000);
+          const days = Math.floor(totalSecs / 86400);
+          const hours = Math.floor((totalSecs % 86400) / 3600);
+          const mins = Math.floor((totalSecs % 3600) / 60);
+          const secs = totalSecs % 60;
+
+          if (els.cdDays) els.cdDays.textContent = days;
+          if (els.cdHours) els.cdHours.textContent = String(hours).padStart(2, '0');
+          if (els.cdMins) els.cdMins.textContent = String(mins).padStart(2, '0');
+          if (els.cdSecs) els.cdSecs.textContent = String(secs).padStart(2, '0');
+        } else {
+          if (els.cdDays) els.cdDays.textContent = '00';
+          if (els.cdHours) els.cdHours.textContent = '00';
+          if (els.cdMins) els.cdMins.textContent = '00';
+          if (els.cdSecs) els.cdSecs.textContent = '00';
+        }
+
+        // 4. 当前所处时段状态计算与表格行动态高亮
+        const curTimeStr = `${hh}:${mm}`;
+        let currentSlot = null;
+
+        DEFAULT_SCHEDULE_SLOTS.forEach((slot, index) => {
+          const rowEl = document.getElementById(`timeSlotRow_${index}`);
+          const statusCell = document.getElementById(`timeSlotStatus_${index}`);
+          if (!rowEl || !statusCell) return;
+
+          if (curTimeStr >= slot.start && curTimeStr < slot.end) {
+            currentSlot = slot;
+            rowEl.className = 'active-time-row';
+            statusCell.innerHTML = '<span class="status-badge ongoing"><span class="pulse-dot"></span>进行中</span>';
+          } else if (curTimeStr >= slot.end) {
+            rowEl.className = 'past-time-row';
+            statusCell.innerHTML = '<span class="status-badge past">已过时段</span>';
+          } else {
+            rowEl.className = 'future-time-row';
+            statusCell.innerHTML = '<span class="status-badge future">待进行</span>';
+          }
+        });
+
+        if (els.currentTaskDesc) {
+          if (currentSlot) {
+            els.currentTaskDesc.innerHTML = `<strong style="color: var(--primary);">【${currentSlot.attr}】</strong>${currentSlot.task} <span style="color: var(--text-muted); font-size: 0.82em; margin-left: 4px;">(${currentSlot.start}~${currentSlot.end})</span>`;
+          } else {
+            if (curTimeStr < '07:30') {
+              els.currentTaskDesc.innerHTML = `<strong style="color: #3b82f6;">【清晨养精蓄锐】</strong>整装待发，准备开启今日高效备考`;
+            } else {
+              els.currentTaskDesc.innerHTML = `<strong style="color: #10b981;">【夜间养精蓄锐】</strong>今日作战已收兵，早睡早起保持充沛体能！`;
+            }
+          }
+        }
       }
 
       // 渲染侧边栏树形
