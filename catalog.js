@@ -25,11 +25,11 @@ window.CATALOG_DATA = {
       "badge": "每日计划与复盘",
       "color": "#ec4899",
       "stats": {
-        "totalDocs": 11,
+        "totalDocs": 34,
         "formats": {
           "html": 0,
           "pdf": 0,
-          "md": 11
+          "md": 34
         }
       },
       "children": [
@@ -103,6 +103,213 @@ window.CATALOG_DATA = {
           "defaultPath": "DailyPlan/2026-09-22.md",
           "formats": {
             "md": "DailyPlan/2026-09-22.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-09-23",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-09-23.md",
+          "formats": {
+            "md": "DailyPlan/2026-09-23.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-09-24",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-09-24.md",
+          "formats": {
+            "md": "DailyPlan/2026-09-24.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-09-25",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-09-25.md",
+          "formats": {
+            "md": "DailyPlan/2026-09-25.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-09-26",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-09-26.md",
+          "formats": {
+            "md": "DailyPlan/2026-09-26.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-09-27",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-09-27.md",
+          "formats": {
+            "md": "DailyPlan/2026-09-27.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-09-28",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-09-28.md",
+          "formats": {
+            "md": "DailyPlan/2026-09-28.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-09-29",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-09-29.md",
+          "formats": {
+            "md": "DailyPlan/2026-09-29.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-09-30",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-09-30.md",
+          "formats": {
+            "md": "DailyPlan/2026-09-30.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-10-01",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-10-01.md",
+          "formats": {
+            "md": "DailyPlan/2026-10-01.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-10-02",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-10-02.md",
+          "formats": {
+            "md": "DailyPlan/2026-10-02.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-10-03",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-10-03.md",
+          "formats": {
+            "md": "DailyPlan/2026-10-03.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-10-04",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-10-04.md",
+          "formats": {
+            "md": "DailyPlan/2026-10-04.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-10-05",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-10-05.md",
+          "formats": {
+            "md": "DailyPlan/2026-10-05.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-10-06",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-10-06.md",
+          "formats": {
+            "md": "DailyPlan/2026-10-06.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-10-07",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-10-07.md",
+          "formats": {
+            "md": "DailyPlan/2026-10-07.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-10-08",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-10-08.md",
+          "formats": {
+            "md": "DailyPlan/2026-10-08.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-10-09",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-10-09.md",
+          "formats": {
+            "md": "DailyPlan/2026-10-09.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-10-10",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-10-10.md",
+          "formats": {
+            "md": "DailyPlan/2026-10-10.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-10-11",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-10-11.md",
+          "formats": {
+            "md": "DailyPlan/2026-10-11.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-10-12",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-10-12.md",
+          "formats": {
+            "md": "DailyPlan/2026-10-12.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-10-13",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-10-13.md",
+          "formats": {
+            "md": "DailyPlan/2026-10-13.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-10-14",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-10-14.md",
+          "formats": {
+            "md": "DailyPlan/2026-10-14.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "2026-10-15",
+          "defaultType": "md",
+          "defaultPath": "DailyPlan/2026-10-15.md",
+          "formats": {
+            "md": "DailyPlan/2026-10-15.md"
           }
         },
         {
