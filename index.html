@@ -1926,12 +1926,6 @@
             header.querySelector('.node-chevron').classList.toggle('expanded', isExpanded);
           });
 
-          // 默认展开 DailyPlan 以及核心重点科目 (数学二)
-          if (subj.name === 'DailyPlan' || subj.name.includes('数学') || subjIdx === 0) {
-            childrenContainer.classList.add('expanded');
-            header.querySelector('.node-chevron').classList.add('expanded', true);
-          }
-
           node.appendChild(header);
           node.appendChild(childrenContainer);
           subjGroup.appendChild(node);
@@ -2009,10 +2003,27 @@
         state.currentDoc = doc;
         state.currentFormat = format || doc.defaultType;
 
-        // 更新高亮激活项
+        // 更新高亮激活项并展开其所有父级文件夹
         document.querySelectorAll('.doc-item').forEach(el => el.classList.remove('active'));
         const activeEl = document.querySelector(`.doc-item[data-path="${doc.defaultPath}"]`);
-        if (activeEl) activeEl.classList.add('active');
+        if (activeEl) {
+          activeEl.classList.add('active');
+          let parent = activeEl.closest('.node-children');
+          while (parent) {
+            parent.classList.add('expanded');
+            const prevHeader = parent.previousElementSibling;
+            if (prevHeader) {
+              const chevron = prevHeader.querySelector('.node-chevron');
+              if (chevron) chevron.classList.add('expanded');
+              const icon = prevHeader.querySelector('.node-icon');
+              if (icon && icon.classList.contains('fa-folder')) {
+                icon.className = 'node-icon fa-regular fa-folder-open';
+              }
+            }
+            parent = parent.parentElement ? parent.parentElement.closest('.node-children') : null;
+          }
+          activeEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
 
         // 更新面包屑
         const pathParts = (doc.formats[state.currentFormat] || doc.defaultPath).split('/');
