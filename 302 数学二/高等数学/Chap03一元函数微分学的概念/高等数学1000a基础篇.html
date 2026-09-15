@@ -167,132 +167,8 @@ hr {
 <body>
 <h1>第3章 一元函数微分学的概念</h1>
 <hr />
-<h2>本章核心考点与全题解大纲速览</h2>
-<blockquote>
-<p>[!NOTE]<br />
-<strong>本章复习重心导引</strong>：一元函数微分学概念的命题焦点在于<strong>导数定义（微商极限本质）</strong>、<strong>可导/连续/极值存在的逻辑充要关系</strong>、<strong>绝对值穿轴尖点模型</strong>、<strong>微分几何/近似估算</strong>以及<strong>含参分段函数的可微性判定</strong>。本章 15 道题覆盖了考研该章节的全部核心考查方式与经典技巧。</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">题号</th>
-<th style="text-align: left;">核心考点与命题类型</th>
-<th style="text-align: left;">关键方法与推导模型</th>
-<th style="text-align: center;">核心结论 / 答案</th>
-<th style="text-align: left;">易错陷阱与反思提示</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;"><strong>Q1</strong></td>
-<td style="text-align: left;">微商极限与等价无穷小综合代换</td>
-<td style="text-align: left;">剥离分母 $\ln(1-x\sin x)\sim -x^2$ 与分子 $1-\cos x \sim \frac{1}{2}x^2$，凑配导数定义</td>
-<td style="text-align: center;">$-\frac{1}{2}f'(0)$</td>
-<td style="text-align: left;">未知 $f'$ 连续性切勿乱用洛必达法则</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>Q2</strong></td>
-<td style="text-align: left;">连续但不可导函数乘积的可导模型</td>
-<td style="text-align: left;">反证法结合导数定义拆分；牢记“可导乘不可导”可导的充要零点条件</td>
-<td style="text-align: center;">(A) $g(a)=0$</td>
-<td style="text-align: left;">必须注意 $g(a)=0$ 是使得极限存在的必要消除项</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>Q3</strong></td>
-<td style="text-align: left;">导数定义的换元变形与系数配平</td>
-<td style="text-align: left;">令 $t=3-x \to 1$，反转差商符号 $\frac{f(1)-f(t)}{1-t}$ 并提取系数</td>
-<td style="text-align: center;">(D) $-\frac{1}{2}$</td>
-<td style="text-align: left;">变量趋近方向及差商正负号极易颠倒</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>Q4</strong></td>
-<td style="text-align: left;">平方差因式分解拆分复合微商</td>
-<td style="text-align: left;">拆分 $\frac{f(x^2)-f(1)}{x^2-1}\cdot(x+1)$，极限存在时四则运算法则分别求极限</td>
-<td style="text-align: center;">$4$</td>
-<td style="text-align: left;">避免未验证各部分极限存在直接拆分</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>Q5</strong></td>
-<td style="text-align: left;">阶梯函数取整夹逼微商</td>
-<td style="text-align: left;">取整不等式 $x-1 < [x] \le x$；当 $x\to 0$ 时 $[x]=0$ 或 $-1$，结合夹逼准则</td>
-<td style="text-align: center;">$1$</td>
-<td style="text-align: left;">区分单侧导数与趋于零时常数因子的退化</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>Q6</strong></td>
-<td style="text-align: left;">对数导数极限的逆向构造</td>
-<td style="text-align: left;">构造差商 $\frac{\ln f(x)-\ln f(0)}{x-0} = (\ln f(x))'_{x=0} = \frac{f'(0)}{f(0)}$</td>
-<td style="text-align: center;">$\frac{f'(0)}{f(0)}$</td>
-<td style="text-align: left;">识别对数复合函数在原点导数的定义形式</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>Q7</strong></td>
-<td style="text-align: left;">绝对值穿轴零点可导性充要模型</td>
-<td style="text-align: left;">形如 $|x-a|\varphi(x)$ 在 $x=a$ 处可导 $\iff \varphi(a)=0$；因 $\sin 0 = 0$ 消除尖点</td>
-<td style="text-align: center;">(B) $|x-1|\sin(x-1)$</td>
-<td style="text-align: left;">奇数次零点带绝对值产生尖点不可导，偶数次零点可导</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>Q8</strong></td>
-<td style="text-align: left;">导数几何意义与曲线切线方程</td>
-<td style="text-align: left;">切点坐标 $(1, 1)$，求导求斜率 $k = y'(1) = 2$，点斜式写出切线</td>
-<td style="text-align: center;">$y = 2x - 1$</td>
-<td style="text-align: left;">注意切线与法线的斜率垂直互逆关系</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>Q9</strong></td>
-<td style="text-align: left;">微分几何与解析定义（增量与主部）</td>
-<td style="text-align: left;">微分即函数增量的线性主部，高阶无穷小差值 $\Delta y - \mathrm{d}y = o(\Delta x)$</td>
-<td style="text-align: center;">(D)</td>
-<td style="text-align: left;">辨析 $\mathrm{d}y$、$\Delta y$ 与增量差的无穷小阶数</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>Q10</strong></td>
-<td style="text-align: left;">振荡因子分段函数 $x^\alpha \sin(1/x^\beta)$</td>
-<td style="text-align: left;">$\alpha=3, \beta=1$，导数定义求 $f'(0)=0$，原点外求导验证 $\lim_{x\to 0}f'(x)=0$</td>
-<td style="text-align: center;">(D) 导函数连续</td>
-<td style="text-align: left;">熟记：$\alpha>1$ 可导，$\alpha>1+\beta$ 导函数才连续</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>Q11</strong></td>
-<td style="text-align: left;">极值点与不可导点判别</td>
-<td style="text-align: left;">$f(x)=|x|\varphi(x)$ 极值与可微性判定；左右微商相等必须 $\varphi(0)=0$</td>
-<td style="text-align: center;">(A) $\varphi(0)=0$</td>
-<td style="text-align: left;">费马引理的前提是该点可导，尖点极值不可用费马引理</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>Q12</strong></td>
-<td style="text-align: left;">非对称双侧步长微商极限拆分</td>
-<td style="text-align: left;">经典拆项加减 $f(x_0)$，配凑两个标准单侧步长微商：$2f'(x_0) - (-f'(x_0)) = 3f'(x_0)$</td>
-<td style="text-align: center;">$2f'(x_0)$</td>
-<td style="text-align: left;">双侧步长非对称时不能直接当成对称微商</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>Q13</strong></td>
-<td style="text-align: left;">奇偶函数的导数特征与线性展开</td>
-<td style="text-align: left;">可导奇函数必有 $f(0)=0$ 且导函数为偶函数；因式提取后凑微商</td>
-<td style="text-align: center;">$(t-5)f'(0)$</td>
-<td style="text-align: left;">奇函数的原点函数值 $f(0)=0$ 是常考的隐蔽条件</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>Q14</strong></td>
-<td style="text-align: left;">最大值函数的可微性分界尖点</td>
-<td style="text-align: left;">$f(x)=\max\{x, a-x^2\}$，不可导点只可能在曲线相交的穿轴交点处</td>
-<td style="text-align: center;">$a=2$</td>
-<td style="text-align: left;">相交但切线重合时依然可导，穿轴相交产生尖点不可导</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>Q15</strong></td>
-<td style="text-align: left;">含参数极限函数显式化与全域可导</td>
-<td style="text-align: left;">按 $|x|<1, |x|=1, |x|>1$ 分段化简极限；利用连续性 $a+b=5$ 与可导性解得</td>
-<td style="text-align: center;">$a=10, b=-5$</td>
-<td style="text-align: left;">分段点必须同时检验“极限连续”与“左右导数相等”</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<p><strong>(简单?再看一眼)<font color=red>题目[1]:导数定义与等价无穷小综合代换</font></strong></p>
-<p>设 $f(x)$ 满足 $f(0)=0$，且 $f'(0)$ 存在，则 $\lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} =$ ______</p>
+<p><strong>(简单?再看一眼)<font color=green>题目[1]:导数定义与等价无穷小综合代换</font></strong></p>
+<p>设$f(x)$满足$f(0)=0$，且$f'(0)$存在，则$\lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} =$______</p>
 <p>主要思路:[看到f(0)=0意味着可以放在任何地方][看到f'(0)就应该考虑导数]</p>
 <p>[1]按照目的构造:$$\lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} =\lim\limits_{x \to 0}\frac{f(1-\cos x)-f(0)}{(1-cosx)-0}\frac{(1-cosx)-0}{\ln(1-x\sin x)} =\lim\limits_{x \to 0}f'(0)\frac{(1-cosx)-0}{\ln(1-x\sin x)}$$</p>
 <p>[2]等价无穷小代换:</p>
@@ -300,305 +176,359 @@ hr {
 <p>(2)$1-\cos x \sim \frac{1}{2}x^2$</p>
 <p>[3]极限拆分与综合计算：</p>
 <p>$$\begin{aligned} \lim\limits_{x \to 0}\frac{f(1-\cos x)}{\ln(1-x\sin x)} = \lim\limits_{x \to 0}\left[ \frac{f(1-\cos x) - f(0)}{1-\cos x} \cdot \frac{1-\cos x}{-x^2} \right] = f'(0) \cdot \lim\limits_{x \to 0}\frac{\frac{1}{2}x^2}{-x^2}&= -\frac{1}{2}f'(0) \end{aligned}$$</p>
-<p><font color=red>[注]:切勿对抽象函数 $f(1-\cos x)$ 盲目使用洛必达法则，因为未指明$f'(x)$在 $0$ 的邻域内连续，必须严格使用导数定义。</font></p>
+<p><font color=red>[注]:切勿对抽象函数$f(1-\cos x)$盲目使用洛必达法则，因为未指明$f'(x)$在$0$的邻域内连续，必须严格使用导数定义</font></p>
 <hr />
-<p><strong>(中等)<font color=deeppink>题目[2]:连续但不可导函数乘积的可导性判定模型</font></strong></p>
-<p>设 $F(x) = g(x)\varphi(x)$，$\varphi(x)$ 在 $x=a$ 处连续但不可导，$g(x)$ 在 $x=a$ 处可导，$F(x)$ 在 $x=a$ 处可导，则一定有 $(\quad)$</p>
-<p>(A) $g(a)=0$  </p>
-<p>(B) $g(a)\ne 0$  </p>
-<p>(C) $g'(a)=0$  </p>
-<p>(D) $g(a)$ 可以为任意实数</p>
-<p>答案: (A)</p>
-<p>主要思路:[反证法结合导数定义拆分，或牢记“可导乘不可导”可导的充要零点条件]</p>
-<blockquote>
-<p>[1]用导数定义展开 $F'(a)$：</p>
-<p>$$F'(a) = \lim\limits_{x \to a}\frac{F(x)-F(a)}{x-a} = \lim\limits_{x \to a}\frac{g(x)\varphi(x) - g(a)\varphi(a)}{x-a}$$</p>
-<p>采用加一项减一项经典裂项变形：</p>
-<p>$$\begin{aligned} \frac{g(x)\varphi(x) - g(a)\varphi(a)}{x-a} &= \frac{[g(x)-g(a)]\varphi(x) + g(a)[\varphi(x)-\varphi(a)]}{x-a} \\ \\ &= \frac{g(x)-g(a)}{x-a}\varphi(x) + g(a)\frac{\varphi(x)-\varphi(a)}{x-a} \end{aligned}$$</p>
-<p>[2]反证法分析：</p>
-<p>已知 $g(x)$ 在 $x=a$ 处可导且 $\varphi(x)$ 在 $x=a$ 处连续，故当 $x \to a$ 时，第一部分极限存在：</p>
-<p>$$\lim\limits_{x \to a}\frac{g(x)-g(a)}{x-a}\varphi(x) = g'(a)\varphi(a)$$</p>
-<p>若 $g(a) \ne 0$，由于总极限 $F'(a)$ 存在，移项除以 $g(a)$ 即得：</p>
-<p>$$\lim\limits_{x \to a}\frac{\varphi(x)-\varphi(a)}{x-a} = \frac{F'(a) - g'(a)\varphi(a)}{g(a)}$$</p>
-<p>这说明 $\varphi(x)$ 在 $x=a$ 处可导，与题设“$\varphi(x)$ 不可导”产生严重矛盾！因此必有 $g(a) = 0$。</p>
-<p>[3]充分性验证：</p>
-<p>若 $g(a)=0$，则 $F(a) = 0$，此时：</p>
-<p>$$\lim\limits_{x \to a}\frac{F(x)-F(a)}{x-a} = \lim\limits_{x \to a}\frac{g(x)\varphi(x)}{x-a} = \lim\limits_{x \to a}\frac{g(x)-g(a)}{x-a} \cdot \varphi(x) = g'(a)\varphi(a)$$</p>
-<p>导数必然存在，故一定有 $g(a)=0$。</p>
-</blockquote>
-<p><font color=deeppink>[核心模型]:设 $f(x) = (x-a)\varphi(x)$，若 $\varphi(x)$ 在 $x=a$ 处连续，则 $f(x)$ 在 $x=a$ 处必可导，且 $f'(a) = \varphi(a)$。</font></p>
+<p><strong>(中等)<font color=red>题目[2]:连续但不可导函数乘积的可导性判定模型</font></strong></p>
+<p>设$F(x) = g(x)\varphi(x)$，$\varphi(x)$在$x=a$处连续但不可导，$g(x)$在$x=a$处可导，$F(x)$在$x=a$处可导，则一定有$A$</p>
+<p>(A)$g(a)=0$ </p>
+<p>(B)$g(a)\ne 0$ </p>
+<p>(C)$g'(a)=0$ </p>
+<p>(D)$g(a)$可以为任意实数</p>
+<p>主要思路:[凑定义和条件,尽可能使用条件]or<strong>[直接在a处,$g(a)=0$直接把$\varphi(a)$的不可导消了]</strong></p>
+<p>[1]用导数定义展开$F'(a)$：$$F'(a) = \lim\limits_{x \to a}\frac{F(x)-F(a)}{x-a} = \lim\limits_{x \to a}\frac{g(x)\varphi(x) - g(a)\varphi(a)}{x-a}$$</p>
+<p>分母是x-a,需要继续凑出x-a:<br />
+$$
+\frac{g(x)\varphi(x) - g(a)\varphi(x) + g(a)\varphi(x) - g(a)\varphi(a)}{x - a} =\frac{g(x) - g(a)}{x - a} \varphi(x)+ g(a) \frac{\varphi(x) - \varphi(a)}{x - a}
+$$<br />
+[2]反证法分析：</p>
+<p>第一部分极限存在：$$\lim\limits_{x \to a}\frac{g(x)-g(a)}{x-a}\varphi(x) = g'(a)\varphi(a)$$    [已知$g(x)$在$x=a$处可导且$\varphi(x)$在$x=a$处连续]</p>
+<p>第二部分极限存在:$\lim\limits_{x \to a}g(a) \frac{\varphi(x) - \varphi(a)}{x - a}=g(a)\varphi'(a)$        [但$\varphi(x)$在$x=a$处不可导且$\varphi(x)$在$x=a$处连续]</p>
+<p>因此必有$g(a) = 0$</p>
+<p><font color=deeppink>[核心模型]:设$f(x) = (x-a)\varphi(x)$，若$\varphi(x)$在$x=a$处连续，则$f(x)$在$x=a$处必可导，且$f'(a) = \varphi(a)$</font></p>
 <hr />
-<p><strong>(简单?再看一眼)<font color=green>题目[3]:利用已知极限反求导数值</font></strong></p>
-<p>设连续函数 $f(x)$ 满足 $\lim\limits_{x \to 2}\frac{\ln(x-1)}{f(3-x)} = 2$，且 $f(1)=0$，则 $f'(1)$ 的值为 $(\quad)$</p>
-<p>(A) $2$  </p>
-<p>(B) $-2$  </p>
-<p>(C) $\frac{1}{2}$  </p>
-<p>(D) $-\frac{1}{2}$</p>
+<p><strong>(简单?再看一眼)<font color=deeppink>题目[3]:利用已知极限反求导数值</font></strong></p>
+<p>设连续函数$f(x)$满足$\lim\limits_{x \to 2}\frac{\ln(x-1)}{f(3-x)} = 2$，且$f(1)=0$，则$f'(1)$的值为(D)</p>
+<p>(A)$2$ </p>
+<p>(B)$-2$ </p>
+<p>(C)$\frac{1}{2}$ </p>
+<p>(D)$-\frac{1}{2}$</p>
 <p>答案: (D)</p>
-<p>主要思路:[换元将自变量统一步调至 $x \to 1$，化为导数定义微商形式]</p>
-<blockquote>
-<p>[1]变量代换：</p>
-<p>令 $t = 3-x$。当 $x \to 2$ 时，$t \to 1$。</p>
-<p>此时 $x-1 = (3-t)-1 = 2-t = 1-(t-1)$。</p>
+<p>主要思路:[不能无穷小换元,只能换元至$x \to 1$，化为导数定义微商形式]</p>
+<p>[1]变量代换：令$t = 3-x$,当$x \to 2$时，$t \to 1$,即$x-1 = (3-t)-1 = 1-(t-1)$</p>
 <p>[2]等价无穷小化简分子：</p>
-<p>当 $t \to 1$ 时，$t-1 \to 0$，利用 $\ln(1+u) \sim u$ 得：</p>
-<p>$$\ln(x-1) = \ln(1-(t-1)) \sim -(t-1)$$</p>
-<p>[3]代入原极限并结合 $f(1)=0$ 转化：</p>
-<p>$$\lim\limits_{x \to 2}\frac{\ln(x-1)}{f(3-x)} = \lim\limits_{t \to 1}\frac{-(t-1)}{f(t)} = \lim\limits_{t \to 1}\frac{-1}{\frac{f(t)-f(1)}{t-1}} = 2$$</p>
-<p>由此直接解得：</p>
-<p>$$f'(1) = \lim\limits_{t \to 1}\frac{f(t)-f(1)}{t-1} = -\frac{1}{2}$$</p>
-</blockquote>
+<p>当$t \to 1$时，$t-1 \to 0$,因为$\ln(1+u) \sim u$,所以:$$\ln(x-1) = \ln(1-(t-1)) \sim -(t-1)$$</p>
+<p>[3]因为$f(1)=0$,分母直接放一个,同时凑一个$f'(1)$：</p>
+<p>$$\lim\limits_{x \to 2}\frac{\ln(x-1)}{f(3-x)} \sim \lim\limits_{t \to 1}\frac{-(t-1)}{f(t)} = \lim\limits_{t \to 1}\frac{-1}{\frac{f(t)-f(1)}{t-1}} =\lim\limits_{t \to 1}\frac{-1}{f'(1)}=  2$$,所以能得到$$f'(1) = \lim\limits_{t \to 1}\frac{f(t)-f(1)}{t-1} = -\frac{1}{2}$$</p>
 <hr />
 <p><strong>(简单)<font color=green>题目[4]:复合函数微商极限界定</font></strong></p>
-<p>设 $f(x)$ 在 $x=0$ 处可导，$f(0)=f'(0)=\sqrt{2}$，则 $\lim\limits_{x \to 0}\frac{f^2(x)-2}{x} =$ ______</p>
-<p>答案: $4$</p>
-<p>主要思路:[平方差分解因式，凑出导数定义与连续函数极限值的乘积]</p>
-<blockquote>
-<p>[1]因式分解：</p>
-<p>注意到 $f^2(0) = (\sqrt{2})^2 = 2$，故分子为平方差：</p>
-<p>$$f^2(x) - 2 = f^2(x) - f^2(0) = [f(x)-f(0)][f(x)+f(0)]$$</p>
-<p>[2]拆分极限求值：</p>
-<p>$$\lim\limits_{x \to 0}\frac{f^2(x)-2}{x} = \lim\limits_{x \to 0}\left[ \frac{f(x)-f(0)}{x-0} \cdot [f(x)+f(0)]\right]$$</p>
-<p>由 $f(x)$ 在 $x=0$ 处可导必连续，知 $\lim\limits_{x \to 0}f(x) = f(0) = \sqrt{2}$，且 $\lim\limits_{x \to 0}\frac{f(x)-f(0)}{x} = f'(0) = \sqrt{2}$。</p>
-<p>故原极限为：</p>
-<p>$$\sqrt{2} \cdot [\sqrt{2} + \sqrt{2}]= \sqrt{2} \cdot 2\sqrt{2} = 4$$</p>
-</blockquote>
+<p>设$f(x)$在$x=0$处可导，$f(0)=f'(0)=\sqrt{2}$，则$\lim\limits_{x \to 0}\frac{f^2(x)-2}{x} = \underline{\quad 4 \quad}$</p>
+<p>主要思路:[分子是平方,数值也可以平方,直接构造]</p>
+<p>[1]注意到$f^2(0) = (\sqrt{2})^2 = 2$，故分子为平方差：$\lim\limits_{x \to 0}\frac{f^2(x)-f^2(0)}{x-0} $</p>
+<p>[2]平方差拆开!:   $$\lim\limits_{x \to 0}\frac{f^2(x)-2}{x} = \lim\limits_{x \to 0}\left[ \frac{f(x)-f(0)}{x-0} \cdot [f(x)+f(0)]\right]= \lim\limits_{x \to 0}\left[ f'(0) \cdot [f(x)+f(0)]\right]$$</p>
+<p>导数定义!:     由$f(x)$在$x=0$处可导必连续，知$\lim\limits_{x \to 0}f(x) = f(0) = \sqrt{2}$</p>
+<p>[3]结论:故原极限为：$$\sqrt{2} \cdot [\sqrt{2} + \sqrt{2}]= \sqrt{2} \cdot 2\sqrt{2} = 4$$</p>
 <hr />
 <p><strong>(中等难度)<font color=red>题目[5]:阶梯间断数列函数单侧导数夹逼计算</font></strong></p>
-<p>设 $f(x) = \frac{1}{n^2},\ \frac{1}{(n+1)^2} < x \le \frac{1}{n^2},\ n=1, 2, \dots$，$f(0)=0$，则 $f'_+(0) =$ ______</p>
-<p>答案: $1$</p>
-<p>主要思路:[右导数定义转化为关于 $x$ 的不等式放缩，利用两边夹逼准则求解]</p>
-<blockquote>
+<p>设$f(x) = \frac{1}{n^2},\ \frac{1}{(n+1)^2} < x \le \frac{1}{n^2},\ n=1, 2, \dots$，$f(0)=0$，则$f'_+(0) = \underline{\quad 1 \quad}$</p>
+<p>答案:$1$</p>
+<p>主要思路:[分段点在0处,虽然函数是阶梯式数列定义的,但求原点右导数必须老老实实用导数定义! 看到x被夹在区间两项之间,立刻联想到夹逼准则]</p>
 <p>[1]由右导数定义列出极限表达式：</p>
 <p>$$f'_+(0) = \lim\limits_{x \to 0^+}\frac{f(x)-f(0)}{x-0} = \lim\limits_{x \to 0^+}\frac{f(x)}{x}$$</p>
-<p>[2]建立双向不等式放缩：</p>
-<p>当 $x \in \left(\frac{1}{(n+1)^2}, \frac{1}{n^2}\right]$ 时，$f(x) = \frac{1}{n^2}$。</p>
-<p>由区间不等式：</p>
-<p>$$\frac{1}{(n+1)^2} < x \le \frac{1}{n^2}$$</p>
-<p>全式取倒数翻转符号：</p>
-<p>$$n^2 \le \frac{1}{x} < (n+1)^2$$</p>
-<p>两端同时乘以正数 $f(x) = \frac{1}{n^2}$：</p>
-<p>$$\frac{1}{n^2} \cdot n^2 \le \frac{f(x)}{x} < \frac{1}{n^2} \cdot (n+1)^2$$</p>
-<p>化简得：</p>
-<p>$$1 \le \frac{f(x)}{x} < \left(1 + \frac{1}{n}\right)^2$$</p>
+<p>目标非常明确：核心就是求出$\frac{f(x)}{x}$当$x \to 0^+$时的极限！</p>
+<p>[2]利用区间不等式取倒数，建立双向夹逼放缩：</p>
+<p>当$x \in \left(\frac{1}{(n+1)^2}, \frac{1}{n^2}\right]$时，函数值为常数$f(x) = \frac{1}{n^2}$</p>
+<p>已知自变量区间：<br />
+   $$\frac{1}{(n+1)^2} < x \le \frac{1}{n^2}$$</p>
+<p>取倒数翻转不等号（分母越大，倒数越小）：<br />
+   $$n^2 \le \frac{1}{x} < (n+1)^2$$</p>
+<p>全式同乘以正数$f(x) = \frac{1}{n^2}$（凑出微商$\frac{f(x)}{x}$）：<br />
+   $$\frac{1}{n^2} \cdot n^2 \le \frac{f(x)}{x} < \frac{1}{n^2} \cdot (n+1)^2$$</p>
+<p>两边展开化简，得到精巧的夹逼区间：<br />
+   $$1 \le \frac{f(x)}{x} < \left(\frac{n+1}{n}\right)^2 = \left(1 + \frac{1}{n}\right)^2$$</p>
 <p>[3]夹逼准则取极限：</p>
-<p>当 $x \to 0^+$ 时，$n \to \infty$。由于：</p>
-<p>$$\lim\limits_{n \to \infty} 1 = 1, \quad \lim\limits_{n \to \infty}\left(1+\frac{1}{n}\right)^2 = 1$$</p>
-<p>根据两边夹逼准则，必有：</p>
-<p>$$f'_+(0) = \lim\limits_{x \to 0^+}\frac{f(x)}{x} = 1$$</p>
-</blockquote>
+<p>当$x \to 0^+$时，因为$x \le \frac{1}{n^2}$，必迫使$n \to \infty$</p>
+<p>对左右两侧同时取$n \to \infty$极限：<br />
+   $$\lim\limits_{n \to \infty} 1 = 1, \quad \lim\limits_{n \to \infty}\left(1+\frac{1}{n}\right)^2 = 1$$</p>
+<p>由两边夹逼准则，中间的微商极限被唯一锁死：<br />
+   $$f'_+(0) = \lim\limits_{x \to 0^+}\frac{f(x)}{x} = 1$$</p>
+<p><font color=red>[注]:阶梯函数在原点根本没有初等函数解析式，切勿求导代入！凡是分段函数分界点、由无穷级数或数列构成的函数在原点求导，第一反应必须是：导数定义 + 夹逼准则！</font></p>
 <hr />
 <p><strong>(简单?再看一眼)<font color=deeppink>题目[6]:对数复合导数定义的逆向构造</font></strong></p>
-<p>设可导函数 $f(x) > 0$，则 $\lim\limits_{n \to \infty} n\ln\frac{f\left(\frac{1}{n}\right)}{f(0)} =$ ______</p>
-<p>答案: $\frac{f'(0)}{f(0)}$</p>
-<p>主要思路:[令 $x = \frac{1}{n}$ 转化为连续变量的导数定义微商形式]</p>
-<blockquote>
-<p>[1]连续化变量代换：</p>
-<p>令 $x = \frac{1}{n}$，当 $n \to \infty$ 时，$x \to 0^+$。原式变形为：</p>
-<p>$$\lim\limits_{n \to \infty} n\left[ \ln f\left(\frac{1}{n}\right) - \ln f(0) \right]= \lim\limits_{x \to 0^+}\frac{\ln f(x) - \ln f(0)}{x-0}$$</p>
-<p>[2]结合导数定义与复合求导：</p>
-<p>设辅助函数 $g(x) = \ln f(x)$，因为 $f(x)>0$ 且可导，故 $g(x)$ 在 $x=0$ 处可导，且：</p>
-<p>$$g'(0) = \lim\limits_{x \to 0^+}\frac{g(x)-g(0)}{x} = \left.[\ln f(x)]'\right|_{x=0} = \frac{f'(0)}{f(0)}$$</p>
-</blockquote>
+<p>设可导函数$f(x) > 0$，则$\lim\limits_{n \to \infty} n\ln\frac{f\left(\frac{1}{n}\right)}{f(0)} = \underline{\quad \frac{f'(0)}{f(0)} \quad}$</p>
+<p>答案:$\frac{f'(0)}{f(0)}$</p>
+<p>主要思路:[看到n倍的对数,把n放到分母变成1/n;看到ln(A/B)拆成ln A - ln B,立刻识别出这是ln f(x)在0处的导数定义!]</p>
+<p>[1]对数性质拆分与连续化变量代换：</p>
+<p>利用对数商的性质$\ln\frac{A}{B} = \ln A - \ln B$，并将乘数$n$移至分母变成$\frac{1}{n}$：<br />
+   $$\lim\limits_{n \to \infty} n\ln\frac{f\left(\frac{1}{n}\right)}{f(0)} = \lim\limits_{n \to \infty}\frac{\ln f\left(\frac{1}{n}\right) - \ln f(0)}{\frac{1}{n}}$$</p>
+<p>令自变量$x = \frac{1}{n}$，当$n \to \infty$时，$x \to 0^+$，原式转化为连续微商形式：<br />
+   $$\lim\limits_{x \to 0^+}\frac{\ln f(x) - \ln f(0)}{x-0}$$</p>
+<p>[2]识别复合函数导数定义：</p>
+<p>设辅助复合函数$g(x) = \ln f(x)$，因为$f(x) > 0$且可导，所以$g(x)$在$x=0$处亦必可导。</p>
+<p>根据导数定义式：<br />
+   $$g'(0) = \lim\limits_{x \to 0^+}\frac{g(x)-g(0)}{x-0} = \lim\limits_{x \to 0^+}\frac{\ln f(x) - \ln f(0)}{x}$$</p>
+<p>由链式求导法则直接计算$g'(0)$：<br />
+   $$g'(x) = [\ln f(x)]' = \frac{f'(x)}{f(x)} \implies g'(0) = \frac{f'(0)}{f(0)}$$</p>
+<p><font color=deeppink>[方法二·等价无穷小秒杀法]:利用当u-&gt;0时，\ln(1+u) ~ u：<br />
+$$\ln\frac{f(x)}{f(0)} = \ln\left(1 + \frac{f(x)-f(0)}{f(0)}\right) \sim \frac{f(x)-f(0)}{f(0)}$$<br />
+代入原式：<br />
+$$\lim\limits_{x \to 0}\frac{\ln\frac{f(x)}{f(0)}}{x} = \lim\limits_{x \to 0}\left[\frac{f(x)-f(0)}{x} \cdot \frac{1}{f(0)}\right] = \frac{f'(0)}{f(0)}$$<br />
+两种方法殊途同归，考场任选一种秒杀！</font></p>
 <hr />
 <p><strong>(高频核心)<font color=red>题目[7]:绝对值函数在零点处的可导性充要判据</font></strong></p>
-<p>设函数 $f(x)$ 可导，$|f(x)|$ 在 $x=0$ 处不可导，则 $(\quad)$</p>
-<p>(A) $f(0)=0,\ f'(0)=0$  </p>
-<p>(B) $f(0)=0,\ f'(0)\ne 0$  </p>
-<p>(C) $f(0)\ne 0,\ f'(0)=0$  </p>
-<p>(D) $f(0)\ne 0,\ f'(0)\ne 0$</p>
+<p>设函数$f(x)$可导，$|f(x)|$在$x=0$处不可导，则一定有(B)</p>
+<p>(A)$f(0)=0,\ f'(0)=0$ </p>
+<p>(B)$f(0)=0,\ f'(0)\ne 0$ </p>
+<p>(C)$f(0)\ne 0,\ f'(0)=0$ </p>
+<p>(D)$f(0)\ne 0,\ f'(0)\ne 0$</p>
 <p>答案: (B)</p>
-<p>主要思路:[由保号性排除非零点，由左右导数相反相成推导零点导数的非零条件]</p>
+<p>主要思路:[考研必背秒杀模型:若f(x)可导，则|f(x)|在点x_0处可导 &lt;=&gt; f(x_0)!=0 或 (f(x_0)=0且f'(x_0)=0)。换句话说，不可导只有唯一一种情况:穿轴尖点，即f(0)=0且f'(0)!=0 !]</p>
+<p>[1]由连续保号性排除非零点：</p>
+<p>因为$f(x)$可导，故$f(x)$必连续。</p>
+<p>若$f(0) \ne 0$，根据连续函数的局部保号性：</p>
 <blockquote>
-<p>[1]若 $f(0) \ne 0$：</p>
-<p>由于 $f(x)$ 可导必连续，根据局部保号性：</p>
-<ul>
-<li>若 $f(0) > 0$，在 $x=0$ 充分小邻域内恒有 $f(x) > 0$，此时 $|f(x)| = f(x)$，显然可导；</li>
-<li>若 $f(0) < 0$，在 $x=0$ 充分小邻域内恒有 $f(x) < 0$，此时 $|f(x)| = -f(x)$，亦显然可导。</li>
-</ul>
-<p>因此，“$|f(x)|$ 不可导”的前提条件<strong>必然是</strong> $f(0) = 0$。排除 (C)、(D)。</p>
-<p>[2]若 $f(0) = 0$，考察 $|f(x)|$ 在 $x=0$ 处的左右导数：</p>
-<p>$$\begin{aligned} (|f(0)|)'_+ &= \lim\limits_{x \to 0^+}\frac{|f(x)|-|f(0)|}{x-0} = \lim\limits_{x \to 0^+}\left|\frac{f(x)-f(0)}{x}\right| = |f'(0)| \\ \\ (|f(0)|)'_- &= \lim\limits_{x \to 0^-}\frac{|f(x)|-|f(0)|}{x-0} = \lim\limits_{x \to 0^-}\frac{|f(x)|}{-(-x)} = -|f'(0)| \end{aligned}$$</p>
-<p>[3]可导性等价条件：</p>
-<p>左右导数相等 $\iff |f'(0)| = -|f'(0)| \iff f'(0) = 0$。</p>
-<p>因此：</p>
-<ul>
-<li>$|f(x)|$ 在 $x=0$ 处可导 $\iff f(0)=0$ 且 $f'(0)=0$；</li>
-<li>$|f(x)|$ 在 $x=0$ 处<strong>不可导</strong> $\iff f(0)=0$ 且 $f'(0) \ne 0$。</li>
-</ul>
+<p>若$f(0) > 0$，在$x=0$的充分小邻域内恒有$f(x) > 0$，此时$|f(x)| = f(x)$，显然可导；<br />
+若$f(0) < 0$，在$x=0$的充分小邻域内恒有$f(x) < 0$，此时$|f(x)| = -f(x)$，亦显然可导</p>
 </blockquote>
-<p><font color=deeppink>[高分口诀]:对可导函数而言，穿轴零点绝对值必出尖点(不可导)，切轴相切零点绝对值光滑可导！</font></p>
+<p>因此，“$|f(x)|$不可导”的前提条件<strong>必然是</strong>$f(0) = 0$！直接排除选项 (C) 和 (D)。</p>
+<p>[2]在零点$f(0)=0$处用定义计算左右导数：</p>
+<p>当$f(0) = 0$时，直接列出$|f(x)|$在$x=0$处的左右微商：</p>
+<p>右导数（$x \to 0^+ \implies x > 0$）：<br />
+   $$(|f(0)|)'_+ = \lim\limits_{x \to 0^+}\frac{|f(x)|-|f(0)|}{x-0} = \lim\limits_{x \to 0^+}\frac{|f(x)|}{x} = \lim\limits_{x \to 0^+}\left|\frac{f(x)-f(0)}{x}\right| = |f'(0)|$$</p>
+<p>左导数（$x \to 0^- \implies x < 0$，分母提到绝对值内需加负号）：<br />
+   $$(|f(0)|)'_- = \lim\limits_{x \to 0^-}\frac{|f(x)|-|f(0)|}{x-0} = \lim\limits_{x \to 0^-}\frac{|f(x)|}{x} = \lim\limits_{x \to 0^-}\left(-\left|\frac{f(x)-f(0)}{x}\right|\right) = -|f'(0)|$$</p>
+<p>[3]可导的充要平衡条件：</p>
+<p>$|f(x)|$在$x=0$处可导 $\iff$ 左导数等于右导数：<br />
+   $$|f'(0)| = -|f'(0)| \iff 2|f'(0)| = 0 \iff f'(0) = 0$$</p>
+<p>反过来，$|f(x)|$在$x=0$处<strong>不可导</strong> $\iff f'(0) \ne 0$！</p>
+<p>结合步骤[1]与步骤[3]，不可导的充要条件必为：$f(0) = 0$ 且 $f'(0) \ne 0$。故选 (B)。</p>
+<p><font color=deeppink>[核心模型·几何画图秒杀]:<br />
+(1) f(0)!=0: 函数图像不接触x轴，绝对值翻折不影响局部光滑性，必可导；<br />
+(2) f(0)=0且f'(0)=0: 曲线与x轴相切（偶次零点），翻折后切线依然水平平滑相切，左右导数均为0，必可导；<br />
+(3) f(0)=0且f'(0)!=0: 曲线倾斜穿过x轴（单零点），翻折后变成“V”字形尖点，左右导数互为相反数，必不可导！</font></p>
 <hr />
 <p><strong>(简单)<font color=green>题目[8]:切线方程与切点判定</font></strong></p>
-<p>设函数 $f(x)$ 连续，$\lim\limits_{x \to 1}\frac{f(x)-1}{\ln x} = 2$，则曲线 $y=f(x)$ 在点 $x=1$ 处的切线方程为 ______</p>
-<p>答案: $y = 2x - 1$ (或 $2x - y - 1 = 0$)</p>
-<p>主要思路:[由分母趋于零定切点坐标，由等价无穷小求导数斜率]</p>
-<blockquote>
-<p>[1]确定切点坐标：</p>
-<p>因为分母 $\lim\limits_{x \to 1}\ln x = 0$ 且极限存在，分子必有 $\lim\limits_{x \to 1}(f(x)-1) = 0$。由 $f(x)$ 连续知 $f(1) = 1$，切点为 $(1, 1)$。</p>
-<p>[2]确定切线斜率 $k$：</p>
-<p>当 $x \to 1$ 时，$\ln x = \ln(1+(x-1)) \sim x-1$。</p>
-<p>$$k = f'(1) = \lim\limits_{x \to 1}\frac{f(x)-f(1)}{x-1} = \lim\limits_{x \to 1}\frac{f(x)-1}{\ln x} = 2$$</p>
+<p>设函数$f(x)$连续，$\lim\limits_{x \to 1}\frac{f(x)-1}{\ln x} = 2$，则曲线$y=f(x)$在点$x=1$处的切线方程为 $\underline{\quad y = 2x - 1 \quad}$</p>
+<p>答案:$y = 2x - 1$(或$2x - y - 1 = 0$)</p>
+<p>主要思路:[分母ln 1 = 0,极限存在说明分子极限必为0，结合连续性锁定切点(1,1);分母等价无穷小ln x ~ x-1立刻凑出导数斜率k=f'(1)=2,点斜式收工!]</p>
+<p>[1]定切点坐标$(x_0, y_0)$：</p>
+<p>当$x \to 1$时，分母$\lim\limits_{x \to 1}\ln x = \ln 1 = 0$</p>
+<p>已知极限值$= 2$（存在有限），由“分母趋于0，极限存在有限 $\implies$ 分子必趋于0”：<br />
+   $$\lim\limits_{x \to 1}[f(x)-1] = 0 \implies \lim\limits_{x \to 1}f(x) = 1$$</p>
+<p>又已知$f(x)$在$x=1$处连续，所以函数值等于极限值：<br />
+   $$f(1) = \lim\limits_{x \to 1}f(x) = 1$$</p>
+<p>至此锁定切点坐标为$(1, 1)$！</p>
+<p>[2]求切线斜率$k = f'(1)$：</p>
+<p>当$x \to 1$时，$x-1 \to 0$，由等价无穷小公式：<br />
+   $$\ln x = \ln(1+(x-1)) \sim x-1$$</p>
+<p>将分母等价替换，立刻还原导数定义式：<br />
+   $$k = f'(1) = \lim\limits_{x \to 1}\frac{f(x)-f(1)}{x-1} = \lim\limits_{x \to 1}\frac{f(x)-1}{\ln x} = 2$$</p>
+<p>斜率确定为$k = 2$！</p>
 <p>[3]点斜式写出切线方程：</p>
-<p>$$y - 1 = 2(x - 1) \implies y = 2x - 1$$</p>
-</blockquote>
+<p>由点斜式公式$y - y_0 = k(x - x_0)$：<br />
+   $$y - 1 = 2(x - 1) \implies y = 2x - 2 + 1 \implies y = 2x - 1$$</p>
+<p><font color=red>[拓展提示]:若题目追问点(1,1)处的“法线方程”，法线与切线垂直，斜率k_法 = -1/k = -1/2，点斜式为 y - 1 = -1/2(x - 1)，即 x + 2y - 3 = 0</font></p>
 <hr />
 <p><strong>(基础辨析)<font color=deeppink>题目[9]:函数的增量与微分的高阶无穷小本质</font></strong></p>
-<p>设函数 $f(x)$ 在 $x=1$ 处可导，且 $\Delta f(1)$ 是 $f(x)$ 在增量为 $\Delta x$ 时的函数值增量，则 $\lim\limits_{\Delta x \to 0}\frac{\Delta f(1) - \mathrm{d}f(1)}{\Delta x} = (\quad)$</p>
-<p>(A) $f'(1)$  </p>
-<p>(B) $1$  </p>
-<p>(C) $\infty$  </p>
-<p>(D) $0$</p>
+<p>设函数$f(x)$在$x=1$处可导，且$\Delta f(1)$是$f(x)$在增量为$\Delta x$时的函数值增量，则$\lim\limits_{\Delta x \to 0}\frac{\Delta f(1) - \mathrm{d}f(1)}{\Delta x} = (\quad)$</p>
+<p>(A)$f'(1)$ </p>
+<p>(B)$1$ </p>
+<p>(C)$\infty$ </p>
+<p>(D)$0$</p>
 <p>答案: (D)</p>
-<p>主要思路:[回归一元函数可微与导数定义的核心关系式：$\Delta y - \mathrm{d}y = o(\Delta x)$]</p>
-<blockquote>
-<p>[1]微分的定义公式：</p>
-<p>由 $f(x)$ 在 $x=1$ 处可导，由可导与可微的等价性可知：</p>
-<p>$$\Delta f(1) = f(1+\Delta x) - f(1) = f'(1)\Delta x + o(\Delta x)$$</p>
-<p>其中微分的定义为线性主部：</p>
-<p>$$\mathrm{d}f(1) = f'(1)\Delta x$$</p>
-<p>[2]两者作差：</p>
-<p>$$\Delta f(1) - \mathrm{d}f(1) = o(\Delta x)$$</p>
-<p>代入极限求值：</p>
+<p>主要思路:[牢记微分的几何意义与解析定义:函数增量 = 微分线性主部 + 高阶无穷小, 即 \Delta y - \mathrm{d}y = o(\Delta x), 考查的就是微分是增量的最佳线性逼近!]</p>
+<p>[1]写出一元函数可导与可微的等价定义：</p>
+<p>在一元函数中，“可导”与“可微”完全等价。由$f(x)$在$x=1$处可导，知其在$x=1$处必可微。</p>
+<p>函数值增量定义为：<br />
+   $$\Delta f(1) = f(1+\Delta x) - f(1) = f'(1)\Delta x + o(\Delta x)$$</p>
+<p>其中线性主部即为微分：<br />
+   $$\mathrm{d}f(1) = f'(1)\Delta x$$</p>
+<p>[2]两者相减求差值：</p>
+<p>$$\Delta f(1) - \mathrm{d}f(1) = [f'(1)\Delta x + o(\Delta x)] - f'(1)\Delta x = o(\Delta x)$$</p>
+<p>即函数增量与微分的差，是一个比$\Delta x$更高阶的无穷小量。</p>
+<p>[3]代入极限求值：</p>
 <p>$$\lim\limits_{\Delta x \to 0}\frac{\Delta f(1) - \mathrm{d}f(1)}{\Delta x} = \lim\limits_{\Delta x \to 0}\frac{o(\Delta x)}{\Delta x} = 0$$</p>
-</blockquote>
+<p>结论为$0$，选 (D)。</p>
+<p><font color=deeppink>[考点归纳]:<br />
+(1) 当f'(x) != 0时，\Delta y与\mathrm{d}y是同阶且等价的无穷小（比值为1）；<br />
+(2) 两者的差值 \Delta y - \mathrm{d}y 恒为比 \Delta x 高阶的无穷小 o(\Delta x)；<br />
+(3) 几何图像上，\Delta y是曲线上点的真实纵坐标改变量，\mathrm{d}y是切线上点的纵坐标改变量，当\Delta x很小时，切线段近似代替曲线段，两者的误差急速趋于0！</font></p>
 <hr />
 <p><strong>(经典必考)<font color=red>题目[10]:分段函数在分界点处的连续、可导与导函数连续性大辨析</font></strong></p>
-<p>设 $f(x) = \begin{cases} x^3 \sin\frac{1}{x}, & x > 0 \\ \\ x^2, & x \le 0 \end{cases}$，则 $f(x)$ 在 $x=0$ 处 $(\quad)$</p>
+<p>设$f(x) = \begin{cases} x^3 \sin\frac{1}{x}, & x > 0 \\ \\ x^2, & x \le 0 \end{cases}$，则$f(x)$在$x=0$处(D)</p>
 <p>(A) 不连续  </p>
 <p>(B) 连续，但不可导  </p>
 <p>(C) 可导，但导函数不连续  </p>
 <p>(D) 可导，且导函数连续</p>
 <p>答案: (D)</p>
-<p>主要思路:[分三步逐级审查：(1)极限定连续；(2)定义式定可导；(3)求导公式取极限定导函数连续]</p>
+<p>主要思路:[分界点三步审查法: 一算极限判连续，二用定义算导数，三对求导公式取极限判导函数连续! 本题看到 x^3 sin(1/x)，指数是3，属于考研经典振荡模型 x^\alpha sin(1/x^\beta)]</p>
+<p>[1]第一步·连续性审查：</p>
+<p>函数在分界点处的取值：$f(0) = 0^2 = 0$</p>
+<p>求左极限：<br />
+   $$\lim\limits_{x \to 0^-} f(x) = \lim\limits_{x \to 0^-} x^2 = 0$$</p>
+<p>求右极限（无穷小乘有界量 $|\sin\frac{1}{x}| \le 1$）：<br />
+   $$\lim\limits_{x \to 0^+} f(x) = \lim\limits_{x \to 0^+} x^3 \sin\frac{1}{x} = 0$$</p>
+<p>因为$\lim\limits_{x \to 0^-} f(x) = \lim\limits_{x \to 0^+} f(x) = f(0) = 0$，所以在$x=0$处连续！</p>
+<p>[2]第二步·导数存在性审查（分界点严禁直接代入公式求导，必须用导数定义！）：</p>
+<p>求左导数：<br />
+   $$f'_-(0) = \lim\limits_{x \to 0^-}\frac{f(x)-f(0)}{x-0} = \lim\limits_{x \to 0^-}\frac{x^2 - 0}{x} = \lim\limits_{x \to 0^-} x = 0$$</p>
+<p>求右导数：<br />
+   $$f'_+(0) = \lim\limits_{x \to 0^+}\frac{f(x)-f(0)}{x-0} = \lim\limits_{x \to 0^+}\frac{x^3\sin\frac{1}{x} - 0}{x} = \lim\limits_{x \to 0^+} x^2\sin\frac{1}{x} = 0 \quad [无穷小乘有界量]$$</p>
+<p>因为$f'_-(0) = f'_+(0) = 0$，所以$f'(0)$存在且$f'(0) = 0$（函数在$x=0$处可导）！</p>
+<p>[3]第三步·导函数$f'(x)$的连续性审查：</p>
+<p>先求分段点外部($x \ne 0$)的导函数解析式：</p>
 <blockquote>
-<p>[1]连续性审查：</p>
-<p>$f(0) = 0^2 = 0$。</p>
-<p>$$\lim\limits_{x \to 0^+} f(x) = \lim\limits_{x \to 0^+} x^3 \sin\frac{1}{x} = 0, \quad \lim\limits_{x \to 0^-} f(x) = \lim\limits_{x \to 0^-} x^2 = 0$$</p>
-<p>因为 $\lim\limits_{x \to 0}f(x) = f(0) = 0$，故 $f(x)$ 在 $x=0$ 处连续。</p>
-<p>[2]导数存在性审查 (必须使用定义)：</p>
-<p>$$\begin{aligned} f'_+(0) &= \lim\limits_{x \to 0^+}\frac{x^3\sin\frac{1}{x} - 0}{x} = \lim\limits_{x \to 0^+} x^2\sin\frac{1}{x} = 0 \\ \\ f'_-(0) &= \lim\limits_{x \to 0^-}\frac{x^2 - 0}{x} = \lim\limits_{x \to 0^-} x = 0 \end{aligned}$$</p>
-<p>因为 $f'_+(0) = f'_-(0) = 0$，所以 $f'(0)$ 存在且 $f'(0) = 0$。</p>
-<p>[3]导函数的连续性审查：</p>
-<p>当 $x > 0$ 时，利用导数运算法则求导：</p>
-<p>$$f'(x) = 3x^2 \sin\frac{1}{x} + x^3 \cos\frac{1}{x} \cdot \left(-\frac{1}{x^2}\right) = 3x^2 \sin\frac{1}{x} - x \cos\frac{1}{x}$$</p>
-<p>当 $x \to 0^+$ 时，由无穷小乘有界量：</p>
-<p>$$\lim\limits_{x \to 0^+} f'(x) = \lim\limits_{x \to 0^+}\left(3x^2 \sin\frac{1}{x} - x \cos\frac{1}{x}\right) = 0$$</p>
-<p>当 $x < 0$ 时：</p>
-<p>$$f'(x) = 2x \implies \lim\limits_{x \to 0^-} f'(x) = 0$$</p>
-<p>因为 $\lim\limits_{x \to 0} f'(x) = 0 = f'(0)$，所以导函数 $f'(x)$ 在 $x=0$ 处亦连续！</p>
+<p>当$x < 0$时：$f'(x) = (x^2)' = 2x$<br />
+当$x > 0$时，利用乘积与链式求导法则：<br />
+     $$f'(x) = (x^3)' \sin\frac{1}{x} + x^3 \left(\sin\frac{1}{x}\right)' = 3x^2 \sin\frac{1}{x} + x^3 \cos\frac{1}{x} \cdot \left(-\frac{1}{x^2}\right) = 3x^2 \sin\frac{1}{x} - x \cos\frac{1}{x}$$</p>
 </blockquote>
-<p><font color=red>[考点升华]:$x^\alpha \sin\frac{1}{x^\beta}$ 的三大分水岭法则(在 $x=0$ 处)：$\alpha > 0$ 连续；$\alpha > 1$ 可导；$\alpha > 1+\beta$ 导函数连续！本题 $\alpha=3, \beta=1$，满足 $3 > 2$，导函数必定连续。</font></p>
+<p>再分别考察$x \to 0$时导函数的左右极限：<br />
+   $$\lim\limits_{x \to 0^-} f'(x) = \lim\limits_{x \to 0^-} 2x = 0$$<br />
+   $$\lim\limits_{x \to 0^+} f'(x) = \lim\limits_{x \to 0^+}\left(3x^2 \sin\frac{1}{x} - x \cos\frac{1}{x}\right) = 0 - 0 = 0 \quad [两项均为无穷小乘有界量]$$</p>
+<p>因为$\lim\limits_{x \to 0} f'(x) = 0 = f'(0)$（导函数极限值等于原点导数值），故导函数在$x=0$处亦连续！选 (D)。</p>
+<p><font color=deeppink>[必背秒杀定理]:对于振荡模型 f(x) = x^\alpha \sin\frac{1}{x^\beta} (x&gt;0), f(0)=0：<br />
+(1) \alpha &gt; 0 &lt;=&gt; 在原点连续;<br />
+(2) \alpha &gt; 1 &lt;=&gt; 在原点可导;<br />
+(3) \alpha &gt; 1 + \beta &lt;=&gt; 在原点导函数连续！<br />
+本题中 \alpha=3, \beta=1，满足 3 &gt; 1+1=2，一眼秒杀：导函数必连续！</font></p>
 <hr />
 <p><strong>(中等难度)<font color=deeppink>题目[11]:尖点函数与可微因子的充要关系</font></strong></p>
-<p>设 $\varphi(x)$ 具有一阶连续导数，$f(x) = \varphi(x)|\ln(1+x)|$，则 $\varphi(0)=0$ 是 $f(x)$ 在 $x=0$ 处可导的 $(\quad)$</p>
+<p>设$\varphi(x)$具有一阶连续导数，$f(x) = \varphi(x)|\ln(1+x)|$，则$\varphi(0)=0$是$f(x)$在$x=0$处可导的(A)</p>
 <p>(A) 充分必要条件  </p>
 <p>(B) 充分非必要条件  </p>
 <p>(C) 必要非充分条件  </p>
 <p>(D) 既非充分又非必要条件</p>
 <p>答案: (A)</p>
-<p>主要思路:[利用导数定义计算左右导数，证明 $\varphi(0)=0$ 既是充分条件亦是必要条件]</p>
+<p>主要思路:[绝对值内|\ln(1+x)|在x=0处穿轴变号,单独不可导;前面乘了一个连续可导因子\varphi(x),想让它可导,必须用\varphi(0)=0把绝对值的尖点抹平! 充分必要一箭双雕!]</p>
+<p>[1]写出原点导数的定义极限：</p>
+<p>$f(0) = \varphi(0)|\ln 1| = 0$</p>
+<p>导数定义式为：<br />
+   $$f'(0) = \lim\limits_{x \to 0}\frac{f(x)-f(0)}{x-0} = \lim\limits_{x \to 0}\frac{\varphi(x)|\ln(1+x)|}{x}$$</p>
+<p>由等价无穷小$\ln(1+x) \sim x$（当$x \to 0$），绝对值内部符号取决于$x$的正负，必须分左右单侧导数讨论！</p>
+<p>[2]分别求左导数与右导数：</p>
 <blockquote>
-<p>[1]充分性证明：</p>
-<p>若 $\varphi(0) = 0$，因为 $\varphi(x)$ 具有一阶连续导数，故 $\lim\limits_{x \to 0}\frac{\varphi(x)}{x} = \varphi'(0)$。</p>
-<p>考察 $f'(0)$ 的定义极限：</p>
-<p>$$\lim\limits_{x \to 0}\frac{f(x)-f(0)}{x-0} = \lim\limits_{x \to 0}\frac{\varphi(x)|\ln(1+x)|}{x} = \lim\limits_{x \to 0}\frac{\varphi(x)}{x} \cdot |\ln(1+x)| = \varphi'(0) \cdot 0 = 0$$</p>
-<p>极限存在且为 $0$，即 $f'(0)$ 存在，充分性成立。</p>
-<p>[2]必要性证明：</p>
-<p>若 $f(x)$ 在 $x=0$ 处可导，则左、右导数必存在且相等。</p>
-<p>$$\begin{aligned} f'_+(0) &= \lim\limits_{x \to 0^+}\frac{\varphi(x)\ln(1+x)}{x} = \varphi(0) \cdot 1 = \varphi(0) \\ \\ f'_-(0) &= \lim\limits_{x \to 0^-}\frac{-\varphi(x)\ln(1+x)}{x} = -\varphi(0) \cdot 1 = -\varphi(0) \end{aligned}$$</p>
-<p>因为可导要求 $f'_+(0) = f'_-(0)$，故 $\varphi(0) = -\varphi(0) \implies \varphi(0) = 0$。必要性成立。</p>
-<p>因此，$\varphi(0)=0$ 是 $f(x)$ 在 $x=0$ 处可导的充分必要条件。</p>
+<p>右导数（$x \to 0^+ \implies x > 0 \implies \ln(1+x) > 0$，直接去绝对值）：<br />
+     $$f'_+(0) = \lim\limits_{x \to 0^+}\frac{\varphi(x)\ln(1+x)}{x} = \lim\limits_{x \to 0^+}\varphi(x) \cdot \frac{\ln(1+x)}{x} = \varphi(0) \cdot 1 = \varphi(0)$$</p>
+<p>左导数（$x \to 0^- \implies -1 < x < 0 \implies \ln(1+x) < 0$，去绝对值添负号）：<br />
+     $$f'_-(0) = \lim\limits_{x \to 0^-}\frac{-\varphi(x)\ln(1+x)}{x} = \lim\limits_{x \to 0^-}[-\varphi(x)] \cdot \frac{\ln(1+x)}{x} = -\varphi(0) \cdot 1 = -\varphi(0)$$</p>
 </blockquote>
+<p>[3]充要性双向论证：</p>
+<p>(1) 充分性：若$\varphi(0) = 0$，则$f'_+(0) = 0$，$f'_-(0) = -0 = 0$。左导数等于右导数，故$f'(0)$存在且等于0，充分性成立。</p>
+<p>(2) 必要性：若$f(x)$在$x=0$处可导，则左导数必等于右导数：<br />
+       $$f'_+(0) = f'_-(0) \implies \varphi(0) = -\varphi(0) \implies 2\varphi(0) = 0 \implies \varphi(0) = 0$$<br />
+       必要性亦成立。</p>
+<p>综上，$\varphi(0) = 0$是$f(x)$在$x=0$处可导的充分必要条件，选 (A)。</p>
+<p><font color=deeppink>[核心模型]:形如 F(x) = g(x)|h(x)|，若 h(x_0)=0 且 h'(x_0)!=0 (h穿轴单零点)，g(x)在x_0连续，则 F(x)在x_0可导 &lt;=&gt; g(x_0)=0！考研试卷上几乎隔年就考一次这个零点抹平尖点模型！</font></p>
 <hr />
 <p><strong>(技巧型)<font color=red>题目[12]:双侧微商裂项与非对称步长极限定理</font></strong></p>
-<p>设 $f(x)$ 在 $x_0$ 处可导，$x_n = \sin\frac{1}{n} + \frac{1}{n^2}$，则 $\lim\limits_{n \to \infty}\frac{f\left(x_0+\frac{1}{n}\right) - f(x_0-x_n)}{\sin\frac{1}{n}} =$ ______</p>
-<p>答案: $2f'(x_0)$</p>
-<p>主要思路:[拆成以 $f(x_0)$ 为中介的两段微商，利用等价无穷小与高阶量分离]</p>
-<blockquote>
-<p>[1]裂项变形：</p>
+<p>设$f(x)$在$x_0$处可导，$x_n = \sin\frac{1}{n} + \frac{1}{n^2}$，则$\lim\limits_{n \to \infty}\frac{f\left(x_0+\frac{1}{n}\right) - f(x_0-x_n)}{\sin\frac{1}{n}} = \underline{\quad 2f'(x_0) \quad}$</p>
+<p>答案:$2f'(x_0)$</p>
+<p>主要思路:[分子左右两端都是动点,缺乏基准点f(x_0);典型解法是加一项减一项f(x_0),拆成两段以x_0为中心的单侧步长微商,分别配平自变量增量即可!]</p>
+<p>[1]分子加减项$f(x_0)$裂项拆分：</p>
 <p>$$\frac{f\left(x_0+\frac{1}{n}\right) - f(x_0-x_n)}{\sin\frac{1}{n}} = \frac{f\left(x_0+\frac{1}{n}\right) - f(x_0)}{\sin\frac{1}{n}} + \frac{f(x_0) - f(x_0-x_n)}{\sin\frac{1}{n}}$$</p>
-<p>[2]计算第一部分极限：</p>
-<p>当 $n \to \infty$ 时，$\sin\frac{1}{n} \sim \frac{1}{n}$，且 $\frac{1}{n} \to 0$：</p>
-<p>$$\lim\limits_{n \to \infty}\frac{f\left(x_0+\frac{1}{n}\right) - f(x_0)}{\sin\frac{1}{n}} = \lim\limits_{n \to \infty}\left[ \frac{f\left(x_0+\frac{1}{n}\right) - f(x_0)}{\frac{1}{n}} \cdot \frac{\frac{1}{n}}{\sin\frac{1}{n}} \right]= f'(x_0) \cdot 1 = f'(x_0)$$</p>
-<p>[3]计算第二部分极限：</p>
-<p>注意到 $x_n = \sin\frac{1}{n} + \frac{1}{n^2} \ne 0$ 且 $x_n \to 0$。凑配自变量微商：</p>
-<p>$$\frac{f(x_0) - f(x_0-x_n)}{\sin\frac{1}{n}} = \frac{f(x_0-x_n) - f(x_0)}{-x_n} \cdot \frac{x_n}{\sin\frac{1}{n}}$$</p>
-<p>因为 $f(x)$ 在 $x_0$ 处可导，所以：</p>
-<p>$$\lim\limits_{n \to \infty}\frac{f(x_0-x_n) - f(x_0)}{-x_n} = f'(x_0)$$</p>
-<p>又：</p>
-<p>$$\lim\limits_{n \to \infty}\frac{x_n}{\sin\frac{1}{n}} = \lim\limits_{n \to \infty}\frac{\sin\frac{1}{n} + \frac{1}{n^2}}{\sin\frac{1}{n}} = \lim\limits_{n \to \infty}\left(1 + \frac{\frac{1}{n^2}}{\sin\frac{1}{n}}\right) = 1 + \lim\limits_{n \to \infty}\frac{\frac{1}{n^2}}{\frac{1}{n}} = 1 + 0 = 1$$</p>
-<p>故第二部分极限亦为 $f'(x_0) \cdot 1 = f'(x_0)$。</p>
-<p>[4]两项合并相加：</p>
-<p>原极限为 $f'(x_0) + f'(x_0) = 2f'(x_0)$。</p>
-</blockquote>
+<p>[2]分别求第一部分极限（自变量增量为$\frac{1}{n}$）：</p>
+<p>当$n \to \infty$时，$\frac{1}{n} \to 0$且$\sin\frac{1}{n} \sim \frac{1}{n}$：<br />
+   $$\lim\limits_{n \to \infty}\frac{f\left(x_0+\frac{1}{n}\right) - f(x_0)}{\sin\frac{1}{n}} = \lim\limits_{n \to \infty}\left[ \frac{f\left(x_0+\frac{1}{n}\right) - f(x_0)}{\frac{1}{n}} \cdot \frac{\frac{1}{n}}{\sin\frac{1}{n}} \right]$$</p>
+<p>因为$f(x)$在$x_0$处可导，第一部分微商趋于$f'(x_0)$，后一部分等价无穷小趋于$1$：<br />
+   $$= f'(x_0) \cdot 1 = f'(x_0)$$</p>
+<p>[3]求第二部分极限（自变量增量为$-x_n$）：</p>
+<p>注意微商标准形式是 $f(x_0+\Delta x) - f(x_0)$，这里是 $f(x_0) - f(x_0-x_n)$，提取负号并凑分母$-x_n$：<br />
+   $$\frac{f(x_0) - f(x_0-x_n)}{\sin\frac{1}{n}} = \frac{f(x_0-x_n) - f(x_0)}{-x_n} \cdot \frac{x_n}{\sin\frac{1}{n}}$$</p>
+<p>考察前半部分（自变量增量$-x_n \to 0$）：<br />
+   $$\lim\limits_{n \to \infty}\frac{f(x_0-x_n) - f(x_0)}{-x_n} = f'(x_0)$$</p>
+<p>考察后半部分系数极限（代入$x_n = \sin\frac{1}{n} + \frac{1}{n^2}$）：<br />
+   $$\lim\limits_{n \to \infty}\frac{x_n}{\sin\frac{1}{n}} = \lim\limits_{n \to \infty}\frac{\sin\frac{1}{n} + \frac{1}{n^2}}{\sin\frac{1}{n}} = \lim\limits_{n \to \infty}\left(1 + \frac{\frac{1}{n^2}}{\sin\frac{1}{n}}\right) = 1 + \lim\limits_{n \to \infty}\frac{\frac{1}{n^2}}{\frac{1}{n}} = 1 + 0 = 1$$</p>
+<p>故第二部分极限亦为：$f'(x_0) \cdot 1 = f'(x_0)$！</p>
+<p>[4]两项极限合并相加：</p>
+<p>原式 $= f'(x_0) + f'(x_0) = 2f'(x_0)$。</p>
+<p><font color=red>[易错陷阱]:切勿因为看到 \sin(1/n) 就直接粗糙地把 x_n 当成 \sin(1/n) 忽略高阶项，必须严格展示 \frac{x_n}{\sin(1/n)} = 1 + o(1) 的推导过程！极限拆开的前提是拆开后的两部分极限都各自独立存在。</font></p>
 <hr />
 <p><strong>(简单)<font color=green>题目[13]:奇函数原点导数与线性参数拆分</font></strong></p>
-<p>设 $f(x)$ 为在 $x=0$ 处可导的奇函数，则 $\lim\limits_{x \to 0}\frac{f(tx) - 5f(x)}{x} =$ ______</p>
-<p>答案: $(t-5)f'(0)$</p>
-<p>主要思路:[奇函数必有 $f(0)=0$，利用导数定义线性拆分]</p>
-<blockquote>
-<p>[1]由奇函数性质：$f(-x) = -f(x)$，令 $x=0$ 得 $f(0) = -f(0) \implies f(0) = 0$。</p>
-<p>[2]拆分极限为两个微商形式：</p>
-<p>$$\begin{aligned} \lim\limits_{x \to 0}\frac{f(tx) - 5f(x)}{x} &= \lim\limits_{x \to 0}\left[ \frac{f(tx) - f(0)}{x} - 5\frac{f(x)-f(0)}{x} \right]\\ \\ &= \lim\limits_{x \to 0}\left[ t \cdot \frac{f(tx)-f(0)}{tx} - 5 \cdot \frac{f(x)-f(0)}{x} \right]\\ \\ &= t f'(0) - 5 f'(0) = (t-5)f'(0) \end{aligned}$$</p>
-</blockquote>
+<p>设$f(x)$为在$x=0$处可导的奇函数，则$\lim\limits_{x \to 0}\frac{f(tx) - 5f(x)}{x} = \underline{\quad (t-5)f'(0) \quad}$</p>
+<p>答案:$(t-5)f'(0)$</p>
+<p>主要思路:[奇函数隐含巨大金矿:f(0)=0! 分子两项各自分一个x凑原点微商，tx分母凑一个t就是tf'(0)，后面是-5f'(0)，答案立出(t-5)f'(0)]</p>
+<p>[1]挖掘奇函数在原点的隐蔽条件：</p>
+<p>因为$f(x)$是奇函数，对定义域内任意$x$恒有$f(-x) = -f(x)$。</p>
+<p>代入$x = 0$：<br />
+   $$f(0) = -f(0) \implies 2f(0) = 0 \implies f(0) = 0$$</p>
+<p>[2]利用$f(0)=0$凑出导数定义微商：</p>
+<p>原式分子两项分别减去$f(0)=0$并拆成两项：<br />
+   $$\lim\limits_{x \to 0}\frac{f(tx) - 5f(x)}{x} = \lim\limits_{x \to 0}\left[ \frac{f(tx) - f(0)}{x} - 5\frac{f(x)-f(0)}{x} \right]$$</p>
+<p>第一项自变量增量为$tx$，分母凑一个$t$并乘回$t$：<br />
+   $$\frac{f(tx)-f(0)}{x} = t \cdot \frac{f(tx)-f(0)}{tx}$$</p>
+<p>代入求极限：<br />
+   $$= \lim\limits_{x \to 0}\left[ t \cdot \frac{f(tx)-f(0)}{tx} - 5 \cdot \frac{f(x)-f(0)}{x} \right] = t f'(0) - 5 f'(0) = (t-5)f'(0)$$</p>
+<p><font color=deeppink>[核心延展]:若题干改为“偶函数在x=0处可导”，由于可导偶函数的导函数必为奇函数，必有 f'(0) = 0！此时原式极限直接等于 0！这也是考研常考的对称性陷阱对比。</font></p>
 <hr />
 <p><strong>(中等)<font color=deeppink>题目[14]:最值函数的分段分界点不可导性分析</font></strong></p>
-<p>设 $f(x) = \max\{2x, x^2\},\ x \in (0, 4)$，且 $f'(a)$ 不存在，$a \in (0, 4)$，则 $a =$ ______</p>
-<p>答案: $2$</p>
-<p>主要思路:[求出曲线交点划分区间，验证分界点左右导数是否相等]</p>
+<p>设$f(x) = \max\{2x, x^2\},\ x \in (0, 4)$，且$f'(a)$不存在，$a \in (0, 4)$，则$a = \underline{\quad 2 \quad}$</p>
+<p>答案:$2$</p>
+<p>主要思路:[求最值max函数，先找曲线交点! 两曲线穿轴相交处通常会产生折角尖点，解方程2x=x^2得交点x=2，左右分别求单侧导数不等立刻确认为不可导点a=2]</p>
+<p>[1]求解曲线交点确定分段分界线：</p>
+<p>令两函数相等：<br />
+   $$2x = x^2 \implies x^2 - 2x = 0 \implies x(x-2) = 0$$</p>
+<p>在开区间$(0, 4)$内，唯一的内部交点为$x = 2$。</p>
+<p>[2]分区间比较大小，写出分段解析式：</p>
 <blockquote>
-<p>[1]求解函数交点：</p>
-<p>令 $2x = x^2 \implies x(x-2) = 0$。在区间 $(0, 4)$ 内唯一的内点交点为 $x = 2$。</p>
-<p>[2]确定分段解析式：</p>
-<ul>
-<li>当 $0 < x < 2$ 时，$2x > x^2$，故 $f(x) = 2x$；</li>
-<li>当 $2 \le x < 4$ 时，$x^2 \ge 2x$，故 $f(x) = x^2$。</li>
-</ul>
-<p>即：</p>
-<p>$$f(x) = \begin{cases} 2x, & 0 < x < 2 \\ \\ x^2, & 2 \le x < 4 \end{cases}$$</p>
-<p>[3]计算 $x=2$ 处的左右导数：</p>
-<p>$$\begin{aligned} f'_-(2) &= \lim\limits_{x \to 2^-}\frac{2x - 4}{x-2} = 2 \\ \\ f'_+(2) &= \lim\limits_{x \to 2^+}\frac{x^2 - 4}{x-2} = \lim\limits_{x \to 2^+}(x+2) = 4 \end{aligned}$$</p>
-<p>因为 $f'_-(2) = 2 \ne 4 = f'_+(2)$，左右导数不相等，故 $f'(2)$ 不存在。</p>
-<p>由此得唯一的不可导点 $a = 2$。</p>
+<p>当$0 < x < 2$时：例如取$x=1$，$2(1) = 2 > 1^2 = 1$，故$2x > x^2 \implies f(x) = 2x$<br />
+当$2 \le x < 4$时：例如取$x=3$，$3^2 = 9 > 2(3) = 6$，故$x^2 \ge 2x \implies f(x) = x^2$</p>
 </blockquote>
+<p>显式分段函数为：<br />
+   $$f(x) = \begin{cases} 2x, & 0 < x < 2 \\ \\ x^2, & 2 \le x < 4 \end{cases}$$</p>
+<p>[3]检验分界点$x=2$处的左右导数（定义法）：</p>
+<p>$f(2) = 2^2 = 4$</p>
+<p>左导数（来自$f(x) = 2x$）：<br />
+   $$f'_-(2) = \lim\limits_{x \to 2^-}\frac{2x - 4}{x-2} = \lim\limits_{x \to 2^-}\frac{2(x-2)}{x-2} = 2$$</p>
+<p>右导数（来自$f(x) = x^2$）：<br />
+   $$f'_+(2) = \lim\limits_{x \to 2^+}\frac{x^2 - 4}{x-2} = \lim\limits_{x \to 2^+}\frac{(x-2)(x+2)}{x-2} = \lim\limits_{x \to 2^+}(x+2) = 4$$</p>
+<p>因为$f'_-(2) = 2 \ne 4 = f'_+(2)$，左右导数不相等，故$f'(2)$不存在！</p>
+<p>在区间$(0, 4)$其余内部点函数均为单项初等函数可导，因此唯一的不可导点即为$a = 2$。</p>
+<p><font color=deeppink>[几何秒杀法]:在草稿纸画出 y=2x 和 y=x^2 的图像：直线在x=2处的斜率恒为2，抛物线在x=2处的切线斜率 (x^2)'|_{x=2} = 4。在交点处两曲线斜率不相等（2 != 4），不是相切而是相交穿过，max取上方曲线必定在x=2形成尖锐折角，一眼秒定 a=2！</font></p>
 <hr />
 <p><strong>(综合大题)<font color=red>题目[15]:含参数极限函数定义、全域连续性与可导性充要条件</font></strong></p>
-<p>设 $f(x) = \lim\limits_{n \to \infty}\frac{x^2 e^{n(x-1)} + ax + b}{5 + e^{n(x-1)}}$，求 $f(x)$ 并讨论 $f(x)$ 的连续性及可导性与 $a, b$ 的关系。</p>
-<p>主要思路:[根据指数底数与0的大小分类求出显式解析式，利用极限连续充要与左右导数相等建立参数方程组]</p>
+<p>设$f(x) = \lim\limits_{n \to \infty}\frac{x^2 e^{n(x-1)} + ax + b}{5 + e^{n(x-1)}}$，求$f(x)$并讨论$f(x)$的连续性及可导性与$a, b$的关系</p>
+<p>主要思路:[含n趋向无穷的极限函数，关键抓指数核心项 e^{n(x-1)}: 当x&gt;1时趋于+oo, 当x=1时是1, 当x&lt;1时趋于0! 先分段写出解析式，再在分界点x=1处: 先求极限连续建立a+b=5，再用导数定义求左右导数求出a=10，步步为营!]</p>
+<p>[1]根据指数项敛散趋势，分段求出$f(x)$的显式解析式：</p>
+<p>观察极限式中唯一依赖$n$的动态项$e^{n(x-1)}$，其极限行为由指数正负完全决定：</p>
+<p>(1) 当$x > 1$时，$x-1 > 0$，当$n \to \infty$时，$n(x-1) \to +\infty$，故$e^{n(x-1)} \to +\infty$。<br />
+       分子分母同除以最高阶无穷大$e^{n(x-1)}$：<br />
+       $$f(x) = \lim\limits_{n \to \infty}\frac{x^2 + (ax+b)e^{-n(x-1)}}{5e^{-n(x-1)} + 1} = \frac{x^2 + 0}{0 + 1} = x^2$$</p>
+<p>(2) 当$x = 1$时，$x-1 = 0$，$e^{n(0)} = e^0 = 1$恒为常数：<br />
+       $$f(1) = \frac{1^2 \cdot 1 + a(1) + b}{5 + 1} = \frac{1+a+b}{6}$$</p>
+<p>(3) 当$x < 1$时，$x-1 < 0$，当$n \to \infty$时，$n(x-1) \to -\infty$，故$e^{n(x-1)} \to 0$。<br />
+       直接代入极限值：<br />
+       $$f(x) = \frac{x^2 \cdot 0 + ax + b}{5 + 0} = \frac{ax+b}{5}$$</p>
+<p>综上所述，函数的分段显式表达式为：<br />
+   $$f(x) = \begin{cases} x^2, & x > 1 \\ \\ \frac{1+a+b}{6}, & x = 1 \\ \\ \frac{ax+b}{5}, & x < 1 \end{cases}$$</p>
+<p>[2]讨论$f(x)$的连续性：</p>
+<p>在$x \ne 1$的区间上，$x^2$与$\frac{ax+b}{5}$均为初等函数，恒连续。</p>
+<p>唯一的可疑点为分界点$x=1$，计算左右极限与函数值：<br />
+   $$\lim\limits_{x \to 1^+} f(x) = \lim\limits_{x \to 1^+} x^2 = 1$$<br />
+   $$\lim\limits_{x \to 1^-} f(x) = \lim\limits_{x \to 1^-} \frac{ax+b}{5} = \frac{a+b}{5}$$<br />
+   $$f(1) = \frac{1+a+b}{6}$$</p>
+<p>函数在$x=1$处连续 $\iff$ 左极限 = 右极限 = 函数值：<br />
+   $$1 = \frac{a+b}{5} = \frac{1+a+b}{6}$$</p>
+<p>解方程：<br />
+   $$\frac{a+b}{5} = 1 \implies a+b = 5$$<br />
+   此时$\frac{1+a+b}{6} = \frac{1+5}{6} = 1$，等式完全相融成立。</p>
+<p><strong>连续性结论</strong>：</p>
 <blockquote>
-<p>[1]分段计算极限，求出 $f(x)$ 的分段显式：</p>
-<p>核心取决于指数项 $e^{n(x-1)}$ 当 $n \to \infty$ 时的发散与收敛趋势：</p>
-<p>(1) 当 $x > 1$ 时，$x-1 > 0$，$n(x-1) \to +\infty$，故 $e^{n(x-1)} \to +\infty$。分子分母同除以 $e^{n(x-1)}$：</p>
-<p>$$f(x) = \lim\limits_{n \to \infty}\frac{x^2 + (ax+b)e^{-n(x-1)}}{5e^{-n(x-1)} + 1} = x^2$$</p>
-<p>(2) 当 $x = 1$ 时，$x-1 = 0$，$e^{n(x-1)} = e^0 = 1$：</p>
-<p>$$f(1) = \frac{1^2 \cdot 1 + a(1) + b}{5 + 1} = \frac{1+a+b}{6}$$</p>
-<p>(3) 当 $x < 1$ 时，$x-1 < 0$，$n(x-1) \to -\infty$，故 $e^{n(x-1)} \to 0$：</p>
-<p>$$f(x) = \frac{0 + ax+b}{5 + 0} = \frac{ax+b}{5}$$</p>
-<p>综上，函数解析式为：</p>
-<p>$$f(x) = \begin{cases} x^2, & x > 1 \\ \\ \frac{1+a+b}{6}, & x = 1 \\ \\ \frac{ax+b}{5}, & x < 1 \end{cases}$$</p>
-<p>[2]讨论 $f(x)$ 的连续性：</p>
-<p>显然在 $x \ne 1$ 时，$f(x)$ 为初等函数必连续。在唯一分界点 $x=1$ 处：</p>
-<p>$$\lim\limits_{x \to 1^+} f(x) = 1^2 = 1, \quad \lim\limits_{x \to 1^-} f(x) = \frac{a+b}{5}, \quad f(1) = \frac{1+a+b}{6}$$</p>
-<p>$f(x)$ 在 $x=1$ 处连续 $\iff \lim\limits_{x \to 1^+} f(x) = \lim\limits_{x \to 1^-} f(x) = f(1)$：</p>
-<p>$$1 = \frac{a+b}{5} = \frac{1+a+b}{6} \iff a+b = 5$$</p>
-<p>因此：<br />
-- 当 $a+b = 5$ 时，$f(x)$ 在 $(-\infty, +\infty)$ 上处处连续；<br />
-- 当 $a+b \ne 5$ 时，$f(x)$ 在 $x=1$ 处不连续 (产生跳跃间断点)。</p>
-<p>[3]讨论 $f(x)$ 的可导性：</p>
-<p>函数可导必先连续，故在不可导点讨论中只需考察 $a+b = 5$ 的情形（此时 $b = 5-a$ 且 $f(1)=1$）。</p>
-<p>利用导数定义考察左右导数：</p>
-<p>$$\begin{aligned} f'_+(1) &= \lim\limits_{x \to 1^+}\frac{x^2 - 1}{x-1} = \lim\limits_{x \to 1^+}(x+1) = 2 \\ \\ f'_-(1) &= \lim\limits_{x \to 1^-}\frac{\frac{ax+b}{5} - 1}{x-1} = \lim\limits_{x \to 1^-}\frac{ax+(5-a)-5}{5(x-1)} = \lim\limits_{x \to 1^-}\frac{a(x-1)}{5(x-1)} = \frac{a}{5} \end{aligned}$$</p>
-<p>$f(x)$ 在 $x=1$ 处可导 $\iff f'_+(1) = f'_-(1)$：</p>
-<p>$$2 = \frac{a}{5} \implies a = 10$$</p>
-<p>再结合连续性条件 $a+b = 5$ 得 $b = 5 - 10 = -5$。</p>
-<p>[4]完整结论总结：</p>
-<ul>
-<li>当 $a = 10$ 且 $b = -5$ 时，$f(x)$ 在 $(-\infty, +\infty)$ 上处处可导；</li>
-<li>当 $a+b = 5$ 且 $a \ne 10$ 时，$f(x)$ 在 $(-\infty, +\infty)$ 处处连续，但在 $x=1$ 处不可导；</li>
-<li>当 $a+b \ne 5$ 时，$f(x)$ 在 $x=1$ 处不连续，必不可导。</li>
-</ul>
+<p>当$a+b = 5$时，$f(x)$在全实数域$(-\infty, +\infty)$上处处连续；<br />
+当$a+b \ne 5$时，左极限$\ne$右极限，在$x=1$处产生跳跃间断点。</p>
 </blockquote>
+<p>[3]讨论$f(x)$的可导性：</p>
+<p>因为可导必连续，若$a+b \ne 5$，函数在$x=1$处不连续，必不可导。</p>
+<p>因此只需在<strong>连续的前提</strong>$a+b = 5$（即$b = 5-a$且$f(1)=1$）下，用导数定义检验$x=1$处的左右导数：</p>
+<p>(1) 右导数：<br />
+     $$f'_+(1) = \lim\limits_{x \to 1^+}\frac{f(x)-f(1)}{x-1} = \lim\limits_{x \to 1^+}\frac{x^2 - 1}{x-1} = \lim\limits_{x \to 1^+}(x+1) = 2$$</p>
+<blockquote>
+<p>左导数（代入$b = 5-a$）：<br />
+     $$\begin{aligned} f'_-(1) &= \lim\limits_{x \to 1^-}\frac{f(x)-f(1)}{x-1} = \lim\limits_{x \to 1^-}\frac{\frac{ax+b}{5} - 1}{x-1} \\ \\ &= \lim\limits_{x \to 1^-}\frac{ax+(5-a)-5}{5(x-1)} = \lim\limits_{x \to 1^-}\frac{a(x-1)}{5(x-1)} = \frac{a}{5} \end{aligned}$$</p>
+</blockquote>
+<p>函数在$x=1$处可导 $\iff$ 左导数等于右导数：<br />
+   $$f'_+(1) = f'_-(1) \iff 2 = \frac{a}{5} \implies a = 10$$</p>
+<p>代入$b = 5 - a$得到：<br />
+   $$b = 5 - 10 = -5$$</p>
+<p>[4]综合结论清晰汇总：</p>
+<blockquote>
+<p>(1) 当$a = 10$且$b = -5$时，$f(x)$在$(-\infty, +\infty)$全实数域上处处可导；<br />
+(2) 当$a+b = 5$且$a \ne 10$时，$f(x)$在全实数域处处连续，但在$x=1$处不可导；<br />
+(3) 当$a+b \ne 5$时，$f(x)$在$x=1$处不连续，必不可导。</p>
+</blockquote>
+<p><font color=red>[大题通关要诀]:研究分段极限函数的连续与可导，永远遵循稳准狠的“四步法”: <br />
+(1) 指数敛散性分类写出分段解析式 -&gt; <br />
+(2) 三式相等解参数定连续 -&gt; <br />
+(3) 连续前提下导数定义算左右导数定可导 -&gt; <br />
+(4) 分类结论梳理成清晰条目不丢一分！</font></p>
     <script>
     function renderMath() {
         if (typeof renderMathInElement !== 'undefined') {
