@@ -2762,84 +2762,126 @@ window.CATALOG_DATA = {
           "path": "408 计算机基础/11408计算机网络",
           "children": [
             {
+              "type": "folder",
+              "name": "Chap1计算机网络体系结构",
+              "path": "408 计算机基础/11408计算机网络/Chap1计算机网络体系结构",
+              "children": [
+                {
+                  "type": "doc",
+                  "name": "Chap1.1 计算机网络体系概述",
+                  "defaultType": "md",
+                  "defaultPath": "408 计算机基础/11408计算机网络/Chap1计算机网络体系结构/Chap1.1 计算机网络体系概述.md",
+                  "formats": {
+                    "md": "408 计算机基础/11408计算机网络/Chap1计算机网络体系结构/Chap1.1 计算机网络体系概述.md"
+                  }
+                },
+                {
+                  "type": "doc",
+                  "name": "Chap1.2 计算机网络体系结构",
+                  "defaultType": "md",
+                  "defaultPath": "408 计算机基础/11408计算机网络/Chap1计算机网络体系结构/Chap1.2 计算机网络体系结构.md",
+                  "formats": {
+                    "md": "408 计算机基础/11408计算机网络/Chap1计算机网络体系结构/Chap1.2 计算机网络体系结构.md"
+                  }
+                },
+                {
+                  "type": "doc",
+                  "name": "Chap1计算机网络体系结构",
+                  "defaultType": "pdf",
+                  "defaultPath": "408 计算机基础/11408计算机网络/Chap1计算机网络体系结构/Chap1计算机网络体系结构.pdf",
+                  "formats": {
+                    "pdf": "408 计算机基础/11408计算机网络/Chap1计算机网络体系结构/Chap1计算机网络体系结构.pdf"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "folder",
+              "name": "Chap2物理层",
+              "path": "408 计算机基础/11408计算机网络/Chap2物理层",
+              "children": [
+                {
+                  "type": "doc",
+                  "name": "Chap2物理层",
+                  "defaultType": "pdf",
+                  "defaultPath": "408 计算机基础/11408计算机网络/Chap2物理层/Chap2物理层.pdf",
+                  "formats": {
+                    "pdf": "408 计算机基础/11408计算机网络/Chap2物理层/Chap2物理层.pdf"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "folder",
+              "name": "Chap3数据链路层",
+              "path": "408 计算机基础/11408计算机网络/Chap3数据链路层",
+              "children": [
+                {
+                  "type": "doc",
+                  "name": "Chap3数据链路层",
+                  "defaultType": "pdf",
+                  "defaultPath": "408 计算机基础/11408计算机网络/Chap3数据链路层/Chap3数据链路层.pdf",
+                  "formats": {
+                    "pdf": "408 计算机基础/11408计算机网络/Chap3数据链路层/Chap3数据链路层.pdf"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "folder",
+              "name": "Chap4网络层",
+              "path": "408 计算机基础/11408计算机网络/Chap4网络层",
+              "children": [
+                {
+                  "type": "doc",
+                  "name": "Chap4网络层",
+                  "defaultType": "pdf",
+                  "defaultPath": "408 计算机基础/11408计算机网络/Chap4网络层/Chap4网络层.pdf",
+                  "formats": {
+                    "pdf": "408 计算机基础/11408计算机网络/Chap4网络层/Chap4网络层.pdf"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "folder",
+              "name": "Chap5传输层",
+              "path": "408 计算机基础/11408计算机网络/Chap5传输层",
+              "children": [
+                {
+                  "type": "doc",
+                  "name": "Chap5传输层",
+                  "defaultType": "pdf",
+                  "defaultPath": "408 计算机基础/11408计算机网络/Chap5传输层/Chap5传输层.pdf",
+                  "formats": {
+                    "pdf": "408 计算机基础/11408计算机网络/Chap5传输层/Chap5传输层.pdf"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "folder",
+              "name": "Chap6应用层",
+              "path": "408 计算机基础/11408计算机网络/Chap6应用层",
+              "children": [
+                {
+                  "type": "doc",
+                  "name": "Chap6应用层",
+                  "defaultType": "pdf",
+                  "defaultPath": "408 计算机基础/11408计算机网络/Chap6应用层/Chap6应用层.pdf",
+                  "formats": {
+                    "pdf": "408 计算机基础/11408计算机网络/Chap6应用层/Chap6应用层.pdf"
+                  }
+                }
+              ]
+            },
+            {
               "type": "doc",
-              "name": "2026计算机网络Chap1计算机网络体系结构",
+              "name": "Index目录",
               "defaultType": "pdf",
-              "defaultPath": "408 计算机基础/11408计算机网络/2026计算机网络Chap1计算机网络体系结构.pdf",
+              "defaultPath": "408 计算机基础/11408计算机网络/Index目录.pdf",
               "formats": {
-                "pdf": "408 计算机基础/11408计算机网络/2026计算机网络Chap1计算机网络体系结构.pdf"
-              }
-            },
-            {
-              "type": "doc",
-              "name": "2026计算机网络Chap2物理层",
-              "defaultType": "pdf",
-              "defaultPath": "408 计算机基础/11408计算机网络/2026计算机网络Chap2物理层.pdf",
-              "formats": {
-                "pdf": "408 计算机基础/11408计算机网络/2026计算机网络Chap2物理层.pdf"
-              }
-            },
-            {
-              "type": "doc",
-              "name": "2026计算机网络Chap3数据链路层",
-              "defaultType": "pdf",
-              "defaultPath": "408 计算机基础/11408计算机网络/2026计算机网络Chap3数据链路层.pdf",
-              "formats": {
-                "pdf": "408 计算机基础/11408计算机网络/2026计算机网络Chap3数据链路层.pdf"
-              }
-            },
-            {
-              "type": "doc",
-              "name": "2026计算机网络Chap4网络层",
-              "defaultType": "pdf",
-              "defaultPath": "408 计算机基础/11408计算机网络/2026计算机网络Chap4网络层.pdf",
-              "formats": {
-                "pdf": "408 计算机基础/11408计算机网络/2026计算机网络Chap4网络层.pdf"
-              }
-            },
-            {
-              "type": "doc",
-              "name": "2026计算机网络Chap5传输层",
-              "defaultType": "pdf",
-              "defaultPath": "408 计算机基础/11408计算机网络/2026计算机网络Chap5传输层.pdf",
-              "formats": {
-                "pdf": "408 计算机基础/11408计算机网络/2026计算机网络Chap5传输层.pdf"
-              }
-            },
-            {
-              "type": "doc",
-              "name": "2026计算机网络Chap6应用层",
-              "defaultType": "pdf",
-              "defaultPath": "408 计算机基础/11408计算机网络/2026计算机网络Chap6应用层.pdf",
-              "formats": {
-                "pdf": "408 计算机基础/11408计算机网络/2026计算机网络Chap6应用层.pdf"
-              }
-            },
-            {
-              "type": "doc",
-              "name": "2026计算机网络Index目录",
-              "defaultType": "pdf",
-              "defaultPath": "408 计算机基础/11408计算机网络/2026计算机网络Index目录.pdf",
-              "formats": {
-                "pdf": "408 计算机基础/11408计算机网络/2026计算机网络Index目录.pdf"
-              }
-            },
-            {
-              "type": "doc",
-              "name": "Chap1.1 计算机网络体系概述",
-              "defaultType": "md",
-              "defaultPath": "408 计算机基础/11408计算机网络/Chap1.1 计算机网络体系概述.md",
-              "formats": {
-                "md": "408 计算机基础/11408计算机网络/Chap1.1 计算机网络体系概述.md"
-              }
-            },
-            {
-              "type": "doc",
-              "name": "Chap1.2 计算机网络体系结构",
-              "defaultType": "md",
-              "defaultPath": "408 计算机基础/11408计算机网络/Chap1.2 计算机网络体系结构.md",
-              "formats": {
-                "md": "408 计算机基础/11408计算机网络/Chap1.2 计算机网络体系结构.md"
+                "pdf": "408 计算机基础/11408计算机网络/Index目录.pdf"
               }
             }
           ]
