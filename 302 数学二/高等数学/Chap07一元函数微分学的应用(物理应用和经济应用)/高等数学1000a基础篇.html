@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>高等数学1000a基础篇</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h1>第7章 一元函数微分学的应用（物理应用和经济应用）</h1>
+<hr />
+<h2>本章核心考点与全题解大纲速览</h2>
+<blockquote>
+<p>[!NOTE]<br />
+<strong>本章复习重心导引</strong>：一元函数微分学的物理应用是数学二统考的特色命题点。其命题核心在于<strong>相关变化率问题（Related Rates）</strong>：<br />
+(1) <strong>几何约束量与时间参数求导</strong>：建立几何/物理等量关系式（勾股定理、面积体积公式、三角函数等），两端同时对时间 $t$ 求导；<br />
+(2) <strong>速度、加速度与导数阶数的物理映射</strong>：位移求一阶导得瞬时速度，速度求一阶导（位移二阶导）得瞬时加速度；<br />
+(3) <strong>增长速度的变化率判别</strong>：通过二阶导数的凹凸性精准判定增长速度的递增或递减趋势。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">题号</th>
+<th style="text-align: left;">核心考点与命题类型</th>
+<th style="text-align: left;">关键方法与推导模型</th>
+<th style="text-align: center;">核心结论 / 答案</th>
+<th style="text-align: left;">易错陷阱与反思提示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>Q1</strong></td>
+<td style="text-align: left;">曲线动点距离原点相关变化率</td>
+<td style="text-align: left;">建立两点间距离公式 $s^2 = x^2 + y^2$，两边对时间 $t$ 链式求导</td>
+<td style="text-align: center;">$82\text{ cm/s}$</td>
+<td style="text-align: left;">须先对曲线方程 $9y=4x^2$ 对 $t$ 求导求得垂直速度 $y'(t)$</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q2</strong></td>
+<td style="text-align: left;">增长速度变化率与凹凸性辨析</td>
+<td style="text-align: left;">速度即一阶导数，增速的变化率即二阶导数：凸弧增速变小，凹弧增速变大</td>
+<td style="text-align: center;">(A) 0~3 变小，7~10 变大</td>
+<td style="text-align: left;">极易混淆“增长速度”本身与“心跳次数”的大小关系</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q3</strong></td>
+<td style="text-align: left;">容器蓄水体积与液面上升速率</td>
+<td style="text-align: left;">关联方程 $V = \frac{\pi}{2}y^2$，两端对时间 $t$ 复合求导解 $\frac{\mathrm{d}y}{\mathrm{d}t}$</td>
+<td style="text-align: center;">$\frac{1}{\pi}\text{ m/min}$</td>
+<td style="text-align: left;">注意单位一致性，由 $V'(t)$ 与高度 $y$ 反求液面上升速率</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q4</strong></td>
+<td style="text-align: left;">圆柱体体积与表面积相关变化率联立</td>
+<td style="text-align: left;">联立 $V = \pi r^2 h$ 与 $S = 2\pi r^2 + 2\pi rh$ 对 $t$ 求导解非线性代数方程组</td>
+<td style="text-align: center;">(B) $r=10\text{ cm}, h=5\text{ cm}$</td>
+<td style="text-align: left;">乘积求导法则展开时系数容易算错，排除负根 $r=-2$</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q5</strong></td>
+<td style="text-align: left;">视线仰角变化率与垂直上升速度</td>
+<td style="text-align: left;">构造直角三角函数 $\tan\theta = y/10$，利用公式 $(\tan\theta)' = \sec^2\theta \cdot \theta'$ 求解</td>
+<td style="text-align: center;">(D) 5</td>
+<td style="text-align: left;">利用 $\sec^2\theta = 1 + \tan^2\theta$ 快速求值，避免求根式三角函数</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>(相关变化率经典题)<font color=green>题目[1]:曲线动点距离原点相关变化率</font></strong></p>
+<p>一动点 $P$ 在曲线 $9y=4x^2$ 上运动，设坐标轴的单位长度是 $1\text{ cm}$，若点 $P$ 横坐标的变化率是 $30\text{ cm/s}$，则当点 $P$ 经过点 $(3, 4)$ 时，点 $P$ 到原点距离的变化率为 ______。</p>
+<p>答案: $82\text{ cm/s}$</p>
+<p>主要思路:[对曲线方程与距离公式分别对时间 $t$ 求导，联立求出纵坐标变化率与距离变化率]</p>
+<blockquote>
+<p>[1] 对轨迹方程求导求解纵坐标变化率：</p>
+<p>已知动点 $P(x, y)$ 处在抛物线 $9y = 4x^2$ 上。</p>
+<p>两边同时对时间变量 $t$ 求导：</p>
+<p>$$9 \frac{\mathrm{d}y}{\mathrm{d}t} = 8x \frac{\mathrm{d}x}{\mathrm{d}t}$$</p>
+<p>当点 $P$ 经过点 $(3, 4)$ 时，$x = 3$。已知横坐标变化率 $\frac{\mathrm{d}x}{\mathrm{d}t} = 30\text{ cm/s}$。</p>
+<p>代入求解 $\frac{\mathrm{d}y}{\mathrm{d}t}$：</p>
+<p>$$9 \frac{\mathrm{d}y}{\mathrm{d}t} = 8(3)(30) = 720 \implies \frac{\mathrm{d}y}{\mathrm{d}t} = \frac{720}{9} = 80\text{ cm/s}$$</p>
+<p>[2] 对距离公式求导求解距离变化率：</p>
+<p>点 $P(x, y)$ 到坐标原点 $(0, 0)$ 的距离为 $s$：</p>
+<p>$$s^2 = x^2 + y^2$$</p>
+<p>在点 $(3, 4)$ 处，距离大小为：</p>
+<p>$$s = \sqrt{3^2 + 4^2} = 5\text{ cm}$$</p>
+<p>将关系式 $s^2 = x^2 + y^2$ 两边同时对时间 $t$ 求导：</p>
+<p>$$2s \frac{\mathrm{d}s}{\mathrm{d}t} = 2x \frac{\mathrm{d}x}{\mathrm{d}t} + 2y \frac{\mathrm{d}y}{\mathrm{d}t} \implies s \frac{\mathrm{d}s}{\mathrm{d}t} = x \frac{\mathrm{d}x}{\mathrm{d}t} + y \frac{\mathrm{d}y}{\mathrm{d}t}$$</p>
+<p>[3] 代入数值计算最终变化率：</p>
+<p>$$5 \cdot \frac{\mathrm{d}s}{\mathrm{d}t} = 3(30) + 4(80) = 90 + 320 = 410$$</p>
+<p>解得：</p>
+<p>$$\frac{\mathrm{d}s}{\mathrm{d}t} = \frac{410}{5} = 82\text{ cm/s}$$</p>
+</blockquote>
+<p><font color=deeppink>[核心反思]:求解相关变化率的标准 SOP：<br />
+(1) 寻找几何约束量建立方程；<br />
+(2) 视变量为时间 $t$ 的复合函数并两端隐函数求导；<br />
+(3) 代入瞬时状态数值求目标未知变化率。</font></p>
+<hr />
+<p><strong>(物理概念与凹凸性辨析题)<font color=red>题目[2]:增长速度变化率与凹凸性辨析</font></strong></p>
+<p>设二阶可导函数 $y=f(t)$ 表示某人在 10 分钟内心跳次数的变化曲线，如图所示（0~3 分钟曲线呈向上凸/向下弯曲形态，7~10 分钟曲线呈向下凸/向上弯曲形态），则关于此人心跳次数的增长速度，说法正确的是 $(\quad)$。</p>
+<p>(A) 0~3 分钟增速变小；7~10 分钟增速变大<br />
+(B) 0~3 分钟增速变大；7~10 分钟增速变小<br />
+(C) 0~3 分钟增速变大；7~10 分钟增速变大<br />
+(D) 0~3 分钟增速变小；7~10 分钟增速变小</p>
+<p>答案: (A)</p>
+<p>主要思路:[增长速度是一阶导数 $f'(t)$，增长速度的变化率是二阶导数 $f''(t)$，由曲线的凹凸性秒定切线斜率变化]</p>
+<blockquote>
+<p>[1] 物理量与导数阶数的映射：</p>
+<p>(1) 心跳总次数：函数值 $f(t)$；</p>
+<p>(2) 心跳次数的增长速度：一阶导数 $v(t) = f'(t)$（即几何上的切线斜率）；</p>
+<p>(3) 心跳次数增长速度的快慢变化趋势：二阶导数 $a(t) = f''(t) = v'(t)$。</p>
+<p>[2] 依据图像凹凸性分段判定增速趋势：</p>
+<p>(1) 在 0~3 分钟区间内：</p>
+<p>图像呈现向上凸起形态（即凸弧，弦在弧下方）：</p>
+<p>这意味着二阶导数 $f''(t) < 0$；</p>
+<p>因 $f''(t) = [f'(t)]' < 0$，一阶导数 $f'(t)$ 随时间单调递减，即切线斜率越来越平缓；</p>
+<p>物理意义：心跳的增长速度在逐渐变小。</p>
+<p>(2) 在 7~10 分钟区间内：</p>
+<p>图像呈现向下凸起形态（即凹弧，弦在弧上方）：</p>
+<p>这意味着二阶导数 $f''(t) > 0$；</p>
+<p>因 $f''(t) = [f'(t)]' > 0$，一阶导数 $f'(t)$ 随时间单调递增，即切线斜率越来越陡峭；</p>
+<p>物理意义：心跳的增长速度在逐渐变大。</p>
+<p>综合两段，0~3 分钟增速变小，7~10 分钟增速变大，正确选项为 (A)。</p>
+</blockquote>
+<p><font color=deeppink>[避坑指南]:切忌把“函数值在变大（心跳总数增加）”与“增长速度变大”混为一谈！心跳总数只要活人永远递增（$f'>0$），但“增速变快变慢”看的是加速度与凹凸性（$f''$ 的正负）！</font></p>
+<hr />
+<p><strong>(液体蓄水相关变化率题)<font color=green>题目[3]:容器蓄水体积与液面上升速率</font></strong></p>
+<p>已知一容器中水增加的速率为 $1\text{ m}^3/\min$，且水的体积 $V$ 与水面高度 $y$ 满足 $V=\frac{\pi}{2}y^2$，当水面上升到高为 $1\text{ m}$ 时，求水面高度上升的速率。</p>
+<p>答案: $\frac{1}{\pi}\text{ m/min}$</p>
+<p>主要思路:[建立体积与高度的关系式，两边对时间 $t$ 复合求导，代入已知速率求解]</p>
+<blockquote>
+<p>[1] 明确已知量与物理变化率：</p>
+<p>已知体积对时间的变化率为：</p>
+<p>$$\frac{\mathrm{d}V}{\mathrm{d}t} = 1\text{ m}^3/\min$$</p>
+<p>体积与液面高度的几何函数关系为：</p>
+<p>$$V(t) = \frac{\pi}{2}[y(t)]^2$$</p>
+<p>[2] 复合链式求导：</p>
+<p>两边同时对时间 $t$ 求导：</p>
+<p>$$\frac{\mathrm{d}V}{\mathrm{d}t} = \frac{\pi}{2} \cdot 2y \cdot \frac{\mathrm{d}y}{\mathrm{d}t} = \pi y \frac{\mathrm{d}y}{\mathrm{d}t}$$</p>
+<p>[3] 代入瞬时高度求解上升速率：</p>
+<p>当水面高度上升到 $y = 1\text{ m}$ 时：</p>
+<p>$$1 = \pi(1) \cdot \frac{\mathrm{d}y}{\mathrm{d}t} \implies \frac{\mathrm{d}y}{\mathrm{d}t} = \frac{1}{\pi}\text{ m/min}$$</p>
+<p>故水面高度上升的速率为 $\frac{1}{\pi}\text{ m/min}$。</p>
+</blockquote>
+<p><font color=deeppink>[核心反思]:在物理实际问题中，先列静态公式（如 $V=f(y)$），再做动态微分（$\mathrm{d}V = f'(y)\mathrm{d}y$），是化繁为简的绝对法宝。</font></p>
+<hr />
+<p><strong>(几何形体双变化率联立大题)<font color=red>题目[4]:圆柱体体积与表面积相关变化率联立</font></strong></p>
+<p>已知某圆柱体底面半径与高随时间变化的变化率分别为 $2\text{ cm/s},\ -3\text{ cm/s}$，且圆柱体的体积与表面积随时间变化的变化率分别为 $-100\pi\text{ cm}^3/\text{s},\ 40\pi\text{ cm}^2/\text{s}$，则圆柱体的底面半径与高分别为 $(\quad)$。</p>
+<p>(A) $5\text{ cm},\ 5\text{ cm}$<br />
+(B) $10\text{ cm},\ 5\text{ cm}$<br />
+(C) $5\text{ cm},\ 10\text{ cm}$<br />
+(D) $10\text{ cm},\ 10\text{ cm}$</p>
+<p>答案: (B)</p>
+<p>主要思路:[分别写出圆柱体体积与表面积关于半径与高的公式，对时间求导建立联立方程组求解]</p>
+<blockquote>
+<p>[1] 建立体积变化率方程：</p>
+<p>设底面半径为 $r$，高为 $h$。</p>
+<p>圆柱体体积公式：</p>
+<p>$$V = \pi r^2 h$$</p>
+<p>两端对时间 $t$ 运用乘积求导法则：</p>
+<p>$$\frac{\mathrm{d}V}{\mathrm{d}t} = \pi \left(2r \frac{\mathrm{d}r}{\mathrm{d}t} h + r^2 \frac{\mathrm{d}h}{\mathrm{d}t}\right)$$</p>
+<p>代入 $\frac{\mathrm{d}r}{\mathrm{d}t} = 2$，$\frac{\mathrm{d}h}{\mathrm{d}t} = -3$，$\frac{\mathrm{d}V}{\mathrm{d}t} = -100\pi$：</p>
+<p>$$-100\pi = \pi \left[2r(2)h + r^2(-3)\right] = \pi(4rh - 3r^2)$$</p>
+<p>两边同除以 $\pi$：</p>
+<p>$$4rh - 3r^2 = -100 \iff 3r^2 - 4rh = 100 \quad (\text{式 1})$$</p>
+<p>[2] 建立表面积变化率方程：</p>
+<p>圆柱体全面积（上下底加侧面积）公式：</p>
+<p>$$S = 2\pi r^2 + 2\pi rh$$</p>
+<p>两端对时间 $t$ 求导：</p>
+<p>$$\frac{\mathrm{d}S}{\mathrm{d}t} = 2\pi \left(2r \frac{\mathrm{d}r}{\mathrm{d}t}\right) + 2\pi \left(\frac{\mathrm{d}r}{\mathrm{d}t} h + r \frac{\mathrm{d}h}{\mathrm{d}t}\right)$$</p>
+<p>代入速率已知数：</p>
+<p>$$40\pi = 2\pi \left[2r(2)\right] + 2\pi \left[2h + r(-3)\right] = 2\pi (4r + 2h - 3r) = 2\pi (r + 2h)$$</p>
+<p>两边同除以 $2\pi$：</p>
+<p>$$r + 2h = 20 \iff 2h = 20 - r \quad (\text{式 2})$$</p>
+<p>[3] 联立方程组求解：</p>
+<p>将式 2 代入式 1：注意 $4rh = 2r(2h) = 2r(20 - r) = 40r - 2r^2$。</p>
+<p>$$3r^2 - (40r - 2r^2) = 100 \implies 5r^2 - 40r - 100 = 0$$</p>
+<p>两边同除以 5：</p>
+<p>$$r^2 - 8r - 20 = 0 \iff (r - 10)(r + 2) = 0$$</p>
+<p>因为半径必须为正实数 $r > 0$，舍去负根 $r = -2$，得：</p>
+<p>$$r = 10\text{ cm}$$</p>
+<p>将 $r = 10$ 代回式 2 解高 $h$：</p>
+<p>$$2h = 20 - 10 = 10 \implies h = 5\text{ cm}$$</p>
+<p>因此圆柱体底面半径为 $10\text{ cm}$，高为 $5\text{ cm}$，选 (B)。</p>
+</blockquote>
+<p><font color=deeppink>[解题技巧]:消元时巧妙利用 $4rh = 2r(2h)$ 进行整块代换，避免分数形式，能够大幅压缩算力开销并彻底杜绝笔误！</font></p>
+<hr />
+<p><strong>(仰角相关变化率题)<font color=red>题目[5]:视线仰角变化率与垂直上升速度</font></strong></p>
+<p>一物体在距离同一水平面上的地面观测器 $10\text{ m}$ 处离地匀速垂直上升，其速度为 $a\text{ m/s}$。若该物体上升到离地 $20\text{ m}$ 时，观测器视线倾角的变化率为 $\frac{1}{10}$，则 $a=(\quad)$。</p>
+<p>(A) 1<br />
+(B) 2<br />
+(C) 3<br />
+(D) 5</p>
+<p>答案: (D)</p>
+<p>主要思路:[根据直角三角形定义正切函数 $\tan\theta = y/10$，两端对时间求导，利用同角正割恒等式代入求解]</p>
+<blockquote>
+<p>[1] 建立三角几何模型：</p>
+<p>设地面观测器位置为坐标原点，物体在水平方向 $x = 10\text{ m}$ 处垂直上升。</p>
+<p>设 $t$ 时刻物体高度为 $y(t)$，观测器视线倾角（仰角）为 $\theta(t)$。</p>
+<p>由直角三角形正切关系：</p>
+<p>$$\tan\theta = \frac{y}{10} \iff y = 10\tan\theta$$</p>
+<p>[2] 对时间 $t$ 链式求导：</p>
+<p>两端同时对时间 $t$ 求导：</p>
+<p>$$\frac{\mathrm{d}y}{\mathrm{d}t} = 10 \sec^2\theta \cdot \frac{\mathrm{d}\theta}{\mathrm{d}t}$$</p>
+<p>[3] 计算特定瞬时的三角函数值并求参数 $a$：</p>
+<p>当物体上升到离地 $y = 20\text{ m}$ 时：</p>
+<p>$$\tan\theta = \frac{20}{10} = 2$$</p>
+<p>由三角恒等式 $\sec^2\theta = 1 + \tan^2\theta$：</p>
+<p>$$\sec^2\theta = 1 + 2^2 = 5$$</p>
+<p>已知该时刻视线倾角变化率 $\frac{\mathrm{d}\theta}{\mathrm{d}t} = \frac{1}{10}$，上升速度 $\frac{\mathrm{d}y}{\mathrm{d}t} = a$。</p>
+<p>代入求导等式：</p>
+<p>$$a = 10 \cdot 5 \cdot \frac{1}{10} = 5\text{ m/s}$$</p>
+<p>故待求速度 $a = 5$，选 (D)。</p>
+</blockquote>
+<p><font color=deeppink>[核心反思]:遇到角度相关变化率，首选正切 $\tan\theta = y/x$ 或正弦余弦！利用 $(\tan\theta)' = \sec^2\theta = 1+\tan^2\theta$ 可以完全避开开平方与反三角函数求导，速度提升十倍！</font></p>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>

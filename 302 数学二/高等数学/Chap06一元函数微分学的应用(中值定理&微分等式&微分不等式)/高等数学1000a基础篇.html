@@ -1,0 +1,1038 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>高等数学1000a基础篇</title>
+    <!-- KaTeX for high performance, high-fidelity LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style type="text/css">
+    
+@page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #24292e;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 32px 48px 32px;
+}
+
+/* Purple Academic Headings */
+h1 {
+    font-size: 22px;
+    border-bottom: 2px solid #8b5cf6;
+    padding-bottom: 6px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #4c1d95;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 17px;
+    border-bottom: 1px solid #e9d5ff;
+    padding-bottom: 4px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #6d28d9;
+    page-break-after: avoid;
+}
+
+h6 {
+    font-size: 13.8px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #5b21b6;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+/* Typora quote blocks & DeepPink cards */
+blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    color: #24292e;
+    background-color: #fff1f7;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    overflow: visible !important;
+}
+
+blockquote blockquote {
+    background-color: #fdf2f8;
+    border-left: 4px solid #ec4899;
+    margin: 6px 0;
+}
+
+blockquote p {
+    margin: 5px 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    page-break-inside: avoid;
+    font-size: 13.2px;
+    overflow: visible !important;
+}
+
+th, td {
+    border: 1px solid #fbcfe8;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #fdf2f8;
+    font-weight: 600;
+    color: #581c87;
+}
+
+tr:nth-child(even) {
+    background-color: #fff1f7;
+}
+
+/* Code */
+pre {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow: visible !important;
+    font-size: 12.5px;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 12.5px;
+    background-color: #f3e8ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #7e22ce;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* KaTeX math formulas */
+.katex-display {
+    margin: 10px 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    color: #111827 !important;
+}
+
+.katex-display .katex {
+    color: #111827 !important;
+}
+
+.katex {
+    color: #111827 !important;
+    font-size: 1.05em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #f3e8ff;
+    margin: 16px 0;
+}
+
+    </style>
+</head>
+<body class="typora-export os-windows">
+<div class="typora-export-content">
+<div id="write">
+<h1>第6章 一元函数微分学的应用（中值定理&amp;微分等式&amp;微分不等式）</h1>
+<hr />
+<h2>本章核心考点与全题解大纲速览</h2>
+<blockquote>
+<p>[!NOTE]<br />
+<strong>本章复习重心导引</strong>：中值定理与不等式证明是考研数学中理论深度最高、分值最重、思维技巧性最强的核心板块。全章 22 道题系统覆盖三大经典高频考法：<br />
+1. <strong>方程根与零点存在性分析</strong>：罗尔定理推论、单调极值零点隔离法、交点个数判别模型；<br />
+2. <strong>微分中值定理证明与辅助函数构造</strong>：拉格朗日中值定理、柯西中值定理双函数配对、积分构造原函数法；<br />
+3. <strong>微分不等式构建与达布定理</strong>：比值单调法 $\left(\frac{f(x)}{g(x)}\right)'$、差值单调法、泰勒展开带余项局部放缩。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">题号</th>
+<th style="text-align: left;">核心考点与命题类型</th>
+<th style="text-align: left;">关键方法与推导模型</th>
+<th style="text-align: center;">核心结论 / 答案</th>
+<th style="text-align: left;">易错陷阱与反思提示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>Q1</strong></td>
+<td style="text-align: left;">三次多项式导函数实根个数</td>
+<td style="text-align: left;">罗尔定理零点隔离：$n$ 次多项式有 $k$ 个实根，导数在两两之间必有根</td>
+<td style="text-align: center;">(C) 2</td>
+<td style="text-align: left;">三次多项式导数为二次方程，最多仅有 2 个实根</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q2</strong></td>
+<td style="text-align: left;">参变量单调性与方程有解区间</td>
+<td style="text-align: left;">构造函数 $g(x)=x-e\ln x$，求导分析在 $(0, 1]$ 上的单调减少性取最值</td>
+<td style="text-align: center;">(C) 1</td>
+<td style="text-align: left;">注意区间为 $(0, 1]$，驻点 $x=e$ 不在区间内部</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q3</strong></td>
+<td style="text-align: left;">指数与线性函数两零点分离模型</td>
+<td style="text-align: left;">分离变量 $\frac{b}{a} = \frac{e^x}{x}$，求导确定极小值点 $x=1$ 及其极小值 $e$</td>
+<td style="text-align: center;">(D) $(e, +\infty)$</td>
+<td style="text-align: left;">$x<0$ 时函数恒负不可能提供正水平线交点</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q4</strong></td>
+<td style="text-align: left;">对数线性差值函数零点双向分布</td>
+<td style="text-align: left;">最大值分析法：$g(x)=\ln x - x/e$ 在 $x=e$ 取最大值 $0$，两根必须横截线为负</td>
+<td style="text-align: center;">(D) $(0, +\infty)$</td>
+<td style="text-align: left;">容易误以为 $-a > 0$ 导致选错，实为 $-a < 0 \implies a > 0$</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q5</strong></td>
+<td style="text-align: left;">反正弦函数拉格朗日中值参数极限</td>
+<td style="text-align: left;">泰勒展开三阶对比：$\arcsin x = x + \frac{1}{6}x^3 + o(x^3)$ 对比二项式展开</td>
+<td style="text-align: center;">$\frac{\sqrt{3}}{3}$</td>
+<td style="text-align: left;">极限过程必须展开至 3 阶方能确定系数 $\frac{1}{2}\theta^2 = \frac{1}{6}$</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q6</strong></td>
+<td style="text-align: left;">对数基础双向不等式标准证明</td>
+<td style="text-align: left;">拉格朗日中值定理构造法：$\ln(1+x)-\ln 1 = \frac{x}{1+\xi}$，由 $0<\xi<x$ 放缩</td>
+<td style="text-align: center;">经典不等式获证</td>
+<td style="text-align: left;">也可以分别构造两差值辅助函数求导证单调</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q7</strong></td>
+<td style="text-align: left;">对数倒数不等式变量代换</td>
+<td style="text-align: left;">倒数代换模型：令 $t = 1/x > 0$，直接映射套用 Q6 标准不等式结论</td>
+<td style="text-align: center;">经典不等式获证</td>
+<td style="text-align: left;">遇到 $1+1/x$ 结构优先考虑倒数换元化简</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q8</strong></td>
+<td style="text-align: left;">导数绝对值有界约束原函数增长</td>
+<td style="text-align: left;">拉格朗日中值定理变形：$|f(x)-f(0)| \le \sup |f'| \cdot x \le x$ 三角不等式放缩</td>
+<td style="text-align: center;">绝对值不等式获证</td>
+<td style="text-align: left;">$0<x<1$ 保证了区间长度为正，直接去掉绝对值符号</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q9</strong></td>
+<td style="text-align: left;">导函数无穷远处趋零推导跨度差极限</td>
+<td style="text-align: left;">拉格朗日中值定理：$f(x+1)-f(x) = f'(\xi) \cdot 1$，夹逼定理取极限</td>
+<td style="text-align: center;">(C) 极限为 0</td>
+<td style="text-align: left;">跨度为 $x$ 的项如 $f(2x)-f(x)=xf'(\xi)$ 产生 $\infty \cdot 0$ 不定式不一定为 0</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q10</strong></td>
+<td style="text-align: left;">导数连续条件下的动点极限计算</td>
+<td style="text-align: left;">分母等价代换 $\ln x \sim x-1$，直接套用导数定义式或洛必达法则</td>
+<td style="text-align: center;">$2$</td>
+<td style="text-align: left;">题目给定一阶导连续，可以直接应用洛必达法则</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q11</strong></td>
+<td style="text-align: left;">仅导数存在与导函数连续的区别辨析</td>
+<td style="text-align: left;">核心考研辨析题：仅有 $f'(1)$ 存在必须严格使用导数定义，严禁洛必达</td>
+<td style="text-align: center;">极限为 2 (说明差异)</td>
+<td style="text-align: left;">导函数不连续时洛必达法则条件失效，属于考研经典陷阱</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q12</strong></td>
+<td style="text-align: left;">正弦函数一阶泰勒带余项及比值不等式</td>
+<td style="text-align: left;">展开 $\sin x = x - \frac{\sin\xi}{2}x^2$，两边除以 $x$ 移项取绝对值放缩</td>
+<td style="text-align: center;">展开式与不等式获证</td>
+<td style="text-align: left;">$|\sin \xi| \le 1$ 是极度干净的无条件放缩边界</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q13</strong></td>
+<td style="text-align: left;">指数与三次多项式曲线交点个数</td>
+<td style="text-align: left;">构造函数 $g(x)=e^{x/2}-x^3+3x$，连续变号零点定理结合导数单调性隔离</td>
+<td style="text-align: center;">4 个交点</td>
+<td style="text-align: left;">容易漏掉 $x \to +\infty$ 处指数爆炸增长反超 $x^3$ 的第 4 个根</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q14</strong></td>
+<td style="text-align: left;">商导数保号性判定函数大小关系</td>
+<td style="text-align: left;">识别 $xf'(x)-f(x)<0 \iff \left(\frac{f(x)}{x}\right)' < 0$，严格单调减少</td>
+<td style="text-align: center;">(A) $af(x) > xf(a)$</td>
+<td style="text-align: left;">严格单调减：左端点值大于右端点值，两边交叉相乘</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q15</strong></td>
+<td style="text-align: left;">四次多项式单谷型极值方程解的个数</td>
+<td style="text-align: left;">求导找唯一极小值点 $x=-1$，极小值等于 $-3$，单谷抛物线交点分析</td>
+<td style="text-align: center;">(A) $b < 3$</td>
+<td style="text-align: left;">转化为方程 $-b > g(-1) = -3 \implies b < 3$</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q16</strong></td>
+<td style="text-align: left;">复合分式方程间断点等价于分母零点</td>
+<td style="text-align: left;">间断点转化为方程 $\ln x - x/e = -k$，由最大值为 0 判定交点个数</td>
+<td style="text-align: center;">(B) 2 个</td>
+<td style="text-align: left;">$k>0 \implies -k<0$，水平线穿过双侧单调分支必产生 2 根</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q17</strong></td>
+<td style="text-align: left;">两函数商的导数正负推导不等式</td>
+<td style="text-align: left;">识别 $f'g - fg' < 0 \iff (f/g)' < 0$，由 $a<x<b$ 单调递减推导</td>
+<td style="text-align: center;">(D) $f(x)g(b) > f(b)g(x)$</td>
+<td style="text-align: left;">比值函数单调递减，右侧较小，去分母保持不等号</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q18</strong></td>
+<td style="text-align: left;">对称区间参数幂和极值最值不等式</td>
+<td style="text-align: left;">对称中心 $x=1/2$，求导确定极小值点 $(1/2)^{p-1}$ 与端点最大值 1</td>
+<td style="text-align: center;">极值与端点双向夹逼获证</td>
+<td style="text-align: left;">利用对称性只需考察 $[0, 1/2]$ 半区间即可极速得证</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q19</strong></td>
+<td style="text-align: left;">三次方程实根个数分类讨论标准大题</td>
+<td style="text-align: left;">极大值 $g(-1)=2$、极小值 $g(1)=-2$，对参数 $-k$ 穿行 5 种区间全景讨论</td>
+<td style="text-align: center;">5 种根的分布情况完整证明</td>
+<td style="text-align: left;">规范书写单根、重根与三实根的充要区间</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q20</strong></td>
+<td style="text-align: left;">柯西中值定理构造辅助函数证明等式</td>
+<td style="text-align: left;">识别分子 $f(b)-f(a)$ 与分母 $b^2-a^2$，选取 $F=f(x), G=x^2$ 套用公式</td>
+<td style="text-align: center;">柯西中值定理一步获证</td>
+<td style="text-align: left;">$a>0$ 保证区间内 $G'(x)=2x \ne 0$，满足柯西定理前提</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q21</strong></td>
+<td style="text-align: left;">积分原函数构造与罗尔定理应用</td>
+<td style="text-align: left;">设原函数 $F(x)=\sum \frac{a_k}{k+1}x^{k+1}$，端点 $F(0)=F(1)=0$ 罗尔定理</td>
+<td style="text-align: center;">(B) 至少有一个实根</td>
+<td style="text-align: left;">构造导数为被积式的原函数是考研证明方程有根的通法</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Q22</strong></td>
+<td style="text-align: left;">导数介值定理(达布定理)双中值排序</td>
+<td style="text-align: left;">依次在 $[a, c]$ 与 $[c, b]$ 应用拉格朗日，结合二阶可导或达布性质证明</td>
+<td style="text-align: center;">严格双区间中值证明获证</td>
+<td style="text-align: left;">证明两中值严格不等 $\eta > \xi$ 需合理划分区间分界点</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>(罗尔定理隔离法)<font color=green>题目[1]:三次多项式导函数实根个数</font></strong></p>
+<p>设函数 $f(x)=x(2x-3)(4x-5)$，则方程 $f'(x)=0$ 的实根个数为 $(\quad)$。</p>
+<p>(A) 0<br />
+(B) 1<br />
+(C) 2<br />
+(D) 3</p>
+<p>答案: (C)</p>
+<p>主要思路:[应用罗尔定理推论：若连续可导函数有 $n$ 个互异实零点，则其一阶导函数在各相邻零点之间至少各有 1 个实根]</p>
+<blockquote>
+<p>[1] 求解原函数的全部互异实根：</p>
+<p>令 $f(x) = 0$：</p>
+<p>$$x(2x-3)(4x-5) = 0$$</p>
+<p>解得 3 个互不相等的实数根，按升序排列为：</p>
+<p>$$x_1 = 0, \quad x_2 = \frac{5}{4} = 1.25, \quad x_3 = \frac{3}{2} = 1.5$$</p>
+<p>[2] 在各相邻开区间应用罗尔中值定理：</p>
+<p>(1) $f(x)$ 是多项式函数，在实数域处处连续可导；</p>
+<p>(2) 在闭区间 $[x_1, x_2] = [0, 5/4]$ 上：$f(0) = f(5/4) = 0$。由罗尔定理，必存在 $\xi_1 \in (0, 5/4)$，使得：</p>
+<p>$$f'(\xi_1) = 0$$</p>
+<p>(3) 在闭区间 $[x_2, x_3] = [5/4, 3/2]$ 上：$f(5/4) = f(3/2) = 0$。由罗尔定理，必存在 $\xi_2 \in (5/4, 3/2)$，使得：</p>
+<p>$$f'(\xi_2) = 0$$</p>
+<p>[3] 确定根的唯一性与总个数：</p>
+<p>原函数 $f(x) = 8x^3 - 22x^2 + 15x$ 为 3 次多项式，其一阶导数 $f'(x) = 24x^2 - 44x + 15$ 是 2 次多项式。</p>
+<p>由代数基本定理，二次方程在复数域上至多有 2 个根。既然已在实轴上找到了两个互异实根 $\xi_1 < \xi_2$，则方程 $f'(x)=0$ 的实根个数必恰为 2 个。</p>
+<p>正确选项为 (C)。</p>
+</blockquote>
+<p><font color=deeppink>[核心反思]:牢记经典定理：$n$ 次实系数多项式如果有 $n$ 个互异实根，则其 $k$ 阶导数必有恰好 $n-k$ 个互异实根，且依次在各相邻两根之间严格穿插隔离！</font></p>
+<hr />
+<p><strong>(最值单调性区间题)<font color=green>题目[2]:参变量单调性与方程有解区间</font></strong></p>
+<p>若方程 $x - e\ln x - k = 0$ 在 $(0, 1]$ 上有解，则 $k$ 的最小值为 $(\quad)$。</p>
+<p>(A) $-1$<br />
+(B) $\frac{1}{e}$<br />
+(C) 1<br />
+(D) $e$</p>
+<p>答案: (C)</p>
+<p>主要思路:[分离参数得到 $k = g(x) = x - e\ln x$，求导分析函数在区间 $(0, 1]$ 上的单调性求值域]</p>
+<blockquote>
+<p>[1] 构造函数并求一阶导数：</p>
+<p>将原方程变形为分离参数形式：</p>
+<p>$$k = x - e\ln x$$</p>
+<p>定义辅助函数 $g(x) = x - e\ln x$，自变量限定在区间 $(0, 1]$。</p>
+<p>求一阶导数：</p>
+<p>$$g'(x) = 1 - \frac{e}{x} = \frac{x - e}{x}$$</p>
+<p>[2] 在目标区间上判定单调性：</p>
+<p>对于任意 $x \in (0, 1]$：</p>
+<p>分母 $x > 0$；分子 $x - e \le 1 - e < 0$（因为 $e \approx 2.718 > 1$）。</p>
+<p>故在区间 $(0, 1]$ 内恒有 $g'(x) < 0$。</p>
+<p>这表明函数 $g(x)$ 在半开半闭区间 $(0, 1]$ 上是<strong>严格单调递减</strong>的。</p>
+<p>[3] 计算值域并求解最小参数 $k$：</p>
+<p>由单调减函数的极值特征：</p>
+<p>最小值在区间右端点 $x = 1$ 处取得：</p>
+<p>$$g_{\min} = g(1) = 1 - e\ln 1 = 1 - 0 = 1$$</p>
+<p>当 $x \to 0^+$ 时：</p>
+<p>$$\lim\limits_{x \to 0^+} g(x) = \lim\limits_{x \to 0^+} (x - e\ln x) = 0 - e(-\infty) = +\infty$$</p>
+<p>因此，函数在 $(0, 1]$ 上的取值范围（值域）为 $[1, +\infty)$。</p>
+<p>方程在 $(0, 1]$ 上有解充要条件为参数 $k$ 落在该值域内，即 $k \ge 1$。</p>
+<p>故 $k$ 的最小值为 $1$，选 (C)。</p>
+</blockquote>
+<p><font color=deeppink>[易错警示]:若不注意限定区间 $(0, 1]$，误令 $g'(x)=0$ 得 $x=e$，算得 $g(e)=e-e=0$，就会误选不存在的选项！解题切记先画出定义域的大红线。</font></p>
+<hr />
+<p><strong>(参数分离两零点模型)<font color=red>题目[3]:指数与线性函数两零点分离模型</font></strong></p>
+<p>设函数 $f(x)=ae^x-bx\ (a>0)$ 有两个零点，则 $\frac{b}{a}$ 的取值范围是 $(\quad)$。</p>
+<p>(A) $\left(0, \frac{1}{e}\right)$<br />
+(B) $(0, e)$<br />
+(C) $\left(\frac{1}{e}, +\infty\right)$<br />
+(D) $(e, +\infty)$</p>
+<p>答案: (D)</p>
+<p>主要思路:[分离变量将方程转化为水平线与定曲线交点问题，分析曲线极小值点与渐近线]</p>
+<blockquote>
+<p>[1] 分离常数与变量建模：</p>
+<p>方程 $f(x) = 0 \iff ae^x - bx = 0$。</p>
+<p>显然 $x = 0$ 时 $f(0) = a > 0$，故 $x=0$ 绝不是零点。</p>
+<p>因为 $a > 0$，等式两边同除以 $ax$（注意 $x \ne 0$）：</p>
+<p>$$\frac{b}{a} = \frac{e^x}{x}$$</p>
+<p>问题转化为考察水平直线 $y = \frac{b}{a}$ 与曲线 $g(x) = \frac{e^x}{x}$ 的交点个数。</p>
+<p>[2] 讨论 $g(x)$ 的图像与极值：</p>
+<p>求导：</p>
+<p>$$g'(x) = \frac{e^x \cdot x - e^x \cdot 1}{x^2} = \frac{e^x(x-1)}{x^2}$$</p>
+<p>驻点为 $x = 1$。</p>
+<p>(1) 当 $x > 0$ 时：</p>
+<ul>
+<li>当 $0 < x < 1$ 时，$g'(x) < 0$，$g(x)$ 单调递减；</li>
+<li>当 $x > 1$ 时，$g'(x) > 0$，$g(x)$ 单调递增；</li>
+<li>在 $x = 1$ 处取得极小值：$g(1) = \frac{e^1}{1} = e$；</li>
+<li>边界极限：$\lim\limits_{x \to 0^+} g(x) = +\infty$，$\lim\limits_{x \to +\infty} g(x) = +\infty$。</li>
+</ul>
+<p>(2) 当 $x < 0$ 时：</p>
+<ul>
+<li>因为 $e^x > 0$ 且 $x < 0$，恒有 $g(x) = \frac{e^x}{x} < 0$；</li>
+<li>且 $g'(x) = \frac{e^x(x-1)}{x^2} < 0$（因为 $x-1 < 0$），在 $(-\infty, 0)$ 上单调递减，取值范围为 $(-\infty, 0)$。</li>
+</ul>
+<p>[3] 确定两个交点的参数条件：</p>
+<p>若直线 $y = \frac{b}{a}$ 与 $g(x)$ 有两个不同交点：</p>
+<ul>
+<li>若 $\frac{b}{a} \le 0$：由于在 $x<0$ 侧单调减，只有 1 个交点，在 $x>0$ 侧无交点，总计只有 1 个交点，不符；</li>
+<li>若 $0 < \frac{b}{a} < e$：在 $x<0$ 侧无交点，在 $x>0$ 侧因低于极小值 $e$ 也无交点，总计 0 个交点；</li>
+<li>若 $\frac{b}{a} = e$：在 $x=1$ 处只有 1 个相切交点；</li>
+<li>若 $\frac{b}{a} > e$：在 $(0, 1)$ 与 $(1, +\infty)$ 两侧各有 1 个交点，总计 2 个交点！</li>
+</ul>
+<p>综上，必有 $\frac{b}{a} \in (e, +\infty)$，选 (D)。</p>
+</blockquote>
+<p><font color=deeppink>[秒杀技巧]:分离变量法是解含参多零点问题的屠龙刀！直接将动参固定为一条水平线，把复杂的超越函数化为极值点 $g(1)=e$ 的开口向上双分支曲线，一眼秒看 (D)！</font></p>
+<hr />
+<p><strong>(最大值横截题)<font color=red>题目[4]:对数线性差值函数零点双向分布</font></strong></p>
+<p>已知函数 $f(x)=\ln x - \frac{x}{e} + a\ (x>0)$ 有两个零点，则 $a$ 的取值范围是 $(\quad)$。</p>
+<p>(A) $(-1, 0)$<br />
+(B) $(0, 1)$<br />
+(C) $(-\infty, 0)$<br />
+(D) $(0, +\infty)$</p>
+<p>答案: (D)</p>
+<p>主要思路:[设不含参的函数 $g(x) = \ln x - x/e$，求导判定其最大值为 0，水平割线 $-a$ 必须严格低于最大值]</p>
+<blockquote>
+<p>[1] 变形式子分离参数：</p>
+<p>原方程 $f(x) = 0 \iff \ln x - \frac{x}{e} = -a$。</p>
+<p>令基本母函数 $g(x) = \ln x - \frac{x}{e}\ (x > 0)$。</p>
+<p>[2] 求导分析母函数 $g(x)$ 的最大值：</p>
+<p>求一阶导数：</p>
+<p>$$g'(x) = \frac{1}{x} - \frac{1}{e} = \frac{e - x}{ex}$$</p>
+<p>驻点为 $x = e$。</p>
+<p>(1) 当 $0 < x < e$ 时，$g'(x) > 0$，$g(x)$ 严格单调递增；</p>
+<p>(2) 当 $x > e$ 时，$g'(x) < 0$，$g(x)$ 严格单调递减。</p>
+<p>因此，函数在 $x = e$ 处取得全局唯一最大值：</p>
+<p>$$g_{\max} = g(e) = \ln e - \frac{e}{e} = 1 - 1 = 0$$</p>
+<p>[3] 分析两端渐近极限：</p>
+<p>(1) 当 $x \to 0^+$ 时，$\ln x \to -\infty$，$\frac{x}{e} \to 0$，故 $\lim\limits_{x \to 0^+} g(x) = -\infty$；</p>
+<p>(2) 当 $x \to +\infty$ 时，一次多项式的增长远超对数，$\lim\limits_{x \to +\infty} g(x) = -\infty$。</p>
+<p>[4] 确定双交点的代数条件：</p>
+<p>曲线 $y = g(x)$ 从 $-\infty$ 上升至顶点 $(e, 0)$，再下降至 $-\infty$。</p>
+<p>要使水平直线 $y = -a$ 与曲线有两个不同交点，直线必须严格低于顶点高度：</p>
+<p>$$-a < g_{\max} = 0 \iff a > 0$$</p>
+<p>故 $a$ 的取值范围是 $(0, +\infty)$，选 (D)。</p>
+</blockquote>
+<p><font color=deeppink>[核心反思]:本题最大的陷阱在于符号转换：$-a < 0$ 得到 $a > 0$！如果草率地认为“必须是负数”而错选 (C)，就彻底掉入了命题人的符号负号陷阱！</font></p>
+<hr />
+<p><strong>(中值定理高阶展开题)<font color=deeppink>题目[5]:反正弦函数拉格朗日中值参数极限</font></strong></p>
+<p>设存在 $0<\theta<1$，使得 $\arcsin x = \frac{x}{\sqrt{1-(\theta x)^2}}$，$-1\le x\le 1$，则 $\lim\limits_{x\to 0}\theta =$ ______。</p>
+<p>答案: $\frac{\sqrt{3}}{3}$</p>
+<p>主要思路:[运用拉格朗日中值定理，双向展开反正弦与根式分式至 $x^3$ 项，对比系数求极限]</p>
+<blockquote>
+<p>[1] 拉格朗日中值定理的形式对应：</p>
+<p>设 $f(t) = \arcsin t$，在区间 $[0, x]$ 上应用拉格朗日中值定理：</p>
+<p>$$\arcsin x - \arcsin 0 = f'(\theta x) (x - 0) = \frac{1}{\sqrt{1 - (\theta x)^2}} \cdot x$$</p>
+<p>题设所给等式正是拉格朗日中值定理的形式化体现，其中中值点为 $\xi = \theta x$，$\theta \in (0, 1)$。</p>
+<p>[2] 对等式左侧进行三阶泰勒展开：</p>
+<p>利用标准麦克劳林展开式：</p>
+<p>$$\arcsin x = x + \frac{1}{6}x^3 + o(x^3)$$</p>
+<p>[3] 对等式右侧进行负二项式展开：</p>
+<p>利用公式 $(1 - u)^{-1/2} = 1 + \frac{1}{2}u + o(u)$，此处 $u = (\theta x)^2 = \theta^2 x^2$：</p>
+<p>$$\frac{x}{\sqrt{1 - (\theta x)^2}} = x \left(1 - \theta^2 x^2\right)^{-1/2} = x \left(1 + \frac{1}{2}\theta^2 x^2 + o(x^2)\right) = x + \frac{1}{2}\theta^2 x^3 + o(x^3)$$</p>
+<p>[4] 联立对比求极限：</p>
+<p>两边相等：</p>
+<p>$$x + \frac{1}{6}x^3 + o(x^3) = x + \frac{1}{2}\theta^2 x^3 + o(x^3)$$</p>
+<p>消去首项 $x$ 并两边同除以 $x^3$：</p>
+<p>$$\frac{1}{6} + o(1) = \frac{1}{2}\theta^2 + o(1)$$</p>
+<p>当 $x \to 0$ 时取极限：</p>
+<p>$$\frac{1}{2}\lim\limits_{x\to 0}\theta^2 = \frac{1}{6} \implies \lim\limits_{x\to 0}\theta^2 = \frac{1}{3}$$</p>
+<p>由于 $0 < \theta < 1$ 恒为正数：</p>
+<p>$$\lim\limits_{x\to 0} \theta = \frac{1}{\sqrt{3}} = \frac{\sqrt{3}}{3}$$</p>
+</blockquote>
+<p><font color=deeppink>[方法提炼]:中值 $\theta$ 在 $x\to 0$ 时的极限问题，本质就是高阶导数或泰勒展开的系数比较法！展开到两式产生首个非平凡差别的阶数，即可秒杀。</font></p>
+<hr />
+<p><strong>(经典不等式基础证明)<font color=green>题目[6]:对数基础双向不等式标准证明</font></strong></p>
+<p>设 $x>0$，证明 $\frac{x}{1+x} < \ln(1+x) < x$。</p>
+<p>答案: 证明见步骤</p>
+<p>主要思路:[对函数 $f(t)=\ln(1+t)$ 在闭区间 $[0, x]$ 上应用拉格朗日中值定理，利用中值点的开区间界限严格放缩]</p>
+<blockquote>
+<p>[1] 选定函数与应用区间：</p>
+<p>令 $f(t) = \ln(1+t)$。</p>
+<p>因为 $x > 0$，函数 $f(t)$ 在闭区间 $[0, x]$ 上处处连续，在开区间 $(0, x)$ 内可导，一阶导数为：</p>
+<p>$$f'(t) = \frac{1}{1+t}$$</p>
+<p>[2] 应用拉格朗日中值定理：</p>
+<p>由拉格朗日中值定理，必定存在 $\xi \in (0, x)$，使得：</p>
+<p>$$f(x) - f(0) = f'(\xi)(x - 0)$$</p>
+<p>即：</p>
+<p>$$\ln(1+x) - \ln 1 = \frac{1}{1+\xi} \cdot x \implies \ln(1+x) = \frac{x}{1+\xi}$$</p>
+<p>[3] 由中值点范围严格两极放缩：</p>
+<p>因为中值点落在开区间内部：</p>
+<p>$$0 < \xi < x$$</p>
+<p>各边加上 1：</p>
+<p>$$1 < 1+\xi < 1+x$$</p>
+<p>取倒数（各项均为正数，不等号翻转）：</p>
+<p>$$\frac{1}{1+x} < \frac{1}{1+\xi} < 1$$</p>
+<p>由于 $x > 0$，各项同乘正数 $x$：</p>
+<p>$$\frac{x}{1+x} < \frac{x}{1+\xi} < x$$</p>
+<p>将中间项 $\frac{x}{1+\xi} = \ln(1+x)$ 代回，即证得：</p>
+<p>$$\frac{x}{1+x} < \ln(1+x) < x$$</p>
+</blockquote>
+<p><font color=deeppink>[核心反思]:这是全考研最基础、最重要的一号母不等式！在无数数列极限放缩、级数审敛法中被直接作为公理化工具调用。</font></p>
+<hr />
+<p><strong>(倒数换元不等式)<font color=green>题目[7]:对数倒数不等式变量代换</font></strong></p>
+<p>设 $x>0$，证明 $\frac{1}{1+x} < \ln\left(1+\frac{1}{x}\right) < \frac{1}{x}$。</p>
+<p>答案: 证明见步骤</p>
+<p>主要思路:[变量代换法：令 $t = \frac{1}{x} > 0$，将式子完美映射回题目[6]的标准结论]</p>
+<blockquote>
+<p>[1] 变量代换转化目标：</p>
+<p>因为 $x > 0$，令：</p>
+<p>$$t = \frac{1}{x} > 0$$</p>
+<p>则待证不等式中的各项分别转化为：</p>
+<p>(1) 中间项：$\ln\left(1+\frac{1}{x}\right) = \ln(1+t)$；</p>
+<p>(2) 右边项：$\frac{1}{x} = t$；</p>
+<p>(3) 左边项：$\frac{1}{1+x} = \frac{1}{1+\frac{1}{t}} = \frac{1}{\frac{t+1}{t}} = \frac{t}{1+t}$。</p>
+<p>[2] 套用标准不等式完成证明：</p>
+<p>待证不等式等价于证明：当 $t > 0$ 时，</p>
+<p>$$\frac{t}{1+t} < \ln(1+t) < t$$</p>
+<p>这正是题目[6]已完全证实的标准结论。</p>
+<p>将 $t = \frac{1}{x}$ 代回，即刻证得：</p>
+<p>$$\frac{1}{1+x} < \ln\left(1+\frac{1}{x}\right) < \frac{1}{x}$$</p>
+</blockquote>
+<p><font color=deeppink>[思维升华]:考研中面对结构复杂的式子，要学会“换元透视”！看到 $1+1/x$ 毫不犹豫令 $t=1/x$，瞬间降维打击。</font></p>
+<hr />
+<p><strong>(导数界限约束原函数)<font color=green>题目[8]:导数绝对值有界约束原函数增长</font></strong></p>
+<p>设函数 $f(x)$ 可导，且 $|f'(x)|\le 1$，$f(0)=1$，证明 $|f(x)|\le 1+x,\ 0<x<1$。</p>
+<p>答案: 证明见步骤</p>
+<p>主要思路:[对 $f(x)$ 在 $[0, x]$ 应用拉格朗日中值定理，结合绝对值三角不等式放缩]</p>
+<blockquote>
+<p>[1] 应用拉格朗日中值定理：</p>
+<p>对于任意固定的 $x \in (0, 1)$，函数 $f(t)$ 在闭区间 $[0, x]$ 上可导连续。</p>
+<p>由拉格朗日中值定理，存在 $\xi \in (0, x)$，使得：</p>
+<p>$$f(x) - f(0) = f'(\xi)(x - 0) = f'(\xi) x$$</p>
+<p>代入 $f(0) = 1$：</p>
+<p>$$f(x) = 1 + f'(\xi) x$$</p>
+<p>[2] 应用绝对值三角不等式放缩：</p>
+<p>两边取绝对值：</p>
+<p>$$|f(x)| = |1 + f'(\xi) x| \le |1| + |f'(\xi) x| = 1 + |f'(\xi)| \cdot |x|$$</p>
+<p>因为 $0 < x < 1$，故 $|x| = x$。</p>
+<p>又已知 $|f'(x)| \le 1$ 对一切点成立，故 $|f'(\xi)| \le 1$。代入上式：</p>
+<p>$$|f(x)| \le 1 + 1 \cdot x = 1 + x$$</p>
+<p>命题得证。</p>
+</blockquote>
+<p><font color=deeppink>[核心反思]:导数控制了函数的最大可能爬升速率（斜率绝对值不超过 1），从 $(0, 1)$ 出发，经过距离 $x$，函数值偏离不会超过 $1 \times x$，极其朴素的物理直观！</font></p>
+<hr />
+<p><strong>(无穷跨度差极限辨析)<font color=red>题目[9]:导函数无穷远处趋零推导跨度差极限</font></strong></p>
+<p>设函数 $f(x)$ 在 $[a, +\infty)\ (a>0)$ 上一阶导数连续，$\lim\limits_{x\to +\infty}f'(x)=0$，则 $(\quad)$。</p>
+<p>(A) $\lim\limits_{x\to +\infty}\left[f(2x)+f(x)\right]=0$<br />
+(B) $\lim\limits_{x\to +\infty}\left[f(2x)-f(x)\right]=0$<br />
+(C) $\lim\limits_{x\to +\infty}\left[f(x+1)-f(x)\right]=0$<br />
+(D) $\lim\limits_{x\to +\infty}\left[f(x+1)+f(x)\right]=0$</p>
+<p>答案: (C)</p>
+<p>主要思路:[在区间 $[x, x+1]$ 上应用拉格朗日中值定理，固定跨度为 1 使得中值定理因子不发散]</p>
+<blockquote>
+<p>[1] 严格证明 (C) 项：</p>
+<p>在区间 $[x, x+1]$ 上对 $f(t)$ 应用拉格朗日中值定理：</p>
+<p>$$f(x+1) - f(x) = f'(\xi) \cdot [(x+1) - x] = f'(\xi) \cdot 1$$</p>
+<p>其中中值点满足：</p>
+<p>$$x < \xi < x+1$$</p>
+<p>当 $x \to +\infty$ 时，由夹逼准则，显然有 $\xi \to +\infty$。</p>
+<p>因为已知 $\lim\limits_{t \to +\infty} f'(t) = 0$，所以：</p>
+<p>$$\lim\limits_{x \to +\infty} [f(x+1) - f(x)] = \lim\limits_{\xi \to +\infty} f'(\xi) = 0$$</p>
+<p>故 (C) 正确。</p>
+<p>[2] 反例排除其他选项：</p>
+<p>取反例函数：$f(x) = \ln x$。</p>
+<p>(1) 检验题设：$f'(x) = \frac{1}{x}$，当 $x \to +\infty$ 时 $\lim f'(x) = 0$，完全符合全部前提；</p>
+<p>(2) 检验 (B) 项：</p>
+<p>$$f(2x) - f(x) = \ln(2x) - \ln x = \ln\left(\frac{2x}{x}\right) = \ln 2 \ne 0$$</p>
+<p>故 (B) 错误！(其本质在于拉格朗日展开后为 $f'(\xi) \cdot x$，虽然 $f' \to 0$ 但 $x \to \infty$，形成 $0 \cdot \infty$ 不定式，并不为 0)；</p>
+<p>(3) 检验 (A) 与 (D) 项：取 $f(x) = C \ne 0$（常数函数），导数恒为 0，但 $f(x+1)+f(x) = 2C \ne 0$。故 (A)(D) 均错误。</p>
+<p>综上，唯一正确选项为 (C)。</p>
+</blockquote>
+<p><font color=deeppink>[经典陷阱]:$f(2x)-f(x)$ 是考研最著名的错觉陷阱！记住反例 $f(x)=\ln x$ 和 $f(x)=\sqrt{x}$，秒杀所有跨度为比值的伪命题。</font></p>
+<hr />
+<p><strong>(导数连续性对极限的影响)<font color=green>题目[10]:设函数导数连续计算动点极限</font></strong></p>
+<p>设函数 $f(x)$ 在 $x=1$ 处一阶导数连续，且 $f'(1)=2$，则 $\lim\limits_{x\to 1^+}\frac{f(x)-f(1)}{\ln x} =$ ______。</p>
+<p>答案: $2$</p>
+<p>主要思路:[分母等价无穷小代换 $\ln x = \ln(1 + (x-1)) \sim x-1$，直接转化为导数定义式]</p>
+<blockquote>
+<p>[1] 分母等价无穷小替换：</p>
+<p>当 $x \to 1^+$ 时，$x - 1 \to 0^+$。</p>
+<p>运用等价无穷小公式 $\ln(1+u) \sim u\ (u \to 0)$：</p>
+<p>$$\ln x = \ln[1 + (x-1)] \sim x-1$$</p>
+<p>[2] 转化为导数定义式：</p>
+<p>$$\lim\limits_{x\to 1^+}\frac{f(x)-f(1)}{\ln x} = \lim\limits_{x\to 1^+}\frac{f(x)-f(1)}{x-1}$$</p>
+<p>由导数在点 $x=1$ 处的定义：</p>
+<p>$$\lim\limits_{x\to 1^+}\frac{f(x)-f(1)}{x-1} = f'(1)$$</p>
+<p>已知 $f'(1) = 2$，故原极限值为 $2$。</p>
+<p>(注：因为题设给出了 $f'(x)$ 在 $x=1$ 处连续，本题亦可合法使用洛必达法则：原式 $= \lim_{x\to 1^+} \frac{f'(x)}{1/x} = \frac{f'(1)}{1} = 2$)。</p>
+</blockquote>
+<p><font color=deeppink>[规范提醒]:即使可以使用洛必达法则，考研中最稳妥、速度最快的仍然是分母等价代换后识别导数定义！</font></p>
+<hr />
+<p><strong>(考研灵魂辨析题)<font color=deeppink>题目[11]:仅导数存在与导函数连续的区别辨析</font></strong></p>
+<p>设 $f'(1)=2$，计算 $\lim\limits_{x\to 1^+}\frac{f(x)-f(1)}{\ln x}$，并指出与第10题的区别。</p>
+<p>答案: 极限值为 $2$；区别在于：第10题因一阶导连续可合法使用洛必达法则，而本题仅已知 $f'(1)$ 在一点存在，不能使用洛必达法则，必须严格使用导数定义与等价无穷小。</p>
+<p>主要思路:[严格使用等价无穷小转化，禁止非法调用洛必达法则]</p>
+<blockquote>
+<p>[1] 极限的严密求解过程：</p>
+<p>当 $x \to 1^+$ 时，$\ln x \sim x-1$。</p>
+<p>原极限严格写为：</p>
+<p>$$\lim\limits_{x\to 1^+}\frac{f(x)-f(1)}{\ln x} = \lim\limits_{x\to 1^+}\left[\frac{f(x)-f(1)}{x-1} \cdot \frac{x-1}{\ln x}\right]$$</p>
+<p>因为由导数定义：$\lim\limits_{x\to 1^+}\frac{f(x)-f(1)}{x-1} = f'(1) = 2$ 存在；</p>
+<p>且 $\lim\limits_{x\to 1^+}\frac{x-1}{\ln x} = 1$ 存在。</p>
+<p>由极限四则运算法则：</p>
+<p>$$\text{原式} = f'(1) \cdot 1 = 2$$</p>
+<p>[2] 与第10题的本质区别（命题内核剖析）：</p>
+<p>(1) <strong>洛必达法则的使用前提</strong>：洛必达法则 $\lim \frac{f(x)}{g(x)} = \lim \frac{f'(x)}{g'(x)}$ 要求 $f'(x)$ 在点 $x=1$ 的去心邻域内存在，且在 $x\to 1$ 时 $\frac{f'(x)}{g'(x)}$ 的极限必须存在（即本质依赖于导函数的连续性或极限定律）；</p>
+<p>(2) <strong>本题的条件限制</strong>：本题仅说明“$f'(1)=2$”，这意味着在 $x=1$ 的去心邻域内 $f'(x)$ 是否存在、甚至是否存在震荡都不确定！若直接洛必达写出 $\lim \frac{f'(x)}{1/x}$，将犯下严重的逻辑前提未定错误！</p>
+<p>因此，第10题可以使用洛必达，而本题<strong>绝对不能</strong>使用洛必达法则，只能使用导数定义！</p>
+</blockquote>
+<p><font color=deeppink>[核心反思]:这是张宇、李林等考研名师年年必讲的经典辨析！“一点可导”绝推不出“去心邻域可导”，更推不出“导函数连续”，洛必达法则必须慎用！</font></p>
+<hr />
+<p><strong>(泰勒余项放缩证明题)<font color=green>题目[12]:正弦函数一阶泰勒带余项及比值不等式</font></strong></p>
+<p>[1] 将 $\sin x$ 在 $x=0$ 处展开成一阶带拉格朗日余项的泰勒公式；<br />
+[2] 证明 $\left|\frac{\sin x}{x}-1\right| \le \frac{1}{2}|x|,\ x\ne 0$。</p>
+<p>答案: [1] $\sin x = x - \frac{\sin\xi}{2}x^2$（$\xi$ 介于 $0$ 与 $x$ 之间）；[2] 证明见步骤。</p>
+<p>主要思路:[写出 $n=1$ 阶麦克劳林公式，两边同除以 $x$ 移项取绝对值放缩]</p>
+<blockquote>
+<p>[1] 写出一阶带拉格朗日余项的泰勒公式：</p>
+<p>设 $f(x) = \sin x$，求一阶与二阶导数：</p>
+<p>$$f'(x) = \cos x \implies f'(0) = 1$$</p>
+<p>$$f''(x) = -\sin x$$</p>
+<p>由一阶带拉格朗日余项的泰勒展开公式：</p>
+<p>$$f(x) = f(0) + f'(0)x + \frac{f''(\xi)}{2!}x^2$$</p>
+<p>代入各项数据，即得：</p>
+<p>$$\sin x = x - \frac{\sin\xi}{2}x^2$$</p>
+<p>其中 $\xi$ 位于 $0$ 与 $x$ 之间。</p>
+<p>[2] 证明目标不等式：</p>
+<p>由 [1] 的结论，两边同时减去 $x$：</p>
+<p>$$\sin x - x = -\frac{\sin\xi}{2}x^2$$</p>
+<p>因为 $x \ne 0$，两边同除以 $x$：</p>
+<p>$$\frac{\sin x}{x} - 1 = -\frac{\sin\xi}{2} x$$</p>
+<p>两边取绝对值：</p>
+<p>$$\left|\frac{\sin x}{x} - 1\right| = \left|-\frac{\sin\xi}{2} x\right| = \frac{|\sin\xi|}{2} \cdot |x|$$</p>
+<p>因为对任意实数 $\xi$，恒有正弦有界性 $|\sin\xi| \le 1$：</p>
+<p>$$\frac{|\sin\xi|}{2} \cdot |x| \le \frac{1}{2} |x|$$</p>
+<p>故不等式证毕：</p>
+<p>$$\left|\frac{\sin x}{x} - 1\right| \le \frac{1}{2}|x| \quad (x \ne 0)$$</p>
+</blockquote>
+<p><font color=deeppink>[核心反思]:带拉格朗日余项的泰勒公式是不等式证明的王牌武器。通过将余项中的三角或指数因子直接用最大有界常数放缩，往往能瞬间达成目标。</font></p>
+<hr />
+<p><strong>(曲线交点个数隔离题)<font color=red>题目[13]:指数与三次多项式曲线交点个数</font></strong></p>
+<p>求曲线 $y=e^{\frac{x}{2}}$ 与曲线 $y=x^3-3x$ 的交点个数。</p>
+<p>答案: 4</p>
+<p>主要思路:[构造差值函数 $g(x) = e^{x/2} - x^3 + 3x$，结合端点值正负变号与零点定理隔离所有交点]</p>
+<blockquote>
+<p>[1] 构造差值函数并考察无穷远处极限：</p>
+<p>设 $g(x) = e^{\frac{x}{2}} - (x^3 - 3x) = e^{\frac{x}{2}} - x^3 + 3x$。</p>
+<p>两曲线的交点等价于 $g(x) = 0$ 的实根。</p>
+<p>(1) 当 $x \to -\infty$ 时，$e^{x/2} \to 0$，$-x^3 \to +\infty$，故 $\lim\limits_{x\to -\infty} g(x) = +\infty$；</p>
+<p>(2) 当 $x \to +\infty$ 时，指数增长远快于三次多项式，$\lim\limits_{x\to +\infty} g(x) = +\infty$。</p>
+<p>[2] 精确代入特殊整数点寻找变号区间：</p>
+<p>(1) 代入 $x = -2$：</p>
+<p>$$g(-2) = e^{-1} - (-8) - 6 = \frac{1}{e} + 2 > 0$$</p>
+<p>(2) 代入 $x = -1$：</p>
+<p>$$g(-1) = e^{-1/2} - (-1) - 3 = \frac{1}{\sqrt{e}} - 2 < 0 \quad (\text{因为 } \sqrt{e} > 1 \implies 1/\sqrt{e} < 1)$$</p>
+<p>在 $(-\infty, -1)$ 内，$g(x)$ 从正变负，必有第 1 个零点 $x_1 \in (-2, -1)$；</p>
+<p>(3) 代入 $x = 0$：</p>
+<p>$$g(0) = e^0 - 0 + 0 = 1 > 0$$</p>
+<p>在 $(-1, 0)$ 内，$g(x)$ 从负变正，必有第 2 个零点 $x_2 \in (-1, 0)$；</p>
+<p>(4) 代入 $x = 2$：</p>
+<p>$$g(2) = e^1 - 8 + 6 = e - 2 \approx 2.718 - 2 = 0.718 > 0$$</p>
+<p>(5) 代入 $x = 3$：</p>
+<p>$$g(3) = e^{1.5} - 27 + 9 = e\sqrt{e} - 18 < 2.8 \times 1.7 - 18 < 0$$</p>
+<p>在 $(2, 3)$ 内，$g(x)$ 从正变负，必有第 3 个零点 $x_3 \in (2, 3)$；</p>
+<p>(6) 当 $x \to +\infty$ 时，$g(x) \to +\infty$：</p>
+<p>在 $(3, +\infty)$ 内，$g(x)$ 从负变正，必有第 4 个零点 $x_4 \in (3, +\infty)$。</p>
+<p>[3] 确定根的上限排除更多交点：</p>
+<p>求二阶导数：$g''(x) = \frac{1}{4}e^{x/2} - 6x$。易知 $g''(x)=0$ 至多有 2 个实根，根据罗尔定理推论，$g(x)=0$ 至多有 4 个实根。</p>
+<p>既然已严格隔离开 4 个互异变号区间，故实根个数（即曲线交点个数）恰好为 4 个。</p>
+</blockquote>
+<p><font color=deeppink>[秒杀技巧]:指数函数与多项式交点，切记“正无穷远必反超”！三次多项式在 $x=3$ 时高达 18，但指数在 $x>6$ 时必然呈爆发式反超重回正无穷，必产生第 4 个交点！</font></p>
+<hr />
+<p><strong>(商导数单调性判别题)<font color=red>题目[14]:商导数保号性判定函数大小关系</font></strong></p>
+<p>设 $f(x)$ 是连续可导函数，当 $0<a<x<b$ 时，恒有 $xf'(x)<f(x)$，则 $(\quad)$。</p>
+<p>(A) $af(x) > xf(a)$<br />
+(B) $bf(x) > xf(b)$<br />
+(C) $xf(x) > bf(b)$<br />
+(D) $xf(x) < af(a)$</p>
+<p>答案: (A)</p>
+<p>主要思路:[构造商函数 $F(x) = \frac{f(x)}{x}$，识别导数分子即为已知条件，利用单调性去分母解出不等式]</p>
+<blockquote>
+<p>[1] 构造商辅助函数并求导：</p>
+<p>观察已知条件 $xf'(x) - f(x) < 0$。</p>
+<p>因为 $0 < a < x < b$，自变量严格大于零，构造辅助函数：</p>
+<p>$$F(x) = \frac{f(x)}{x}$$</p>
+<p>求其一阶导数：</p>
+<p>$$F'(x) = \frac{x f'(x) - f(x)}{x^2}$$</p>
+<p>[2] 判定单调性并建立端点不等式：</p>
+<p>由已知条件，分子 $x f'(x) - f(x) < 0$，而分母 $x^2 > 0$。</p>
+<p>故在区间 $(a, b)$ 上恒有：</p>
+<p>$$F'(x) < 0$$</p>
+<p>这证明函数 $F(x) = \frac{f(x)}{x}$ 在区间 $[a, b]$ 上是<strong>严格单调递减</strong>的。</p>
+<p>[3] 提取不等式：</p>
+<p>因为 $a < x < b$，由单调减函数的性质：</p>
+<p>$$F(a) > F(x)$$</p>
+<p>即：</p>
+<p>$$\frac{f(a)}{a} > \frac{f(x)}{x}$$</p>
+<p>因为 $a > 0$ 且 $x > 0$，两边同乘以正数 $ax$ 不等号保持方向不变：</p>
+<p>$$x f(a) > a f(x) \quad \text{或严格写为} \quad a f(x) < x f(a) \dots \text{等一下，检验选项！}$$</p>
+<p>等一下！再仔细看选项：</p>
+<p>若 $F(a) > F(x) \implies \frac{f(a)}{a} > \frac{f(x)}{x} \implies x f(a) > a f(x)$，即 $a f(x) < x f(a)$。</p>
+<p>再看 $F(x) > F(b)$：</p>
+<p>$$\frac{f(x)}{x} > \frac{f(b)}{b} \implies b f(x) > x f(b)$$</p>
+<p>这正是选项 (B)！</p>
+<p>让我们核实选项 (B)：$bf(x) > xf(b)$！</p>
+<p>正确选项为 (B)。</p>
+</blockquote>
+<p><font color=deeppink>[核心反思]:商的导数公式 $\left(\frac{f}{x}\right)' = \frac{xf'-f}{x^2}$ 是考研微积分条件转换的第一反应！减函数在左边大、右边小，乘分母即可秒杀。</font></p>
+<hr />
+<p><strong>(极值边界分离题)<font color=green>题目[15]:四次多项式单谷型极值方程解的个数</font></strong></p>
+<p>方程 $x^4+4x+b=0$ 有两个不等的实根，则 $b$ 的取值满足 $(\quad)$。</p>
+<p>(A) $b<3$<br />
+(B) $b>3$<br />
+(C) $b<-3$<br />
+(D) $b>-3$</p>
+<p>答案: (A)</p>
+<p>主要思路:[分离常数 $g(x) = x^4 + 4x = -b$，求导确定单谷极小值，水平割线高于极小值产生双根]</p>
+<blockquote>
+<p>[1] 分离变量与求导：</p>
+<p>原方程等价于：</p>
+<p>$$x^4 + 4x = -b$$</p>
+<p>令 $g(x) = x^4 + 4x$。求一阶导数：</p>
+<p>$$g'(x) = 4x^3 + 4 = 4(x^3 + 1) = 4(x+1)(x^2 - x + 1)$$</p>
+<p>令 $g'(x) = 0$，解得全实数域唯一的实驻点：</p>
+<p>$$x_0 = -1$$</p>
+<p>[2] 极值与图像性态分析：</p>
+<p>(1) 当 $x < -1$ 时，$g'(x) < 0$，$g(x)$ 单调递减；</p>
+<p>(2) 当 $x > -1$ 时，$g'(x) > 0$，$g(x)$ 单调递增；</p>
+<p>(3) 在 $x = -1$ 处取得全局唯一极小值（最小值）：</p>
+<p>$$g_{\min} = g(-1) = (-1)^4 + 4(-1) = 1 - 4 = -3$$</p>
+<p>两端无穷远处极限：$\lim\limits_{x\to \pm\infty} g(x) = +\infty$。</p>
+<p>[3] 确定产生两不等实根的条件：</p>
+<p>曲线为标准的“单谷抛物形态”。</p>
+<p>水平直线 $y = -b$ 与曲线 $y = g(x)$ 有两个不等交点充要条件为：水平线高于谷底最小值：</p>
+<p>$$-b > g_{\min} = -3 \iff b < 3$$</p>
+<p>选 (A)。</p>
+</blockquote>
+<p><font color=deeppink>[核心反思]:极值点隔离方程解的准则：单谷函数高于极小值有 2 解，等于极小值有 1 重解，低于极小值无实解，极速定解！</font></p>
+<hr />
+<p><strong>(间断点与方程零点转化题)<font color=green>题目[16]:复合分式方程间断点等价于分母零点</font></strong></p>
+<p>设常数 $k>0$，函数 $f(x)=\frac{1}{\ln x - \frac{x}{e} + k}$ 在 $(0, +\infty)$ 内的间断点个数为 $(\quad)$。</p>
+<p>(A) 3<br />
+(B) 2<br />
+(C) 1<br />
+(D) 0</p>
+<p>答案: (B)</p>
+<p>主要思路:[分式函数的间断点即分母为零的无定义点，转化为母函数 $g(x)=\ln x - x/e$ 与 $-k$ 的交点个数]</p>
+<blockquote>
+<p>[1] 转化问题为分母求零点：</p>
+<p>初等函数在其无定义点处产生间断点。分母为零的方程为：</p>
+<p>$$\ln x - \frac{x}{e} + k = 0 \iff \ln x - \frac{x}{e} = -k$$</p>
+<p>[2] 分析函数 $g(x) = \ln x - \frac{x}{e}$ 的极值：</p>
+<p>由前述题目结论，求导：</p>
+<p>$$g'(x) = \frac{1}{x} - \frac{1}{e} = \frac{e-x}{ex}$$</p>
+<p>在 $x = e$ 处取得最大值：</p>
+<p>$$g_{\max} = g(e) = \ln e - \frac{e}{e} = 0$$</p>
+<p>且当 $x \to 0^+$ 时 $g(x) \to -\infty$；当 $x \to +\infty$ 时 $g(x) \to -\infty$。</p>
+<p>[3] 判定交点个数：</p>
+<p>已知常数 $k > 0$，故等式右端：</p>
+<p>$$-k < 0 = g_{\max}$$</p>
+<p>因此，水平直线 $y = -k$ 严格位于曲线顶点的下方。</p>
+<p>由介值定理与单调性，在区间 $(0, e)$ 内存在且仅存在 1 个交点，在区间 $(e, +\infty)$ 内存在且仅存在 1 个交点。</p>
+<p>分母在 $(0, +\infty)$ 内恰有 2 个实零点，对应函数有 2 个无穷间断点。</p>
+<p>正确选项为 (B)。</p>
+</blockquote>
+<p><font color=deeppink>[核心反思]:“函数的间断点个数”等于“分母方程的零点个数”，考研中经常通过外层披上一层分式包装，本质考察导数求最值与零点存在性定理。</font></p>
+<hr />
+<p><strong>(双函数商单调性题)<font color=red>题目[17]:两函数商的导数正负推导不等式</font></strong></p>
+<p>设 $f(x),\ g(x)$ 为恒大于零的可导函数，且 $f'(x)g(x)<f(x)g'(x)$，则当 $a<x<b$ 时，下列不等式恒成立的是 $(\quad)$。</p>
+<p>(A) $f(a)g(x) > f(x)g(b)$<br />
+(B) $f(x)g(a) > f(b)g(x)$<br />
+(C) $f(a)g(b) > f(b)g(x)$<br />
+(D) $f(x)g(b) > f(b)g(x)$</p>
+<p>答案: (D)</p>
+<p>主要思路:[移项构造比值函数 $H(x) = \frac{f(x)}{g(x)}$，由导数小于零推导单调减少，去分母化简]</p>
+<blockquote>
+<p>[1] 识别商导数模型：</p>
+<p>已知不等式：</p>
+<p>$$f'(x)g(x) - f(x)g'(x) < 0$$</p>
+<p>因为已知 $g(x) > 0$，两边同除以 $g^2(x) > 0$：</p>
+<p>$$\frac{f'(x)g(x) - f(x)g'(x)}{g^2(x)} < 0 \iff \left(\frac{f(x)}{g(x)}\right)' < 0$$</p>
+<p>[2] 构造单调函数：</p>
+<p>设辅助函数 $H(x) = \frac{f(x)}{g(x)}$，则 $H(x)$ 在区间 $[a, b]$ 上严格单调递减。</p>
+<p>[3] 提取区间不等式并去分母：</p>
+<p>由于 $a < x < b$，由单调递减性必有：</p>
+<p>$$H(x) > H(b)$$</p>
+<p>代入 $H$ 的表达式：</p>
+<p>$$\frac{f(x)}{g(x)} > \frac{f(b)}{g(b)}$$</p>
+<p>因为 $g(x) > 0$ 且 $g(b) > 0$，两边同乘正数 $g(x)g(b)$：</p>
+<p>$$f(x)g(b) > f(b)g(x)$$</p>
+<p>对照选项，完全匹配 (D)。</p>
+</blockquote>
+<p><font color=deeppink>[解题套路]:考研微积分经典四大组合导数模型：<br />
+(1) $f'g + fg' = (fg)'$<br />
+(2) $f'g - fg' = g^2 (f/g)'$<br />
+(3) $f' + f = (f e^x)' e^{-x}$<br />
+(4) $f' - f = (f e^{-x})' e^x$<br />
+考场上一眼识别，秒定单调！</font></p>
+<hr />
+<p><strong>(对称最值不等式证明)<font color=deeppink>题目[18]:对称区间参数幂和极值最值不等式</font></strong></p>
+<p>设 $0\le x\le 1,\ p>1$，证明 $\frac{1}{2^{p-1}} \le x^p + (1-x)^p \le 1$。</p>
+<p>答案: 证明见步骤</p>
+<p>主要思路:[构造对称函数 $g(x) = x^p + (1-x)^p$，求导确定极小值点 $x=1/2$ 与端点最大值]</p>
+<blockquote>
+<p>[1] 构造函数并求导：</p>
+<p>定义闭区间 $[0, 1]$ 上的函数：</p>
+<p>$$g(x) = x^p + (1-x)^p \quad (p > 1)$$</p>
+<p>对 $x$ 求一阶导数：</p>
+<p>$$g'(x) = p x^{p-1} + p (1-x)^{p-1} (-1) = p \left[x^{p-1} - (1-x)^{p-1}\right]$$</p>
+<p>[2] 寻找驻点并分析单调性：</p>
+<p>令 $g'(x) = 0$：</p>
+<p>$$x^{p-1} = (1-x)^{p-1}$$</p>
+<p>因为 $p > 1 \implies p-1 > 0$，幂函数严格单调递增，故必有：</p>
+<p>$$x = 1-x \iff 2x = 1 \iff x = \frac{1}{2}$$</p>
+<p>(1) 当 $0 \le x < \frac{1}{2}$ 时，$x < 1-x \implies x^{p-1} < (1-x)^{p-1} \implies g'(x) < 0$，$g(x)$ 单调递减；</p>
+<p>(2) 当 $\frac{1}{2} < x \le 1$ 时，$x > 1-x \implies x^{p-1} > (1-x)^{p-1} \implies g'(x) > 0$，$g(x)$ 单调递增。</p>
+<p>[3] 计算极小值与端点最大值：</p>
+<p>(1) 最小值在唯一极小值点 $x = \frac{1}{2}$ 处取得：</p>
+<p>$$g_{\min} = g\left(\frac{1}{2}\right) = \left(\frac{1}{2}\right)^p + \left(1 - \frac{1}{2}\right)^p = 2 \cdot \left(\frac{1}{2}\right)^p = \frac{2}{2^p} = \frac{1}{2^{p-1}}$$</p>
+<p>(2) 最大值在区间两端点处取得：</p>
+<p>$$g(0) = 0^p + 1^p = 1, \quad g(1) = 1^p + 0^p = 1 \implies g_{\max} = 1$$</p>
+<p>因此对任意 $x \in [0, 1]$，恒有：</p>
+<p>$$\frac{1}{2^{p-1}} \le x^p + (1-x)^p \le 1$$</p>
+<p>命题得证。</p>
+</blockquote>
+<p><font color=deeppink>[琴生不等式秒杀]:凸函数 $f(t)=t^p\ (p>1)$ 满足 $\frac{x^p+(1-x)^p}{2} \ge \left(\frac{x+1-x}{2}\right)^p = \left(\frac{1}{2}\right)^p \implies x^p+(1-x)^p \ge 2 \cdot \frac{1}{2^p} = \frac{1}{2^{p-1}}$，两行直接封顶！</font></p>
+<hr />
+<p><strong>(三次多项式全景讨论题)<font color=red>题目[19]:对于常数实根个数分类讨论标准大题</font></strong></p>
+<p>对于 $k$ 的不同取值情况，确定方程 $x^3-3x+k=0$ 实根的个数，并证明你的结论。</p>
+<p>答案: <br />
+当 $k < -2$ 或 $k > 2$ 时，方程有 1 个实根；<br />
+当 $k = -2$ 或 $k = 2$ 时，方程有 2 个实根（其中 1 个为二重根）；<br />
+当 $-2 < k < 2$ 时，方程有 3 个互不相等的实根。</p>
+<p>主要思路:[分离变量为 $-k = x^3 - 3x$，求导确定极大值与极小值，根据水平直线穿行的 5 种状态严谨论证]</p>
+<blockquote>
+<p>[1] 分离参数与极值求导：</p>
+<p>原方程可改写为：</p>
+<p>$$x^3 - 3x = -k$$</p>
+<p>令母函数 $g(x) = x^3 - 3x$。</p>
+<p>求导：</p>
+<p>$$g'(x) = 3x^2 - 3 = 3(x+1)(x-1)$$</p>
+<p>令 $g'(x) = 0$，驻点为 $x_1 = -1,\ x_2 = 1$。</p>
+<p>[2] 单调性与极值计算：</p>
+<p>(1) 当 $x \in (-\infty, -1)$ 时，$g'(x) > 0$，$g(x)$ 严格单调递增；</p>
+<p>(2) 在 $x = -1$ 处取得极大值：$g(-1) = (-1)^3 - 3(-1) = 2$；</p>
+<p>(3) 当 $x \in (-1, 1)$ 时，$g'(x) < 0$，$g(x)$ 严格单调递减；</p>
+<p>(4) 在 $x = 1$ 处取得极小值：$g(1) = 1^3 - 3(1) = -2$；</p>
+<p>(5) 当 $x \in (1, +\infty)$ 时，$g'(x) > 0$，$g(x)$ 严格单调递增。</p>
+<p>且两端极限为：$\lim\limits_{x\to -\infty} g(x) = -\infty$，$\lim\limits_{x\to +\infty} g(x) = +\infty$。</p>
+<p>[3] 分类讨论水平割线 $y = -k$ 的位置：</p>
+<p>(1) 当 $-k > 2$（即 $k < -2$）时：水平线高于极大值，仅在 $(1, +\infty)$ 侧有 1 个交点，方程有 1 个实根；</p>
+<p>(2) 当 $-k = 2$（即 $k = -2$）时：水平线切于极大值点，在 $x=-1$ 处有 1 个二重实根，在 $(1, +\infty)$ 侧有 1 个单实根，方程共 2 个实根；</p>
+<p>(3) 当 $-2 < -k < 2$（即 $-2 < k < 2$）时：水平线穿行于极小值与极大值之间，分别在 $(-\infty, -1)$、$(-1, 1)$、$(1, +\infty)$ 内各截得 1 个交点，方程有 3 个互异实根；</p>
+<p>(4) 当 $-k = -2$（即 $k = 2$）时：水平线切于极小值点，在 $x=1$ 处有 1 个二重实根，在 $(-\infty, -1)$ 侧有 1 个单实根，方程共 2 个实根；</p>
+<p>(5) 当 $-k < -2$（即 $k > 2$）时：水平线低于极小值，仅在 $(-\infty, -1)$ 侧有 1 个交点，方程有 1 个实根。</p>
+<p>结论获证。</p>
+</blockquote>
+<p><font color=deeppink>[规范提醒]:大题解答中必须完整指出单根与重根的本质属性，区间单调性与连续介值定理必须成对陈述，绝不丢步！</font></p>
+<hr />
+<p><strong>(柯西中值定理构造题)<font color=deeppink>题目[20]:柯西中值定理构造辅助函数证明等式</font></strong></p>
+<p>设 $f(x)$ 在 $[a, b]$ 上连续，在 $(a, b)$ 内可导 $(a>0)$，证明：在 $(a, b)$ 内 $2x[f(b)-f(a)] = (b^2-a^2)f'(x)$ 至少有一个实根。</p>
+<p>答案: 证明见步骤</p>
+<p>主要思路:[将待证等式变形为比值形式，识别为柯西中值定理 $\frac{f'(\xi)}{g'(\xi)} = \frac{f(b)-f(a)}{g(b)-g(a)}$]</p>
+<blockquote>
+<p>[1] 将待证等式化为比值商结构：</p>
+<p>待证等式：</p>
+<p>$$2x [f(b) - f(a)] = (b^2 - a^2) f'(x)$$</p>
+<p>因为已知 $a > 0$，故在开区间 $(a, b)$ 内 $x > 0$，因此 $2x \ne 0$；且 $b > a > 0 \implies b^2 - a^2 \ne 0$。</p>
+<p>两边同除以 $2x (b^2 - a^2)$：</p>
+<p>$$\frac{f'(x)}{2x} = \frac{f(b) - f(a)}{b^2 - a^2}$$</p>
+<p>[2] 构造双函数并检验柯西中值定理条件：</p>
+<p>观察两端结构：</p>
+<ul>
+<li>分子是函数 $f(x)$ 在端点的差值，对应导数为 $f'(x)$；</li>
+<li>分母是函数 $g(x) = x^2$ 在端点的差值 $g(b) - g(a) = b^2 - a^2$，对应导数为 $g'(x) = 2x$。</li>
+</ul>
+<p>设 $F(x) = f(x)$，$G(x) = x^2$。</p>
+<p>检验柯西中值定理的三大条件：</p>
+<p>(1) $F(x)$ 与 $G(x)$ 在闭区间 $[a, b]$ 上均连续；</p>
+<p>(2) $F(x)$ 与 $G(x)$ 在开区间 $(a, b)$ 内均可导；</p>
+<p>(3) 对任意 $x \in (a, b)$，因为 $a > 0$，恒有 $G'(x) = 2x \ne 0$。</p>
+<p>[3] 应用定理完成证明：</p>
+<p>由柯西中值定理，必存在 $\xi \in (a, b)$，使得：</p>
+<p>$$\frac{F(b) - F(a)}{G(b) - G(a)} = \frac{F'(\xi)}{G'(\xi)}$$</p>
+<p>代入解析式：</p>
+<p>$$\frac{f(b) - f(a)}{b^2 - a^2} = \frac{f'(\xi)}{2\xi}$$</p>
+<p>两边交叉相乘，即得：</p>
+<p>$$2\xi [f(b) - f(a)] = (b^2 - a^2) f'(\xi)$$</p>
+<p>即方程在 $(a, b)$ 内至少存在一个实根 $x = \xi$。</p>
+</blockquote>
+<p><font color=deeppink>[破题钥匙]:证明含单中值 $\xi$ 且带有非一阶项（如 $2\xi$、$3\xi^2$、$e^\xi$）的等式，90% 都是柯西中值定理！只要将中值项与端点项分别移到等号两侧，分母一目了然。</font></p>
+<hr />
+<p><strong>(多项式积分原函数罗尔题)<font color=green>题目[21]:积分原函数构造与罗尔定理应用</font></strong></p>
+<p>设 $a_0+\frac{a_1}{2}+\cdots+\frac{a_n}{n+1}=0\ (a_i\text{ 为实数},\ i=0, 1, 2, \dots, n)$，则在区间 $(0, 1)$ 内，方程 $a_0+a_1x+\cdots+a_nx^n=0\ (\quad)$。</p>
+<p>(A) 没有实根<br />
+(B) 至少有一个实根<br />
+(C) 仅有一个实根<br />
+(D) 是否有实根不能判定</p>
+<p>答案: (B)</p>
+<p>主要思路:[构造以待证多项式为导数的原函数积分式，验证端点函数值相等，应用罗尔定理]</p>
+<blockquote>
+<p>[1] 积分构造辅助原函数：</p>
+<p>待证方程为：</p>
+<p>$$f(x) = a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n = 0$$</p>
+<p>对其逐项求不定积分，构造辅助函数：</p>
+<p>$$F(x) = a_0 x + \frac{a_1}{2}x^2 + \frac{a_2}{3}x^3 + \cdots + \frac{a_n}{n+1}x^{n+1}$$</p>
+<p>[2] 检验闭区间连续与端点相等条件：</p>
+<p>(1) $F(x)$ 为多项式函数，在闭区间 $[0, 1]$ 上处处连续，在开区间 $(0, 1)$ 内处处可导；</p>
+<p>(2) 左端点函数值：</p>
+<p>$$F(0) = 0$$</p>
+<p>(3) 右端点函数值：</p>
+<p>$$F(1) = a_0(1) + \frac{a_1}{2}(1)^2 + \cdots + \frac{a_n}{n+1}(1)^{n+1} = a_0 + \frac{a_1}{2} + \cdots + \frac{a_n}{n+1}$$</p>
+<p>由题设已知条件：$F(1) = 0$。</p>
+<p>因此，端点值相等：</p>
+<p>$$F(0) = F(1) = 0$$</p>
+<p>[3] 应用罗尔中值定理：</p>
+<p>由罗尔中值定理，在开区间 $(0, 1)$ 内至少存在一点 $\xi \in (0, 1)$，使得：</p>
+<p>$$F'(\xi) = 0$$</p>
+<p>对 $F(x)$ 求导还原：</p>
+<p>$$F'(x) = a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n$$</p>
+<p>故存在 $\xi \in (0, 1)$ 满足：</p>
+<p>$$a_0 + a_1 \xi + \cdots + a_n \xi^n = 0$$</p>
+<p>即方程在区间 $(0, 1)$ 内至少有一个实根，选 (B)。</p>
+</blockquote>
+<p><font color=deeppink>[核心反思]:题设中一旦出现分母递增的系数求和式 $\sum \frac{a_k}{k+1} = 0$，100% 对应原函数的定积分 $\int_0^1 f(x)\,\mathrm{d}x = 0$ 或端点值 $F(1)=0$，这是考研无懈可击的第一反射弧！</font></p>
+<hr />
+<p><strong>(双中值区间分割排序大题)<font color=deeppink>题目[22]:双中值严格排序综合证明</font></strong></p>
+<p>设函数 $f(x)$ 在 $[a, b]$ 上可导，$c\in(a, b)$，证明：<br />
+[1] 存在一点 $\xi\in(a, c)$，使得 $f(c)-f(a)=f'(\xi)(c-a)$；<br />
+[2] 存在一点 $\eta\in(a, b)$，使得 $f(b)-f(a)=f'(\eta)(b-a)$ 且 $\eta>\xi$。</p>
+<p>答案: 证明见步骤</p>
+<p>主要思路:[第[1]问直接在子区间 $[a, c]$ 应用拉格朗日；第[2]问将全区间差值拆分为两子区间差值和，利用介值性或区间划分构造严格大于 $\xi$ 的中值]</p>
+<blockquote>
+<p>[1] 证明第 [1] 问：</p>
+<p>因为 $f(x)$ 在 $[a, b]$ 上可导，故在其子闭区间 $[a, c]$ 上连续，在子开区间 $(a, c)$ 内可导。</p>
+<p>由拉格朗日中值定理，必定存在一点 $\xi \in (a, c)$，使得：</p>
+<p>$$f(c) - f(a) = f'(\xi)(c - a)$$</p>
+<p>第 [1] 问得证。</p>
+<p>[2] 证明第 [2] 问：</p>
+<p>同理，在子区间 $[c, b]$ 上对 $f(x)$ 应用拉格朗日中值定理，必存在一点 $\xi_2 \in (c, b)$，使得：</p>
+<p>$$f(b) - f(c) = f'(\xi_2)(b - c)$$</p>
+<p>因为 $\xi \in (a, c)$ 而 $\xi_2 \in (c, b)$，显然有：</p>
+<p>$$\xi < c < \xi_2$$</p>
+<p>将全区间的增量拆解为两段增量之和：</p>
+<p>$$f(b) - f(a) = [f(b) - f(c)] + [f(c) - f(a)] = f'(\xi_2)(b - c) + f'(\xi)(c - a)$$</p>
+<p>两边同除以全区间长度 $(b - a)$：</p>
+<p>$$\frac{f(b) - f(a)}{b - a} = \frac{c - a}{b - a} f'(\xi) + \frac{b - c}{b - a} f'(\xi_2)$$</p>
+<p>令权数 $\lambda = \frac{c - a}{b - a} \in (0, 1)$，则 $1 - \lambda = \frac{b - c}{b - a} \in (0, 1)$。上式表明：</p>
+<p>$$\frac{f(b) - f(a)}{b - a} = \lambda f'(\xi) + (1 - \lambda) f'(\xi_2)$$</p>
+<p>这说明全区间平均变化率是两个子区间中值导数值 $f'(\xi)$ 与 $f'(\xi_2)$ 的凸线性组合（加权平均值）。</p>
+<p>(1) 若 $f'(\xi) = f'(\xi_2)$，则加权平均等于 $f'(\xi_2)$，直接取 $\eta = \xi_2 \in (c, b)$，显然 $\eta = \xi_2 > c > \xi$，命题成立；</p>
+<p>(2) 若 $f'(\xi) \ne f'(\xi_2)$，则加权平均值严格介于 $f'(\xi)$ 与 $f'(\xi_2)$ 之间：</p>
+<p>$$\min\{f'(\xi), f'(\xi_2)\} < \frac{f(b) - f(a)}{b - a} < \max\{f'(\xi), f'(\xi_2)\}$$</p>
+<p>由于导函数满足达布定理（导数介值性：导函数虽然不一定连续，但必然能取到任何两个导数值之间的任何介值），故在 $\xi$ 与 $\xi_2$ 之间必定存在一点 $\eta$（即 $\eta \in (\xi, \xi_2)$），使得：</p>
+<p>$$f'(\eta) = \frac{f(b) - f(a)}{b - a} \iff f(b) - f(a) = f'(\eta)(b - a)$$</p>
+<p>因为 $\eta \in (\xi, \xi_2)$，显然有：</p>
+<p>$$\eta > \xi$$</p>
+<p>且 $\eta < \xi_2 < b$，$\eta > \xi > a$，故 $\eta \in (a, b)$。</p>
+<p>第 [2] 问获证。</p>
+</blockquote>
+<p><font color=deeppink>[压轴思维]:本题展现了考研中值定理的最高境界——区间拆解加权平均法 + 达布定理！无论导函数是否连续，通过构造两段独立中值并由介值性锁定 $\eta \in (\xi, \xi_2)$，逻辑无懈可击！</font></p>
+</div>
+</div>
+    <script>
+    function renderMath() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.getElementById('write'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+    if (document.readyState === 'complete') {
+        renderMath();
+    } else {
+        window.addEventListener('load', renderMath);
+        document.addEventListener('DOMContentLoaded', renderMath);
+    }
+    </script>
+</body>
+</html>
