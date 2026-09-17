@@ -32,25 +32,35 @@ SUBJECT_CONFIG = {
         "badge": "每日计划与复盘",
         "color": "#ec4899"
     },
+    "101 思想政治": {
+        "icon": "fa-landmark-flag",
+        "badge": "公共课",
+        "color": "#ef4444"
+    },
+    "201 英语一": {
+        "icon": "fa-language",
+        "badge": "英语一",
+        "color": "#10b981"
+    },
     "302 数学二": {
         "icon": "fa-square-root-variable",
         "badge": "重点核心",
         "color": "#8b5cf6"
     },
+    "自命题 数据科学基础": {
+        "icon": "fa-database",
+        "badge": "自命题专业课",
+        "color": "#06b6d4"
+    },
     "408 计算机基础": {
         "icon": "fa-microchip",
-        "badge": "统考专业课",
+        "badge": "专业底座储备",
         "color": "#3b82f6"
     },
     "204 英语二": {
-        "icon": "fa-language",
-        "badge": "英语二",
-        "color": "#10b981"
-    },
-    "101 思想政治": {
-        "icon": "fa-landmark-flag",
-        "badge": "公共课",
-        "color": "#ef4444"
+        "icon": "fa-book",
+        "badge": "历史储备",
+        "color": "#64748b"
     },
     "Leetcode": {
         "icon": "fa-code",
@@ -147,8 +157,8 @@ def build_catalog():
     root_dir = os.path.abspath(os.path.dirname(__file__))
     catalog = {
         "repo": "EscoffierZhou/22408_2027",
-        "title": "22408 考研备考知识库",
-        "target": "2027 考研 22408 | 中国科学院大学 (UCAS)",
+        "title": "SDUFE 140500 智能科学与技术 备考知识库",
+        "target": "2027 考研 140500 | 山东财经大学 计算机与人工智能学院",
         "rootDocs": [],
         "subjects": []
     }

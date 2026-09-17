@@ -2,8 +2,8 @@
 // 兼容本地 file:// 协议与 GitHub Pages 在线浏览
 window.CATALOG_DATA = {
   "repo": "EscoffierZhou/22408_2027",
-  "title": "22408 考研备考知识库",
-  "target": "2027 考研 22408 | 中国科学院大学 (UCAS)",
+  "title": "SDUFE 140500 智能科学与技术 备考知识库",
+  "target": "2027 考研 140500 | 山东财经大学 计算机与人工智能学院",
   "rootDocs": [
     {
       "name": "备考核心总纲与录取档案",
@@ -337,6 +337,113 @@ window.CATALOG_DATA = {
           "defaultPath": "DailyPlan/WEEKLY_OVERVIEW.md",
           "formats": {
             "md": "DailyPlan/WEEKLY_OVERVIEW.md"
+          }
+        }
+      ]
+    },
+    {
+      "name": "101 思想政治",
+      "icon": "fa-landmark-flag",
+      "badge": "公共课",
+      "color": "#ef4444",
+      "stats": {
+        "totalDocs": 2,
+        "formats": {
+          "html": 0,
+          "pdf": 0,
+          "md": 2
+        }
+      },
+      "children": [
+        {
+          "type": "doc",
+          "name": "01_马原核心哲学与政经考点",
+          "defaultType": "md",
+          "defaultPath": "101 思想政治/01_马原核心哲学与政经考点.md",
+          "formats": {
+            "md": "101 思想政治/01_马原核心哲学与政经考点.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "README",
+          "defaultType": "md",
+          "defaultPath": "101 思想政治/README.md",
+          "formats": {
+            "md": "101 思想政治/README.md"
+          }
+        }
+      ]
+    },
+    {
+      "name": "201 英语一",
+      "icon": "fa-language",
+      "badge": "英语一",
+      "color": "#10b981",
+      "stats": {
+        "totalDocs": 4,
+        "formats": {
+          "html": 0,
+          "pdf": 0,
+          "md": 4
+        }
+      },
+      "children": [
+        {
+          "type": "folder",
+          "name": "01_真题精读与长难句",
+          "path": "201 英语一/01_真题精读与长难句",
+          "children": [
+            {
+              "type": "doc",
+              "name": "README",
+              "defaultType": "md",
+              "defaultPath": "201 英语一/01_真题精读与长难句/README.md",
+              "formats": {
+                "md": "201 英语一/01_真题精读与长难句/README.md"
+              }
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "02_高频核心词汇",
+          "path": "201 英语一/02_高频核心词汇",
+          "children": [
+            {
+              "type": "doc",
+              "name": "README",
+              "defaultType": "md",
+              "defaultPath": "201 英语一/02_高频核心词汇/README.md",
+              "formats": {
+                "md": "201 英语一/02_高频核心词汇/README.md"
+              }
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "03_写作与新题型专题",
+          "path": "201 英语一/03_写作与新题型专题",
+          "children": [
+            {
+              "type": "doc",
+              "name": "README",
+              "defaultType": "md",
+              "defaultPath": "201 英语一/03_写作与新题型专题/README.md",
+              "formats": {
+                "md": "201 英语一/03_写作与新题型专题/README.md"
+              }
+            }
+          ]
+        },
+        {
+          "type": "doc",
+          "name": "README",
+          "defaultType": "md",
+          "defaultPath": "201 英语一/README.md",
+          "formats": {
+            "md": "201 英语一/README.md"
           }
         }
       ]
@@ -1722,9 +1829,75 @@ window.CATALOG_DATA = {
       ]
     },
     {
+      "name": "自命题 数据科学基础",
+      "icon": "fa-database",
+      "badge": "自命题专业课",
+      "color": "#06b6d4",
+      "stats": {
+        "totalDocs": 4,
+        "formats": {
+          "html": 0,
+          "pdf": 0,
+          "md": 4
+        }
+      },
+      "children": [
+        {
+          "type": "folder",
+          "name": "01_核心数据结构与算法储备",
+          "path": "自命题 数据科学基础/01_核心数据结构与算法储备",
+          "children": [
+            {
+              "type": "doc",
+              "name": "README",
+              "defaultType": "md",
+              "defaultPath": "自命题 数据科学基础/01_核心数据结构与算法储备/README.md",
+              "formats": {
+                "md": "自命题 数据科学基础/01_核心数据结构与算法储备/README.md"
+              }
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "02_Python与数据分析基础预备",
+          "path": "自命题 数据科学基础/02_Python与数据分析基础预备",
+          "children": [
+            {
+              "type": "doc",
+              "name": "README",
+              "defaultType": "md",
+              "defaultPath": "自命题 数据科学基础/02_Python与数据分析基础预备/README.md",
+              "formats": {
+                "md": "自命题 数据科学基础/02_Python与数据分析基础预备/README.md"
+              }
+            }
+          ]
+        },
+        {
+          "type": "doc",
+          "name": "README",
+          "defaultType": "md",
+          "defaultPath": "自命题 数据科学基础/README.md",
+          "formats": {
+            "md": "自命题 数据科学基础/README.md"
+          }
+        },
+        {
+          "type": "doc",
+          "name": "官方考纲与参考书目跟踪(国庆后待更新)",
+          "defaultType": "md",
+          "defaultPath": "自命题 数据科学基础/官方考纲与参考书目跟踪(国庆后待更新).md",
+          "formats": {
+            "md": "自命题 数据科学基础/官方考纲与参考书目跟踪(国庆后待更新).md"
+          }
+        }
+      ]
+    },
+    {
       "name": "408 计算机基础",
       "icon": "fa-microchip",
-      "badge": "统考专业课",
+      "badge": "专业底座储备",
       "color": "#3b82f6",
       "stats": {
         "totalDocs": 109,
@@ -2896,9 +3069,9 @@ window.CATALOG_DATA = {
     },
     {
       "name": "204 英语二",
-      "icon": "fa-language",
-      "badge": "英语二",
-      "color": "#10b981",
+      "icon": "fa-book",
+      "badge": "历史储备",
+      "color": "#64748b",
       "stats": {
         "totalDocs": 2,
         "formats": {
@@ -2939,31 +3112,6 @@ window.CATALOG_DATA = {
               }
             }
           ]
-        }
-      ]
-    },
-    {
-      "name": "101 思想政治",
-      "icon": "fa-landmark-flag",
-      "badge": "公共课",
-      "color": "#ef4444",
-      "stats": {
-        "totalDocs": 1,
-        "formats": {
-          "html": 0,
-          "pdf": 0,
-          "md": 1
-        }
-      },
-      "children": [
-        {
-          "type": "doc",
-          "name": "Readme",
-          "defaultType": "md",
-          "defaultPath": "101 思想政治/Readme.md",
-          "formats": {
-            "md": "101 思想政治/Readme.md"
-          }
         }
       ]
     },
