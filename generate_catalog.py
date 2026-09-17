@@ -156,7 +156,7 @@ def scan_directory(dir_path, rel_path=""):
 def build_catalog():
     root_dir = os.path.abspath(os.path.dirname(__file__))
     catalog = {
-        "repo": "EscoffierZhou/22408_2027",
+        "repo": "EscoffierZhou/SDUFE_140500_2027",
         "title": "SDUFE 140500 智能科学与技术 备考知识库",
         "target": "2027 考研 140500 | 山东财经大学 计算机与人工智能学院",
         "rootDocs": [],

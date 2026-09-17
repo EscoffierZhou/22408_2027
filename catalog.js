@@ -1,7 +1,7 @@
 // 自动生成的知识库目录数据文件 - 由 generate_catalog.py 自动产生
 // 兼容本地 file:// 协议与 GitHub Pages 在线浏览
 window.CATALOG_DATA = {
-  "repo": "EscoffierZhou/22408_2027",
+  "repo": "EscoffierZhou/SDUFE_140500_2027",
   "title": "SDUFE 140500 智能科学与技术 备考知识库",
   "target": "2027 考研 140500 | 山东财经大学 计算机与人工智能学院",
   "rootDocs": [

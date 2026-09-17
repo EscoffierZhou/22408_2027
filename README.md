@@ -1,15 +1,15 @@
 # EscoffierZhou SDUFE 140500 in 2027
 
 <p align="center">
-  <a href="https://escoffierzhou.github.io/22408_2027/">
+  <a href="https://escoffierzhou.github.io/SDUFE_140500_2027/">
     <img src="https://img.shields.io/badge/📖_在线知识库门户-免下载·即点即看-8b5cf6?style=for-the-badge&logo=githubpages&logoColor=white" alt="Online Knowledge Base" />
   </a>
-  <a href="https://github.com/EscoffierZhou/22408_2027">
+  <a href="https://github.com/EscoffierZhou/SDUFE_140500_2027">
     <img src="https://img.shields.io/badge/Target-2027_SDUFE_140500-3b82f6?style=for-the-badge&logo=google-scholar&logoColor=white" alt="Target" />
   </a>
 </p>
 
-> 🚀 **全景在线阅读直达：** [https://escoffierzhou.github.io/22408_2027/](https://escoffierzhou.github.io/22408_2027/)  
+> 🚀 **全景在线阅读直达：** [https://escoffierzhou.github.io/SDUFE_140500_2027/](https://escoffierzhou.github.io/SDUFE_140500_2027/)  
 > **特性：** 手机/iPad/电脑跨端免下载阅读，支持多级折叠侧边栏自由切换章节、全局实时搜索、HTML / PDF / Markdown 格式无缝切换与暗色主题。
 
 > **Target:** 2027 考研 140500 智能科学与技术 (学术型硕士) | 山东财经大学 (SDUFE)  
@@ -60,7 +60,7 @@ SDUFE 140500 智能科学与技术 考研备考总库
 ### 🌐 在线阅读与目录同步指引
 
 1. **直接在线阅读**：
-   - 访问 [https://escoffierzhou.github.io/22408_2027/](https://escoffierzhou.github.io/22408_2027/) 即可即点即看，无需下载任何 HTML 或 PDF。
+   - 访问 [https://escoffierzhou.github.io/SDUFE_140500_2027/](https://escoffierzhou.github.io/SDUFE_140500_2027/) 即可即点即看，无需下载任何 HTML 或 PDF。
 2. **新增笔记后一键更新目录**：
    - 当你在各科目添加了新章节的 Markdown、HTML 或 PDF 后，只需在仓库根目录执行一行命令：
      ```bash
