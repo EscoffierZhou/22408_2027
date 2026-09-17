@@ -32,6 +32,24 @@ $(\arcsin x)' = \frac{1}{\sqrt{1-x^2}}$ $(\arccos x)' = -\frac{1}{\sqrt{1-x^2}}$
 
 $(\arctan x)' = \frac{1}{1+x^2}$  $(\operatorname{arccot} x)' = -\frac{1}{1+x^2}$	
 
+| **函数 \ 弧度** | **0**  | **$\frac{1}{6}$π**    | **$\frac{1}{4}$π**   | **$\frac{1}{3}$π**    | **$\frac{1}{2}$π** | **$\frac{3}{2}$π**    | **$\frac{3}{4}$π**    | **$\frac{5}{6}$π**     | **π**  | **$\frac{3}{2}$π** | **2π** |
+| --------------- | ------ | --------------------- | -------------------- | --------------------- | ------------------ | --------------------- | --------------------- | ---------------------- | ------ | ------------------ | ------ |
+| **$\sin x$**    | $0$    | $\frac{1}{2}$         | $\frac{\sqrt{2}}{2}$ | $\frac{\sqrt{3}}{2}$  | $1$                | $\frac{\sqrt{3}}{2}$  | $\frac{\sqrt{2}}{2}$  | $\frac{1}{2}$          | $0$    | $-1$               | $0$    |
+| **$\cos x$**    | $1$    | $\frac{\sqrt{3}}{2}$  | $\frac{\sqrt{2}}{2}$ | $\frac{1}{2}$         | $0$                | $-\frac{1}{2}$        | $-\frac{\sqrt{2}}{2}$ | $-\frac{\sqrt{3}}{2}$  | $-1$   | $0$                | $1$    |
+| **$\tan x$**    | $0$    | $\frac{\sqrt{3}}{3}$  | $1$                  | $\sqrt{3}$            | 不存在             | $-\sqrt{3}$           | $-1$                  | $-\frac{\sqrt{3}}{3}$  | $0$    | 不存在             | $0$    |
+|                 |        |                       |                      |                       |                    |                       |                       |                        |        |                    |        |
+| **$\cot x$**    | 不存在 | $\sqrt{3}$            | $1$                  | $\frac{\sqrt{3}}{3}$  | $0$                | $-\frac{\sqrt{3}}{3}$ | $-1$                  | $-\sqrt{3}$            | 不存在 | $0$                | 不存在 |
+| **$\sec x$**    | $1$    | $\frac{2\sqrt{3}}{3}$ | $\sqrt{2}$           | $2$                   | 不存在             | $-2$                  | $-\sqrt{2}$           | $-\frac{2\sqrt{3}}{3}$ | $-1$   | 不存在             | $1$    |
+| **$\csc x$**    | 不存在 | $2$                   | $\sqrt{2}$           | $\frac{2\sqrt{3}}{3}$ | $1$                | $\frac{2\sqrt{3}}{3}$ | $\sqrt{2}$            | $2$                    | 不存在 | $-1$               | 不存在 |
+
+
+
+<p align="center">
+  <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-220 -180 440 360' width='600'><style>text{font-family:sans-serif;font-size:12px;fill:%23555}.axis{stroke:%23666;stroke-width:1.5}.grid{stroke:%23eee;stroke-width:1;stroke-dasharray:3,3}.curve{fill:none;stroke-width:2.5}</style><rect x='-220' y='-180' width='440' height='360' fill='%23fff'/><path d='M-200,0 H200 M0,-160 V160' class='axis'/><path d='M-180,-140 H180 M-180,-70 H180 M-180,70 H180 M-180,140 H180 M-90,-150 V150 M90,-150 V150' class='grid'/><text x='185' y='-8'>x</text><text x='10' y='-145'>y</text><text x='85' y='16'>1</text><text x='-105' y='16'>-1</text><text x='8' y='-135'>π</text><text x='8' y='-65'>π/2</text><text x='8' y='75'>-π/2</text><text x='-15' y='16'>0</text><path d='M-90,70 C-90,50 -40,30 0,0 C40,-30 90,-50 90,-70' class='curve' stroke='%23d9534f'/><circle cx='-90' cy='70' r='3.5' fill='%23d9534f'/><circle cx='90' cy='-70' r='3.5' fill='%23d9534f'/><path d='M-90,-140 C-90,-120 -40,-100 0,-70 C40,-40 90,-20 90,0' class='curve' stroke='%23337ab7'/><circle cx='-90' cy='-140' r='3.5' fill='%23337ab7'/><circle cx='90' cy='0' r='3.5' fill='%23337ab7'/><line x1='-190' y1='-70' x2='190' y2='-70' stroke='%235cb85c' stroke-dasharray='4,4'/><line x1='-190' y1='70' x2='190' y2='70' stroke='%235cb85c' stroke-dasharray='4,4'/><path d='M-180,62 C-100,58 -45,35 0,0 C45,-35 100,-58 180,-62' class='curve' stroke='%235cb85c'/><g transform='translate(-200,-150)'><circle cx='10' cy='5' r='5' fill='%23d9534f'/><text x='25' y='9' font-weight='bold'>arcsin(x)</text><circle cx='105' cy='5' r='5' fill='%23337ab7'/><text x='120' y='9' font-weight='bold'>arccos(x)</text><circle cx='200' cy='5' r='5' fill='%235cb85c'/><text x='215' y='9' font-weight='bold'>arctan(x)</text></g></svg>" alt="Inverse Trigonometric Functions" />
+</p>
+
+<img src="./assets/1FnNchvmUxG_TsEAvYWWU6JrxllIFSWSfoAUvpjCJx9V15sPCg3ebt481Fy4qVt65_QkVZGqDVx_Qq0khnljcWbE7_2aTdsCSEMhbKZYUlVqsgTCmbR65SsdldnH8HmPHKo_YQBeVtFneBBU8iT-e7sL1avhizOk1VgjUWDbILc.jpeg" style="zoom:50%;" />a
+
 ****
 
 ###### **原理[3]:双曲反函数求导函数**
